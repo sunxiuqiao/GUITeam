@@ -73,9 +73,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ArcMap161 {
+            get {
+                object obj = ResourceManager.GetObject("ArcMap161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AttributesWindow16 {
             get {
                 object obj = ResourceManager.GetObject("AttributesWindow16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AttributesWindow161 {
+            get {
+                object obj = ResourceManager.GetObject("AttributesWindow161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +113,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CadastralLineSegmentation161 {
+            get {
+                object obj = ResourceManager.GetObject("CadastralLineSegmentation161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DataAdd_B_16 {
             get {
                 object obj = ResourceManager.GetObject("DataAdd_B_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DataAdd_B_161 {
+            get {
+                object obj = ResourceManager.GetObject("DataAdd_B_161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +153,59 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingAddStraightSegmentTool321 {
+            get {
+                object obj = ResourceManager.GetObject("EditingAddStraightSegmentTool321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingAdjustmentAdjust32 {
             get {
                 object obj = ResourceManager.GetObject("EditingAdjustmentAdjust32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingAdjustmentAdjust321 {
+            get {
+                object obj = ResourceManager.GetObject("EditingAdjustmentAdjust321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingBuffer16 {
+            get {
+                object obj = ResourceManager.GetObject("EditingBuffer16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingConstructPoints16 {
+            get {
+                object obj = ResourceManager.GetObject("EditingConstructPoints16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingCopyParallel16 {
+            get {
+                object obj = ResourceManager.GetObject("EditingCopyParallel16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +223,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingCreateFeaturesWindowShow161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingCreateFeaturesWindowShow161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingEditAnnotationTool16 {
             get {
                 object obj = ResourceManager.GetObject("EditingEditAnnotationTool16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingEditAnnotationTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingEditAnnotationTool161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +263,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingEditTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingEditTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingEditTool32 {
             get {
                 object obj = ResourceManager.GetObject("EditingEditTool32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingEditTool321 {
+            get {
+                object obj = ResourceManager.GetObject("EditingEditTool321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +303,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingEditVertices161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingEditVertices161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingLineIntersectionTool16 {
             get {
                 object obj = ResourceManager.GetObject("EditingLineIntersectionTool16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingLineIntersectionTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingLineIntersectionTool161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +343,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingMidpointArcSegmentTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingMidpointArcSegmentTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingMidpointConstructor16 {
             get {
                 object obj = ResourceManager.GetObject("EditingMidpointConstructor16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingMidpointConstructor161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingMidpointConstructor161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,9 +383,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingOffset161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingOffset161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingPointAtEndofLine16 {
             get {
                 object obj = ResourceManager.GetObject("EditingPointAtEndofLine16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingPointAtEndofLine161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingPointAtEndofLine161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +423,39 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingPointConstructor161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingPointConstructor161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingReshapeFeatureTool16 {
             get {
                 object obj = ResourceManager.GetObject("EditingReshapeFeatureTool16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingReshapeFeatureTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingReshapeFeatureTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingReshapeFeatureTool32 {
+            get {
+                object obj = ResourceManager.GetObject("EditingReshapeFeatureTool32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,9 +473,39 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingRightAngleConstructor161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingRightAngleConstructor161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingRotateTool16 {
             get {
                 object obj = ResourceManager.GetObject("EditingRotateTool16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingRotateTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingRotateTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingSaveEdits16 {
+            get {
+                object obj = ResourceManager.GetObject("EditingSaveEdits16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -273,9 +523,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingSelectVertexTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingSelectVertexTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingSelectVertexTool32 {
             get {
                 object obj = ResourceManager.GetObject("EditingSelectVertexTool32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingSelectVertexTool321 {
+            get {
+                object obj = ResourceManager.GetObject("EditingSelectVertexTool321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,9 +563,49 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingSplitLineTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingSplitLineTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditingSplitPolygonTool16 {
             get {
                 object obj = ResourceManager.GetObject("EditingSplitPolygonTool16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingSplitPolygonTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingSplitPolygonTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingStartEditing16 {
+            get {
+                object obj = ResourceManager.GetObject("EditingStartEditing16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditingStopEditing16 {
+            get {
+                object obj = ResourceManager.GetObject("EditingStopEditing16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,9 +623,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditingTraceTool161 {
+            get {
+                object obj = ResourceManager.GetObject("EditingTraceTool161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditRedo_B_16 {
             get {
                 object obj = ResourceManager.GetObject("EditRedo_B_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditRedo_B_161 {
+            get {
+                object obj = ResourceManager.GetObject("EditRedo_B_161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,9 +663,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditRedo161 {
+            get {
+                object obj = ResourceManager.GetObject("EditRedo161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EditUndo_B_16 {
             get {
                 object obj = ResourceManager.GetObject("EditUndo_B_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditUndo_B_161 {
+            get {
+                object obj = ResourceManager.GetObject("EditUndo_B_161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -353,9 +703,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EditUndo161 {
+            get {
+                object obj = ResourceManager.GetObject("EditUndo161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GenericArrowToolBlack16 {
             get {
                 object obj = ResourceManager.GetObject("GenericArrowToolBlack16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GenericArrowToolBlack161 {
+            get {
+                object obj = ResourceManager.GetObject("GenericArrowToolBlack161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -373,9 +743,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GenericDeleteBlack161 {
+            get {
+                object obj = ResourceManager.GetObject("GenericDeleteBlack161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GeodatabaseConnection16 {
             get {
                 object obj = ResourceManager.GetObject("GeodatabaseConnection16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GeodatabaseConnection161 {
+            get {
+                object obj = ResourceManager.GetObject("GeodatabaseConnection161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -393,9 +783,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GeodatabaseFeatureClassEmpty161 {
+            get {
+                object obj = ResourceManager.GetObject("GeodatabaseFeatureClassEmpty161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GeodatabaseFeatureClassLine16 {
             get {
                 object obj = ResourceManager.GetObject("GeodatabaseFeatureClassLine16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GeodatabaseFeatureClassLine161 {
+            get {
+                object obj = ResourceManager.GetObject("GeodatabaseFeatureClassLine161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -413,9 +823,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GeodatabaseFeatureClassPoint161 {
+            get {
+                object obj = ResourceManager.GetObject("GeodatabaseFeatureClassPoint161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GeodatabaseFeatureClassPolygon16 {
             get {
                 object obj = ResourceManager.GetObject("GeodatabaseFeatureClassPolygon16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GeodatabaseFeatureClassPolygon161 {
+            get {
+                object obj = ResourceManager.GetObject("GeodatabaseFeatureClassPolygon161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -433,9 +863,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GeodatabaseFeatureDataset161 {
+            get {
+                object obj = ResourceManager.GetObject("GeodatabaseFeatureDataset161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShapefileLine16 {
             get {
                 object obj = ResourceManager.GetObject("ShapefileLine16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShapefileLine161 {
+            get {
+                object obj = ResourceManager.GetObject("ShapefileLine161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -453,9 +903,29 @@ namespace ArcEngineTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ShapefilePoint161 {
+            get {
+                object obj = ResourceManager.GetObject("ShapefilePoint161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShapefilePolygon16 {
             get {
                 object obj = ResourceManager.GetObject("ShapefilePolygon16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ShapefilePolygon161 {
+            get {
+                object obj = ResourceManager.GetObject("ShapefilePolygon161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -33,28 +33,40 @@
             this.axTOCControl = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.AddData = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editTS = new System.Windows.Forms.ToolStrip();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
+            this.开始编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.停止编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.保存编辑内容ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.移动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.分割ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.构造点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.平行复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.合并ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.缓冲ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.联合ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.裁剪ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.捕捉ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
+            this.AddData = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
@@ -99,15 +111,6 @@
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // AddData
-            // 
-            this.AddData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AddData.Image = ((System.Drawing.Image)(resources.GetObject("AddData.Image")));
-            this.AddData.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AddData.Name = "AddData";
-            this.AddData.Size = new System.Drawing.Size(23, 22);
-            this.AddData.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -120,16 +123,16 @@
             // 
             this.editTS.AllowMerge = false;
             this.editTS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox1,
+            this.toolStripSplitButton2,
             this.toolStripSeparator1,
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripSeparator3,
             this.toolStripButton3,
             this.toolStripButton4,
-            this.toolStripButton5,
             this.toolStripButton6,
             this.toolStripSeparator2,
+            this.toolStripSplitButton1,
             this.toolStripButton7,
             this.toolStripButton8,
             this.toolStripButton9,
@@ -145,24 +148,6 @@
             this.editTS.TabIndex = 6;
             this.editTS.Text = "toolStrip2";
             // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Items.AddRange(new object[] {
-            "开始编辑",
-            "停止编辑",
-            "保存编辑",
-            "移动",
-            "分割",
-            "构造点",
-            "平行复制",
-            "合并",
-            "缓冲",
-            "联合",
-            "捕捉"});
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(75, 25);
-            this.toolStripComboBox1.Text = "编辑器";
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -177,6 +162,110 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSplitButton2
+            // 
+            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开始编辑ToolStripMenuItem,
+            this.停止编辑ToolStripMenuItem,
+            this.保存编辑内容ToolStripMenuItem,
+            this.移动ToolStripMenuItem,
+            this.分割ToolStripMenuItem,
+            this.构造点ToolStripMenuItem,
+            this.平行复制ToolStripMenuItem,
+            this.合并ToolStripMenuItem,
+            this.缓冲ToolStripMenuItem,
+            this.联合ToolStripMenuItem,
+            this.裁剪ToolStripMenuItem,
+            this.捕捉ToolStripMenuItem});
+            this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
+            this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton2.Name = "toolStripSplitButton2";
+            this.toolStripSplitButton2.Size = new System.Drawing.Size(60, 22);
+            this.toolStripSplitButton2.Text = "编辑器";
+            // 
+            // 开始编辑ToolStripMenuItem
+            // 
+            this.开始编辑ToolStripMenuItem.Image = global::ArcEngineTest.Properties.Resources.EditingStartEditing16;
+            this.开始编辑ToolStripMenuItem.Name = "开始编辑ToolStripMenuItem";
+            this.开始编辑ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.开始编辑ToolStripMenuItem.Text = "开始编辑";
+            // 
+            // 停止编辑ToolStripMenuItem
+            // 
+            this.停止编辑ToolStripMenuItem.Image = global::ArcEngineTest.Properties.Resources.EditingStopEditing16;
+            this.停止编辑ToolStripMenuItem.Name = "停止编辑ToolStripMenuItem";
+            this.停止编辑ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.停止编辑ToolStripMenuItem.Text = "停止编辑";
+            // 
+            // 保存编辑内容ToolStripMenuItem
+            // 
+            this.保存编辑内容ToolStripMenuItem.Image = global::ArcEngineTest.Properties.Resources.EditingSaveEdits16;
+            this.保存编辑内容ToolStripMenuItem.Name = "保存编辑内容ToolStripMenuItem";
+            this.保存编辑内容ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.保存编辑内容ToolStripMenuItem.Text = "保存编辑内容";
+            // 
+            // 移动ToolStripMenuItem
+            // 
+            this.移动ToolStripMenuItem.Name = "移动ToolStripMenuItem";
+            this.移动ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.移动ToolStripMenuItem.Text = "移动";
+            // 
+            // 分割ToolStripMenuItem
+            // 
+            this.分割ToolStripMenuItem.Name = "分割ToolStripMenuItem";
+            this.分割ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.分割ToolStripMenuItem.Text = "分割";
+            // 
+            // 构造点ToolStripMenuItem
+            // 
+            this.构造点ToolStripMenuItem.Name = "构造点ToolStripMenuItem";
+            this.构造点ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.构造点ToolStripMenuItem.Text = "构造点";
+            // 
+            // 平行复制ToolStripMenuItem
+            // 
+            this.平行复制ToolStripMenuItem.Image = global::ArcEngineTest.Properties.Resources.EditingCopyParallel16;
+            this.平行复制ToolStripMenuItem.Name = "平行复制ToolStripMenuItem";
+            this.平行复制ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.平行复制ToolStripMenuItem.Text = "平行复制";
+            // 
+            // 合并ToolStripMenuItem
+            // 
+            this.合并ToolStripMenuItem.Name = "合并ToolStripMenuItem";
+            this.合并ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.合并ToolStripMenuItem.Text = "合并";
+            // 
+            // 缓冲ToolStripMenuItem
+            // 
+            this.缓冲ToolStripMenuItem.Name = "缓冲ToolStripMenuItem";
+            this.缓冲ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.缓冲ToolStripMenuItem.Text = "缓冲";
+            // 
+            // 联合ToolStripMenuItem
+            // 
+            this.联合ToolStripMenuItem.Name = "联合ToolStripMenuItem";
+            this.联合ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.联合ToolStripMenuItem.Text = "联合";
+            // 
+            // 裁剪ToolStripMenuItem
+            // 
+            this.裁剪ToolStripMenuItem.Image = global::ArcEngineTest.Properties.Resources.EditingSaveEdits16;
+            this.裁剪ToolStripMenuItem.Name = "裁剪ToolStripMenuItem";
+            this.裁剪ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.裁剪ToolStripMenuItem.Text = "裁剪";
+            // 
+            // 捕捉ToolStripMenuItem
+            // 
+            this.捕捉ToolStripMenuItem.Name = "捕捉ToolStripMenuItem";
+            this.捕捉ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.捕捉ToolStripMenuItem.Text = "捕捉";
             // 
             // toolStripButton1
             // 
@@ -214,15 +303,6 @@
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "toolStripButton4";
             // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::ArcEngineTest.Properties.Resources.EditingTraceTool16;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "toolStripButton5";
-            // 
             // toolStripButton6
             // 
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -231,6 +311,15 @@
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton6.Text = "toolStripButton6";
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton1.Image = global::ArcEngineTest.Properties.Resources.EditingOffset16;
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 22);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             // 
             // toolStripButton7
             // 
@@ -277,11 +366,6 @@
             this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton11.Text = "toolStripButton11";
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripButton12
             // 
             this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -308,6 +392,15 @@
             this.toolStripButton14.Name = "toolStripButton14";
             this.toolStripButton14.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton14.Text = "toolStripButton14";
+            // 
+            // AddData
+            // 
+            this.AddData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddData.Image = ((System.Drawing.Image)(resources.GetObject("AddData.Image")));
+            this.AddData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddData.Name = "AddData";
+            this.AddData.Size = new System.Drawing.Size(23, 22);
+            this.AddData.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Form1
             // 
@@ -344,7 +437,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripButton AddData;
         private System.Windows.Forms.ToolStrip editTS;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -352,7 +444,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
@@ -363,6 +454,20 @@
         private System.Windows.Forms.ToolStripButton toolStripButton12;
         private System.Windows.Forms.ToolStripButton toolStripButton13;
         private System.Windows.Forms.ToolStripButton toolStripButton14;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
+        private System.Windows.Forms.ToolStripMenuItem 开始编辑ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 停止编辑ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 保存编辑内容ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 移动ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 分割ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 构造点ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 平行复制ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 合并ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 缓冲ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 联合ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 裁剪ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 捕捉ToolStripMenuItem;
     }
 }
 

@@ -80,6 +80,13 @@ namespace ArcEngineTest
             }
         }
         #endregion
+        #region
+        /// <summary>
+        /// 开始编辑
+        /// </summary>
+        private void StartEdit()
+        { }
+        #endregion
 
     }
 }      

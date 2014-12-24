@@ -82,6 +82,7 @@ namespace ArcEngineTest
             }
         }
         #endregion
+ 
 
         private void axTOCControl_OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
         {
@@ -92,6 +93,15 @@ namespace ArcEngineTest
         {
 
         }
+         #region
+        /// <summary>
+        /// 开始编辑
+        /// </summary>
+        private void StartEdit()
+        { }
+        #endregion
+
+ 
     }
 }      
     

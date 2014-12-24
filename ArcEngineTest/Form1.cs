@@ -28,10 +28,8 @@ namespace ArcEngineTest
         {
             AddShpfile();
         }
-        #region
-        /// <summary>
-        /// 添加SHP文件
-        /// </summary>
+        #region //添加SHP文件
+        
         private void AddShpfile()    
         {
             //存储打开文件的全路径
@@ -92,15 +90,170 @@ namespace ArcEngineTest
         private void axMapControl_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
         {
 
+            edittool(editbool, Type, e);
+             
         }
-         #region
-        /// <summary>
-        /// 开始编辑
-        /// </summary>
+         #region 开始编辑
+        
         private void StartEdit()
         { }
         #endregion
 
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+
+        }
+        #region //画点
+        private void editpoint(IMapControlEvents2_OnMouseDownEvent e)
+        {
+            IGraphicsContainer pGraphicsContainer;
+            //获取当前视图
+            axMapControl.MousePointer = esriControlsMousePointer.esriPointerCrosshair;
+            IActiveView pActiveView = this.axMapControl.ActiveView;
+            //获取鼠标点
+            IPoint pPoint = pActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(e.x, e.y);
+            
+            IPoint pt;
+            pt = axMapControl.ToMapPoint(e.x, e.y);
+            IMarkerElement pMarkerElement;
+            pMarkerElement = new MarkerElementClass();
+            IElement pElement;
+            pElement = pMarkerElement as IElement;
+            pElement.Geometry = pt;
+            pGraphicsContainer = axMapControl.Map as IGraphicsContainer;
+            pGraphicsContainer.AddElement((IElement)pMarkerElement, 0);
+            pActiveView.Refresh();
+
+
+
+        }
+        #endregion
+        #region //画线
+        private void editline(IMapControlEvents2_OnMouseDownEvent e)
+        {
+            IGraphicsContainer pGraphicsContainer;
+            //获取当前视图
+            axMapControl.MousePointer = esriControlsMousePointer.esriPointerCrosshair;
+            IActiveView pActiveView = this.axMapControl.ActiveView;
+            //获取鼠标点
+            IPoint pPoint = pActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(e.x, e.y);
+            IGeometry polyline;
+            polyline = axMapControl.TrackLine();
+            ILineElement pLineElement;
+            pLineElement = new LineElementClass();
+            IElement pElement;
+            pElement = pLineElement as IElement;
+            pElement.Geometry = polyline;
+            pGraphicsContainer = axMapControl.Map as IGraphicsContainer;
+            pGraphicsContainer.AddElement((IElement)pLineElement, 0);
+            pActiveView.Refresh();
+        }
+        #endregion
+        #region//画面
+        private void editpoly(IMapControlEvents2_OnMouseDownEvent e)
+        {
+            IGraphicsContainer pGraphicsContainer;
+            //获取当前视图
+            axMapControl.MousePointer = esriControlsMousePointer.esriPointerCrosshair;
+            IActiveView pActiveView = this.axMapControl.ActiveView;
+            //获取鼠标点
+            IPoint pPoint = pActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(e.x, e.y);
+            
+            IGeometry Polygon;
+            Polygon = axMapControl.TrackPolygon();
+            IPolygonElement PolygonElement;
+            PolygonElement = new PolygonElementClass();
+            IElement pElement;
+            pElement = PolygonElement as IElement;
+            pElement.Geometry = Polygon;
+            pGraphicsContainer = axMapControl.Map as IGraphicsContainer;
+            pGraphicsContainer.AddElement((IElement)PolygonElement, 0);
+            pActiveView.Refresh();
+        
+        }
+        #endregion
+
+        #region  //编辑
+        private  void edittool(bool startorend ,string type,IMapControlEvents2_OnMouseDownEvent e)
+        {
+          if (startorend)
+          {
+              switch(type)
+              {
+                  case "point": editpoint(e);  break;
+
+                  case "line": editline(e);  break;
+
+                  case "pology": editpoly(e); break;
+                  default: editbool = false; break;
+
+
+                   
+              }
+       
+         
+
+
+          }
+
+          else { MessageBox.Show("无法编辑!"); startorend = false; }
+
+
+
+
+        }
+         #endregion
+        private bool editbool  ;
+        private string Type;
+        private void 开始编辑ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            editbool = true;
+        }
+
+        private void 点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(this.Enabled==true)
+            {
+               
+                    Type = "point";
+
+
+                
+
+
+            }
+
+        }
+
+        private void 线ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.Enabled == true)
+            {
+
+                Type = "line";
+
+
+
+
+
+            }
+        }
+
+        private void 面ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.Enabled == true)
+            {
+
+                Type = "pology";
+
+
+
+
+
+            }
+        }
  
     }
 }      

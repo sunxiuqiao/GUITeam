@@ -33,8 +33,8 @@
             this.axTOCControl = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.AddData = new System.Windows.Forms.ToolStripButton();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
@@ -49,6 +49,7 @@
             this.axMapControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl.OcxState")));
             this.axMapControl.Size = new System.Drawing.Size(490, 445);
             this.axMapControl.TabIndex = 1;
+            this.axMapControl.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(this.axMapControl_OnMouseDown);
             // 
             // axTOCControl
             // 
@@ -58,6 +59,7 @@
             this.axTOCControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axTOCControl.OcxState")));
             this.axTOCControl.Size = new System.Drawing.Size(151, 445);
             this.axTOCControl.TabIndex = 2;
+            this.axTOCControl.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.axTOCControl_OnMouseDown);
             // 
             // axLicenseControl1
             // 
@@ -78,14 +80,6 @@
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(641, 24);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // AddData
             // 
             this.AddData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -94,6 +88,14 @@
             this.AddData.Name = "AddData";
             this.AddData.Size = new System.Drawing.Size(23, 22);
             this.AddData.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(641, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // Form1
             // 

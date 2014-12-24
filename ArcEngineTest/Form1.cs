@@ -39,7 +39,6 @@ namespace ArcEngineTest
             //设置OpenFileDialog的属性，使其能打开多种类型文件
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "shape文件(*.shp)|*.shp";
-
             openFile.Title = "打开文件";
             try
             {
@@ -63,9 +62,12 @@ namespace ArcEngineTest
                         //打开类要素
                         featureLay.FeatureClass = featureWorkspc.OpenFeatureClass(fileNam);
                         //清空图层
-                        axMapControl.ClearLayers();
+                      //  ILayer plyr = featureLay as ILayer;
+                        featureLay.Name = fileNam;
+                       // axMapControl.ClearLayers();
                         //添加图层
                         axMapControl.AddLayer(featureLay);
+                       
                         axMapControl.Refresh();
 
                     }
@@ -75,11 +77,21 @@ namespace ArcEngineTest
 
             catch (Exception e)
             {
-                MessageBox.Show("添加图层是失败" + e.ToString());
+                MessageBox.Show("添加图层失败" + e.ToString());
 
             }
         }
         #endregion
+
+        private void axTOCControl_OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
+        {
+
+        }
+
+        private void axMapControl_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
+        {
+
+        }
     }
 }      
     

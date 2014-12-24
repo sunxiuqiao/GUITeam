@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -114,4 +117,125 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ArcMap16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArcMap16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AttributesWindow16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AttributesWindow16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CadastralLineSegmentation16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CadastralLineSegmentation16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataAdd_B_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataAdd_B_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingAddStraightSegmentTool32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingAddStraightSegmentTool32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingAdjustmentAdjust32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingAdjustmentAdjust32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingCreateFeaturesWindowShow16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingCreateFeaturesWindowShow16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingEditAnnotationTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingEditAnnotationTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingEditTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingEditTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingEditTool32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingEditTool32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingEditVertices16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingEditVertices16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingLineIntersectionTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingLineIntersectionTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingMidpointArcSegmentTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingMidpointArcSegmentTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingMidpointConstructor16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingMidpointConstructor16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingOffset16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingOffset16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingPointAtEndofLine16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingPointAtEndofLine16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingPointConstructor16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingPointConstructor16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingReshapeFeatureTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingReshapeFeatureTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingRightAngleConstructor16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingRightAngleConstructor16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingRotateTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingRotateTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingSelectVertexTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingSelectVertexTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingSelectVertexTool32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingSelectVertexTool32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingSplitLineTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingSplitLineTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingSplitPolygonTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingSplitPolygonTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditingTraceTool16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditingTraceTool16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditRedo_B_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditRedo_B_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditRedo16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditRedo16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditUndo_B_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditUndo_B_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditUndo16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditUndo16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GenericArrowToolBlack16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GenericArrowToolBlack16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GenericDeleteBlack16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GenericDeleteBlack16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GeodatabaseConnection16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeodatabaseConnection16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GeodatabaseFeatureClassEmpty16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeodatabaseFeatureClassEmpty16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GeodatabaseFeatureClassLine16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeodatabaseFeatureClassLine16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GeodatabaseFeatureClassPoint16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeodatabaseFeatureClassPoint16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GeodatabaseFeatureClassPolygon16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeodatabaseFeatureClassPolygon16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GeodatabaseFeatureDataset16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GeodatabaseFeatureDataset16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShapefileLine16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShapefileLine16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShapefilePoint16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShapefilePoint16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ShapefilePolygon16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShapefilePolygon16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -128,20 +128,42 @@ namespace ArcEngineTest
 
 
         }
+
+
+        private IRgbColor getcolor(int r, int g, int b)
+        {
+            IRgbColor rgbcolor = new RgbColorClass();
+            rgbcolor.Red = r;
+            rgbcolor.Blue = b;
+            rgbcolor.Green = g;
+
+            return rgbcolor;
+
+        }
         #endregion
         #region //画线
         private void editline(IMapControlEvents2_OnMouseDownEvent e)
         {
+            //IFeatureLayer pFeatureLayer = axMapControl.get_Layer(0) as IFeatureLayer;
+            //IFeatureClass pFeatureClass = pFeatureLayer.FeatureClass;
+            ////IFeature pfeature = pFeatureClass.GetFeature(0);
             IGraphicsContainer pGraphicsContainer;
             //获取当前视图
             axMapControl.MousePointer = esriControlsMousePointer.esriPointerCrosshair;
             IActiveView pActiveView = this.axMapControl.ActiveView;
             //获取鼠标点
             IPoint pPoint = pActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(e.x, e.y);
+            ILineElement pLineEle = new LineElementClass();
+            IElement pEle = (IElement)pLineEle;
+            ILineSymbol pLsym = new SimpleLineSymbolClass();
+            pLsym.Color = getcolor(0,0,255);
+            pLsym.Width = 2;
+            pLineEle.Symbol = pLsym;
             IGeometry polyline;
             polyline = axMapControl.TrackLine();
-            ILineElement pLineElement;
-            pLineElement = new LineElementClass();
+           
+            ILineElement pLineElement= new LineElementClass();
+            pLineElement.Symbol = pLsym;
             IElement pElement;
             pElement = pLineElement as IElement;
             pElement.Geometry = polyline;
@@ -159,16 +181,23 @@ namespace ArcEngineTest
             IActiveView pActiveView = this.axMapControl.ActiveView;
             //获取鼠标点
             IPoint pPoint = pActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(e.x, e.y);
-            
-            IGeometry Polygon;
-            Polygon = axMapControl.TrackPolygon();
-            IPolygonElement PolygonElement;
-            PolygonElement = new PolygonElementClass();
-            IElement pElement;
-            pElement = PolygonElement as IElement;
+           
+            IPolygon Polygon = axMapControl.TrackPolygon() as IPolygon;
+            IPolygonElement PolygonElement= new PolygonElementClass();
+           
+            ISimpleFillSymbol pFillSymbol = new SimpleFillSymbolClass();
+            pFillSymbol.Color = getcolor(255, 255, 255);
+            pFillSymbol.Outline.Color = getcolor(0, 0, 255);
+            pFillSymbol.Style = esriSimpleFillStyle.esriSFSSolid;
+            IFillShapeElement pfillshpEle = new PolygonElementClass();
+            pfillshpEle.Symbol = pFillSymbol;
+
+            IElement pElement = pfillshpEle as IElement;
             pElement.Geometry = Polygon;
+           
             pGraphicsContainer = axMapControl.Map as IGraphicsContainer;
-            pGraphicsContainer.AddElement((IElement)PolygonElement, 0);
+            pGraphicsContainer.AddElement(pElement, 0);
+            pActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
             pActiveView.Refresh();
         
         }
@@ -187,21 +216,11 @@ namespace ArcEngineTest
 
                   case "pology": editpoly(e); break;
                   default: editbool = false; break;
-
-
-                   
               }
        
-         
-
-
           }
 
           else { MessageBox.Show("无法编辑!"); startorend = false; }
-
-
-
-
         }
          #endregion
         private bool editbool  ;

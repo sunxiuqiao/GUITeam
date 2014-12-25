@@ -67,6 +67,7 @@
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
             this.AddData = new System.Windows.Forms.ToolStripButton();
+            this.openMapDoc = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
@@ -104,7 +105,8 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddData});
+            this.AddData,
+            this.openMapDoc});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(641, 25);
@@ -196,6 +198,7 @@
             this.开始编辑ToolStripMenuItem.Name = "开始编辑ToolStripMenuItem";
             this.开始编辑ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.开始编辑ToolStripMenuItem.Text = "开始编辑";
+            this.开始编辑ToolStripMenuItem.Click += new System.EventHandler(this.开始编辑ToolStripMenuItem_Click);
             // 
             // 停止编辑ToolStripMenuItem
             // 
@@ -288,7 +291,7 @@
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::ArcEngineTest.Properties.Resources.EditingAddStraightSegmentTool32;
+            this.toolStripButton3.Image = global::ArcEngineTest.Properties.Resources.EditingAddStraightSegmentTool16;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
@@ -369,7 +372,7 @@
             // toolStripButton12
             // 
             this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton12.Image = global::ArcEngineTest.Properties.Resources.AttributesWindow16;
+            this.toolStripButton12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton12.Image")));
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton12.Name = "toolStripButton12";
             this.toolStripButton12.Size = new System.Drawing.Size(23, 22);
@@ -378,7 +381,7 @@
             // toolStripButton13
             // 
             this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton13.Image = global::ArcEngineTest.Properties.Resources.EditingRightAngleConstructor16;
+            this.toolStripButton13.Image = global::ArcEngineTest.Properties.Resources.EditingSketchPropertiesWindowShow16;
             this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(23, 22);
@@ -401,6 +404,16 @@
             this.AddData.Name = "AddData";
             this.AddData.Size = new System.Drawing.Size(23, 22);
             this.AddData.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // openMapDoc
+            // 
+            this.openMapDoc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openMapDoc.Image = global::ArcEngineTest.Properties.Resources.GenericOpen_B_16;
+            this.openMapDoc.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openMapDoc.Name = "openMapDoc";
+            this.openMapDoc.Size = new System.Drawing.Size(23, 22);
+            this.openMapDoc.Text = "toolStripButton5";
+            this.openMapDoc.Click += new System.EventHandler(this.openMapDoc_Click);
             // 
             // Form1
             // 
@@ -468,6 +481,7 @@
         private System.Windows.Forms.ToolStripMenuItem 联合ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 裁剪ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 捕捉ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton openMapDoc;
     }
 }
 

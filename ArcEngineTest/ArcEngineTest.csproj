@@ -50,11 +50,17 @@
     <Reference Include="ESRI.ArcGIS.DataSourcesFile, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesRaster, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="ESRI.ArcGIS.Display, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.EditingTools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86" />
     <Reference Include="ESRI.ArcGIS.Editor, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoAnalyst, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Geodatabase, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
@@ -100,6 +106,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IRasterWorkspaceFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -137,6 +144,161 @@
     <Content Include="icon\zoom in.bmp" />
     <Content Include="icon\zoom out.bmp" />
     <Content Include="icon\刷新.bmp" />
+    <None Include="Resources\GenericOpen_B_16.png" />
+    <None Include="Resources\GenericDocument32.png" />
+    <None Include="Resources\EditCut16.png" />
+    <None Include="Resources\ShapefilePolygon163.png" />
+    <None Include="Resources\ShapefilePoint163.png" />
+    <None Include="Resources\ShapefileLine163.png" />
+    <None Include="Resources\GeodatabaseFeatureDataset163.png" />
+    <None Include="Resources\GeodatabaseFeatureClassPolygon163.png" />
+    <None Include="Resources\GeodatabaseFeatureClassPoint163.png" />
+    <None Include="Resources\GeodatabaseFeatureClassLine163.png" />
+    <None Include="Resources\GeodatabaseFeatureClassEmpty163.png" />
+    <None Include="Resources\GeodatabaseConnection163.png" />
+    <None Include="Resources\GenericDeleteBlack163.png" />
+    <None Include="Resources\GenericArrowToolBlack163.png" />
+    <None Include="Resources\EditUndo163.png" />
+    <None Include="Resources\EditUndo_B_163.png" />
+    <None Include="Resources\EditRedo163.png" />
+    <None Include="Resources\EditRedo_B_163.png" />
+    <None Include="Resources\EditingTraceTool163.png" />
+    <None Include="Resources\EditingTangentArcConstructor161.png" />
+    <None Include="Resources\EditingStopEditing162.png" />
+    <None Include="Resources\EditingStartEditing162.png" />
+    <None Include="Resources\EditingSplitPolygonTool163.png" />
+    <None Include="Resources\EditingSplitLineTool163.png" />
+    <None Include="Resources\EditingSketchPropertiesWindowShow161.png" />
+    <None Include="Resources\EditingSelectVertexTool323.png" />
+    <None Include="Resources\EditingSelectVertexTool163.png" />
+    <None Include="Resources\EditingSaveEdits162.png" />
+    <None Include="Resources\EditingRotateTool163.png" />
+    <None Include="Resources\EditingRightAngleConstructor163.png" />
+    <None Include="Resources\EditingReshapeFeatureTool322.png" />
+    <None Include="Resources\EditingReshapeFeatureTool163.png" />
+    <None Include="Resources\EditingPointConstructor163.png" />
+    <None Include="Resources\EditingPointAtEndofLine163.png" />
+    <None Include="Resources\EditingOffset163.png" />
+    <None Include="Resources\EditingMidpointConstructor163.png" />
+    <None Include="Resources\EditingMidpointArcSegmentTool163.png" />
+    <None Include="Resources\EditingLineIntersectionTool163.png" />
+    <None Include="Resources\EditingEditVertices163.png" />
+    <None Include="Resources\EditingEditTool323.png" />
+    <None Include="Resources\EditingEditTool163.png" />
+    <None Include="Resources\EditingEditAnnotationTool163.png" />
+    <None Include="Resources\EditingDistanceDistanceConstructor161.png" />
+    <None Include="Resources\EditingDirectionDistanceConstructor161.png" />
+    <None Include="Resources\EditingCreateFeaturesWindowShow163.png" />
+    <None Include="Resources\EditingCopyParallel162.png" />
+    <None Include="Resources\EditingConstructPoints162.png" />
+    <None Include="Resources\EditingBuffer162.png" />
+    <None Include="Resources\EditingBezierCurveConstructor161.png" />
+    <None Include="Resources\EditingAdjustmentAdjust323.png" />
+    <None Include="Resources\EditingAddStraightSegmentTool323.png" />
+    <None Include="Resources\EditingAddStraightSegmentTool16.png" />
+    <None Include="Resources\DataAdd_B_163.png" />
+    <None Include="Resources\CadastralLineSegmentation163.png" />
+    <None Include="Resources\AttributesWindow163.png" />
+    <None Include="Resources\ArcMap163.png" />
+    <None Include="Resources\ShapefilePolygon162.png" />
+    <None Include="Resources\ShapefilePoint162.png" />
+    <None Include="Resources\ShapefileLine162.png" />
+    <None Include="Resources\GeodatabaseFeatureDataset162.png" />
+    <None Include="Resources\GeodatabaseFeatureClassPolygon162.png" />
+    <None Include="Resources\GeodatabaseFeatureClassPoint162.png" />
+    <None Include="Resources\GeodatabaseFeatureClassLine162.png" />
+    <None Include="Resources\GeodatabaseFeatureClassEmpty162.png" />
+    <None Include="Resources\GeodatabaseConnection162.png" />
+    <None Include="Resources\GenericDeleteBlack162.png" />
+    <None Include="Resources\GenericArrowToolBlack162.png" />
+    <None Include="Resources\EditUndo162.png" />
+    <None Include="Resources\EditUndo_B_162.png" />
+    <None Include="Resources\EditRedo162.png" />
+    <None Include="Resources\EditRedo_B_162.png" />
+    <None Include="Resources\EditingTraceTool162.png" />
+    <None Include="Resources\EditingTangentArcConstructor16.png" />
+    <None Include="Resources\EditingStopEditing161.png" />
+    <None Include="Resources\EditingStartEditing161.png" />
+    <None Include="Resources\EditingSplitPolygonTool162.png" />
+    <None Include="Resources\EditingSplitLineTool162.png" />
+    <None Include="Resources\EditingSketchPropertiesWindowShow16.png" />
+    <None Include="Resources\EditingSelectVertexTool322.png" />
+    <None Include="Resources\EditingSelectVertexTool162.png" />
+    <None Include="Resources\EditingSaveEdits161.png" />
+    <None Include="Resources\EditingRotateTool162.png" />
+    <None Include="Resources\EditingRightAngleConstructor162.png" />
+    <None Include="Resources\EditingReshapeFeatureTool321.png" />
+    <None Include="Resources\EditingReshapeFeatureTool162.png" />
+    <None Include="Resources\EditingPointConstructor162.png" />
+    <None Include="Resources\EditingPointAtEndofLine162.png" />
+    <None Include="Resources\EditingOffset162.png" />
+    <None Include="Resources\EditingMidpointConstructor162.png" />
+    <None Include="Resources\EditingMidpointArcSegmentTool162.png" />
+    <None Include="Resources\EditingLineIntersectionTool162.png" />
+    <None Include="Resources\EditingEditVertices162.png" />
+    <None Include="Resources\EditingEditTool322.png" />
+    <None Include="Resources\EditingEditTool162.png" />
+    <None Include="Resources\EditingEditAnnotationTool162.png" />
+    <None Include="Resources\EditingDistanceDistanceConstructor16.png" />
+    <None Include="Resources\EditingDirectionDistanceConstructor16.png" />
+    <None Include="Resources\EditingCreateFeaturesWindowShow162.png" />
+    <None Include="Resources\EditingCopyParallel161.png" />
+    <None Include="Resources\EditingConstructPoints161.png" />
+    <None Include="Resources\EditingBuffer161.png" />
+    <None Include="Resources\EditingBezierCurveConstructor16.png" />
+    <None Include="Resources\EditingAdjustmentAdjust322.png" />
+    <None Include="Resources\EditingAddStraightSegmentTool322.png" />
+    <None Include="Resources\DataAdd_B_162.png" />
+    <None Include="Resources\CadastralLineSegmentation162.png" />
+    <None Include="Resources\AttributesWindow162.png" />
+    <None Include="Resources\ArcMap162.png" />
+    <None Include="Resources\ShapefilePolygon161.png" />
+    <None Include="Resources\ShapefilePoint161.png" />
+    <None Include="Resources\ShapefileLine161.png" />
+    <None Include="Resources\GeodatabaseFeatureDataset161.png" />
+    <None Include="Resources\GeodatabaseFeatureClassPolygon161.png" />
+    <None Include="Resources\GeodatabaseFeatureClassPoint161.png" />
+    <None Include="Resources\GeodatabaseFeatureClassLine161.png" />
+    <None Include="Resources\GeodatabaseFeatureClassEmpty161.png" />
+    <None Include="Resources\GeodatabaseConnection161.png" />
+    <None Include="Resources\GenericDeleteBlack161.png" />
+    <None Include="Resources\GenericArrowToolBlack161.png" />
+    <None Include="Resources\EditUndo161.png" />
+    <None Include="Resources\EditUndo_B_161.png" />
+    <None Include="Resources\EditRedo161.png" />
+    <None Include="Resources\EditRedo_B_161.png" />
+    <None Include="Resources\EditingTraceTool161.png" />
+    <None Include="Resources\EditingStopEditing16.png" />
+    <None Include="Resources\EditingStartEditing16.png" />
+    <None Include="Resources\EditingSplitPolygonTool161.png" />
+    <None Include="Resources\EditingSplitLineTool161.png" />
+    <None Include="Resources\EditingSelectVertexTool321.png" />
+    <None Include="Resources\EditingSelectVertexTool161.png" />
+    <None Include="Resources\EditingSaveEdits16.png" />
+    <None Include="Resources\EditingRotateTool161.png" />
+    <None Include="Resources\EditingRightAngleConstructor161.png" />
+    <None Include="Resources\EditingReshapeFeatureTool32.png" />
+    <None Include="Resources\EditingReshapeFeatureTool161.png" />
+    <None Include="Resources\EditingPointConstructor161.png" />
+    <None Include="Resources\EditingPointAtEndofLine161.png" />
+    <None Include="Resources\EditingOffset161.png" />
+    <None Include="Resources\EditingMidpointConstructor161.png" />
+    <None Include="Resources\EditingMidpointArcSegmentTool161.png" />
+    <None Include="Resources\EditingLineIntersectionTool161.png" />
+    <None Include="Resources\EditingEditVertices161.png" />
+    <None Include="Resources\EditingEditTool321.png" />
+    <None Include="Resources\EditingEditTool161.png" />
+    <None Include="Resources\EditingEditAnnotationTool161.png" />
+    <None Include="Resources\EditingCreateFeaturesWindowShow161.png" />
+    <None Include="Resources\EditingCopyParallel16.png" />
+    <None Include="Resources\EditingConstructPoints16.png" />
+    <None Include="Resources\EditingBuffer16.png" />
+    <None Include="Resources\EditingAdjustmentAdjust321.png" />
+    <None Include="Resources\EditingAddStraightSegmentTool321.png" />
+    <None Include="Resources\DataAdd_B_161.png" />
+    <None Include="Resources\CadastralLineSegmentation161.png" />
+    <None Include="Resources\AttributesWindow161.png" />
+    <None Include="Resources\ArcMap161.png" />
     <None Include="Resources\ShapefilePolygon16.png" />
     <None Include="Resources\ShapefilePoint16.png" />
     <None Include="Resources\ShapefileLine16.png" />

@@ -33,14 +33,15 @@
             this.axTOCControl = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.AddData = new System.Windows.Forms.ToolStripButton();
+            this.openMapDoc = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editTS = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.开始编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.线ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.面ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.停止编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存编辑内容ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.移动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,22 +53,24 @@
             this.联合ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.裁剪ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.捕捉ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
-            this.AddData = new System.Windows.Forms.ToolStripButton();
-            this.openMapDoc = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
@@ -83,6 +86,7 @@
             this.axMapControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl.OcxState")));
             this.axMapControl.Size = new System.Drawing.Size(490, 445);
             this.axMapControl.TabIndex = 1;
+            this.axMapControl.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(this.axMapControl_OnMouseDown);
             // 
             // axTOCControl
             // 
@@ -92,6 +96,7 @@
             this.axTOCControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axTOCControl.OcxState")));
             this.axTOCControl.Size = new System.Drawing.Size(151, 445);
             this.axTOCControl.TabIndex = 2;
+            this.axTOCControl.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.axTOCControl_OnMouseDown);
             // 
             // axLicenseControl1
             // 
@@ -112,6 +117,26 @@
             this.toolStrip1.Size = new System.Drawing.Size(641, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            // 
+            // AddData
+            // 
+            this.AddData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddData.Image = ((System.Drawing.Image)(resources.GetObject("AddData.Image")));
+            this.AddData.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddData.Name = "AddData";
+            this.AddData.Size = new System.Drawing.Size(23, 22);
+            this.AddData.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // openMapDoc
+            // 
+            this.openMapDoc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openMapDoc.Image = global::ArcEngineTest.Properties.Resources.GenericOpen_B_16;
+            this.openMapDoc.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openMapDoc.Name = "openMapDoc";
+            this.openMapDoc.Size = new System.Drawing.Size(23, 22);
+            this.openMapDoc.Text = "toolStripButton5";
+            this.openMapDoc.Click += new System.EventHandler(this.openMapDoc_Click);
             // 
             // menuStrip1
             // 
@@ -150,26 +175,6 @@
             this.editTS.TabIndex = 6;
             this.editTS.Text = "toolStrip2";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripSplitButton2
             // 
             this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -194,11 +199,36 @@
             // 
             // 开始编辑ToolStripMenuItem
             // 
+            this.开始编辑ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.点ToolStripMenuItem,
+            this.线ToolStripMenuItem,
+            this.面ToolStripMenuItem});
             this.开始编辑ToolStripMenuItem.Image = global::ArcEngineTest.Properties.Resources.EditingStartEditing16;
             this.开始编辑ToolStripMenuItem.Name = "开始编辑ToolStripMenuItem";
             this.开始编辑ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.开始编辑ToolStripMenuItem.Text = "开始编辑";
-            this.开始编辑ToolStripMenuItem.Click += new System.EventHandler(this.开始编辑ToolStripMenuItem_Click);
+            this.开始编辑ToolStripMenuItem.Click += new System.EventHandler(this.开始编辑ToolStripMenuItem_Click_1);
+            // 
+            // 点ToolStripMenuItem
+            // 
+            this.点ToolStripMenuItem.Name = "点ToolStripMenuItem";
+            this.点ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.点ToolStripMenuItem.Text = "点";
+            this.点ToolStripMenuItem.Click += new System.EventHandler(this.点ToolStripMenuItem_Click);
+            // 
+            // 线ToolStripMenuItem
+            // 
+            this.线ToolStripMenuItem.Name = "线ToolStripMenuItem";
+            this.线ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.线ToolStripMenuItem.Text = "线";
+            this.线ToolStripMenuItem.Click += new System.EventHandler(this.线ToolStripMenuItem_Click);
+            // 
+            // 面ToolStripMenuItem
+            // 
+            this.面ToolStripMenuItem.Name = "面ToolStripMenuItem";
+            this.面ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.面ToolStripMenuItem.Text = "面";
+            this.面ToolStripMenuItem.Click += new System.EventHandler(this.面ToolStripMenuItem_Click);
             // 
             // 停止编辑ToolStripMenuItem
             // 
@@ -270,6 +300,11 @@
             this.捕捉ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.捕捉ToolStripMenuItem.Text = "捕捉";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -287,6 +322,11 @@
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "toolStripButton2";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton3
             // 
@@ -314,6 +354,11 @@
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton6.Text = "toolStripButton6";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripSplitButton1
             // 
@@ -369,6 +414,11 @@
             this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton11.Text = "toolStripButton11";
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton12
             // 
             this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -395,25 +445,6 @@
             this.toolStripButton14.Name = "toolStripButton14";
             this.toolStripButton14.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton14.Text = "toolStripButton14";
-            // 
-            // AddData
-            // 
-            this.AddData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AddData.Image = ((System.Drawing.Image)(resources.GetObject("AddData.Image")));
-            this.AddData.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AddData.Name = "AddData";
-            this.AddData.Size = new System.Drawing.Size(23, 22);
-            this.AddData.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // openMapDoc
-            // 
-            this.openMapDoc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openMapDoc.Image = global::ArcEngineTest.Properties.Resources.GenericOpen_B_16;
-            this.openMapDoc.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openMapDoc.Name = "openMapDoc";
-            this.openMapDoc.Size = new System.Drawing.Size(23, 22);
-            this.openMapDoc.Text = "toolStripButton5";
-            this.openMapDoc.Click += new System.EventHandler(this.openMapDoc_Click);
             // 
             // Form1
             // 
@@ -481,7 +512,13 @@
         private System.Windows.Forms.ToolStripMenuItem 联合ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 裁剪ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 捕捉ToolStripMenuItem;
+
         private System.Windows.Forms.ToolStripButton openMapDoc;
+
+        private System.Windows.Forms.ToolStripMenuItem 点ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 线ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 面ToolStripMenuItem;
+
     }
 }
 

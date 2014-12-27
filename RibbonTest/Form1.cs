@@ -15,5 +15,10 @@ namespace RibbonTest
         {
             InitializeComponent();
         }
+
+        private void ribbonButtonAddShapefile_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Clicked!");
+        }
     }
 }

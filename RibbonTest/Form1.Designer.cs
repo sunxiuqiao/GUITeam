@@ -34,6 +34,7 @@
             this.ribbonTab1 = new System.Windows.Forms.RibbonTab();
             this.ribbonPanel1 = new System.Windows.Forms.RibbonPanel();
             this.ribbonTab2 = new System.Windows.Forms.RibbonTab();
+            this.ribbonButtonAddShapefile = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -79,11 +80,19 @@
             // 
             // ribbonPanel1
             // 
-            this.ribbonPanel1.Text = "hh";
+            this.ribbonPanel1.Items.Add(this.ribbonButtonAddShapefile);
+            this.ribbonPanel1.Text = "Data";
             // 
             // ribbonTab2
             // 
             this.ribbonTab2.Text = "Insert";
+            // 
+            // ribbonButtonAddShapefile
+            // 
+            this.ribbonButtonAddShapefile.Image = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddShapefile.Image")));
+            this.ribbonButtonAddShapefile.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButtonAddShapefile.SmallImage")));
+            this.ribbonButtonAddShapefile.Text = "添加Shapefile";
+            this.ribbonButtonAddShapefile.Click += new System.EventHandler(this.ribbonButtonAddShapefile_Click);
             // 
             // Form1
             // 
@@ -104,5 +113,6 @@
         private System.Windows.Forms.RibbonTab ribbonTab1;
         private System.Windows.Forms.RibbonTab ribbonTab2;
         private System.Windows.Forms.RibbonPanel ribbonPanel1;
+        private System.Windows.Forms.RibbonButton ribbonButtonAddShapefile;
     }
 }

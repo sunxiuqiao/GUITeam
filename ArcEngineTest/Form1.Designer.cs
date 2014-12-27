@@ -34,7 +34,6 @@
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.AddData = new System.Windows.Forms.ToolStripButton();
-            this.openMapDoc = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.editTS = new System.Windows.Forms.ToolStrip();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
@@ -110,8 +109,7 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddData,
-            this.openMapDoc});
+            this.AddData});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(641, 25);
@@ -127,16 +125,6 @@
             this.AddData.Name = "AddData";
             this.AddData.Size = new System.Drawing.Size(23, 22);
             this.AddData.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // openMapDoc
-            // 
-            this.openMapDoc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openMapDoc.Image = global::ArcEngineTest.Properties.Resources.GenericOpen_B_16;
-            this.openMapDoc.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openMapDoc.Name = "openMapDoc";
-            this.openMapDoc.Size = new System.Drawing.Size(23, 22);
-            this.openMapDoc.Text = "toolStripButton5";
-            this.openMapDoc.Click += new System.EventHandler(this.openMapDoc_Click);
             // 
             // menuStrip1
             // 
@@ -155,9 +143,9 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripSeparator3,
+            this.toolStripButton6,
             this.toolStripButton3,
             this.toolStripButton4,
-            this.toolStripButton6,
             this.toolStripSeparator2,
             this.toolStripSplitButton1,
             this.toolStripButton7,
@@ -512,8 +500,6 @@
         private System.Windows.Forms.ToolStripMenuItem 联合ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 裁剪ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 捕捉ToolStripMenuItem;
-
-        private System.Windows.Forms.ToolStripButton openMapDoc;
 
         private System.Windows.Forms.ToolStripMenuItem 点ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 线ToolStripMenuItem;

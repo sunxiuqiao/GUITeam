@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcEngineTest", "ArcEngineT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Windows.Forms.Ribbon35", "System.Windows.Forms.Ribbon\System.Windows.Forms.Ribbon35.csproj", "{46A18A55-5AE8-49CE-91CD-C7421B642E7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDeom", "WpfDemo\WpfDeom.csproj", "{F0F8BFA3-7C2F-4D65-A778-2901CFDD6771}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcEngineWpfDemo", "ArcEngineWpfDemo\ArcEngineWpfDemo.csproj", "{F0F8BFA3-7C2F-4D65-A778-2901CFDD6771}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,57 @@
+﻿<f:RibbonWindow  x:Class="FluentRibbonWpfDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:f="urn:fluent-ribbon"
+        xmlns:xxx="clr-namespace:FluentRibbonWpfDemo"
+        Title="MainWindow" WindowState="Maximized">
+    <f:RibbonWindow.Resources>
+        <xxx:VisibilityToBool x:Key="V2BConverter"></xxx:VisibilityToBool>        
+    </f:RibbonWindow.Resources>
+    
+    <f:RibbonWindow.CommandBindings>
+        <CommandBinding x:Name="CommandClose" Command="Close" Executed="CommandClose_Executed"></CommandBinding>
+    </f:RibbonWindow.CommandBindings>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <f:Ribbon Grid.Row="0">
+            <f:Ribbon.Menu>
+                <f:Backstage Header="文件">
+                    <f:BackstageTabControl>                        
+                        <f:BackstageTabItem Header="新建"></f:BackstageTabItem>
+                        <f:BackstageTabItem Header="打开"></f:BackstageTabItem>
+                        <f:BackstageTabItem Header="保存"></f:BackstageTabItem>
+                        <f:BackstageTabItem Header="另存为"></f:BackstageTabItem>
+                        <f:SeparatorTabItem></f:SeparatorTabItem>
+                        <f:Button Header="关闭" Command="Close"></f:Button>
+                    </f:BackstageTabControl>
+                </f:Backstage>
+            </f:Ribbon.Menu>
+            
+            <f:Ribbon.Tabs>
+                <f:RibbonTabItem Header="开始">
+                    <f:RibbonTabItem.Groups>
+                        <f:RibbonGroupBox Header="项目">
+                            <f:Button Header="关闭" Command="Close"></f:Button>
+                        </f:RibbonGroupBox>
+                    </f:RibbonTabItem.Groups>
+                </f:RibbonTabItem>
+                <f:RibbonTabItem Header="编辑"></f:RibbonTabItem>
+                <f:RibbonTabItem Header="数据"></f:RibbonTabItem>
+                <f:RibbonTabItem Header="类别" Group="{Binding ElementName=TrainingSamples}"></f:RibbonTabItem>
+            </f:Ribbon.Tabs>
+            
+            <f:Ribbon.ContextualGroups>
+                <f:RibbonContextualTabGroup x:Name="TrainingSamples" Header="训练样区" Background="Green"></f:RibbonContextualTabGroup>
+            </f:Ribbon.ContextualGroups>
+        </f:Ribbon>
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <CheckBox x:Name="boxTrainingSamples" Content="显示训练样本" IsChecked="{Binding ElementName=TrainingSamples,Path=Visibility,Converter={StaticResource V2BConverter},Mode=TwoWay}"></CheckBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</f:RibbonWindow>

@@ -5,10 +5,19 @@
         xmlns:xxx="clr-namespace:FluentRibbonWpfDemo"
         Title="MainWindow" WindowState="Maximized">
     <f:RibbonWindow.Resources>
-        <xxx:VisibilityToBool x:Key="V2BConverter"></xxx:VisibilityToBool>        
+        <!--转换器-->
+        <xxx:VisibilityToBool x:Key="V2BConverter"></xxx:VisibilityToBool>
+
+        <!--资源-->
+        <Style x:Key="TrainingSamplesGroupStyle" TargetType="f:RibbonContextualTabGroup">
+            <Setter Property="Header" Value="选择样区"></Setter>
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="BorderBrush" Value="Green"/>
+        </Style>
     </f:RibbonWindow.Resources>
     
     <f:RibbonWindow.CommandBindings>
+        <!--命令-->
         <CommandBinding x:Name="CommandClose" Command="Close" Executed="CommandClose_Executed"></CommandBinding>
     </f:RibbonWindow.CommandBindings>
     
@@ -19,6 +28,7 @@
         </Grid.RowDefinitions>
         <f:Ribbon Grid.Row="0">
             <f:Ribbon.Menu>
+                <!--BackStage-->
                 <f:Backstage Header="文件">
                     <f:BackstageTabControl>                        
                         <f:BackstageTabItem Header="新建"></f:BackstageTabItem>
@@ -30,7 +40,8 @@
                     </f:BackstageTabControl>
                 </f:Backstage>
             </f:Ribbon.Menu>
-            
+
+            <!--所有的Tab-->
             <f:Ribbon.Tabs>
                 <f:RibbonTabItem Header="开始">
                     <f:RibbonTabItem.Groups>
@@ -44,12 +55,15 @@
                 <f:RibbonTabItem Header="类别" Group="{Binding ElementName=TrainingSamples}"></f:RibbonTabItem>
             </f:Ribbon.Tabs>
             
+            <!--上下文Tab-->
             <f:Ribbon.ContextualGroups>
-                <f:RibbonContextualTabGroup x:Name="TrainingSamples" Header="训练样区" Background="Green"></f:RibbonContextualTabGroup>
+                <f:RibbonContextualTabGroup x:Name="TrainingSamples" Style="{StaticResource TrainingSamplesGroupStyle}"></f:RibbonContextualTabGroup>
             </f:Ribbon.ContextualGroups>
         </f:Ribbon>
+        
         <Grid Grid.Row="1">
             <StackPanel>
+                <!--是否显示训练样本的“上下文Tab”-->
                 <CheckBox x:Name="boxTrainingSamples" Content="显示训练样本" IsChecked="{Binding ElementName=TrainingSamples,Path=Visibility,Converter={StaticResource V2BConverter},Mode=TwoWay}"></CheckBox>
             </StackPanel>
         </Grid>

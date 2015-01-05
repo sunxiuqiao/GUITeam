@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcEngineWpfDemo", "ArcEngi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentRibbonWpfDemo", "FluentRibbonWpfDemo\FluentRibbonWpfDemo.csproj", "{F14C1C33-B50A-4DEB-B55B-FE5071879408}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMTest", "MVVMTest\MVVMTest.csproj", "{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F14C1C33-B50A-4DEB-B55B-FE5071879408}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F14C1C33-B50A-4DEB-B55B-FE5071879408}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F14C1C33-B50A-4DEB-B55B-FE5071879408}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

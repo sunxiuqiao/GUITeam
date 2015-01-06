@@ -1,8 +1,100 @@
-﻿<Window x:Class="MVVMTest.MainWindow"
+﻿<f:RibbonWindow x:Class="MVVMTest.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:f="urn:fluent-ribbon"
+        xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:MVVMTest"
+        Title="MainWindow" MinHeight="600" MinWidth="800" WindowState="Maximized">
+    <f:RibbonWindow.Resources>
+        <local:ActiveContentToVisibility x:Key="activeContentToVisibility"></local:ActiveContentToVisibility>
+    </f:RibbonWindow.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
         
+        <f:Ribbon Grid.Row="0">
+            <f:Ribbon.Menu>
+                <f:Backstage Header="文件">
+                    <f:BackstageTabControl>                        
+                    </f:BackstageTabControl>
+                </f:Backstage>
+            </f:Ribbon.Menu>
+            
+            <f:Ribbon.Tabs>
+                <f:RibbonTabItem Header="开始">
+                    <f:RibbonTabItem.Groups>
+                        <f:RibbonGroupBox Header="项目">
+                            <f:Button Header="新建"></f:Button>
+                            <f:Button Header="打开"></f:Button>
+                            <f:Button Header="保存"></f:Button>
+                            <f:Button Header="另存为"></f:Button>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Header="帮助">
+                            <f:Button Header="关闭"></f:Button>
+                            <f:Button Header="帮助主题"></f:Button>
+                            <f:Button Header="关于"></f:Button>
+                        </f:RibbonGroupBox>
+                    </f:RibbonTabItem.Groups>
+                </f:RibbonTabItem>
+                <f:RibbonTabItem Header="图层" Group="{Binding ElementName=Project}">
+                    
+                </f:RibbonTabItem>
+                <f:RibbonTabItem Header="属性" Group="{Binding ElementName=Project}">
+                    
+                </f:RibbonTabItem>
+            </f:Ribbon.Tabs>
+            
+            <f:Ribbon.ContextualGroups>
+                <f:RibbonContextualTabGroup x:Name="Project" Header="项目" Background="Red" BorderBrush="Red" Visibility="{Binding ElementName=dockManager,Path=ActiveContent,Converter={StaticResource activeContentToVisibility}}">                    
+                </f:RibbonContextualTabGroup>
+            </f:Ribbon.ContextualGroups>
+        </f:Ribbon>
+
+        <dock:DockingManager x:Name="dockManager" Grid.Row="1">
+            <dock:DockingManager.Theme>
+                <dock:MetroTheme></dock:MetroTheme>
+            </dock:DockingManager.Theme>
+            <dock:LayoutRoot>
+                <dock:LayoutPanel>
+                    <dock:LayoutAnchorablePaneGroup DockWidth="200">
+                        <dock:LayoutAnchorablePane DockWidth="200">
+                            <dock:LayoutAnchorable ContentId="Layers" Title="Layers">
+                                <TreeView BorderBrush="Transparent" BorderThickness="3">
+                                    <s:String>Layer 1</s:String>
+                                    <s:String>Layer 2</s:String>
+                                    <s:String>Layer 3</s:String>
+                                </TreeView>
+                            </dock:LayoutAnchorable>
+
+                        </dock:LayoutAnchorablePane>
+                    </dock:LayoutAnchorablePaneGroup>
+                    <dock:LayoutDocumentPaneGroup>
+                        <dock:LayoutDocumentPane>
+                            <dock:LayoutDocument Title="影像.project">
+                                <WindowsFormsHost></WindowsFormsHost>
+                            </dock:LayoutDocument>
+                        </dock:LayoutDocumentPane>
+                    </dock:LayoutDocumentPaneGroup>
+                </dock:LayoutPanel>
+            </dock:LayoutRoot>
+        </dock:DockingManager>
+
+        <f:StatusBar Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Foreground="White">
+            <f:StatusBarItem Title="当前坐标"
+                                  HorizontalAlignment="Left"
+                             >
+                100，200
+            </f:StatusBarItem>
+            <Separator HorizontalAlignment="Left" />
+            <f:StatusBarItem Title="Selected Words"
+                                  ToolTip="This is Selected Words"
+                                  Content="15"
+                                  HorizontalAlignment="Left" />
+            <Separator HorizontalAlignment="Left" />
+        </f:StatusBar>
     </Grid>
-</Window>
+</f:RibbonWindow>

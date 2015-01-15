@@ -59,6 +59,6 @@ namespace MVVMTest.ViewModels
             return true;
         }
 
-        public ICommand UpdateArtistName { get { return new RelayCommand<string>(UpdateProjectNameExecute,CanUpdateProjectNameExecute); } }
+        public ICommand UpdateProjectName { get { return new RelayCommand<string>(UpdateProjectNameExecute, CanUpdateProjectNameExecute); } }
     }
 }

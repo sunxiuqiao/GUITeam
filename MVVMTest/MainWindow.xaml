@@ -9,15 +9,9 @@
         Title="MainWindow" MinHeight="600" MinWidth="800" WindowState="Maximized">
     <f:RibbonWindow.Resources>
         <local:ActiveContentToVisibility x:Key="activeContentToVisibility"></local:ActiveContentToVisibility>
-        <DataTemplate DataType="{x:Type vm:ProjectViewModel}">
-            <StackPanel>
-                <TextBlock Text="{Binding ProjectName}"></TextBlock>
-                <TextBlock Text="{Binding FilePath}" FontSize="50"></TextBlock>  
-            </StackPanel>            
-        </DataTemplate>
-        <DataTemplate x:Key="DocumentPanelTitles">
-            <TextBlock Text="{Binding ProjectName}"></TextBlock>
-        </DataTemplate>
+        <!--<DataTemplate DataType="{x:Type vm:ProjectViewModel}">
+            <dock:LayoutAnchorableTabItem></dock:LayoutAnchorableTabItem>
+        </DataTemplate>-->
     </f:RibbonWindow.Resources>
     <f:RibbonWindow.DataContext>
         <vm:MainViewModel></vm:MainViewModel>
@@ -42,7 +36,7 @@
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox Header="项目">
                             <f:Button Header="新建"></f:Button>
-                            <f:Button Header="打开"></f:Button>
+                            <f:Button Header="打开" Command="{Binding OpenProject}"></f:Button>
                             <f:Button Header="保存"></f:Button>
                             <f:Button Header="另存为"></f:Button>
                         </f:RibbonGroupBox>
@@ -68,47 +62,37 @@
         </f:Ribbon>
 
         <dock:DockingManager x:Name="dockManager" Grid.Row="1" DocumentsSource="{Binding Projects}">
-            <dock:DockingManager.DocumentHeaderTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FilePath}" />
-                    </StackPanel>
-                </DataTemplate>
-            </dock:DockingManager.DocumentHeaderTemplate>
             <dock:DockingManager.Theme>
                 <dock:MetroTheme></dock:MetroTheme>
             </dock:DockingManager.Theme>
+            
+            <dock:DockingManager.LayoutItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding ProjectName}"/>
+                        <TextBlock Text="{Binding FilePath}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </dock:DockingManager.LayoutItemTemplate>
+            
+            <dock:DockingManager.LayoutItemContainerStyle>
+                <Style TargetType="{x:Type dock:LayoutItem}">
+                    <Setter Property="Title" Value="{Binding Model.ProjectName}"/>
+                </Style>
+            </dock:DockingManager.LayoutItemContainerStyle>
+            
             <dock:LayoutRoot>
                <dock:LayoutPanel>
-                     <!--<dock:LayoutAnchorablePaneGroup DockWidth="200">
-                        <dock:LayoutAnchorablePane DockWidth="200">
-                            <dock:LayoutAnchorable ContentId="Layers" Title="Layers">
-                                <TreeView BorderBrush="Transparent" BorderThickness="3">
-                                    <s:String>Layer 1</s:String>
-                                    <s:String>Layer 2</s:String>
-                                    <s:String>Layer 3</s:String>
-                                </TreeView>
-                            </dock:LayoutAnchorable>
-
-                        </dock:LayoutAnchorablePane>
-                    </dock:LayoutAnchorablePaneGroup>                    
-                    <dock:LayoutDocumentPaneGroup>
-                        <dock:LayoutDocumentPane>
-                            <dock:LayoutDocument Title="影像.project">
-                            </dock:LayoutDocument>
-                        </dock:LayoutDocumentPane>
-                    </dock:LayoutDocumentPaneGroup>-->
                     <dock:LayoutAnchorablePane DockWidth="200">
-                        <dock:LayoutAnchorable ContentId="Layers" Title="Layers">
+                        <dock:LayoutAnchorable ContentId="Layers" Title="Layers">                            
                             <TreeView BorderBrush="Transparent" BorderThickness="3">
-                                <s:String>Layer 1</s:String>
-                                <s:String>Layer 2</s:String>
-                                <s:String>Layer 3</s:String>
+                                <TreeViewItem Header="Layer1"></TreeViewItem>
+                                <TreeViewItem Header="Layer2"></TreeViewItem>
+                                <TreeViewItem Header="Layer3"></TreeViewItem>
                             </TreeView>
                         </dock:LayoutAnchorable>
                     </dock:LayoutAnchorablePane>
-                    <dock:LayoutDocumentPane>
-                    </dock:LayoutDocumentPane>
+                    <dock:LayoutDocumentPane></dock:LayoutDocumentPane>
                 </dock:LayoutPanel>
             </dock:LayoutRoot>
         </dock:DockingManager>

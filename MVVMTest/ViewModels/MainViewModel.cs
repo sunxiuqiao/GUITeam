@@ -15,8 +15,6 @@ namespace MVVMTest.ViewModels
 
         public MainViewModel() 
         {
-            projects.Add(new ProjectViewModel("hehe", "c:/hehe.path"));
-            projects.Add(new ProjectViewModel("hehe2", "d:/hehe2.path"));
         }
 
         public static MainViewModel This
@@ -48,7 +46,23 @@ namespace MVVMTest.ViewModels
         }
         public event EventHandler ActiveProjectChanged;
 
+        #region NewProjectCommand
+        void NewProjectExcute()
+        {
+            ProjectViewModel prj = new ProjectViewModel();
+            projects.Add(prj);
+            ActiveDocument = prj;
+        }
 
+        bool CanNewProjectExcute()
+        {
+            return true;
+        }
+
+        public ICommand NewProject { get { return new RelayCommand(NewProjectExcute, CanNewProjectExcute); } }
+        #endregion
+
+        #region OpenProjectCommand
         void OpenProjectExcute()
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -56,8 +70,9 @@ namespace MVVMTest.ViewModels
             if (dlg.ShowDialog().GetValueOrDefault())
             {
                 string filePath = dlg.FileName;
-                string projectName = System.IO.Path.GetFileNameWithoutExtension(filePath);
-                projects.Add(new ProjectViewModel(projectName, filePath));
+                ProjectViewModel prj = new ProjectViewModel(filePath);
+                projects.Add(prj);
+                ActiveDocument = prj;
             }
         }
 
@@ -67,5 +82,6 @@ namespace MVVMTest.ViewModels
         }
 
         public ICommand OpenProject { get { return new RelayCommand(OpenProjectExcute, CanOpenProjectExcute); } }
+        #endregion
     }
 }

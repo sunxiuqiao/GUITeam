@@ -9,56 +9,80 @@ using MVVMTest.Models;
 namespace MVVMTest.ViewModels
 {
     public class ProjectViewModel : ObservableObject
-    {
-        Project project;
-
-        public ProjectViewModel(string name, string path)
+    { 
+        public ProjectViewModel(string path)
         {
-            project = new Project { ProjectName = name, FilePath = path };
+            FilePath = path;
+            Title = FileName;
         }
 
-        public Project Project 
+        public ProjectViewModel()
         {
-            get { return project; }
-            set { project = value; }
+            IsDirty = true;
+            Title = FileName;
         }
 
-        public string ProjectName
+        #region Title
+        private string title = null;
+        public string Title
         {
-            get { return project.ProjectName; }
+            get { return title; }
             set
             {
-                if (project.ProjectName != value)
+                if (title != value)
                 {
-                    project.ProjectName = value;
-                    RaisePropertyChanged("ProjectName");
+                    title = value;
+                    RaisePropertyChanged("Title");
                 }
             }
         }
+        #endregion
 
+        #region FilePath
+        private string filePath;
         public string FilePath
         {
-            get { return project.FilePath; }
+            get { return filePath; }
             set 
             {
-                if (project.FilePath != value)
+                if (filePath != value)
                 {
-                    project.FilePath = value;
+                    filePath = value;
                     RaisePropertyChanged("FilePath");
                 }
             }
         }
+        #endregion
 
-        void UpdateProjectNameExecute(string newName)
+        #region FileName
+        public string FileName
         {
-            ProjectName = newName;
-        }
+            get
+            {
+                if (FilePath == null)
+                    return "Untitled" + (IsDirty ? "*" : "");
 
-        bool CanUpdateProjectNameExecute(string newName)
+                return System.IO.Path.GetFileName(FilePath) + (IsDirty ? "*" : "");
+            }
+        }
+        #endregion
+
+        #region IsDirty
+        private bool isDirty = false;
+        public bool IsDirty
         {
-            return true;
+            get { return isDirty; }
+            set
+            {
+                if (isDirty != value)
+                {
+                    isDirty = value;
+                    RaisePropertyChanged("IsDirty");
+                    RaisePropertyChanged("FilePath");
+                }
+            }
         }
+        #endregion
 
-        public ICommand UpdateProjectName { get { return new RelayCommand<string>(UpdateProjectNameExecute, CanUpdateProjectNameExecute); } }
     }
 }

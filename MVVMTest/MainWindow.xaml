@@ -9,9 +9,7 @@
         Title="MainWindow" MinHeight="600" MinWidth="800" WindowState="Maximized">
     <f:RibbonWindow.Resources>
         <local:ActiveContentToVisibility x:Key="activeContentToVisibility"></local:ActiveContentToVisibility>
-        <!--<DataTemplate DataType="{x:Type vm:ProjectViewModel}">
-            <dock:LayoutAnchorableTabItem></dock:LayoutAnchorableTabItem>
-        </DataTemplate>-->
+        <local:ActiveDocumentConverter x:Key="activeDocumentConverter"></local:ActiveDocumentConverter>
     </f:RibbonWindow.Resources>
     <f:RibbonWindow.DataContext>
         <vm:MainViewModel></vm:MainViewModel>
@@ -26,7 +24,11 @@
         <f:Ribbon Grid.Row="0">
             <f:Ribbon.Menu>
                 <f:Backstage Header="文件">
-                    <f:BackstageTabControl>                        
+                    <f:BackstageTabControl>
+                        <f:Button Header="新建" Command="{Binding NewProject}"></f:Button>
+                        <f:Button Header="打开" Command="{Binding OpenProject}"></f:Button>
+                        <f:BackstageTabItem Header="保存"></f:BackstageTabItem>
+                        <f:BackstageTabItem Header="另存为"></f:BackstageTabItem>
                     </f:BackstageTabControl>
                 </f:Backstage>
             </f:Ribbon.Menu>
@@ -35,7 +37,7 @@
                 <f:RibbonTabItem Header="开始">
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox Header="项目">
-                            <f:Button Header="新建"></f:Button>
+                            <f:Button Header="新建" Command="{Binding NewProject}"></f:Button>
                             <f:Button Header="打开" Command="{Binding OpenProject}"></f:Button>
                             <f:Button Header="保存"></f:Button>
                             <f:Button Header="另存为"></f:Button>
@@ -46,10 +48,7 @@
                             <f:Button Header="关于"></f:Button>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
-                </f:RibbonTabItem>
-                <f:RibbonTabItem Header="图层" Group="{Binding ElementName=Project}">
-                    
-                </f:RibbonTabItem>
+                </f:RibbonTabItem>   
                 <f:RibbonTabItem Header="属性" Group="{Binding ElementName=Project}">
                     
                 </f:RibbonTabItem>
@@ -61,7 +60,9 @@
             </f:Ribbon.ContextualGroups>
         </f:Ribbon>
 
-        <dock:DockingManager x:Name="dockManager" Grid.Row="1" DocumentsSource="{Binding Projects}">
+        <dock:DockingManager x:Name="dockManager" Grid.Row="1" 
+                             DocumentsSource="{Binding Projects}"
+                             ActiveContent="{Binding ActiveDocument, Mode=TwoWay,Converter={StaticResource activeDocumentConverter}}">
             <dock:DockingManager.Theme>
                 <dock:MetroTheme></dock:MetroTheme>
             </dock:DockingManager.Theme>
@@ -69,7 +70,7 @@
             <dock:DockingManager.LayoutItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding ProjectName}"/>
+                        <TextBlock Text="{Binding Title}"/>
                         <TextBlock Text="{Binding FilePath}"/>
                     </StackPanel>
                 </DataTemplate>
@@ -77,7 +78,7 @@
             
             <dock:DockingManager.LayoutItemContainerStyle>
                 <Style TargetType="{x:Type dock:LayoutItem}">
-                    <Setter Property="Title" Value="{Binding Model.ProjectName}"/>
+                    <Setter Property="Title" Value="{Binding Model.Title}"/>
                 </Style>
             </dock:DockingManager.LayoutItemContainerStyle>
             

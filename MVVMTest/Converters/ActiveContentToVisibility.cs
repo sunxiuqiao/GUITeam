@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Data;
 
 namespace MVVMTest
@@ -13,7 +14,7 @@ namespace MVVMTest
             if (value == null)
                 return System.Windows.Visibility.Hidden;
 
-            if (value.GetType().ToString() == "System.Windows.Forms.Integration.WindowsFormsHost")
+            if (value.GetType().ToString() == "MVVMTest.ViewModels.ProjectViewModel")
                 return System.Windows.Visibility.Visible;
             else
                 return System.Windows.Visibility.Hidden;

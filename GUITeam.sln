@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentRibbonWpfDemo", "Flue
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMTest", "MVVMTest\MVVMTest.csproj", "{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{508D1E2D-DEE2-4FEC-B217-738FDE255789}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43BD89F4-8D0D-488C-B299-FE9DDEB2D648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{508D1E2D-DEE2-4FEC-B217-738FDE255789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{508D1E2D-DEE2-4FEC-B217-738FDE255789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{508D1E2D-DEE2-4FEC-B217-738FDE255789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{508D1E2D-DEE2-4FEC-B217-738FDE255789}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

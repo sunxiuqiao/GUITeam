@@ -1,0 +1,113 @@
+﻿<f:RibbonWindow x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:f="urn:fluent-ribbon"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <f:Ribbon Grid.Row="0">
+            <f:Ribbon.Menu>
+                <f:Backstage Name="开始" Header="开始">
+                    <f:BackstageTabControl >
+                        <f:BackstageTabItem Name="新建" Header="新建"/>
+                        <f:BackstageTabItem Name="打开" Header="打开"/>
+                        <f:BackstageTabItem Name="打印" Header="打印"/>
+                        <f:BackstageTabItem Name="保存" Header="保存"/>
+                        <f:BackstageTabItem Name="另存为" Header="另存为"/>
+                        
+                        <f:SeparatorTabItem></f:SeparatorTabItem>
+                        <f:BackstageTabItem Name="设置" Header="设置"/>
+                        
+                    </f:BackstageTabControl>
+                </f:Backstage>
+            </f:Ribbon.Menu>
+            <f:Ribbon.Tabs>
+                <f:RibbonTabItem Name="数据采集" Header="数据采集">
+                    <f:RibbonTabItem.Groups>
+                        <f:RibbonGroupBox Name="加载数据" Header="加载数据">
+                            <f:Button Name="添加数据" Header="添加数据"></f:Button>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="加载影像" Header="加载影像">
+                            <f:Button Name="添加影像" Header="添加影像"></f:Button>
+                        </f:RibbonGroupBox>
+                    </f:RibbonTabItem.Groups>
+                </f:RibbonTabItem> 
+                <f:RibbonTabItem Name="数据编辑" Header="数据编辑">
+                    <f:RibbonTabItem.Groups>
+                        <f:RibbonGroupBox Name="图形绘制" Header="图形绘制">
+                            <f:Button Name="地块绘制" Header="地块"/>
+                            <f:Button Name="地块自动构建" Header="地块 自动构建" />
+                            <f:Button Name="地块分割" Header="地块分割"/>
+                            <f:Button Name="地块合并" Header="地块合并"/>
+                            <f:Button Name="自动绘制界址点" Header="自动绘制 界址点" />
+                            <f:Button Name="手动绘制界址点" Header="手动绘制 界址点"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="注记" Header="注记">
+                            <f:Button Name="添加注记" Header="添加"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="属性入库" Header="属性入库">
+                            <f:Button Name="批量信息录入" Header="批量信息"/>
+                            <f:Button Name="属性修改" Header="属性修改"/>
+                        </f:RibbonGroupBox>
+                    </f:RibbonTabItem.Groups>
+                </f:RibbonTabItem>
+                <f:RibbonTabItem Name="数据检查" Header="数据检查">
+                    <f:RibbonTabItem.Groups>
+                        <f:RibbonGroupBox Name="图形检查" Header="图形检查">
+                            <f:Button Name="共点检查" Header="共点"/>
+                            <f:Button Name="微短线检查" Header="微短线"/>
+                            <f:Button Name="微多边形检查" Header="微多边形"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="地块检查" Header="地块检查">
+                            <f:Button Name="地相交检查" Header="相交"/>
+                            <f:Button Name="地块封闭性检查" Header="封闭性"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="属性检查" Header="属性检查">
+                            <f:Button Name="实体标准型检查" Header="实体标准型"/>
+                            <f:Button Name="注记标准型检查" Header="注记标准型"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="批量检查G" Header="批量检查">
+                            <f:Button Name="批量检查" Header="批量检查"/>
+                        </f:RibbonGroupBox>
+                    </f:RibbonTabItem.Groups>
+                </f:RibbonTabItem>
+                <f:RibbonTabItem Name="查询分析" Header="查询分析">
+                    <f:RibbonTabItem.Groups>
+                        <f:RibbonGroupBox Name="条件查询" Header="条件查询">
+                            <f:Button Name="根据地块信息查询" Header="根据地块 信息"/>
+                            <f:Button Name="根据承包方信息查询" Header="根据承包方 信息"/>
+                            <f:Button Name="根据发包方信息查询" Header="根据发包方 信息"/>
+                            <f:Button Name="根据承包合同查询" Header="根据承包 合同"/>
+                            <f:Button Name="根据发包合同查询" Header="根据发包 合同"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="拉框查询G" Header="拉框查询">
+                            <f:Button Name="拉框查询" Header="拉框查询"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="图属联动查询G" Header="图属联动查询">
+                            <f:Button Name="图属联动查询" Header="图属联动"/>
+                        </f:RibbonGroupBox>
+                    </f:RibbonTabItem.Groups>
+                </f:RibbonTabItem>
+                <f:RibbonTabItem Name="图标输出" Header="图标输出">
+                    <f:RibbonTabItem.Groups>
+                        <f:RibbonGroupBox Name="单个打印输出" Header="单个打印输出">
+                            <f:Button Name="公示表打印输出" Header="公示表"/>
+                            <f:Button Name="归户表打印输出" Header="归户表"/>
+                            <f:Button Name="承包合同打印输出" Header="承包合同"/>
+                            <f:Button Name="登记簿打印输出" Header="登记簿"/>
+                            <f:Button Name="公示图打印输出" Header="公示图"/>
+                            <f:Button Name="申请书打印输出" Header="申请书"/>
+                            <f:Button Name="土地经营权证书打印输出" Header="土地经营 权证书"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox Name="批量打印G" Header="批量打印">
+                            <f:Button Name="批量打印" Header="批量打印"></f:Button>
+                        </f:RibbonGroupBox>
+                    </f:RibbonTabItem.Groups>
+                </f:RibbonTabItem>
+            </f:Ribbon.Tabs>
+        </f:Ribbon>
+    </Grid>
+</f:RibbonWindow>

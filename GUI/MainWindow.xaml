@@ -2,6 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:f="urn:fluent-ribbon"
+        xmlns:esri="clr-namespace:ESRI.ArcGIS.Controls;assembly=ESRI.ArcGIS.AxControls" 
+        xmlns:esrilicense="clr-namespace:ESRI.ArcGIS;assembly=ESRI.ArcGIS.Version"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="MainWindow" Height="700" Width="1000">
     <Grid>
@@ -114,13 +116,17 @@
             <avalonDock:LayoutRoot>
                 <avalonDock:LayoutPanel Orientation="Horizontal">
                     <avalonDock:LayoutAnchorablePane DockWidth="150">
-                        <avalonDock:LayoutAnchorable x:Name="TOCControl" Title="地图" >
-                            <WindowsFormsHost x:Name="TOCControlHost"></WindowsFormsHost>
+                        <avalonDock:LayoutAnchorable x:Name="TOCControl" Title="图层" >
+                            <WindowsFormsHost x:Name="TOCControlHost">
+                                <esri:AxTOCControl x:Name="axTOCControl"></esri:AxTOCControl>
+                            </WindowsFormsHost>
                         </avalonDock:LayoutAnchorable>
                     </avalonDock:LayoutAnchorablePane>
                     <avalonDock:LayoutDocumentPane>
                         <avalonDock:LayoutDocument>
-                            <WindowsFormsHost x:Name="MapControlHost"></WindowsFormsHost>
+                            <WindowsFormsHost x:Name="MapControlHost">
+                                <esri:AxMapControl x:Name="axMapControl"></esri:AxMapControl>
+                            </WindowsFormsHost>
                         </avalonDock:LayoutDocument>
                     </avalonDock:LayoutDocumentPane>
                 </avalonDock:LayoutPanel>

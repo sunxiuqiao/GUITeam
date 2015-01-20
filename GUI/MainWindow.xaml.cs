@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ESRI.ArcGIS.Controls;
+using ESRI.ArcGIS.SystemUI;
+using ESRI.ArcGIS;
 
 namespace GUI
 {
@@ -23,6 +26,8 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+            axTOCControl.SetBuddyControl(axMapControl);
+            
         }
     }
 }

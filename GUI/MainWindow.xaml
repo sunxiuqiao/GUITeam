@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:f="urn:fluent-ribbon"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        Title="MainWindow" Height="700" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -109,5 +110,21 @@
                 </f:RibbonTabItem>
             </f:Ribbon.Tabs>
         </f:Ribbon>
+        <avalonDock:DockingManager x:Name="DockingManager" Grid.Row="1">
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutPanel Orientation="Horizontal">
+                    <avalonDock:LayoutAnchorablePane DockWidth="150">
+                        <avalonDock:LayoutAnchorable x:Name="TOCControl" Title="地图" >
+                            <WindowsFormsHost x:Name="TOCControlHost"></WindowsFormsHost>
+                        </avalonDock:LayoutAnchorable>
+                    </avalonDock:LayoutAnchorablePane>
+                    <avalonDock:LayoutDocumentPane>
+                        <avalonDock:LayoutDocument>
+                            <WindowsFormsHost x:Name="MapControlHost"></WindowsFormsHost>
+                        </avalonDock:LayoutDocument>
+                    </avalonDock:LayoutDocumentPane>
+                </avalonDock:LayoutPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
     </Grid>
 </f:RibbonWindow>

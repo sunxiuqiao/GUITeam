@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using MicroMvvm;
-using MVVMTest.Models;
 
 namespace MVVMTest.ViewModels
 {

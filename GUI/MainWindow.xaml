@@ -4,8 +4,13 @@
         xmlns:f="urn:fluent-ribbon"
         xmlns:esri="clr-namespace:ESRI.ArcGIS.Controls;assembly=ESRI.ArcGIS.AxControls" 
         xmlns:esrilicense="clr-namespace:ESRI.ArcGIS;assembly=ESRI.ArcGIS.Version"
+        xmlns:local ="clr-namespace:GUI"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="MainWindow" Height="700" Width="1000">
+    <Window.DataContext>
+        <local:FileViewModel x:Name="FileViewModel"></local:FileViewModel>
+    </Window.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -31,7 +36,7 @@
                 <f:RibbonTabItem Name="数据采集" Header="数据采集">
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox Name="加载数据" Header="加载数据">
-                            <f:Button Name="添加数据" Header="添加数据"></f:Button>
+                            <f:Button Name="添加数据" Header="添加数据" Command="{Binding OpenFileCommand}"></f:Button>
                         </f:RibbonGroupBox>
                         <f:RibbonGroupBox Name="加载影像" Header="加载影像">
                             <f:Button Name="添加影像" Header="添加影像"></f:Button>
@@ -117,16 +122,12 @@
                 <avalonDock:LayoutPanel Orientation="Horizontal">
                     <avalonDock:LayoutAnchorablePane DockWidth="150">
                         <avalonDock:LayoutAnchorable x:Name="TOCControl" Title="图层" >
-                            <WindowsFormsHost x:Name="TOCControlHost">
-                                <esri:AxTOCControl x:Name="axTOCControl"></esri:AxTOCControl>
-                            </WindowsFormsHost>
+                            <WindowsFormsHost x:Name="TOCControlHost"></WindowsFormsHost>
                         </avalonDock:LayoutAnchorable>
                     </avalonDock:LayoutAnchorablePane>
                     <avalonDock:LayoutDocumentPane>
                         <avalonDock:LayoutDocument>
-                            <WindowsFormsHost x:Name="MapControlHost">
-                                <esri:AxMapControl x:Name="axMapControl"></esri:AxMapControl>
-                            </WindowsFormsHost>
+                            <WindowsFormsHost x:Name="MapControlHost"></WindowsFormsHost>
                         </avalonDock:LayoutDocument>
                     </avalonDock:LayoutDocumentPane>
                 </avalonDock:LayoutPanel>

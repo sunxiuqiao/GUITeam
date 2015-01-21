@@ -26,8 +26,11 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            axTOCControl.SetBuddyControl(axMapControl);
-            
+            MapControlHost.Child = FileViewModel.MapControl;
+            TOCControlHost.Child = FileViewModel.TOCControl;
+            FileViewModel.MapControl.CreateControl();
+            FileViewModel.TOCControl.CreateControl();
+            FileViewModel.TOCControl.SetBuddyControl(FileViewModel.MapControl);
         }
     }
 }

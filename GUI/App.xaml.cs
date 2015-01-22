@@ -29,6 +29,7 @@ namespace GUI
             {
                 aoi.Initialize(productcode);
             }
+            base.OnStartup(e);
         }
     }
 }

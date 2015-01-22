@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS;
+using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.Carto;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace GUI
 {
@@ -30,7 +33,15 @@ namespace GUI
             TOCControlHost.Child = FileViewModel.TOCControl;
             FileViewModel.MapControl.CreateControl();
             FileViewModel.TOCControl.CreateControl();
+            FileViewModel.MapControl.OleDropEnabled = true;
             FileViewModel.TOCControl.SetBuddyControl(FileViewModel.MapControl);
+
+            Binding MapControlDocumentBinding = new Binding();
+            MapControlDocumentBinding.Source = FileViewModel;
+            MapControlDocumentBinding.Path = new PropertyPath("MapFileName");
+            BindingOperations.SetBinding(this.MapControlDocument, LayoutDocument.TitleProperty, MapControlDocumentBinding);
         }
+        
     }
+        
 }

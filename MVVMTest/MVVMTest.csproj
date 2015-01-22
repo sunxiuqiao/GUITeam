@@ -81,10 +81,11 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Converters\ActiveDocumentConverter.cs" />
+    <Compile Include="Converters\ActiveProjectConverter.cs" />
     <Compile Include="MicroMVVM\ObservableObject.cs" />
     <Compile Include="MicroMVVM\PropertySupport.cs" />
     <Compile Include="MicroMVVM\RelayCommand.cs" />
+    <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Page Include="MainWindow.xaml">

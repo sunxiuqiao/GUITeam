@@ -10,7 +10,8 @@ using System.Windows.Input;
 namespace MVVMTest.ViewModels
 {
     class MainViewModel:MicroMvvm.ObservableObject
-    {        
+    {
+        #region Constructor
         static MainViewModel _this = new MainViewModel();
 
         public MainViewModel() 
@@ -21,37 +22,42 @@ namespace MVVMTest.ViewModels
         {
             get { return _this; }
         }
+        #endregion
 
-        ObservableCollection<ProjectViewModel> projects = new ObservableCollection<ProjectViewModel>();
+        #region Projects
+        private ObservableCollection<ProjectViewModel> projects = new ObservableCollection<ProjectViewModel>();
         public ObservableCollection<ProjectViewModel> Projects
         {
             get {  return projects; }
             set { projects = value; }
         }
+        #endregion
 
-        private ProjectViewModel _activeDocument = null;
-        public ProjectViewModel ActiveDocument
+        #region ActiveProject
+        private ProjectViewModel _activeProject = null;
+        public ProjectViewModel ActiveProject
         {
-            get { return _activeDocument; }
+            get { return _activeProject; }
             set
             {
-                if (_activeDocument != value)
+                if (_activeProject != value)
                 {
-                    _activeDocument = value;
-                    RaisePropertyChanged("ActiveDocument");
+                    _activeProject = value;
+                    RaisePropertyChanged("ActiveProject");
                     if (ActiveProjectChanged != null)
                         ActiveProjectChanged(this, EventArgs.Empty);
                 }
             }
         }
         public event EventHandler ActiveProjectChanged;
+        #endregion
 
         #region NewProjectCommand
         void NewProjectExcute()
         {
             ProjectViewModel prj = new ProjectViewModel();
             projects.Add(prj);
-            ActiveDocument = prj;
+            ActiveProject = prj;
         }
 
         bool CanNewProjectExcute()
@@ -72,7 +78,7 @@ namespace MVVMTest.ViewModels
                 string filePath = dlg.FileName;
                 ProjectViewModel prj = new ProjectViewModel(filePath);
                 projects.Add(prj);
-                ActiveDocument = prj;
+                ActiveProject = prj;
             }
         }
 

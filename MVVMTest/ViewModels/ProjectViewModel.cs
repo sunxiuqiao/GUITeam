@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using MicroMvvm;
 
 namespace MVVMTest.ViewModels
@@ -20,6 +22,15 @@ namespace MVVMTest.ViewModels
             IsDirty = true;
             Title = FileName;
         }
+
+        #region Images
+        private ObservableCollection<ImageViewModel> images = new ObservableCollection<ImageViewModel>();
+        public ObservableCollection<ImageViewModel> Images
+        {
+            get { return images; }
+            set { images = value; }
+        }
+        #endregion
 
         #region Title
         private string title = null;
@@ -81,6 +92,27 @@ namespace MVVMTest.ViewModels
                 }
             }
         }
+        #endregion
+
+        #region AddImageCommand
+        void AddImageExcute()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "栅格数据文件|*.tif,*.img|所有文件(*.*)|*.*";
+            if (dlg.ShowDialog().GetValueOrDefault())
+            {
+                string filePath = dlg.FileName;
+                ImageViewModel img = new ImageViewModel(filePath);
+                images.Add(img);
+            }
+        }
+
+        bool CanAddImageExcute()
+        {
+            return true;
+        }
+
+        public ICommand AddImage { get { return new RelayCommand(AddImageExcute, CanAddImageExcute); } }
         #endregion
 
     }

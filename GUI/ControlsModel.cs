@@ -4,23 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ESRI.ArcGIS.Controls;
-using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS.Carto;
 using System.Windows;
-using ESRI.ArcGIS.SystemUI;
+using ESRI.ArcGIS.esriSystem;
+
 
 namespace GUI
 {
     class ControlsModel
     {
-        private AxMapControl _MapControl = new AxMapControl();
+        private readonly AxMapControl _MapControl = new AxMapControl();
         private readonly AxTOCControl _TOCControl = new AxTOCControl();
-        private esriControlsDragDropEffect __MapControlEffect = esriControlsDragDropEffect.esriDragDropNone;
+
+        private esriControlsDragDropEffect _MapControlEffect = esriControlsDragDropEffect.esriDragDropNone;
+        private IToolbarMenu _MapMenu = null;
+        private IToolbarMenu _LayerMenu = null;
 
         public ControlsModel()
         {
             MapControl.OnOleDrop += MapControl_OnOleDrop;
-            //TOCControl.OnMouseDown += OnMouseDown;
+            TOCControl.OnMouseDown += OnMouseDown;
+
+            InitTOCControlContextMenu();
         }
 
         #region properties
@@ -45,7 +51,32 @@ namespace GUI
 
         private void OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
         {
-            MessageBox.Show("Mouse down");
+            if (e.button == 1) return;
+
+            else if (e.button == 2)
+            {
+                esriTOCControlItem item = esriTOCControlItem.esriTOCControlItemNone;
+                IBasicMap map =null;
+                ILayer layer = null;
+                object other = null;
+                object index = null;
+                _TOCControl.HitTest(e.x, e.y, ref item, ref map, ref layer, ref other, ref index);
+
+                if(item == esriTOCControlItem.esriTOCControlItemMap)
+                {
+                    _TOCControl.SelectItem(map, null);
+                    _MapControl.CustomProperty = layer;
+                    if(_MapMenu != null)
+                        _MapMenu.PopupMenu(e.x, e.y, _TOCControl.hWnd);
+                }
+                else if(item == esriTOCControlItem.esriTOCControlItemLayer)
+                {
+                    _TOCControl.SelectItem(layer, null);
+                    _MapControl.CustomProperty = layer;
+                    if(_LayerMenu != null)
+                        _LayerMenu.PopupMenu(e.x, e.y, _TOCControl.hWnd);
+                }
+            }
         }
 
         private void MapControl_OnOleDrop(object sender, IMapControlEvents2_OnOleDropEvent e)
@@ -58,12 +89,12 @@ namespace GUI
             {
                 if (dataObjectHelper.CanGetFiles() || dataObjectHelper.CanGetNames())
                 {
-                    __MapControlEffect = esriControlsDragDropEffect.esriDragDropCopy;
+                    _MapControlEffect = esriControlsDragDropEffect.esriDragDropCopy;
                 }
             }
             else if (action == esriControlsDropAction.esriDropOver)
             {
-                e.effect = (int)__MapControlEffect;
+                e.effect = (int)_MapControlEffect;
             }
             else if (action == esriControlsDropAction.esriDropped)
             {
@@ -140,6 +171,20 @@ namespace GUI
             _MapControl.MousePointer = esriControlsMousePointer.esriPointerDefault;
         }
         #endregion
+
+        private void InitTOCControlContextMenu()
+        {
+            //init MapMenu
+             
+            _MapMenu = new ToolbarMenuClass();
+            _MapMenu.AddItem(new AECommand.RemoveCommand(), 2, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            //init LayerMenu
+            _LayerMenu = new ToolbarMenuClass();
+            _LayerMenu.AddItem(new AECommand.RemoveCommand(), 1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+
+            _LayerMenu.SetHook(_TOCControl);
+            _MapMenu.SetHook(_TOCControl);
+        }
     }
         
 }

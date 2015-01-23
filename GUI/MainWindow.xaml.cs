@@ -36,10 +36,6 @@ namespace GUI
             FileViewModel.MapControl.OleDropEnabled = true;
             FileViewModel.TOCControl.SetBuddyControl(FileViewModel.MapControl);
 
-            Binding MapControlDocumentBinding = new Binding();
-            MapControlDocumentBinding.Source = FileViewModel;
-            MapControlDocumentBinding.Path = new PropertyPath("MapFileName");
-            BindingOperations.SetBinding(this.MapControlDocument, LayoutDocument.TitleProperty, MapControlDocumentBinding);
         }
         
     }

@@ -19,7 +19,7 @@ namespace GUI
     {
         public sealed class RemoveCommand : BaseCommand,ICommandSubType
         {
-            private AxTOCControl _TOCControl;
+            private IMapControl3 _MapControl;
             private long _SubType;
 
             public RemoveCommand()
@@ -55,11 +55,7 @@ namespace GUI
             /// <param name="hook">Instance of the application</param>
             public override void OnCreate(object hook)
             {
-                if (hook == null)
-                    return;
-                if (_TOCControl == null)
-                    _TOCControl = new AxTOCControl();
-                _TOCControl = (AxTOCControl)hook;
+                _MapControl = (IMapControl3)(((AxMapControl)hook).Object);
 
             }
 
@@ -71,15 +67,18 @@ namespace GUI
                 // TODO: Add Command1.OnClick implementation
                 if(_SubType == 1)
                 {
-                    IMapControl3 map = (IMapControl3)_TOCControl.Buddy;
-                    
-                    map.Map.DeleteLayer((ILayer)map.CustomProperty);
+                    _MapControl.Map.DeleteLayer((ILayer)_MapControl.CustomProperty);
                 }
                 else
                 {
-                    IMapControl3 map = (IMapControl3)_TOCControl.Buddy;
-                    map.ClearLayers();
-                    _TOCControl.Update();
+                    IEnumLayer layers = _MapControl.Map.Layers;
+                    layers.Reset();
+                    ILayer layer = layers.Next();
+                    while (layer != null)
+                    {
+                        _MapControl.Map.DeleteLayer(layer);
+                        layer = layers.Next();
+                    }
                 }
                 
             }
@@ -93,6 +92,79 @@ namespace GUI
                 _SubType = SubType;
             }
             #endregion
+        }
+
+        public sealed class ScaleThresholdCommand : BaseCommand,ICommandSubType
+        {
+            private HookHelper m_HookHelper = new HookHelper();
+            private long _subType;
+
+            public int GetCount()
+            {
+                return 3;
+            }
+
+            public void SetSubType(int SubType)
+            {
+                _subType = SubType;
+            }
+
+            public override string Caption
+            {
+                get
+                {
+                    if (_subType == 1)
+                        return "设置为最大比例";
+                    else if (_subType == 2)
+                        return "设展位最小比例";
+                    else if (_subType == 3)
+                        return "清除比例范围";
+                    
+                    return base.Caption;
+                }
+            }
+
+            public override bool Enabled
+            {
+                get
+                {
+                    bool enable = true;
+
+                    if(_subType == 3)
+                    {
+                        IMapControl3 map = (IMapControl3)(((AxMapControl)(m_HookHelper.Hook)).Object);
+                        ILayer layer = (ILayer)map.CustomProperty;
+                        if (layer.MaximumScale == 0 && layer.MinimumScale == 0)
+                        {
+                            enable = false;
+                        }
+                    }
+                    return enable;
+                }
+            }
+
+            public override void OnCreate(object hook)
+            {
+                m_HookHelper.Hook = ((AxMapControl)hook).Object;
+            }
+
+            public override void OnClick()
+            {
+                IMapControl3 map = (IMapControl3)(m_HookHelper.ActiveView.FocusMap);
+                if(_subType == 1)
+                {
+                    ((ILayer)map.CustomProperty).MaximumScale = m_HookHelper.ActiveView.FocusMap.MapScale;
+                }
+                else if (_subType == 2)
+                {
+                    ((ILayer)map.CustomProperty).MinimumScale = m_HookHelper.ActiveView.FocusMap.MapScale;
+                }
+                else if (_subType == 3)
+                {
+                    ((ILayer)map.CustomProperty).MinimumScale = 0;
+                    ((ILayer)map.CustomProperty).MaximumScale = 0;
+                }
+            }
         }
     }
     

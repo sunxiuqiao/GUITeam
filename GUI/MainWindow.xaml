@@ -121,12 +121,12 @@
             <avalonDock:LayoutRoot>
                 <avalonDock:LayoutPanel Orientation="Horizontal">
                     <avalonDock:LayoutAnchorablePane DockWidth="150">
-                        <avalonDock:LayoutAnchorable x:Name="TOCControlDock" Title="Layer" >
+                        <avalonDock:LayoutAnchorable x:Name="TOCControlDock" Title="图层" >
                             <WindowsFormsHost x:Name="TOCControlHost"></WindowsFormsHost>
                         </avalonDock:LayoutAnchorable>
                     </avalonDock:LayoutAnchorablePane>
                     <avalonDock:LayoutDocumentPane>
-                        <avalonDock:LayoutDocument x:Name="MapControlDocument">
+                        <avalonDock:LayoutDocument x:Name="MapControlDocument" Title="地图">
                             <WindowsFormsHost x:Name="MapControlHost"></WindowsFormsHost>
                         </avalonDock:LayoutDocument>
                     </avalonDock:LayoutDocumentPane>

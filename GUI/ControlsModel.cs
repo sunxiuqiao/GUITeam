@@ -181,9 +181,12 @@ namespace GUI
             //init LayerMenu
             _LayerMenu = new ToolbarMenuClass();
             _LayerMenu.AddItem(new AECommand.RemoveCommand(), 1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new AECommand.ScaleThresholdCommand(), 1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new AECommand.ScaleThresholdCommand(), 2, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new AECommand.ScaleThresholdCommand(), 3, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
 
-            _LayerMenu.SetHook(_TOCControl);
-            _MapMenu.SetHook(_TOCControl);
+            _LayerMenu.SetHook(_MapControl);
+            _MapMenu.SetHook(_MapControl);
         }
     }
         

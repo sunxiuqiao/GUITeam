@@ -4,23 +4,49 @@
         xmlns:f="urn:fluent-ribbon"
         xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:MVVMTest"
         xmlns:vm="clr-namespace:MVVMTest.ViewModels"
         Title="MVVMTest" MinHeight="600" MinWidth="800" WindowState="Maximized">
     <f:RibbonWindow.Resources>
+        <!--Converters-->
         <local:ActiveContentToVisibility x:Key="activeContentToVisibility"></local:ActiveContentToVisibility>
         <local:ActiveProjectConverter x:Key="activeProjectConverter"></local:ActiveProjectConverter>
+        <local:ObjectToBool x:Key="objectToBool"></local:ObjectToBool>
 
-        <Style x:Key="RibbonContextualTabGroupProjectStyle" TargetType="f:RibbonContextualTabGroup">
+        <!--Templetes-->
+        <DataTemplate x:Key= "projectViewTemplete">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Title}"/>
+                <TextBlock Text="{Binding FilePath}"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="layersViewTemplete">
+            <TreeView>
+                <TreeViewItem Header="栅格影像" IsExpanded="True" ItemsSource="{Binding Images}">
+                    <TreeViewItem.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding FileName}"></TextBlock>
+                                <TextBlock Text="{Binding FilePath}"></TextBlock>
+                                <TextBlock Text="{Binding IsValid}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeViewItem.ItemTemplate>
+                </TreeViewItem>
+            </TreeView>
+        </DataTemplate>
+
+        <!--<Style x:Key="RibbonContextualTabGroupProjectStyle" TargetType="f:RibbonContextualTabGroup">
             <Setter Property="Header" Value="项目"></Setter>
             <Setter Property="Background" Value="Green"></Setter>
             <Setter Property="BorderBrush" Value="Green"></Setter>
             <Setter Property="Visibility" Value="{Binding ElementName=dockManager,Path=ActiveContent,Converter={StaticResource activeContentToVisibility}}"></Setter>
-        </Style>
+        </Style>-->
     </f:RibbonWindow.Resources>
-    <f:RibbonWindow.DataContext>
-        <vm:MainViewModel></vm:MainViewModel>
-    </f:RibbonWindow.DataContext>
+    <!--<f:RibbonWindow.DataContext>
+        <vm:MainViewModel ></vm:MainViewModel>
+    </f:RibbonWindow.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -55,8 +81,8 @@
                             <f:Button Header="关于"></f:Button>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
-                </f:RibbonTabItem>   
-                <f:RibbonTabItem Header="图层管理" Group="{Binding ElementName=Project}" Visibility="{Binding ElementName=dockManager,Path=ActiveContent,Converter={StaticResource activeContentToVisibility}}">
+                </f:RibbonTabItem>
+                <f:RibbonTabItem Header="图层管理" IsEnabled="{Binding ActiveProject,Converter={StaticResource objectToBool}}">
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox Header="面向对象分析">
                             <f:Button Header="添加栅格图层" Command="{Binding ActiveProject.AddImage}"></f:Button>
@@ -71,26 +97,25 @@
             </f:Ribbon.Tabs>
             
             <f:Ribbon.ContextualGroups>
-                <f:RibbonContextualTabGroup x:Name="Project" Style="{StaticResource RibbonContextualTabGroupProjectStyle}">                    
-                </f:RibbonContextualTabGroup>
+                <!--<f:RibbonContextualTabGroup x:Name="Project" Style="{StaticResource RibbonContextualTabGroupProjectStyle}">                    
+                </f:RibbonContextualTabGroup>-->
             </f:Ribbon.ContextualGroups>
         </f:Ribbon>
 
         <dock:DockingManager x:Name="dockManager" Grid.Row="1" 
+                             AnchorablesSource="{Binding Layers}"
                              DocumentsSource="{Binding Projects}"
                              ActiveContent="{Binding ActiveProject, Mode=TwoWay,Converter={StaticResource activeProjectConverter}}">
             <dock:DockingManager.Theme>
                 <dock:MetroTheme></dock:MetroTheme>
             </dock:DockingManager.Theme>
             
-            <dock:DockingManager.LayoutItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Title}"/>
-                        <TextBlock Text="{Binding FilePath}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </dock:DockingManager.LayoutItemTemplate>
+            <dock:DockingManager.LayoutItemTemplateSelector>
+                <local:PanesTemplateSelector 
+                    ProjectViewTemplate="{StaticResource projectViewTemplete}"
+                    LayersViewTemplate="{StaticResource layersViewTemplete}" >
+                </local:PanesTemplateSelector>
+            </dock:DockingManager.LayoutItemTemplateSelector>
             
             <dock:DockingManager.LayoutItemContainerStyle>
                 <Style TargetType="{x:Type dock:LayoutItem}">
@@ -100,16 +125,10 @@
             
             <dock:LayoutRoot>
                <dock:LayoutPanel>
-                    <dock:LayoutAnchorablePane DockWidth="200">
-                        <dock:LayoutAnchorable ContentId="Layers" Title="Layers">                            
-                            <TreeView BorderBrush="Transparent" BorderThickness="3">
-                                <TreeViewItem Header="Layer1"></TreeViewItem>
-                                <TreeViewItem Header="Layer2"></TreeViewItem>
-                                <TreeViewItem Header="Layer3"></TreeViewItem>
-                            </TreeView>
-                        </dock:LayoutAnchorable>
+                    <dock:LayoutAnchorablePane DockMinWidth="200">
                     </dock:LayoutAnchorablePane>
-                    <dock:LayoutDocumentPane></dock:LayoutDocumentPane>
+                    <dock:LayoutDocumentPane>                        
+                    </dock:LayoutDocumentPane>
                 </dock:LayoutPanel>
             </dock:LayoutRoot>
         </dock:DockingManager>
@@ -126,6 +145,9 @@
                                   Content="15"
                                   HorizontalAlignment="Left" />
             <Separator HorizontalAlignment="Left" />
+            <f:StatusBarItem Title="Projects count" Content="{Binding Projects.Count}" HorizontalAlignment="Left">
+                
+            </f:StatusBarItem>
         </f:StatusBar>
     </Grid>
 </f:RibbonWindow>

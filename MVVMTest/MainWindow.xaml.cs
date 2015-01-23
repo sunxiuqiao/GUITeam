@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVMTest.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,9 @@ namespace MVVMTest
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = MainViewModel.This;
+            LayersViewModel layer = new LayersViewModel();
+            MainViewModel.This.Layers.Add(layer);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace MVVMTest.ViewModels
         public ProjectViewModel()
         {
             IsDirty = true;
-            Title = FileName;
+            Title = FileName;            
         }
 
         #region Images
@@ -30,7 +30,7 @@ namespace MVVMTest.ViewModels
             get { return images; }
             set { images = value; }
         }
-        #endregion
+        #endregion        
 
         #region Title
         private string title = null;
@@ -103,7 +103,7 @@ namespace MVVMTest.ViewModels
             {
                 string filePath = dlg.FileName;
                 ImageViewModel img = new ImageViewModel(filePath);
-                images.Add(img);
+                Images.Add(img);
             }
         }
 

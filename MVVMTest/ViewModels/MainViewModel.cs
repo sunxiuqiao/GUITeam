@@ -16,6 +16,7 @@ namespace MVVMTest.ViewModels
 
         public MainViewModel() 
         {
+            //图层窗格            
         }
 
         public static MainViewModel This
@@ -52,10 +53,20 @@ namespace MVVMTest.ViewModels
         public event EventHandler ActiveProjectChanged;
         #endregion
 
+        #region Layers
+        private ObservableCollection<PaneViewModel> layers = new ObservableCollection<PaneViewModel>();
+        public ObservableCollection<PaneViewModel> Layers
+        {
+            get { return layers; }
+            set { layers = value; }
+        }
+        #endregion
+
         #region NewProjectCommand
         void NewProjectExcute()
         {
             ProjectViewModel prj = new ProjectViewModel();
+            prj.Images.Add(new ImageViewModel(@"C:\Users\cgz\Pictures\ChangeObject.png"));
             projects.Add(prj);
             ActiveProject = prj;
         }

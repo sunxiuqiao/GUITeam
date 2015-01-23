@@ -26,7 +26,7 @@ namespace MVVMTest
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is MVVMTest.ViewModels.ProjectViewModel)
+            if (value is MVVMTest.ViewModels.ProjectViewModel) 
                 return value;
 
             return Binding.DoNothing;
@@ -34,7 +34,7 @@ namespace MVVMTest
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is MVVMTest.ViewModels.ProjectViewModel)
+            if (value is MVVMTest.ViewModels.ProjectViewModel) 
                 return value;
 
             return Binding.DoNothing;

@@ -11,7 +11,7 @@ namespace MVVMTest.ViewModels
         #region Constructor
         public ImageViewModel(string imageFilePath)
         {
-            filePath = imageFilePath;
+            FilePath = imageFilePath;
         }
         #endregion
 

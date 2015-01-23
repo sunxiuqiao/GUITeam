@@ -96,7 +96,7 @@ namespace GUI
 
         public sealed class ScaleThresholdCommand : BaseCommand,ICommandSubType
         {
-            private HookHelper m_HookHelper = new HookHelper();
+            private IMapControl3 _MapControl = null;
             private long _subType;
 
             public int GetCount()
@@ -132,9 +132,8 @@ namespace GUI
 
                     if(_subType == 3)
                     {
-                        IMapControl3 map = (IMapControl3)(((AxMapControl)(m_HookHelper.Hook)).Object);
-                        ILayer layer = (ILayer)map.CustomProperty;
-                        if (layer.MaximumScale == 0 && layer.MinimumScale == 0)
+                        ILayer layer = (ILayer)_MapControl.CustomProperty;
+                        if(layer.MaximumScale == 0 && layer.MinimumScale ==0)
                         {
                             enable = false;
                         }
@@ -145,24 +144,24 @@ namespace GUI
 
             public override void OnCreate(object hook)
             {
-                m_HookHelper.Hook = ((AxMapControl)hook).Object;
+                _MapControl = (IMapControl3)(((AxMapControl)hook).Object);
             }
 
             public override void OnClick()
             {
-                IMapControl3 map = (IMapControl3)(m_HookHelper.ActiveView.FocusMap);
+                ILayer layer = (ILayer)_MapControl.CustomProperty;
                 if(_subType == 1)
                 {
-                    ((ILayer)map.CustomProperty).MaximumScale = m_HookHelper.ActiveView.FocusMap.MapScale;
+                    layer.MaximumScale = _MapControl.MapScale;
                 }
                 else if (_subType == 2)
                 {
-                    ((ILayer)map.CustomProperty).MinimumScale = m_HookHelper.ActiveView.FocusMap.MapScale;
+                    layer.MinimumScale = _MapControl.MapScale;
                 }
                 else if (_subType == 3)
                 {
-                    ((ILayer)map.CustomProperty).MinimumScale = 0;
-                    ((ILayer)map.CustomProperty).MaximumScale = 0;
+                    layer.MinimumScale = 0;
+                    layer.MaximumScale = 0;
                 }
             }
         }

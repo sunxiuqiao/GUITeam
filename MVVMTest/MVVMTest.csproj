@@ -87,6 +87,7 @@
     <Compile Include="MicroMVVM\PropertySupport.cs" />
     <Compile Include="MicroMVVM\RelayCommand.cs" />
     <Compile Include="PanesTemplateSelector.cs" />
+    <Compile Include="PaneStyleSelector.cs" />
     <Compile Include="ViewModels\ImageViewModel.cs" />
     <Compile Include="ViewModels\Panes\LayersViewModel.cs" />
     <Compile Include="ViewModels\Panes\PaneViewModel.cs" />

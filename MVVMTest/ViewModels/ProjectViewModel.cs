@@ -115,5 +115,16 @@ namespace MVVMTest.ViewModels
         public ICommand AddImage { get { return new RelayCommand(AddImageExcute, CanAddImageExcute); } }
         #endregion
 
+        #region ClosePeojectCommand
+
+        void ClosePeoject()
+        {
+            MainViewModel.This.Close(this);
+        }
+
+        public ICommand Close { get { return new RelayCommand(ClosePeoject, () => true); } }
+
+        #endregion
+
     }
 }

@@ -37,12 +37,14 @@
             </TreeView>
         </DataTemplate>
 
-        <!--<Style x:Key="RibbonContextualTabGroupProjectStyle" TargetType="f:RibbonContextualTabGroup">
-            <Setter Property="Header" Value="项目"></Setter>
-            <Setter Property="Background" Value="Green"></Setter>
-            <Setter Property="BorderBrush" Value="Green"></Setter>
-            <Setter Property="Visibility" Value="{Binding ElementName=dockManager,Path=ActiveContent,Converter={StaticResource activeContentToVisibility}}"></Setter>
-        </Style>-->
+        <!--Styles-->
+        <Style x:Key="projectStyle" TargetType="{x:Type dock:LayoutItem}">
+            <Setter Property="Title" Value="{Binding Model.Title}"/>
+            <Setter Property="CloseCommand" Value="{Binding Model.Close}"></Setter>
+        </Style>
+        <Style x:Key="layerStyle" TargetType="{x:Type dock:LayoutItem}">
+            <Setter Property="Title" Value="{Binding Model.Title}"/>
+        </Style>
     </f:RibbonWindow.Resources>
     <!--<f:RibbonWindow.DataContext>
         <vm:MainViewModel ></vm:MainViewModel>
@@ -74,9 +76,9 @@
                             <f:Button Header="打开" Command="{Binding OpenProject}"></f:Button>
                             <f:Button Header="保存"></f:Button>
                             <f:Button Header="另存为"></f:Button>
+                            <f:Button Header="关闭" Command="{Binding CloseActiveProject}"></f:Button>
                         </f:RibbonGroupBox>
                         <f:RibbonGroupBox Header="帮助">
-                            <f:Button Header="关闭"></f:Button>
                             <f:Button Header="帮助主题"></f:Button>
                             <f:Button Header="关于"></f:Button>
                         </f:RibbonGroupBox>
@@ -117,11 +119,11 @@
                 </local:PanesTemplateSelector>
             </dock:DockingManager.LayoutItemTemplateSelector>
             
-            <dock:DockingManager.LayoutItemContainerStyle>
-                <Style TargetType="{x:Type dock:LayoutItem}">
-                    <Setter Property="Title" Value="{Binding Model.Title}"/>
-                </Style>
-            </dock:DockingManager.LayoutItemContainerStyle>
+            <dock:DockingManager.LayoutItemContainerStyleSelector>
+                <local:PanesStyleSelector 
+                    ProjectStyle="{StaticResource projectStyle}" 
+                    LayersStyle="{StaticResource layerStyle}"/>
+            </dock:DockingManager.LayoutItemContainerStyleSelector>
             
             <dock:LayoutRoot>
                <dock:LayoutPanel>

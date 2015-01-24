@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using Microsoft.Win32;
 using MicroMvvm;
 using System.Windows.Input;
@@ -99,6 +100,43 @@ namespace MVVMTest.ViewModels
         }
 
         public ICommand OpenProject { get { return new RelayCommand(OpenProjectExcute, CanOpenProjectExcute); } }
+        #endregion
+
+        #region CloseProjectCommand
+        void CloseActiveProjectExcute()
+        {
+            Close(ActiveProject);
+        }
+
+        bool CanCloseActiveProjectExcute()
+        {
+            return ActiveProject!=null;
+        }
+
+        public ICommand CloseActiveProject { get { return new RelayCommand(CloseActiveProjectExcute, CanCloseActiveProjectExcute); } }
+
+        internal void Close(ProjectViewModel projectToClose)
+        {
+            if (projectToClose == null)
+                return;
+
+            if (projectToClose.IsDirty)
+            {
+                MessageBoxResult ret = MessageBox.Show("项目已修改，是否保存？", "是否保存", MessageBoxButton.YesNoCancel);
+                if (ret == MessageBoxResult.OK)
+                {
+                    //Save();
+                }
+                else if (ret == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+            }
+
+            Projects.Remove(projectToClose);
+            if (Projects.Count == 0)
+                ActiveProject = null;
+        }
         #endregion
     }
 }

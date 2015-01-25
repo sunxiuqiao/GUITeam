@@ -22,8 +22,13 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="layersViewTemplete">
-            <TreeView>
-                <TreeViewItem Header="栅格影像" IsExpanded="True" ItemsSource="{Binding Images}">
+            <TreeView Margin="3" BorderBrush="Transparent">                
+                <Border Width="1">
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="Black" Opacity="0.1"></SolidColorBrush>
+                    </Border.BorderBrush>
+                </Border>
+                <TreeViewItem Header="栅格影像" IsExpanded="True" ItemsSource="{Binding Images}" FontWeight="Bold">
                     <TreeViewItem.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>

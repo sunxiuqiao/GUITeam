@@ -98,7 +98,7 @@ namespace MVVMTest.ViewModels
         void AddImageExcute()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "栅格数据文件|*.tif,*.img|所有文件(*.*)|*.*";
+            dlg.Filter = "栅格数据文件|*.tif;*.img|所有文件(*.*)|*.*";
             if (dlg.ShowDialog().GetValueOrDefault())
             {
                 string filePath = dlg.FileName;

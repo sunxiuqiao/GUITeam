@@ -126,7 +126,7 @@ namespace GUI
 
         #endregion
 
-        #region ZoomIn 
+        #region ZoomIn ZoomOut
         private bool ZoomInCommand_CanExecute()
         {
             return true;
@@ -134,7 +134,6 @@ namespace GUI
 
         private void ZoomInCommand_Executed()
         {
-            MapControl.MousePointer = esriControlsMousePointer.esriPointerPageZoomIn;
             ESRI.ArcGIS.Controls.ControlsMapZoomInTool tool = new ESRI.ArcGIS.Controls.ControlsMapZoomInToolClass();
             ICommand cmd = tool as ICommand;
             cmd.OnCreate(MapControl.Object);
@@ -148,7 +147,6 @@ namespace GUI
 
         private void ZoomOutCommand_Executed()
         {
-            MapControl.MousePointer = esriControlsMousePointer.esriPointerPageZoomIn;
             ESRI.ArcGIS.Controls.ControlsMapZoomOutTool tool = new ESRI.ArcGIS.Controls.ControlsMapZoomOutToolClass();
             ICommand cmd = tool as ICommand;
             cmd.OnCreate(MapControl.Object);
@@ -178,11 +176,29 @@ namespace GUI
             cmd.OnCreate(MapControl);
             cmd.OnClick();
         }
+
         public System.Windows.Input.ICommand ZoomInCommand { get { return new RelayCommand(ZoomInCommand_Executed, ZoomInCommand_CanExecute); } }
         public System.Windows.Input.ICommand ConstFactorZoomOutCommand { get { return new RelayCommand(ConstFactorZoomOutCommand_Executed, ConstFactorZoomOutCommand_CanExecute); } }
         public System.Windows.Input.ICommand ConstFactorZoomInCommand { get { return new RelayCommand(ConstFactorZoomInCommand_Executed, ConstFactorZoomInCommand_CanExecute); } }
         public System.Windows.Input.ICommand ZoomOutCommand { get { return new RelayCommand(ZoomOutCommand_Executed, ZoomOutCommand_CanExecute); } }
 
+
+        #endregion
+
+        #region MapPanCommand
+        private bool MapPanCommand_CanExecute()
+        {
+            return true;
+        }
+
+        private void MapPanCommand_Executed()
+        {
+            ESRI.ArcGIS.Controls.ControlsMapPanTool tool = new ESRI.ArcGIS.Controls.ControlsMapPanToolClass();
+            ICommand cmd = tool as ICommand;
+            cmd.OnCreate(MapControl.Object);
+            MapControl.CurrentTool = cmd as ITool ;    
+        }
+        public System.Windows.Input.ICommand MapPanCommand { get { return new RelayCommand(MapPanCommand_Executed, MapPanCommand_CanExecute); } }
 
         #endregion
 

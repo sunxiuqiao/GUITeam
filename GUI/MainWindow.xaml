@@ -44,7 +44,7 @@
                         <f:RibbonGroupBox x:Name="工具" Header="工具">
                             <f:Button x:Name="放大" Header="放大" Size="Middle" Command="{Binding ZoomInCommand}"></f:Button>
                             <f:Button x:Name="缩小" Header="缩小" Size="Middle" Command="{Binding ZoomOutCommand}"></f:Button>
-                            <f:Button x:Name="平移" Header="平移" Size="Middle" ></f:Button>
+                            <f:Button x:Name="平移" Header="平移" Size="Middle" Command="{Binding MapPanCommand}"></f:Button>
                             <f:Button x:Name="全图" Header="全图" Size="Middle" Command="{Binding OverViewCommand}"></f:Button>
                             <f:Button x:Name="量测" Header="量测" Size="Middle" ></f:Button>
                             <f:Button x:Name="查找" Header="查找" Size="Middle" ></f:Button>

@@ -24,10 +24,13 @@ namespace GUI
         public ControlsModel()
         {
             MapControl.OnOleDrop += MapControl_OnOleDrop;
+            MapControl.OnMouseDown += MapControl_OnMouseDown;
             TOCControl.OnMouseDown += TOCControl_OnMouseDown;
 
             InitTOCControlContextMenu();
         }
+
+        
 
         #region properties
         public AxMapControl MapControl
@@ -171,9 +174,17 @@ namespace GUI
             _MapControl.MousePointer = esriControlsMousePointer.esriPointerDefault;
         }
 
-        private void MapControl_OnMouseDown(object sender, IMapControlEvents2_Ax_OnMouseDownEventHandler e)
+        private void MapControl_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
         {
-
+            if (e.button == 1)
+                return;
+            if (e.button == 2)
+            {
+                ESRI.ArcGIS.Controls.ControlsMapViewMenu tool = new ControlsMapViewMenuClass();
+                ICommand cmd = (ICommand)tool;
+                cmd.OnCreate(_MapControl.Object);
+                _MapControl.CurrentTool = cmd as ITool;
+            }
         }
         
         #endregion

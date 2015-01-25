@@ -67,7 +67,7 @@ namespace MVVMTest.ViewModels
         void NewProjectExcute()
         {
             ProjectViewModel prj = new ProjectViewModel();
-            prj.Images.Add(new ImageViewModel(@"C:\Users\cgz\Pictures\ChangeObject.png"));
+            //prj.Images.Add(new ImageViewModel(@"C:\Users\cgz\Pictures\ChangeObject.png"));
             projects.Add(prj);
             ActiveProject = prj;
         }

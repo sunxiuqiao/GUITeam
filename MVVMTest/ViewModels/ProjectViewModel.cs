@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Input;
-using Microsoft.Win32;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using System.Windows.Forms.Integration;
+using Microsoft.Win32;
+using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.Controls;
 using MicroMvvm;
 
 namespace MVVMTest.ViewModels
@@ -93,6 +96,23 @@ namespace MVVMTest.ViewModels
             }
         }
         #endregion
+
+
+        private WindowsFormsHost mapControlHost = new WindowsFormsHost();
+        private AxMapControl mapControl = null;
+        public WindowsFormsHost MapControlHost
+        {
+            get
+            {
+                if (mapControl == null)
+                {
+                    mapControl = new AxMapControl();
+                    mapControlHost.Child = mapControl;
+                }
+
+                return mapControlHost;
+            }
+        }
 
         #region AddImageCommand
         void AddImageExcute()

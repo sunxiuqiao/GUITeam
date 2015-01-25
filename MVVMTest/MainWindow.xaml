@@ -19,6 +19,7 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding Title}"/>
                 <TextBlock Text="{Binding FilePath}"/>
+                <WindowsFormsHost></WindowsFormsHost>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="layersViewTemplete">
@@ -46,6 +47,7 @@
         <Style x:Key="projectStyle" TargetType="{x:Type dock:LayoutItem}">
             <Setter Property="Title" Value="{Binding Model.Title}"/>
             <Setter Property="CloseCommand" Value="{Binding Model.Close}"></Setter>
+            <Setter Property="ToolTip" Value="{Binding Model.FilePath}"></Setter>
         </Style>
         <Style x:Key="layerStyle" TargetType="{x:Type dock:LayoutItem}">
             <Setter Property="Title" Value="{Binding Model.Title}"/>

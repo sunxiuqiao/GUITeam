@@ -10,13 +10,15 @@ namespace MVVMTest.ViewModels
     {
         public LayersViewModel()
         {
-            Title = "Layers";
+            Title = "图层";
             MainViewModel.This.ActiveProjectChanged += new EventHandler(OnActiveProjectChanged);
         }
 
         void OnActiveProjectChanged(object sender, EventArgs e)
         {
             RaisePropertyChanged("Images");
+            Title = "图层" + (MainViewModel.This.ActiveProject != null ? 
+                " -- " + MainViewModel.This.ActiveProject.FileName : "");
         }
 
         public ObservableCollection<ImageViewModel> Images

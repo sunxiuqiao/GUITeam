@@ -133,7 +133,7 @@ namespace GUI
 
         public override void OnMouseDown(int Button, int Shift, int X, int Y)
         {
-            // TODO:  Add Tool1.OnMouseDown implementation
+            // TODO:  Add Tool1.TOCControl_OnMouseDown implementation
         }
 
         public override void OnMouseMove(int Button, int Shift, int X, int Y)

@@ -24,7 +24,7 @@ namespace GUI
         public ControlsModel()
         {
             MapControl.OnOleDrop += MapControl_OnOleDrop;
-            TOCControl.OnMouseDown += OnMouseDown;
+            TOCControl.OnMouseDown += TOCControl_OnMouseDown;
 
             InitTOCControlContextMenu();
         }
@@ -49,7 +49,7 @@ namespace GUI
 
         #region Event Handler
 
-        private void OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
+        private void TOCControl_OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
         {
             if (e.button == 1) return;
 
@@ -170,6 +170,12 @@ namespace GUI
             }
             _MapControl.MousePointer = esriControlsMousePointer.esriPointerDefault;
         }
+
+        private void MapControl_OnMouseDown(object sender, IMapControlEvents2_Ax_OnMouseDownEventHandler e)
+        {
+
+        }
+        
         #endregion
 
         private void InitTOCControlContextMenu()
@@ -177,14 +183,15 @@ namespace GUI
             //init MapMenu
              
             _MapMenu = new ToolbarMenuClass();
-            _MapMenu.AddItem(new AECommand.RemoveCommand(), 2, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _MapMenu.AddItem(new Commands.OverViewCommand(), -1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _MapMenu.AddItem(new Commands.RemoveCommand(), 2, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
             //init LayerMenu
             _LayerMenu = new ToolbarMenuClass();
-            _LayerMenu.AddItem(new AECommand.RemoveCommand(), 1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.AddItem(new AECommand.ScaleThresholdCommand(), 1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.AddItem(new AECommand.ScaleThresholdCommand(), 2, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.AddItem(new AECommand.ScaleThresholdCommand(), 3, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
-
+            _LayerMenu.AddItem(new Commands.RemoveCommand(), 1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new Commands.ScaleThresholdCommand(), 1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new Commands.ScaleThresholdCommand(), 2, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new Commands.ScaleThresholdCommand(), 3, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new Commands.ZoomToLayerCommand(), -1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
             _LayerMenu.SetHook(_MapControl);
             _MapMenu.SetHook(_MapControl);
         }

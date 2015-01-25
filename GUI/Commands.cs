@@ -6,6 +6,8 @@ using ESRI.ArcGIS.ADF.CATIDs;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.SystemUI;
+using ESRI.ArcGIS.Geometry;
+using ESRI.ArcGIS.esriSystem;
 
 namespace GUI
 {
@@ -15,7 +17,7 @@ namespace GUI
     //[Guid("9a67ee8b-5d77-4c10-9fc8-319b63332746")]
     //[ClassInterface(ClassInterfaceType.None)]
     //[ProgId("WindowsFormsApplication2.Command1")]
-    namespace AECommand
+    namespace Commands
     {
         public sealed class RemoveCommand : BaseCommand,ICommandSubType
         {
@@ -165,6 +167,120 @@ namespace GUI
                 }
             }
         }
+
+        public sealed class ZoomToLayerCommand : BaseCommand
+        {
+            IMapControl3 _MapControl;
+
+            public override void OnCreate(object hook)
+            {
+                if (hook == null)
+                    return;
+                _MapControl = (IMapControl3)(((AxMapControl)hook).Object);
+            }
+
+            public override void OnClick()
+            {
+                ILayer layer = (ILayer)_MapControl.CustomProperty;
+                _MapControl.Extent = layer.AreaOfInterest;
+
+            }
+
+            public override string Caption
+            {
+                get
+                {
+                    return "Ëõ·Åµ½Í¼²ã";
+                }
+            }
+        }
+       
+        //TODO finish ZoomInCommand
+        public sealed class ConstFactorZoomOutCommand : BaseCommand
+        {
+            private HookHelper m_HookHelper = new HookHelperClass();
+
+            public override void OnCreate(object hook)
+            {
+                if (hook == null)
+                    return;
+                m_HookHelper.Hook = ((AxMapControl)hook).Object;
+            }
+
+            public override void OnClick()
+            {
+                IActiveView activeView = m_HookHelper.ActiveView;
+                IEnvelope envelope = activeView.Extent;
+
+                double zoomFactor = 1.5;
+                envelope.Expand((zoomFactor / System.Convert.ToDouble(1.0)), (zoomFactor / System.Convert.ToDouble(1.0)), true);
+                activeView.Extent = envelope;
+                activeView.Refresh();
+            }
+            public override string Caption
+            {
+                get
+                {
+                    return "ZoomIn";
+                }
+            }
+        }
+
+        public sealed class ConstFactorZoomInCommand : BaseCommand
+        {
+            private HookHelper m_HookHelper = new HookHelperClass();
+
+            public override void OnCreate(object hook)
+            {
+                if (hook == null)
+                    return;
+                m_HookHelper.Hook = ((AxMapControl)hook).Object;
+            }
+
+            public override void OnClick()
+            {
+                IActiveView activeView = m_HookHelper.ActiveView;
+                IEnvelope envelope = activeView.Extent;
+
+                double zoomFactor = 1.5;
+                envelope.Expand((System.Convert.ToDouble(1.0) / zoomFactor), (System.Convert.ToDouble(1.0) / zoomFactor), true);
+                activeView.Extent = envelope;
+                activeView.Refresh();
+            }
+            public override string Caption
+            {
+                get
+                {
+                    return "ZoomOut";
+                }
+            }
+        }
+
+        public sealed class OverViewCommand : BaseCommand
+        {
+            private IMapControl3 _MapControl = null;
+
+            public override void OnCreate(object hook)
+            {
+                if (hook == null)
+                    return;
+                _MapControl = (IMapControl3)(((AxMapControl)hook).Object);
+            }
+
+            public override void OnClick()
+            {
+                _MapControl.Extent = _MapControl.FullExtent;
+            }
+
+            public override string Caption
+            {
+                get
+                {
+                    return "È«Í¼";
+                }
+            }
+        }
+
     }
     
 }

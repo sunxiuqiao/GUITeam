@@ -117,7 +117,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AECommands.cs" />
+    <Compile Include="Commands.cs" />
     <Compile Include="ControlsModel.cs" />
     <Compile Include="FileViewModel.cs" />
     <Compile Include="PropertySupport.cs" />

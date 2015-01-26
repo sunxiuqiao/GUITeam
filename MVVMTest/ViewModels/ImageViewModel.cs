@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ESRI.ArcGIS.Carto;
 using MicroMvvm;
 
 namespace MVVMTest.ViewModels
@@ -15,6 +16,10 @@ namespace MVVMTest.ViewModels
         }
         #endregion
 
+        #region Layer
+        private IRasterLayer layer;
+
+
         #region FilePath
         private string filePath;
         public string FilePath
@@ -25,6 +30,7 @@ namespace MVVMTest.ViewModels
                 if (filePath != value)
                 {
                     filePath = value;
+                    layer = RasterLayerClass();
                     RaisePropertyChanged("FilePath");
                 }
             }
@@ -51,6 +57,8 @@ namespace MVVMTest.ViewModels
             {
                 if (System.IO.File.Exists(FilePath)==false)
                     return false;
+
+                
                 return true;
             }
         }

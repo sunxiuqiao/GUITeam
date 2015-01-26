@@ -16,11 +16,11 @@
 
         <!--Templetes-->
         <DataTemplate x:Key= "projectViewTemplete">
-            <StackPanel Orientation="Vertical">
+            <!--<StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding Title}"/>
                 <TextBlock Text="{Binding FilePath}"/>
-                <WindowsFormsHost></WindowsFormsHost>
-            </StackPanel>
+            </StackPanel>-->
+            <ContentControl Content="{Binding MapControlHost}"></ContentControl>
         </DataTemplate>
         <DataTemplate x:Key="layersViewTemplete">
             <TreeView Margin="3" BorderBrush="Transparent">                

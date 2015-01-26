@@ -98,19 +98,12 @@ namespace MVVMTest.ViewModels
         #endregion
 
 
-        private WindowsFormsHost mapControlHost = new WindowsFormsHost();
-        private AxMapControl mapControl = null;
-        public WindowsFormsHost MapControlHost
+        private ESRIMapControl mapControl = new ESRIMapControl();
+        public ESRIMapControl MapControlHost
         {
             get
             {
-                if (mapControl == null)
-                {
-                    mapControl = new AxMapControl();
-                    mapControlHost.Child = mapControl;
-                }
-
-                return mapControlHost;
+                return mapControl;
             }
         }
 

@@ -22,19 +22,19 @@ namespace MVVMTest
     /// </summary>
     public partial class ESRIMapControl : UserControl
     {
-        private AxMapControl mapControl = new AxMapControl();
+        protected AxMapControl mapControl = new AxMapControl();
         public ESRIMapControl()
         {
             InitializeComponent();
             host.Child = mapControl;
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        protected void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             mapControl.BorderStyle = esriControlsBorderStyle.esriNoBorder;
-            //mapControl.KeyIntercept = (int)esriKeyIntercept.esriKeyInterceptArrowKeys;
-            //mapControl.AutoKeyboardScrolling = true;
-            //mapControl.AutoMouseWheel = true;
+            mapControl.KeyIntercept = (int)esriKeyIntercept.esriKeyInterceptArrowKeys;
+            mapControl.AutoKeyboardScrolling = true;
+            mapControl.AutoMouseWheel = true;
         }
 
         public void AddLayer(ILayer layer)

@@ -21,16 +21,16 @@ namespace MVVMTest.ViewModels
         #endregion   
     
         #region Thumbnail
-        private ESRIMapControl thumbnail = null;
-        public ESRIMapControl Thumbnail { 
+        private ThumbnailMap thumbnail = null;
+        public ThumbnailMap Thumbnail { 
             get 
             {
                 if (dataLayer==null)
                     return null;
-                if (thumbnail == null)
+                if (thumbnail==null)
                 {
-                    thumbnail = new ESRIMapControl();
-                    thumbnail.AddLayer(dataLayer);
+                    thumbnail = new ThumbnailMap();
+                    thumbnail.DataLayer = DataLayer;
                 }
                 return thumbnail;
             }

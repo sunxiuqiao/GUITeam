@@ -42,7 +42,17 @@
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type vm:LayerViewModel}">
                         <StackPanel>
-                            <TextBlock Text="{Binding FileName}" ToolTip="{Binding FilePath}"></TextBlock>
+                            <StackPanel.ToolTip>
+                                <ToolTip StaysOpen="True">
+                                    <ToolTip.Content>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding FilePath}"></TextBlock>
+                                            <!--<ContentControl Content="{Binding Thumbnail}"></ContentControl>-->
+                                        </StackPanel>
+                                    </ToolTip.Content>
+                                </ToolTip>
+                            </StackPanel.ToolTip>
+                            <TextBlock Text="{Binding FileName}"></TextBlock>
                             <TextBlock Text="{Binding IsValid}"></TextBlock>
                             <ContentControl Content="{Binding Thumbnail}"></ContentControl>
                         </StackPanel>

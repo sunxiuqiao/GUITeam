@@ -32,9 +32,9 @@ namespace MVVMTest
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             mapControl.BorderStyle = esriControlsBorderStyle.esriNoBorder;
-            mapControl.KeyIntercept = (int)esriKeyIntercept.esriKeyInterceptArrowKeys;
-            mapControl.AutoKeyboardScrolling = true;
-            mapControl.AutoMouseWheel = true;
+            //mapControl.KeyIntercept = (int)esriKeyIntercept.esriKeyInterceptArrowKeys;
+            //mapControl.AutoKeyboardScrolling = true;
+            //mapControl.AutoMouseWheel = true;
         }
 
         public void AddLayer(ILayer layer)

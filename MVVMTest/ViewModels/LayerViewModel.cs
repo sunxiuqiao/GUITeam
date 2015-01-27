@@ -18,7 +18,24 @@ namespace MVVMTest.ViewModels
         #region DataLayer
         protected ILayer dataLayer;
         public ILayer DataLayer { get { return dataLayer; } }
-        #endregion       
+        #endregion   
+    
+        #region Thumbnail
+        private ESRIMapControl thumbnail = null;
+        public ESRIMapControl Thumbnail { 
+            get 
+            {
+                if (dataLayer==null)
+                    return null;
+                if (thumbnail == null)
+                {
+                    thumbnail = new ESRIMapControl();
+                    thumbnail.AddLayer(dataLayer);
+                }
+                return thumbnail;
+            }
+        }
+        #endregion
 
         #region IsValid
         abstract protected bool isValid();

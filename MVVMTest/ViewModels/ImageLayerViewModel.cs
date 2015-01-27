@@ -1,23 +1,26 @@
-﻿using System;
+﻿using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ESRI.ArcGIS.Carto;
-using MicroMvvm;
 
 namespace MVVMTest.ViewModels
 {
-    public class ImageViewModel : ObservableObject
+    public class ImageLayerViewModel:LayerViewModel
     {
         #region Constructor
-        public ImageViewModel(string imageFilePath)
+        public ImageLayerViewModel(string imageFilePath, ESRIMapControl mapControl)
         {
             FilePath = imageFilePath;
+            if (IsValid)
+            {
+                mapControl.AddLayer(DataLayer);
+            }
         }
-        #endregion
 
-        #region Layer
-        private IRasterLayer layer;
+        override protected string layerName() { return "影像"; }
+        #endregion
 
 
         #region FilePath
@@ -30,7 +33,9 @@ namespace MVVMTest.ViewModels
                 if (filePath != value)
                 {
                     filePath = value;
-                    layer = RasterLayerClass();
+                    RasterLayerClass dataLayer = new RasterLayerClass();
+                    dataLayer.CreateFromFilePath(filePath);
+                    this.dataLayer = dataLayer;
                     RaisePropertyChanged("FilePath");
                 }
             }
@@ -51,16 +56,13 @@ namespace MVVMTest.ViewModels
         #endregion
 
         #region IsValid
-        public bool IsValid
+        override protected bool isValid()
         {
-            get
-            {
-                if (System.IO.File.Exists(FilePath)==false)
-                    return false;
+            if (System.IO.File.Exists(FilePath) == false)
+                return false;
 
-                
-                return true;
-            }
+
+            return true;
         }
         #endregion
     }

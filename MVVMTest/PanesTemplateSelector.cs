@@ -32,7 +32,7 @@ namespace MVVMTest
         {
             var itemAsLayoutContent = item as LayoutContent;
 
-            if (item is LayersViewModel)
+            if (item is LayersPaneViewModel)
                 return LayersViewTemplate;
 
             if (item is ProjectViewModel)

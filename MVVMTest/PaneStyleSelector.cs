@@ -24,7 +24,7 @@ namespace MVVMTest
 
         public override System.Windows.Style SelectStyle(object item, System.Windows.DependencyObject container)
         {
-            if (item is LayersViewModel)
+            if (item is LayersPaneViewModel)
                 return LayersStyle;
 
             if (item is ProjectViewModel)

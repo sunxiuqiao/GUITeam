@@ -14,6 +14,21 @@
         <local:ActiveProjectConverter x:Key="activeProjectConverter"></local:ActiveProjectConverter>
         <local:ObjectToBool x:Key="objectToBool"></local:ObjectToBool>
 
+        <!--Styles-->
+        <Style x:Key="projectStyle" TargetType="{x:Type dock:LayoutItem}">
+            <Setter Property="Title" Value="{Binding Model.Title}"/>
+            <Setter Property="CloseCommand" Value="{Binding Model.Close}"></Setter>
+            <Setter Property="ToolTip" Value="{Binding Model.FilePath}"></Setter>
+        </Style>
+        <Style x:Key="layerStyle" TargetType="{x:Type dock:LayoutItem}">
+            <Setter Property="Title" Value="{Binding Model.Title}"/>
+        </Style>
+
+        <Style x:Key="projectLayersHeader" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="FontSize" Value="12"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        
         <!--Templetes-->
         <DataTemplate x:Key= "projectViewTemplete">
             <!--<StackPanel Orientation="Vertical">
@@ -24,34 +39,29 @@
         </DataTemplate>
         <DataTemplate x:Key="layersViewTemplete">
             <TreeView Margin="3" BorderBrush="Transparent">                
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type vm:LayerViewModel}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding FileName}" ToolTip="{Binding FilePath}"></TextBlock>
+                            <TextBlock Text="{Binding IsValid}"></TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
                 <Border Width="1">
                     <Border.BorderBrush>
                         <SolidColorBrush Color="Black" Opacity="0.1"></SolidColorBrush>
                     </Border.BorderBrush>
                 </Border>
-                <TreeViewItem Header="栅格影像" IsExpanded="True" ItemsSource="{Binding Images}" FontWeight="Bold">
-                    <TreeViewItem.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding FileName}"></TextBlock>
-                                <TextBlock Text="{Binding FilePath}"></TextBlock>
-                                <TextBlock Text="{Binding IsValid}"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </TreeViewItem.ItemTemplate>
+                <TreeViewItem Header="栅格影像" IsExpanded="True" ItemsSource="{Binding Images}" Style="{StaticResource projectLayersHeader}">
+                    <!--<TreeViewItem.ItemTemplate>
+                        
+                    </TreeViewItem.ItemTemplate>-->
                 </TreeViewItem>
+                <TreeViewItem Header="基于像素变化检测" Style="{StaticResource projectLayersHeader}"></TreeViewItem>
+                <TreeViewItem Header="基于矢量变化检测" Style="{StaticResource projectLayersHeader}"></TreeViewItem>
             </TreeView>
         </DataTemplate>
 
-        <!--Styles-->
-        <Style x:Key="projectStyle" TargetType="{x:Type dock:LayoutItem}">
-            <Setter Property="Title" Value="{Binding Model.Title}"/>
-            <Setter Property="CloseCommand" Value="{Binding Model.Close}"></Setter>
-            <Setter Property="ToolTip" Value="{Binding Model.FilePath}"></Setter>
-        </Style>
-        <Style x:Key="layerStyle" TargetType="{x:Type dock:LayoutItem}">
-            <Setter Property="Title" Value="{Binding Model.Title}"/>
-        </Style>
     </f:RibbonWindow.Resources>
     <!--<f:RibbonWindow.DataContext>
         <vm:MainViewModel ></vm:MainViewModel>

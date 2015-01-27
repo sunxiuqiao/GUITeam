@@ -27,8 +27,8 @@ namespace MVVMTest.ViewModels
         }
 
         #region Images
-        private ObservableCollection<ImageViewModel> images = new ObservableCollection<ImageViewModel>();
-        public ObservableCollection<ImageViewModel> Images
+        private ObservableCollection<LayerViewModel> images = new ObservableCollection<LayerViewModel>();
+        public ObservableCollection<LayerViewModel> Images
         {
             get { return images; }
             set { images = value; }
@@ -97,7 +97,7 @@ namespace MVVMTest.ViewModels
         }
         #endregion
 
-
+        #region MapControl
         private ESRIMapControl mapControl = new ESRIMapControl();
         public ESRIMapControl MapControlHost
         {
@@ -107,6 +107,9 @@ namespace MVVMTest.ViewModels
             }
         }
 
+        //public AxMapControl MapControl { get { return MapControlHost.MapControl; } }
+        #endregion
+
         #region AddImageCommand
         void AddImageExcute()
         {
@@ -115,7 +118,7 @@ namespace MVVMTest.ViewModels
             if (dlg.ShowDialog().GetValueOrDefault())
             {
                 string filePath = dlg.FileName;
-                ImageViewModel img = new ImageViewModel(filePath);
+                LayerViewModel img = new ImageLayerViewModel(filePath, mapControl);
                 Images.Add(img);
             }
         }

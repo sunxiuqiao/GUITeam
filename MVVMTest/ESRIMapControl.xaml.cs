@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.SystemUI;
+using ESRI.ArcGIS.Carto;
 
 namespace MVVMTest
 {
@@ -35,5 +36,21 @@ namespace MVVMTest
             mapControl.AutoKeyboardScrolling = true;
             mapControl.AutoMouseWheel = true;
         }
+
+        public void AddLayer(ILayer layer)
+        {
+            mapControl.AddLayer(layer);
+        }
+
+        public void DeleteLayer(ILayer layer)
+        {
+            for (int i = 0; i < mapControl.LayerCount; ++i)
+            {
+                if (mapControl.get_Layer(i) == layer)
+                    mapControl.DeleteLayer(i);
+            }
+        }
+
+        //public AxMapControl MapControl { get { return mapControl; } }
     }
 }

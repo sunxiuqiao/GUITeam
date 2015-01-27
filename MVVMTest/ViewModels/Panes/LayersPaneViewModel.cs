@@ -6,9 +6,9 @@ using System.Text;
 
 namespace MVVMTest.ViewModels
 {
-    public class LayersViewModel : PaneViewModel
+    public class LayersPaneViewModel : PaneViewModel
     {
-        public LayersViewModel()
+        public LayersPaneViewModel()
         {
             Title = "图层";
             MainViewModel.This.ActiveProjectChanged += new EventHandler(OnActiveProjectChanged);
@@ -21,7 +21,7 @@ namespace MVVMTest.ViewModels
                 " -- " + MainViewModel.This.ActiveProject.FileName : "");
         }
 
-        public ObservableCollection<ImageViewModel> Images
+        public ObservableCollection<LayerViewModel> Images
         {
             get
             {

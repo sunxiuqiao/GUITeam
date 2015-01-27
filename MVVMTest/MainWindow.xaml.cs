@@ -26,7 +26,7 @@ namespace MVVMTest
         {
             InitializeComponent();
             this.DataContext = MainViewModel.This;
-            LayersViewModel layer = new LayersViewModel();
+            LayersPaneViewModel layer = new LayersPaneViewModel();
             MainViewModel.This.Layers.Add(layer);
         }
     }

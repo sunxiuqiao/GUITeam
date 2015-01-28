@@ -27,6 +27,8 @@ namespace MVVMTest
         {
             InitializeComponent();
             host.Child = mapControl;
+
+            //mapControl.Show();
         }
 
         protected ILayer dataLayer = null;
@@ -40,7 +42,9 @@ namespace MVVMTest
         {
             mapControl.BorderStyle = esriControlsBorderStyle.esriNoBorder;
             if (dataLayer!=null)
+            {
                 mapControl.AddLayer(dataLayer);
+            } 
         }
 
     }

@@ -54,7 +54,7 @@
                             </StackPanel.ToolTip>
                             <TextBlock Text="{Binding FileName}"></TextBlock>
                             <TextBlock Text="{Binding IsValid}"></TextBlock>
-                            <ContentControl Content="{Binding Thumbnail}"></ContentControl>
+                            <!--<ContentControl Content="{Binding Thumbnail}"></ContentControl>-->
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>

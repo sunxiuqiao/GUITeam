@@ -1,11 +1,11 @@
-﻿using System;
+﻿using MicroMvvm;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using Microsoft.Win32;
-using MicroMvvm;
 using System.Windows.Input;
 
 namespace MVVMTest.ViewModels
@@ -122,7 +122,7 @@ namespace MVVMTest.ViewModels
 
             if (projectToClose.IsDirty)
             {
-                MessageBoxResult ret = MessageBox.Show("项目已修改，是否保存？", "是否保存", MessageBoxButton.YesNoCancel);
+                MessageBoxResult ret = MessageBox.Show("项目已修改，是否保存？", "是否保存项目:" + projectToClose.Title + " ?", MessageBoxButton.YesNoCancel);
                 if (ret == MessageBoxResult.OK)
                 {
                     //Save();

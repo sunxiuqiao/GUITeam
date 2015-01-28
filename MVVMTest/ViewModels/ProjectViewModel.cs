@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ESRI.ArcGIS.Controls;
+using ESRI.ArcGIS.esriSystem;
+using MicroMvvm;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using System.Windows.Forms.Integration;
-using Microsoft.Win32;
-using ESRI.ArcGIS.esriSystem;
-using ESRI.ArcGIS.Controls;
-using MicroMvvm;
+using System.Windows.Input;
 
 namespace MVVMTest.ViewModels
 {

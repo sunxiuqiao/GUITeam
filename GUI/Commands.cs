@@ -195,7 +195,6 @@ namespace GUI
             }
         }
        
-        //TODO finish ZoomInCommand
         public sealed class ConstFactorZoomOutCommand : BaseCommand
         {
             private HookHelper m_HookHelper = new HookHelperClass();

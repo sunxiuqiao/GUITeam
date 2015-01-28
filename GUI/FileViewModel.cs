@@ -8,11 +8,14 @@ using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.DataSourcesRaster;
+using GUI.MVVMBase;
+using Microsoft.Win32;
+using System.IO;
 
 
 namespace GUI
 {
-    class FileViewModel : ObservableObject
+    class FileViewModel : MVVMBase.ObservableObject
     {
         private ControlsModel _ControlsModel = new ControlsModel();
         private string _MapFileName = "null";
@@ -55,6 +58,7 @@ namespace GUI
             cmd = new ESRI.ArcGIS.Controls.ControlsAddDataCommandClass();
             cmd.OnCreate(MapControl.Object);
             cmd.OnClick();
+            
         }
 
         //private IRasterLayer CreateRasterLayerFromFile(System.IO.FileInfo fileInfo)
@@ -64,7 +68,7 @@ namespace GUI
         //        IWorkspaceFactory pWSF;
         //        pWSF = new RasterWorkspaceFactoryClass();
 
-        //        IWorkspace pWS;
+        //IWorkspace pWS;
         //        pWS = pWSF.OpenFromFile(fileInfo.DirectoryName, 0);
 
         //        IRasterWorkspace pRWS;
@@ -123,6 +127,45 @@ namespace GUI
             //MapControl.CurrentTool = cmd as ITool;
         }
         public System.Windows.Input.ICommand OpenFileCommand { get { return new RelayCommand(OpenFileCommand_Executed, OpenFileCommand_CanExecute); } }
+
+        #endregion
+
+        #region NewProjectCommand
+        private bool NewProjectCommand_CanExecute()
+        {
+            return true;
+        }
+        private void NewProjectCommand_Executed()
+        {
+            string saveFilePath = "";
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.AddExtension = true;
+            saveFile.Filter = "*.mdb|*.mdb|all files|*.*";
+            saveFile.FilterIndex = 0;
+
+            bool? f = saveFile.ShowDialog();
+            if (f != null && f.Value)
+            {
+                saveFilePath = saveFile.FileName.Trim();
+                System.Resources.ResourceManager srcManager = global::Resource.Properties.Resources.ResourceManager;
+                byte[] buff = srcManager.GetObject("承包地块") as byte[];
+                FileStream fileStr = new FileStream(saveFilePath, FileMode.OpenOrCreate);
+                fileStr.Write(buff, 0, buff.Length);
+                fileStr.Close();
+                //IWorkspaceFactory workspaceFactory = new ESRI.ArcGIS.DataSourcesGDB.AccessWorkspaceFactoryClass();
+                //IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)workspaceFactory.OpenFromFile(saveFilePath, 0);
+                //IWorkspace workspace = (IWorkspace)featureWorkspace;
+                //IEnumDataset enumDataset = workspace.get_Datasets(esriDatasetType.esriDTFeatureClass);
+                //workspace.
+            }
+
+            
+
+            
+            
+            
+        }
+        public System.Windows.Input.ICommand NewProjectCommand { get { return new RelayCommand(NewProjectCommand_Executed, NewProjectCommand_CanExecute); } }
 
         #endregion
 

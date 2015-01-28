@@ -62,6 +62,7 @@
                 <dock:LayoutPanel>
                     <dock:LayoutAnchorablePaneGroup DockWidth="200">
                         <dock:LayoutAnchorablePane DockWidth="200">
+                            
                             <dock:LayoutAnchorable ContentId="Layers" Title="Layers">
                                 <TreeView BorderBrush="Transparent" BorderThickness="3">
                                     <s:String>Layer 1</s:String>

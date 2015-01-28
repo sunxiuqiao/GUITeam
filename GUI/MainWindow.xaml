@@ -35,10 +35,9 @@
             <f:Ribbon.Tabs>
                 <f:RibbonTabItem Name="数据采集" Header="数据采集">
                     <f:RibbonTabItem.Groups>
-                        <f:RibbonGroupBox Name="加载数据" Header="加载数据">
+                        <f:RibbonGroupBox Name="工程" Header="工程">
+                            <f:Button Name="新建工程" Header="新建工程" Command="{Binding NewProjectCommand}"></f:Button>
                             <f:Button Name="添加数据" Header="添加数据" Command="{Binding AddDataCommand}"></f:Button>
-                        </f:RibbonGroupBox>
-                        <f:RibbonGroupBox Name="加载文件" Header="加载文件">
                             <f:Button Name="添加文件" Header="添加文件" Command="{Binding OpenFileCommand}"></f:Button>
                         </f:RibbonGroupBox>
                         <f:RibbonGroupBox x:Name="工具" Header="工具">

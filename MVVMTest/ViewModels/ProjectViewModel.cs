@@ -133,12 +133,12 @@ namespace MVVMTest.ViewModels
 
         #region ClosePeojectCommand
 
-        void ClosePeoject()
+        public void CloseProject()
         {
             MainViewModel.This.Close(this);
         }
 
-        public ICommand Close { get { return new RelayCommand(ClosePeoject, () => true); } }
+        public ICommand Close { get { return new RelayCommand(CloseProject, () => true); } }
 
         #endregion
 

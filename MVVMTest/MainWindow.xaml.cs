@@ -29,5 +29,17 @@ namespace MVVMTest
             LayersPaneViewModel layer = new LayersPaneViewModel();
             MainViewModel.This.Layers.Add(layer);
         }
+
+        private void RibbonWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            while (MainViewModel.This.ActiveProject != null)
+            {
+                if (MainViewModel.This.Close(MainViewModel.This.Projects[0]) == false)
+                {                    
+                    e.Cancel = true;
+                    break;
+                }
+            }
+        }
     }
 }

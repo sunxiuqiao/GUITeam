@@ -115,10 +115,10 @@ namespace MVVMTest.ViewModels
 
         public ICommand CloseActiveProject { get { return new RelayCommand(CloseActiveProjectExcute, CanCloseActiveProjectExcute); } }
 
-        internal void Close(ProjectViewModel projectToClose)
+        internal bool Close(ProjectViewModel projectToClose)//true 关闭; false 未关闭
         {
             if (projectToClose == null)
-                return;
+                return false;
 
             if (projectToClose.IsDirty)
             {
@@ -129,13 +129,14 @@ namespace MVVMTest.ViewModels
                 }
                 else if (ret == MessageBoxResult.Cancel)
                 {
-                    return;
+                    return false;
                 }
             }
 
             Projects.Remove(projectToClose);
             if (Projects.Count == 0)
                 ActiveProject = null;
+            return true;
         }
         #endregion
     }

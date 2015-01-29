@@ -18,14 +18,99 @@
         </Grid.RowDefinitions>
         <f:Ribbon Grid.Row="0">
             <f:Ribbon.Menu>
-                <f:Backstage Name="开始" Header="开始">
+                <f:Backstage Name="工程" Header="工程">
+                    <f:Backstage.Resources>
+                        <Style x:Key="InnerBackstageTabControlItem" TargetType="{x:Type TabItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type TabItem}">
+                                        <Grid Background="#00000000" Margin="0,3">
+                                            <Border x:Name="border" BorderBrush="{DynamicResource TransparentBrush}" BorderThickness="1" Margin="0" Background="{DynamicResource TransparentBrush}">
+                                                <ContentPresenter Margin="5,5,50,5" ContentSource="Header" />
+                                            </Border>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="Selector.IsSelected" Value="True">
+                                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonPressedOuterBackgroundBrush}" />
+                                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonPressedOuterBorderBrush}" />
+                                            </Trigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="IsMouseOver" Value="True" />
+                                                    <Condition Property="Selector.IsSelected" Value="False" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonHoverOuterBackgroundBrush}" />
+                                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonHoverOuterBorderBrush}" />
+                                            </MultiTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <SolidColorBrush x:Key="ButtonPressedOuterBackgroundBrush" Color="{DynamicResource {x:Static f:MetroColors.ThemeColorKey}}" Opacity="0.3" />
+                        <SolidColorBrush x:Key="ButtonPressedOuterBorderBrush" Color="{DynamicResource {x:Static f:MetroColors.ThemeColorKey}}" Opacity="0.3" />
+                        <Style x:Key="TitleStyle" TargetType="Label">
+                            <Setter Property="FontFamily" Value="YaHei Consolas Hybrid"/>
+                            <Setter Property="FontSize" Value="30"/>
+                            <Setter Property="FontWeight" Value="Light"/>
+                            <!--<Setter Property="Padding" Value="50"/>-->
+                            <Setter Property="Foreground" Value="DimGray"/>
+                        </Style>
+                        <Style x:Key="BigLabelStyle" TargetType="Label">
+                            <Setter Property="FontFamily" Value="YaHei Consolas Hybrid"/>
+                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="FontWeight" Value="Light"/>
+                            <!--<Setter Property="Padding" Value="50"/>-->
+                            <Setter Property="Foreground" Value="DimGray"/>
+                        </Style>
+                        <Style x:Key="ButtonStyle" TargetType="Button">
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="FontWeight" Value="Light"/>
+                            <Setter Property="FontStretch" Value="ExtraExpanded"/>
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="Foreground" Value="DimGray"/>
+                            <Setter Property="Opacity" Value="0.8"/>
+                            <Setter Property="Width" Value="70"/>
+                        </Style>
+                    </f:Backstage.Resources>
                     <f:BackstageTabControl >
-                        <f:BackstageTabItem Name="新建" Header="新建"/>
+                        <f:BackstageTabItem Name="新建" Header="新建">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource TitleStyle}">新建</Label>
+                                <Grid Grid.Row="2" Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource BigLabelStyle}" Padding="25">项目名称</Label>
+                                    <TextBox Grid.Column="1" Focusable="True" Height="25" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray" ></TextBox>
+                                    <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建"/>
+                                </Grid>
+                                <TabControl Grid.Row="3" Grid.Column="1" Style="{DynamicResource InnerBackstageTabControlStyle}">
+                                    <TabItem Header="空间数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
+                                        <GroupBox Header="连接参数设置" Margin="10"></GroupBox>
+                                    </TabItem>
+                                    <TabItem Header="属性数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray"/>
+                                    <TabItem Header="业务数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray"/>
+                                </TabControl>
+                            </Grid>
+                        </f:BackstageTabItem>
                         <f:BackstageTabItem Name="打开" Header="打开"/>
                         <f:BackstageTabItem Name="打印" Header="打印"/>
                         <f:BackstageTabItem Name="保存" Header="保存"/>
                         <f:BackstageTabItem Name="另存为" Header="另存为"/>
-                        
                         <f:SeparatorTabItem></f:SeparatorTabItem>
                         <f:BackstageTabItem Name="设置" Header="设置"/>
                         
@@ -35,7 +120,7 @@
             <f:Ribbon.Tabs>
                 <f:RibbonTabItem Name="数据采集" Header="数据采集">
                     <f:RibbonTabItem.Groups>
-                        <f:RibbonGroupBox Name="工程" Header="工程">
+                        <f:RibbonGroupBox Name="工程2" Header="工程">
                             <f:Button Name="新建工程" Header="新建工程" Command="{Binding NewProjectCommand}"></f:Button>
                             <f:Button Name="添加数据" Header="添加数据" Command="{Binding AddDataCommand}"></f:Button>
                             <f:Button Name="添加文件" Header="添加文件" Command="{Binding OpenFileCommand}"></f:Button>

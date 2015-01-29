@@ -152,21 +152,28 @@ namespace GUI
                 FileStream fileStr = new FileStream(saveFilePath, FileMode.OpenOrCreate);
                 fileStr.Write(buff, 0, buff.Length);
                 fileStr.Close();
-                //IWorkspaceFactory workspaceFactory = new ESRI.ArcGIS.DataSourcesGDB.AccessWorkspaceFactoryClass();
-                //IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)workspaceFactory.OpenFromFile(saveFilePath, 0);
-                //IWorkspace workspace = (IWorkspace)featureWorkspace;
-                //IEnumDataset enumDataset = workspace.get_Datasets(esriDatasetType.esriDTFeatureClass);
-                //workspace.
+                LoadMDBFile(saveFilePath);
             }
 
-            
-
-            
-            
-            
         }
         public System.Windows.Input.ICommand NewProjectCommand { get { return new RelayCommand(NewProjectCommand_Executed, NewProjectCommand_CanExecute); } }
 
+        private void LoadMDBFile(string filePath)
+        {
+            IWorkspaceFactory workspaceFactory = new ESRI.ArcGIS.DataSourcesGDB.AccessWorkspaceFactoryClass();
+            IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)workspaceFactory.OpenFromFile(filePath, 0);
+            //IWorkspace workspace = (IWorkspace)featureWorkspace;
+            IFeatureDataset featureDataset = featureWorkspace.OpenFeatureDataset("CBQ");
+            IFeatureClassContainer featureClassContainer = featureDataset as IFeatureClassContainer;
+            for (int i = 0; i < featureClassContainer.ClassCount; i++)
+            {
+                IFeatureClass featureclass = featureClassContainer.get_Class(i);
+                IFeatureLayer layer = new FeatureLayerClass();
+                layer.FeatureClass = featureclass;
+                layer.Name = featureclass.AliasName;
+                MapControl.AddLayer(layer as ILayer);
+            }
+        }
         #endregion
 
         #region ZoomIn ZoomOut

@@ -53,8 +53,7 @@ namespace Resource.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -66,8 +65,7 @@ namespace Resource.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] 承包地块
-        {
+        internal static byte[] 承包地块 {
             get {
                 object obj = ResourceManager.GetObject("承包地块", resourceCulture);
                 return ((byte[])(obj));

@@ -10,7 +10,7 @@ using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.DataSourcesRaster;
 using GUI.MVVMBase;
 using Microsoft.Win32;
-using System.IO;
+using System.IO;  
 
 
 namespace GUI

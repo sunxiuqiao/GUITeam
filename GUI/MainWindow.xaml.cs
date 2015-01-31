@@ -37,7 +37,8 @@ namespace GUI
             FileViewModel.TOCControl.SetBuddyControl(FileViewModel.MapControl);
 
         }
-        
+
+      
     }
         
 }

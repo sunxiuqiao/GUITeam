@@ -127,6 +127,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\AttributeDBDialog.xaml.cs">
+      <DependentUpon>AttributeDBDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DialogBase.xaml.cs">
+      <DependentUpon>DialogBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Commands.cs" />
     <Compile Include="View\ConnectionParamView.xaml.cs">
       <DependentUpon>ConnectionParamView.xaml</DependentUpon>
@@ -136,6 +142,17 @@
     <Compile Include="MVVMBase\PropertySupport.cs" />
     <Compile Include="MVVMBase\RelayCommand.cs" />
     <Compile Include="Tool1.cs" />
+    <Compile Include="View\GeoDBCreationDialog.xaml.cs">
+      <DependentUpon>GeoDBCreationDialog.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AttributeDBDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DialogBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ConnectionParamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +169,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\GeoDBCreationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVMBase\ObservableObject.cs" />

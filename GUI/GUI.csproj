@@ -127,29 +127,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\AttributeDBDialog.xaml.cs">
-      <DependentUpon>AttributeDBDialog.xaml</DependentUpon>
+    <Compile Include="ViewModel\AttriDBCreationVM.cs" />
+    <Compile Include="ViewModel\BusiDBCreationVM.cs" />
+    <Compile Include="Converter.cs" />
+    <Compile Include="ViewModel\DBCreationDialogVM.cs" />
+    <Compile Include="ViewModel\DBCreationVM.cs" />
+    <Compile Include="ViewModel\GeoDBCreationVM.cs" />
+    <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
+      <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DialogBase.xaml.cs">
-      <DependentUpon>DialogBase.xaml</DependentUpon>
+    <Compile Include="View\BusinessDBCreationDialog.xaml.cs">
+      <DependentUpon>BusinessDBCreationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DBCreationDialogView.xaml.cs">
+      <DependentUpon>DBCreationDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Commands.cs" />
     <Compile Include="View\ConnectionParamView.xaml.cs">
       <DependentUpon>ConnectionParamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ControlsModel.cs" />
-    <Compile Include="ViewModel\FileViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="MVVMBase\PropertySupport.cs" />
     <Compile Include="MVVMBase\RelayCommand.cs" />
     <Compile Include="Tool1.cs" />
+    <Compile Include="View\DialogUserControl.cs" />
     <Compile Include="View\GeoDBCreationDialog.xaml.cs">
       <DependentUpon>GeoDBCreationDialog.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AttributeDBDialog.xaml">
+    <Page Include="View\AttributeDBCreationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DialogBase.xaml">
+    <Page Include="View\BusinessDBCreationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DBCreationDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

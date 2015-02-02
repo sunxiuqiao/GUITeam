@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Data;
+
+namespace GUI
+{
+    public class ActiveContentToVisibility : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value == null)
+                return System.Windows.Visibility.Hidden;
+
+            if (value.GetType().ToString() == "System.Windows.Forms.Integration.WindowsFormsHost")
+                return System.Windows.Visibility.Visible;
+            else
+                return System.Windows.Visibility.Hidden;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new ArgumentException("Can't convert from Visibility to this");
+        }
+    }
+}

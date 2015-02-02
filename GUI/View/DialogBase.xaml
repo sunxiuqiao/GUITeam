@@ -1,9 +1,0 @@
-﻿<Window x:Class="GUI.DialogBase"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local ="clr-namespace:GUI"
-        Title="Need binding" Width="500" Height="300">
-    <Grid>
-        <local:AttributeDBDialog />
-    </Grid>
-</Window>

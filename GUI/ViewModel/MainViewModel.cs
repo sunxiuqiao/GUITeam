@@ -13,14 +13,16 @@ using Microsoft.Win32;
 using System.IO;  
 
 
-namespace GUI
+
+namespace GUI.ViewModel
 {
-    class FileViewModel : MVVMBase.ObservableObject
+    class MainViewModel : MVVMBase.ObservableObject
     {
         private ControlsModel _ControlsModel = new ControlsModel();
         private string _MapFileName = "null";
+        private DBCreationVM dbCreationVM= new DBCreationVM();
 
-        public FileViewModel()
+        public MainViewModel()
         {
             //_ControlsModel.MapControl.OleDropEnabled = true;
         }
@@ -265,6 +267,10 @@ namespace GUI
             cmd.OnClick();
         }
         public System.Windows.Input.ICommand OverViewCommand { get { return new RelayCommand(OverViewCommand_Executed, OverViewCommand_CanExecute); } }
+        #endregion
+
+        #region CreateDBCommand
+        public System.Windows.Input.ICommand CreateDBCommand { get { return dbCreationVM.CreateCommand; } }
         #endregion
 
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI
+namespace GUI.View
 {
     /// <summary>
     /// Interaction logic for GeoDBCreationDialog.xaml
     /// </summary>
-    public partial class GeoDBCreationDialog : UserControl
+    public partial class GeoDBCreationDialog : DialogUserControl
     {
         public GeoDBCreationDialog()
         {
             InitializeComponent();
+            //this.DataContext = new GeoDBCreationVM(DBCreationDialogVM.GetInstance());
         }
     }
 }

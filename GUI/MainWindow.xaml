@@ -5,10 +5,12 @@
         xmlns:esri="clr-namespace:ESRI.ArcGIS.Controls;assembly=ESRI.ArcGIS.AxControls" 
         xmlns:esrilicense="clr-namespace:ESRI.ArcGIS;assembly=ESRI.ArcGIS.Version"
         xmlns:local ="clr-namespace:GUI"
+        xmlns:vm ="clr-namespace:GUI.ViewModel"
+        xmlns:v="clr-namespace:GUI.View"
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="MainWindow" Height="700" Width="1000">
     <Window.DataContext>
-        <local:FileViewModel x:Name="FileViewModel"></local:FileViewModel>
+        <vm:MainViewModel x:Name="FileViewModel"></vm:MainViewModel>
     </Window.DataContext>
     
     <Grid>
@@ -19,6 +21,9 @@
         <f:Ribbon Grid.Row="0">
             <f:Ribbon.Menu>
                 <f:Backstage Name="工程" Header="工程">
+                    <!--<f:Backstage.DataContext>
+                        <vm:DBCreationVM x:Name="DBCreationVM"></vm:DBCreationVM>
+                    </f:Backstage.DataContext>-->
                     <f:Backstage.Resources>
                         <Style x:Key="InnerBackstageTabControlItem" TargetType="{x:Type TabItem}">
                             <Setter Property="Template">
@@ -88,7 +93,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Style="{StaticResource BigLabelStyle}" Padding="25">项目名称</Label>
                                     <TextBox Grid.Column="1" Focusable="True" Height="25" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray" ></TextBox>
-                                    <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" />
+                                    <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" Command="{Binding CreateDBCommand}" />
                                 </Grid>
                                 <TabControl Grid.Row="3" Grid.Column="1" Style="{DynamicResource InnerBackstageTabControlStyle}">
                                     <TabItem Header="空间数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
@@ -101,7 +106,7 @@
                                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <local:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="空间库连接参数设置"/>
+                                            <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="空间库连接参数设置"/>
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="属性数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
@@ -114,7 +119,7 @@
                                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <local:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="属性库连接参数设置"/>
+                                            <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="属性库连接参数设置"/>
                                         </Grid>
                                     </TabItem>
                                     <TabItem Header="业务数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
@@ -127,7 +132,7 @@
                                                 <ColumnDefinition Width="4*"></ColumnDefinition>
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
-                                            <local:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="业务库连接参数设置"/>
+                                            <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="业务库连接参数设置"/>
                                         </Grid>
                                     </TabItem>
                                 </TabControl>

@@ -1,0 +1,19 @@
+﻿<v:DialogUserControl x:Class="GUI.View.BusinessDBCreationDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:local ="clr-namespace:GUI"
+             xmlns:v="clr-namespace:GUI.View"
+             d:DesignHeight="280" d:DesignWidth="450">
+    <Grid>
+        <GroupBox Margin="5" Header="业务库建库参数设置">
+            <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
+                <CheckBox x:Name="isContinueWithError" IsChecked="True" Margin="10" Content="允许出错后继续"/>
+                <CheckBox x:Name="isInitDictionary" IsChecked="True" Margin="10" Content="初始化字典"/>
+            </StackPanel>
+        </GroupBox>
+        
+    </Grid>
+</v:DialogUserControl>

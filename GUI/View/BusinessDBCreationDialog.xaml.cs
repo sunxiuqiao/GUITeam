@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI
+namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for DialogBase.xaml
+    /// Interaction logic for BusinessDBDialog.xaml
     /// </summary>
-    public partial class DialogBase : Window
+    public partial class BusinessDBCreationDialog : DialogUserControl
     {
-        public DialogBase()
+        public BusinessDBCreationDialog()
         {
             InitializeComponent();
+            //this.DataContext = new BusiDBCreationVM(DBCreationDialogVM.GetInstance());
         }
     }
 }

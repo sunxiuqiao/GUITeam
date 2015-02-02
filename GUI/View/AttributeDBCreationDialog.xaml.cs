@@ -12,17 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GUI.ViewModel;
 
 namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for BusinessDBDialog.xaml
+    /// Interaction logic for AttributeDBDialog.xaml
     /// </summary>
-    public partial class BusinessDBDialog : UserControl
+    public partial class AttributeDBCreationDialog : DialogUserControl
     {
-        public BusinessDBDialog()
+        public AttributeDBCreationDialog()
         {
             InitializeComponent();
+            //this.DataContext = new AttriDBCreationVM(DBCreationDialogVM.GetInstance());
         }
     }
 }

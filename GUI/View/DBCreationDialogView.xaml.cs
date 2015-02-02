@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI
+namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for AttributeDBDialog.xaml
+    /// Interaction logic for DialogBase.xaml
     /// </summary>
-    public partial class AttributeDBDialog : UserControl
+    public partial class DBCreationDialogView : Window
     {
-        public AttributeDBDialog()
+        public DBCreationDialogView()
         {
             InitializeComponent();
+            //this.DataContext = GUI.ViewModel.DBCreationDialogVM.GetInstance();
         }
     }
 }

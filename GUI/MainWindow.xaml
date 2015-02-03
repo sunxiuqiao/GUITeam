@@ -68,7 +68,13 @@
                             <!--<Setter Property="Padding" Value="50"/>-->
                             <Setter Property="Foreground" Value="DimGray"/>
                         </Style>
-                        
+                        <x:ArrayExtension x:Key="ListViewItemStyle" xmlns="clr-namespace:System;assembly=mscorlib" Type="String" >
+                            <String>lalallllal</String>
+                            <String>1234567890</String>
+                        </x:ArrayExtension>
+                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        </Style>
                     </f:Backstage.Resources>
                     <f:BackstageTabControl >
                         <f:BackstageTabItem Name="新建" Header="新建">
@@ -138,7 +144,55 @@
                                 </TabControl>
                             </Grid>
                         </f:BackstageTabItem>
-                        <f:BackstageTabItem Name="打开" Header="打开"/>
+                        <f:BackstageTabItem Name="浏览" Header="浏览">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource TitleStyle}" Content="浏览"/>
+                                <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource BigLabelStyle}" Content="最近的项目" HorizontalContentAlignment="Center"/>
+                                <ListView Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="5" Width="220" BorderBrush="Transparent" ItemsSource="" 
+                                          FontFamily="YaHei Consolas Hybrid" FontSize="20" Foreground="DimGray">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn  DisplayMemberBinding="{Binding}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="true">
+                                                    <Setter Property="Background" Value="{DynamicResource ButtonPressedOuterBorderBrush}"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="Background" Value="{DynamicResource ButtonPressedOuterBackgroundBrush}"/>
+                                                    <Setter Property="Foreground" Value="Black"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                </ListView>
+                                <TabControl Grid.Row="4"  Grid.Column="2" Style="{DynamicResource InnerBackstageTabControlStyle}">
+                                    <TabItem Header="空间数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
+                                    </TabItem>
+                                    <TabItem Header="属性数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
+                                    </TabItem>
+                                    <TabItem Header="业务数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                        </f:BackstageTabItem>
+                            
                         <f:BackstageTabItem Name="打印" Header="打印"/>
                         <f:BackstageTabItem Name="保存" Header="保存"/>
                         <f:BackstageTabItem Name="另存为" Header="另存为"/>

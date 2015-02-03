@@ -11,7 +11,7 @@ namespace GUI.ViewModel
     {
         public AttriDBCreationVM(DBCreationDialogVM p)
         {
-
+            
         }
 
     }

@@ -13,9 +13,8 @@ namespace GUI.ViewModel
     {
         #region member
         private DialogUserControl currentControl ;
-        //private AttributeDBCreationDialog attrDBCreationControl =null;
-        //private GeoDBCreationDialog geoDBCreationControl = null;
-        //private BusinessDBCreationDialog busiDBCreationControl = null;
+        private string nextStepButtonContent = "下一步";
+        System.Windows.Visibility dbCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;
         private ObservableCollection<DialogUserControl> UserControls = new ObservableCollection<DialogUserControl>();
 
 
@@ -28,7 +27,6 @@ namespace GUI.ViewModel
             UserControls.Add(new GeoDBCreationDialog());
             UserControls.Add(new AttributeDBCreationDialog());
             UserControls.Add(new BusinessDBCreationDialog());
-            //geoDBCreationControl = new GeoDBCreationDialog();
             currentControl = UserControls.First();
         }
 
@@ -45,63 +43,6 @@ namespace GUI.ViewModel
             }
         }
 
-        //public System.Windows.Visibility IsCreateButtonShow
-        //{
-        //    get 
-        //    {
-        //        if (CurrentControl == UserControls.Last())
-        //            return System.Windows.Visibility.Visible;
-        //        else
-        //            return System.Windows.Visibility.Hidden;
-        //    }
-        //    set
-        //    {
-        //        if (value == System.Windows.Visibility.Visible)
-        //            isLastControl = true;
-        //        else
-        //            isLastControl = false;
-        //        RaisePropertyChanged("IsLastControl");
-        //    }
-            
-        //}
-        //public System.Windows.Visibility IsBackButtonShow
-        //{
-        //    get
-        //    {
-        //        if (isFirstControl ==true)
-        //            return System.Windows.Visibility.Hidden;
-        //        else
-        //            return System.Windows.Visibility.Visible;
-        //    }
-        //    set
-        //    {
-        //        if (value == System.Windows.Visibility.Hidden)
-        //            isFirstControl = true;
-        //        else
-        //            isFirstControl = false;
-        //        RaisePropertyChanged("IsNotFirstControl");
-        //    }
-            
-        //}
-        //public System.Windows.Visibility IsNextButtonShow
-        //{
-        //    get
-        //    {
-        //        if (CurrentControl == UserControls.First())
-        //            return System.Windows.Visibility.Hidden;
-        //        else
-        //            return System.Windows.Visibility.Visible;
-        //    }
-        //    set
-        //    {
-        //        if (value == System.Windows.Visibility.Hidden)
-        //            isLastControl = true;
-        //        else
-        //            isLastControl = false;
-        //        RaisePropertyChanged("IsNotLastControl");
-        //    }
-            
-        //}
 
         #region NextStepCommand
         private bool NextStepCommand_CanExecute()
@@ -115,10 +56,19 @@ namespace GUI.ViewModel
         {
             count++;
             if (count == UserControls.Count)
-                System.Windows.MessageBox.Show("haha");
-            else
+            {
+                DBCreationProgramBarVisibiliy = System.Windows.Visibility.Visible;
+            }
+                
+            else if(count == UserControls.Count-1)
+            {
+                NextStepButtonContent = "创建";
                 CurrentControl = UserControls[count];
-            
+            }
+            else
+            {
+                CurrentControl = UserControls[count];
+            }
         }
         public System.Windows.Input.ICommand NextStepCommand { get { return new RelayCommand(NextStepCommand_Executed, NextStepCommand_CanExecute); } }
 
@@ -136,10 +86,38 @@ namespace GUI.ViewModel
         {
             count--;
             CurrentControl = UserControls[count];
+            DBCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;
 
         }
         public System.Windows.Input.ICommand BackCommand { get { return new RelayCommand(BackCommand_Executed, BackCommand_CanExecute); } }
 
+        #endregion
+
+        #region NextStepButton Content
+        public string NextStepButtonContent
+        {
+            get 
+            {
+                return nextStepButtonContent;
+            }
+            set
+            {
+                nextStepButtonContent = value;
+                RaisePropertyChanged("NextStepButtonContent");
+            }
+        }
+        #endregion
+
+        #region ProgramBarVisibiliy
+        public System.Windows.Visibility DBCreationProgramBarVisibiliy
+        {
+            get { return dbCreationProgramBarVisibiliy; }
+            set
+            {
+                dbCreationProgramBarVisibiliy = value;
+                RaisePropertyChanged("DBCreationProgramBarVisibiliy");
+            }
+        }
         #endregion
 
 

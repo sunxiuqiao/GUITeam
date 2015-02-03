@@ -22,7 +22,11 @@ namespace GUI.View
         public DBCreationDialogView()
         {
             InitializeComponent();
-            //this.DataContext = GUI.ViewModel.DBCreationDialogVM.GetInstance();
+        }
+
+        private void CancelButtom_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

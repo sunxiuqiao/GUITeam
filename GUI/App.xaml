@@ -17,6 +17,7 @@
                 <Setter Property="Opacity" Value="0.8"/>
                 <Setter Property="Width" Value="70"/>
             </Style>
+            
            
         </ResourceDictionary>
     </Application.Resources>

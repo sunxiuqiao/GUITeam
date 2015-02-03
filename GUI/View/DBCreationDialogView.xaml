@@ -14,7 +14,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ContentControl Grid.Row="0" Content="{Binding CurrentControl,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <ContentControl Grid.Row="0" Content="{Binding CurrentControl,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
         <ProgressBar Grid.Row="1" x:Name="DBCreationProgressBar" Height="15" Margin="5" Visibility="{Binding DBCreationProgramBarVisibiliy}" Value="15"></ProgressBar>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Grid>

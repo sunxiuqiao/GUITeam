@@ -20,7 +20,9 @@ namespace GUI.ViewModel
     {
         private ControlsModel _ControlsModel = new ControlsModel();
         private string _MapFileName = "null";
+        #region subVM
         private DBCreationVM dbCreationVM= new DBCreationVM();
+        #endregion
 
         public MainViewModel()
         {

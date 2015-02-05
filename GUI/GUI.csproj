@@ -159,6 +159,10 @@
     <Compile Include="View\GeoDBCreationDialog.xaml.cs">
       <DependentUpon>GeoDBCreationDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AttributeDBCreationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

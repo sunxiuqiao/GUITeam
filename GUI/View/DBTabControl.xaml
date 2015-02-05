@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              xmlns:vm ="clr-namespace:GUI.ViewModel"
              xmlns:v="clr-namespace:GUI.View"
-             d:DesignHeight="400" d:DesignWidth="800">
+             d:DesignHeight="400" d:DesignWidth="800" >
     <UserControl.Resources>
         <Style x:Key="InnerBackstageTabControlItem" TargetType="{x:Type TabItem}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid Background="#00000000" Margin="0,3">
+                        <Grid Margin="0,3">
                             <Border x:Name="border" BorderBrush="{DynamicResource TransparentBrush}" BorderThickness="1" Margin="0" Background="{DynamicResource TransparentBrush}">
                                 <ContentPresenter Margin="5,5,50,5" ContentSource="Header" />
                             </Border>
@@ -42,43 +42,13 @@
     <Grid>
         <TabControl Style="{DynamicResource InnerBackstageTabControlStyle}" Margin="0" Grid.ColumnSpan="2">
             <TabItem Header="空间数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="空间库连接参数设置"/>
-                </Grid>
+                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="空间库连接参数设置"/>
             </TabItem>
             <TabItem Header="属性数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="属性库连接参数设置"/>
-                </Grid>
+                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="属性库连接参数设置"/>
             </TabItem>
             <TabItem Header="业务数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="业务库连接参数设置"/>
-                </Grid>
+                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="业务库连接参数设置"/>
             </TabItem>
         </TabControl>
     </Grid>

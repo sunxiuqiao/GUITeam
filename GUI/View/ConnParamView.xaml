@@ -32,9 +32,7 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" Margin="10">连接名称</Label>
                 <ComboBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="10" IsEditable="True" ItemsSource="{Binding ServerNames}" >
-                    <!--<DataTemplate>
-                        <Label Content="{Binding Path=ServerNames}"></Label>
-                    </DataTemplate>-->
+                   
                 </ComboBox>
                 <Label Grid.Column="0" Grid.Row="1" Margin="10">数据类型</Label>
                 <ComboBox Grid.Column="1" Grid.Row="1" Margin="10" IsEditable="True"></ComboBox>

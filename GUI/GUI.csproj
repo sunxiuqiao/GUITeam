@@ -77,9 +77,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Version, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86" />
-    <Reference Include="Fluent, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
+    <Reference Include="Fluent, Version=3.0.3.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\3rdParty\Ribbon\Fluent.Ribbon-master\build\bin\NET 4.5\Release\Fluent.dll</HintPath>
+      <HintPath>..\..\3rdParty\Ribbon\Fluent.Ribbon-master\build\bin\NET 4.5\Debug\Fluent.dll</HintPath>
     </Reference>
     <Reference Include="Resource, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -130,8 +130,10 @@
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />
     <Compile Include="ViewModel\BusiDBCreationVM.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="ViewModel\ConnParamBaseVM.cs" />
     <Compile Include="ViewModel\DBCreationDialogVM.cs" />
     <Compile Include="ViewModel\DBCreationVM.cs" />
+    <Compile Include="ViewModel\GeoConnParam.cs" />
     <Compile Include="ViewModel\GeoDBCreationVM.cs" />
     <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
       <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>
@@ -147,7 +149,7 @@
       <DependentUpon>ConnParamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ControlsModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="MVVMBase\PropertySupport.cs" />
     <Compile Include="MVVMBase\RelayCommand.cs" />
     <Compile Include="Tool1.cs" />

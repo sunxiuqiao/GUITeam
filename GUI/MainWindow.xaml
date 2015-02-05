@@ -10,7 +10,7 @@
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="MainWindow" Height="700" Width="1000">
     <Window.DataContext>
-        <vm:MainViewModel x:Name="FileViewModel"></vm:MainViewModel>
+        <vm:MainVM x:Name="FileViewModel"></vm:MainVM>
     </Window.DataContext>
     
     <Grid>
@@ -117,13 +117,12 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource TitleStyle}" Content="浏览"/>
                                 <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource BigLabelStyle}" Content="最近的项目" HorizontalContentAlignment="Center"/>
-                                <ListView Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="5" Width="220" BorderBrush="Transparent" ItemsSource="" 
-                                          FontFamily="YaHei Consolas Hybrid" FontSize="20" Foreground="DimGray">
+                                <ListView Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="5"  BorderBrush="Transparent" FontFamily="YaHei Consolas Hybrid" FontSize="20" Foreground="DimGray">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn  DisplayMemberBinding="{Binding}"/>

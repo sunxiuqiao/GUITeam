@@ -16,7 +16,7 @@ using System.IO;
 
 namespace GUI.ViewModel
 {
-    class MainViewModel : MVVMBase.ObservableObject
+    class MainVM : MVVMBase.ObservableObject
     {
         private ControlsModel _ControlsModel = new ControlsModel();
         private string _MapFileName = "null";
@@ -24,7 +24,7 @@ namespace GUI.ViewModel
         private DBCreationVM dbCreationVM= new DBCreationVM();
         #endregion
 
-        public MainViewModel()
+        public MainVM()
         {
             //_ControlsModel.MapControl.OleDropEnabled = true;
         }

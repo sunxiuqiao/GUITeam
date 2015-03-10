@@ -5,7 +5,7 @@
         xmlns:vm ="clr-namespace:GUI.ViewModel"
         xmlns:v="clr-namespace:GUI.View"
         Width="500" Height="350">
-    <Border BorderThickness="2" BorderBrush="SteelBlue">
+    <Border BorderThickness="2" BorderBrush="SteelBlue" >
         <Grid Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

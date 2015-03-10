@@ -139,7 +139,6 @@ namespace GUI.ViewModel
         #region CreateDBCommand
         private void CreationCommand_Excuted()
         {
-            //IsCreateDBDialogOpen = true;
             IsCreationDialogOpen = true;
         }
 

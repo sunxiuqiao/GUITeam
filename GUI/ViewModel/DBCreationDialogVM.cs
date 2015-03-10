@@ -15,8 +15,8 @@ namespace GUI.ViewModel
         private DialogUserControl currentControl ;
         private string nextStepButtonContent = "下一步";
         System.Windows.Visibility dbCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;
-        private ObservableCollection<DialogUserControl> UserControls = new ObservableCollection<DialogUserControl>();
-
+        private ObservableCollection<DialogUserControl> userControls = new ObservableCollection<DialogUserControl>();
+        private bool isCreationDialogOpen = false;
 
         private int count = 0;
         #endregion
@@ -24,15 +24,21 @@ namespace GUI.ViewModel
 
         public DBCreationDialogVM()
         {
-            UserControls.Add(new GeoDBCreationDialog());
-            UserControls.Add(new AttributeDBCreationDialog());
-            UserControls.Add(new BusinessDBCreationDialog());
-            currentControl = UserControls.First();
+            userControls.Add(new GeoDBCreationDialog());
+            userControls.Add(new AttributeDBCreationDialog());
+            userControls.Add(new BusinessDBCreationDialog());
+            currentControl = userControls.First();
         }
 
-        //#region properties
-
-
+        #region properties
+        public bool IsCreationDialogOpen
+        {
+            get { return isCreationDialogOpen; }
+            set { isCreationDialogOpen = value;
+            RaisePropertyChanged("IsCreationDialogOpen");
+            }
+        }
+        
         public DialogUserControl CurrentControl
         {
             get { return currentControl; }
@@ -44,10 +50,34 @@ namespace GUI.ViewModel
         }
 
 
+        public string NextStepButtonContent
+        {
+            get 
+            {
+                return nextStepButtonContent;
+            }
+            set
+            {
+                nextStepButtonContent = value;
+                RaisePropertyChanged("NextStepButtonContent");
+            }
+        }
+
+        public System.Windows.Visibility DBCreationProgramBarVisibiliy
+        {
+            get { return dbCreationProgramBarVisibiliy; }
+            set
+            {
+                dbCreationProgramBarVisibiliy = value;
+                RaisePropertyChanged("DBCreationProgramBarVisibiliy");
+            }
+        }
+        #endregion
+
         #region NextStepCommand
         private bool NextStepCommand_CanExecute()
         {
-            if (count >= UserControls.Count)
+            if (count >= userControls.Count)
                 return false;
             return true;
         }
@@ -55,19 +85,19 @@ namespace GUI.ViewModel
         private void NextStepCommand_Executed()
         {
             count++;
-            if (count == UserControls.Count)
+            if (count == userControls.Count)
             {
                 DBCreationProgramBarVisibiliy = System.Windows.Visibility.Visible;
             }
-                
-            else if(count == UserControls.Count-1)
+
+            else if (count == userControls.Count - 1)
             {
                 NextStepButtonContent = "创建";
-                CurrentControl = UserControls[count];
+                CurrentControl = userControls[count];
             }
             else
             {
-                CurrentControl = UserControls[count];
+                CurrentControl = userControls[count];
             }
         }
         public System.Windows.Input.ICommand NextStepCommand { get { return new RelayCommand(NextStepCommand_Executed, NextStepCommand_CanExecute); } }
@@ -85,7 +115,7 @@ namespace GUI.ViewModel
         private void BackCommand_Executed()
         {
             count--;
-            CurrentControl = UserControls[count];
+            CurrentControl = userControls[count];
             DBCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;
 
         }
@@ -93,33 +123,34 @@ namespace GUI.ViewModel
 
         #endregion
 
-        #region NextStepButton Content
-        public string NextStepButtonContent
+        #region CancelCommand
+        private bool CancelCommand_CanExecute()
         {
-            get 
-            {
-                return nextStepButtonContent;
-            }
-            set
-            {
-                nextStepButtonContent = value;
-                RaisePropertyChanged("NextStepButtonContent");
-            }
+            return true;
         }
+        private void CancelCommand_Executed()
+        {
+            IsCreationDialogOpen = false;
+        }
+        public System.Windows.Input.ICommand CancelCommand { get { return new RelayCommand(CancelCommand_Executed, CancelCommand_CanExecute); } }
+
         #endregion
 
-        #region ProgramBarVisibiliy
-        public System.Windows.Visibility DBCreationProgramBarVisibiliy
+        #region CreateDBCommand
+        private void CreationCommand_Excuted()
         {
-            get { return dbCreationProgramBarVisibiliy; }
-            set
-            {
-                dbCreationProgramBarVisibiliy = value;
-                RaisePropertyChanged("DBCreationProgramBarVisibiliy");
-            }
+            //IsCreateDBDialogOpen = true;
+            IsCreationDialogOpen = true;
         }
-        #endregion
 
+        private bool CreationCommand_CanExcute()
+        {
+            return true;
+        }
+
+        public System.Windows.Input.ICommand StartCreateDBCommand { get { return new MVVMBase.RelayCommand(CreationCommand_Excuted, CreationCommand_CanExcute); } }
+
+        #endregion
 
     }
 }

@@ -17,16 +17,13 @@ namespace GUI.View
     /// <summary>
     /// Interaction logic for DialogBase.xaml
     /// </summary>
-    public partial class DBCreationDialogView : Window
+    public partial class DBCreationDialogView : UserControl
     {
         public DBCreationDialogView()
         {
             InitializeComponent();
         }
 
-        private void CancelButtom_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        
     }
 }

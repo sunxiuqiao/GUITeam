@@ -10,7 +10,8 @@ using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.DataSourcesRaster;
 using GUI.MVVMBase;
 using Microsoft.Win32;
-using System.IO;  
+using System.IO;
+using System.Windows.Data;  
 
 
 
@@ -27,6 +28,8 @@ namespace GUI.ViewModel
         public MainVM()
         {
             //_ControlsModel.MapControl.OleDropEnabled = true;
+            
+            
         }
 
         #region Properties
@@ -48,6 +51,12 @@ namespace GUI.ViewModel
                 _MapFileName = value;
                 RaisePropertyChanged("MapFileName");
             }
+        }
+
+        public DBCreationVM DBCreationVM
+        {
+            get { return dbCreationVM; }
+            set { dbCreationVM = value; }
         }
         #endregion
 
@@ -271,9 +280,7 @@ namespace GUI.ViewModel
         public System.Windows.Input.ICommand OverViewCommand { get { return new RelayCommand(OverViewCommand_Executed, OverViewCommand_CanExecute); } }
         #endregion
 
-        #region CreateDBCommand
-        public System.Windows.Input.ICommand CreateDBCommand { get { return dbCreationVM.CreateCommand; } }
-        #endregion
+        
 
     }
 }

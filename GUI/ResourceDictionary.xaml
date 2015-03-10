@@ -235,6 +235,7 @@
         <Setter Property="TextBlock.FontWeight" Value="Light"/>
         <Setter Property="TextBlock.Foreground" Value="DimGray"/>
     </Style>
+    
     <Style x:Key="BigLabelStyle" TargetType="Label">
         <Setter Property="FontFamily" Value="YaHei Consolas Hybrid"/>
         <Setter Property="FontSize" Value="20"/>

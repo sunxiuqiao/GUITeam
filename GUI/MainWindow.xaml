@@ -21,53 +21,6 @@
         <f:Ribbon Grid.Row="0">
             <f:Ribbon.Menu>
                 <f:Backstage Name="工程" Header="工程">
-                    <!--<f:Backstage.Resources>
-                        <Style x:Key="InnerBackstageTabControlItem" TargetType="{x:Type TabItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type TabItem}">
-                                        <Grid Background="#00000000" Margin="0,3">
-                                            <Border x:Name="border" BorderBrush="{DynamicResource TransparentBrush}" BorderThickness="1" Margin="0" Background="{DynamicResource TransparentBrush}">
-                                                <ContentPresenter Margin="5,5,50,5" ContentSource="Header" />
-                                            </Border>
-                                        </Grid>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="Selector.IsSelected" Value="True">
-                                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonPressedOuterBackgroundBrush}" />
-                                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonPressedOuterBorderBrush}" />
-                                            </Trigger>
-                                            <MultiTrigger>
-                                                <MultiTrigger.Conditions>
-                                                    <Condition Property="IsMouseOver" Value="True" />
-                                                    <Condition Property="Selector.IsSelected" Value="False" />
-                                                </MultiTrigger.Conditions>
-                                                <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonHoverOuterBackgroundBrush}" />
-                                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonHoverOuterBorderBrush}" />
-                                            </MultiTrigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                        <SolidColorBrush x:Key="ButtonPressedOuterBackgroundBrush" Color="{DynamicResource {x:Static f:MetroColors.ThemeColorKey}}" Opacity="0.3" />
-                        <SolidColorBrush x:Key="ButtonPressedOuterBorderBrush" Color="{DynamicResource {x:Static f:MetroColors.ThemeColorKey}}" Opacity="0.3" />
-                        <Style x:Key="TitleStyle">
-                            <Setter Property="TextBlock.FontFamily" Value="YaHei Consolas Hybrid"/>
-                            <Setter Property="TextBlock.FontSize" Value="30"/>
-                            <Setter Property="TextBlock.FontWeight" Value="Light"/>
-                            <Setter Property="TextBlock.Foreground" Value="DimGray"/>
-                        </Style>
-                        <Style x:Key="BigLabelStyle" TargetType="Label">
-                            <Setter Property="FontFamily" Value="YaHei Consolas Hybrid"/>
-                            <Setter Property="FontSize" Value="20"/>
-                            <Setter Property="FontWeight" Value="Light"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Foreground" Value="DimGray"/>
-                        </Style>
-                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                            <Setter Property="OverridesDefaultStyle" Value="True"/>
-                        </Style>
-                    </f:Backstage.Resources>-->
                     <f:BackstageTabControl >
                         <f:BackstageTabItem Name="新建" Header="新建" >
                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource ScrollViewerStyle}">
@@ -85,11 +38,16 @@
                                             </Grid.ColumnDefinitions>
                                             <Label Grid.Column="0" Style="{StaticResource BigLabelStyle}" Margin="5">项目名称</Label>
                                             <TextBox Grid.Column="1" Focusable="True" Height="25" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray" ></TextBox>
-                                            <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" Command="{Binding CreateDBCommand}" />
+                                            <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" Command="{Binding DBCreationVM.DBCreationDialogVM.StartCreateDBCommand}" />
                                         </Grid>
                                         <ContentControl Grid.Row="1" Margin="35,0,25,0">
                                             <v:DBTabControl></v:DBTabControl>
                                         </ContentControl>
+                                        <Popup x:Name="DBCreateDialog" Placement="Center" StaysOpen="True" PopupAnimation="Slide" IsOpen="{Binding Path=DBCreationVM.DBCreationDialogVM.IsCreationDialogOpen ,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                            <ContentControl>
+                                                <v:DBCreationDialogView DataContext="{Binding Path=DBCreationVM.DBCreationDialogVM}"></v:DBCreationDialogView>
+                                            </ContentControl>
+                                        </Popup>
                                     </Grid>
                                 </GroupBox>
                             </ScrollViewer>

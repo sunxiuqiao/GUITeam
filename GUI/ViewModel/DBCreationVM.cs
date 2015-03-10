@@ -4,26 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GUI.View;
+using GUI.MVVMBase;
 
 namespace GUI.ViewModel
 {
-    class DBCreationVM
+    class DBCreationVM : MVVMBase.ObservableObject
     {
+        #region SubModel 
+        private DBCreationDialogVM dbCreationDialogVM = new DBCreationDialogVM();
+        #endregion
+
         #region Properties
-        #region CreationCommand
-        private void CreationCommand_Excuted()
+        public DBCreationDialogVM DBCreationDialogVM
         {
-            DBCreationDialogView dialog = new DBCreationDialogView();
-            dialog.ShowDialog();
+            get { return dbCreationDialogVM; }
+            set { dbCreationDialogVM = value; }
         }
 
-        private bool CreationCommand_CanExcute()
-        {
-            return true;
-        }
+        //public bool IsCreateDBDialogOpen
+        //{
+        //    get { return dbCreationDialogVM.IsCreationDialogOpen; }
+        //    set { dbCreationDialogVM.IsCreationDialogOpen = value;  }
+        //}
+        #endregion
 
-        public System.Windows.Input.ICommand CreateCommand { get { return new MVVMBase.RelayCommand(CreationCommand_Excuted, CreationCommand_CanExcute); } }
+        #region Commands
+        //#region CreationCommand
+        //private void CreationCommand_Excuted()
+        //{
+        //    IsCreateDBDialogOpen = true;
+        //}
+
+        //private bool CreationCommand_CanExcute()
+        //{
+        //    return true;
+        //}
+          
+        //public System.Windows.Input.ICommand CreateCommand { get { return new MVVMBase.RelayCommand(CreationCommand_Excuted, CreationCommand_CanExcute); } }
+        //#endregion
         #endregion
-        #endregion
+
     }
 }

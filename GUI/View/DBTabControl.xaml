@@ -42,13 +42,13 @@
     <Grid>
         <TabControl Style="{DynamicResource InnerBackstageTabControlStyle}" Margin="0" Grid.ColumnSpan="2">
             <TabItem Header="空间数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="空间库连接参数设置"/>
+                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="GeoDBParamView"/>
             </TabItem>
             <TabItem Header="属性数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="属性库连接参数设置"/>
+                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="AttributeDBParamView"/>
             </TabItem>
             <TabItem Header="业务数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="业务库连接参数设置"/>
+                <v:ConnectionParamView Grid.Column="0" Grid.Row="0" x:Name="BusinessDBParamView"/>
             </TabItem>
         </TabControl>
     </Grid>

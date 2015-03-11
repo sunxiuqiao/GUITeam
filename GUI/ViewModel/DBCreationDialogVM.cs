@@ -116,6 +116,11 @@ namespace GUI.ViewModel
         {
             count--;
             CurrentControl = userControls[count];
+            if (count != userControls.Count)
+            {
+                NextStepButtonContent = "下一步";
+                CurrentControl = userControls[count];
+            }
             DBCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;
 
         }

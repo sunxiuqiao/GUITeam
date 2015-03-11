@@ -19,12 +19,14 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <f:Ribbon Grid.Row="0">
+        <f:Ribbon Grid.Row="0" >
             <f:Ribbon.Menu>
                 <f:Backstage Name="ProjectBackStage" Header="工程">
                     <f:BackstageTabControl>
                         <f:BackstageTabItem Header="新建" >
-                            <ScrollViewer  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource ScrollViewerStyle}">
+                            <ScrollViewer  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+                                           VerticalAlignment="Top" HorizontalAlignment="Left" 
+                                           Style="{StaticResource ScrollViewerStyle}">
                                 <GroupBox Header="新建" TextBlock.Foreground="DimGray" Style="{StaticResource TitleStyle}" Margin="70" MinWidth="900" MinHeight="500" BorderBrush="White">
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -47,14 +49,12 @@
                                         </ContentControl>
                                         <Popup Grid.Row="3" x:Name="DBCreateDialog" 
                                                AllowsTransparency="True" Placement="Center" StaysOpen="True" PopupAnimation="Slide" 
-                                               Width="{Binding ElementName=GUIMainWindow,Path=Width,UpdateSourceTrigger= PropertyChanged}" 
-                                               Height="{Binding ElementName=GUIMainWindow,Path=Height,UpdateSourceTrigger= PropertyChanged}" 
+                                               Width="{Binding ElementName=GUIMainWindow,Path=Width,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
+                                               Height="{Binding ElementName=GUIMainWindow,Path=Height,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
                                                PlacementTarget="{Binding ElementName=GUIMainWindow}" 
                                                IsOpen="{Binding Path=DBCreationVM.DBCreationDialogVM.IsCreationDialogOpen ,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}">
-                                            <Grid Width="{Binding ElementName=GUIMainWindow,Path=Width,UpdateSourceTrigger= PropertyChanged}"
-                                                  Height="{Binding ElementName=GUIMainWindow,Path=Height,UpdateSourceTrigger= PropertyChanged}"
-                                                  Background="#88888888" >
-                                                <ContentControl >
+                                            <Grid Background="#88888888" >
+                                                <ContentControl>
                                                     <v:DBCreationDialogView DataContext="{Binding Path=DBCreationVM.DBCreationDialogVM}"></v:DBCreationDialogView>
                                                 </ContentControl>
                                             </Grid>

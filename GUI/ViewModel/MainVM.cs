@@ -27,8 +27,6 @@ namespace GUI.ViewModel
 
         public MainVM()
         {
-            //_ControlsModel.MapControl.OleDropEnabled = true;
-            
             
         }
 
@@ -58,6 +56,7 @@ namespace GUI.ViewModel
             get { return dbCreationVM; }
             set { dbCreationVM = value; }
         }
+
         #endregion
 
         #region AddDataCommand

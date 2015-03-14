@@ -30,8 +30,5 @@
             </StackPanel>
         </Grid>
     </Border>
-    <!--<UserControl.DataContext>
-        <vm:DBCreationDialogVM x:Name="DBCreationDialogVM"></vm:DBCreationDialogVM>
-    </UserControl.DataContext>-->
     
 </UserControl>

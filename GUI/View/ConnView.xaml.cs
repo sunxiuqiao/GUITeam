@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GUI.View
 {
     /// <summary>
-    /// Interaction logic for ConnectionParamView.xaml
+    /// Interaction logic for ConnView.xaml
     /// </summary>
-    public partial class ConnectionParamView : UserControl
+    public partial class ConnView : UserControl
     {
-        public ConnectionParamView()
+        public ConnView()
         {
             InitializeComponent();
         }

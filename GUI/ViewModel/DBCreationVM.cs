@@ -12,6 +12,7 @@ namespace GUI.ViewModel
     {
         #region SubModel 
         private DBCreationDialogVM dbCreationDialogVM = new DBCreationDialogVM();
+        private DBTabControlVM dbTabControlVM = new DBTabControlVM();
         #endregion
 
         #region Properties
@@ -21,27 +22,15 @@ namespace GUI.ViewModel
             set { dbCreationDialogVM = value; }
         }
 
-        //public bool IsCreateDBDialogOpen
-        //{
-        //    get { return dbCreationDialogVM.IsCreationDialogOpen; }
-        //    set { dbCreationDialogVM.IsCreationDialogOpen = value;  }
-        //}
+        public DBTabControlVM DBTabControlVM
+        {
+            get { return dbTabControlVM; }
+            set { dbTabControlVM = value; }
+        }
         #endregion
 
         #region Commands
-        //#region CreationCommand
-        //private void CreationCommand_Excuted()
-        //{
-        //    IsCreateDBDialogOpen = true;
-        //}
-
-        //private bool CreationCommand_CanExcute()
-        //{
-        //    return true;
-        //}
-          
-        //public System.Windows.Input.ICommand CreateCommand { get { return new MVVMBase.RelayCommand(CreationCommand_Excuted, CreationCommand_CanExcute); } }
-        //#endregion
+        
         #endregion
 
     }

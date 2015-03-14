@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CreateDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CreateDatabase\CreateDatabase\bin\Debug\CreateDatabase.dll</HintPath>
+    </Reference>
     <Reference Include="ESRI.ArcGIS.ADF, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86" />
     <Reference Include="ESRI.ArcGIS.ADF.Core, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
     <Reference Include="ESRI.ArcGIS.AxControls, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86" />
@@ -129,10 +133,11 @@
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />
     <Compile Include="ViewModel\BusiDBCreationVM.cs" />
     <Compile Include="Converter.cs" />
-    <Compile Include="ViewModel\ConnParamBaseVM.cs" />
+    <Compile Include="ViewModel\ConnBaseVM.cs" />
     <Compile Include="ViewModel\DBCreationDialogVM.cs" />
     <Compile Include="ViewModel\DBCreationVM.cs" />
-    <Compile Include="ViewModel\GeoConnParam.cs" />
+    <Compile Include="ViewModel\DBTabControlVM.cs" />
+    <Compile Include="ViewModel\GeoConnVM.cs" />
     <Compile Include="ViewModel\GeoDBCreationVM.cs" />
     <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
       <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>
@@ -144,8 +149,8 @@
       <DependentUpon>DBCreationDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Commands.cs" />
-    <Compile Include="View\ConnParamView.xaml.cs">
-      <DependentUpon>ConnParamView.xaml</DependentUpon>
+    <Compile Include="View\ConnView.xaml.cs">
+      <DependentUpon>ConnView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ControlsModel.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
@@ -175,7 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ConnParamView.xaml">
+    <Page Include="View\ConnView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

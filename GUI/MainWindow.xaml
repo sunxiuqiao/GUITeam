@@ -45,7 +45,7 @@
                                             <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" Command="{Binding DBCreationVM.DBCreationDialogVM.StartCreateDBCommand}" />
                                         </Grid>
                                         <ContentControl Grid.Row="1" Margin="35,0,25,0">
-                                            <v:DBTabControl></v:DBTabControl>
+                                            <v:DBTabControl DataContext="{Binding Path=DBCreationVM.DBTabControlVM}"></v:DBTabControl>
                                         </ContentControl>
                                         <Popup Grid.Row="3" x:Name="DBCreateDialog" 
                                                AllowsTransparency="True" Placement="Center" StaysOpen="True" PopupAnimation="Slide" 

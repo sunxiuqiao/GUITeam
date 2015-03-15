@@ -69,48 +69,47 @@
                             
                         </f:BackstageTabItem>
                         <f:BackstageTabItem Name="浏览" Header="浏览">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="5*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource TitleStyle}" Content="浏览"/>
-                                <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource BigLabelStyle}" Content="最近的项目" HorizontalContentAlignment="Center"/>
-                                <ListView Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="5"  BorderBrush="Transparent" FontFamily="YaHei Consolas Hybrid" FontSize="20" Foreground="DimGray">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn  DisplayMemberBinding="{Binding}"/>
-                                        </GridView>
-                                    </ListView.View>
-                                    <ListView.ItemContainerStyle>
-                                        <Style TargetType="{x:Type ListViewItem}">
-                                            <Style.Triggers>
-                                                <Trigger Property="IsSelected" Value="true">
-                                                    <Setter Property="Background" Value="{DynamicResource ButtonPressedOuterBorderBrush}"/>
-                                                    <Setter Property="Foreground" Value="Black"/>
-                                                </Trigger>
-                                                <Trigger Property="IsMouseOver" Value="true">
-                                                    <Setter Property="Background" Value="{DynamicResource ButtonPressedOuterBackgroundBrush}"/>
-                                                    <Setter Property="Foreground" Value="Black"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ListView.ItemContainerStyle>
-                                </ListView>
-                                <ContentControl Grid.Row="4"  Grid.Column="2">
-                                    <v:DBTabControl></v:DBTabControl>
-                                </ContentControl>
-                            </Grid>
-                        </f:BackstageTabItem>
-                            
+                            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
+                                          VerticalAlignment="Top" HorizontalAlignment="Left"
+                                          Style="{StaticResource ScrollViewerStyle}">
+                                <GroupBox Header="浏览" TextBlock.Foreground="DimGray" Style="{StaticResource TitleStyle}" Margin="70" MinWidth="900" MinHeight="500" BorderBrush="Transparent">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <!--<RowDefinition Height="1"/>-->
+                                            <RowDefinition Height="50"/>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="1" Grid.Column="1"  Content="最近的项目" FontFamily="YaHei Consolas Hybrid" FontSize="20" FontWeight="Light" Foreground="DimGray"  />
+                                        <ListView Grid.Row="2"  Grid.Column="1" Margin="5"  BorderBrush="Transparent" FontFamily="YaHei Consolas Hybrid" FontSize="20" Foreground="DimGray">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="{x:Type ListViewItem}">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsSelected" Value="true">
+                                                            <Setter Property="Background" Value="{DynamicResource ButtonPressedOuterBorderBrush}"/>
+                                                            <Setter Property="Foreground" Value="Black"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver" Value="true">
+                                                            <Setter Property="Background" Value="{DynamicResource ButtonPressedOuterBackgroundBrush}"/>
+                                                            <Setter Property="Foreground" Value="Black"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                        </ListView>
+                                        <ContentControl Grid.Row="2"  Grid.Column="3" Margin="35,0,25,0">
+                                            <v:DBTabControl></v:DBTabControl>
+                                        </ContentControl>
+                                    </Grid>
+                                </GroupBox>
+                            </ScrollViewer>  
+                        </f:BackstageTabItem>                           
                         <f:BackstageTabItem Name="打印" Header="打印"/>
                         <f:BackstageTabItem Name="保存" Header="保存"/>
                         <f:BackstageTabItem Name="另存为" Header="另存为"/>

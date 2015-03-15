@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using GUI.MVVMBase;
+using Microsoft.Win32;
+using System.Windows.Forms;
 
 namespace GUI.ViewModel
 {
@@ -172,6 +174,7 @@ namespace GUI.ViewModel
         }
         private void ConnSaveCommand_Executed()
         {
+
             IsSaved = true;
         }
         public System.Windows.Input.ICommand ConnSaveCommand { get { return new RelayCommand(ConnSaveCommand_Executed, ConnSaveCommand_CanExecute); } }

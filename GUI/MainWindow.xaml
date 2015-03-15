@@ -41,8 +41,12 @@
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
                                             <Label Grid.Column="0" Style="{StaticResource BigLabelStyle}" Margin="5">项目名称</Label>
-                                            <TextBox Grid.Column="1" Focusable="True" Height="25" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray" ></TextBox>
-                                            <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" Command="{Binding DBCreationVM.DBCreationDialogVM.StartCreateDBCommand}" />
+                                            <TextBox x:Name="ProjectName" Grid.Column="1" Focusable="True" Height="25" 
+                                                     FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray" 
+                                                     Text="{Binding DBCreationVM.ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                            <Button x:Name="CreateProjectButton" Grid.Column="2" Style="{StaticResource ButtonStyle}" 
+                                                    FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" 
+                                                    Command="{Binding DBCreationVM.StartCreateDBCommand}" />
                                         </Grid>
                                         <ContentControl Grid.Row="1" Margin="35,0,25,0">
                                             <v:DBTabControl DataContext="{Binding Path=DBCreationVM.DBTabControlVM}"></v:DBTabControl>
@@ -52,7 +56,7 @@
                                                Width="{Binding ElementName=GUIMainWindow,Path=Width,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
                                                Height="{Binding ElementName=GUIMainWindow,Path=Height,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
                                                PlacementTarget="{Binding ElementName=GUIMainWindow}" 
-                                               IsOpen="{Binding Path=DBCreationVM.DBCreationDialogVM.IsCreationDialogOpen ,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}">
+                                               IsOpen="{Binding Path=DBCreationVM.DBCreationDialogVM.IsCreateDialogOpened ,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}">
                                             <Grid Background="#88888888" >
                                                 <ContentControl>
                                                     <v:DBCreationDialogView DataContext="{Binding Path=DBCreationVM.DBCreationDialogVM}"></v:DBCreationDialogView>

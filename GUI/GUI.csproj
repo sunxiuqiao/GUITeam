@@ -133,11 +133,10 @@
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />
     <Compile Include="ViewModel\BusiDBCreationVM.cs" />
     <Compile Include="Converter.cs" />
-    <Compile Include="ViewModel\ConnBaseVM.cs" />
+    <Compile Include="ViewModel\ConnVM.cs" />
     <Compile Include="ViewModel\DBCreationDialogVM.cs" />
     <Compile Include="ViewModel\DBCreationVM.cs" />
     <Compile Include="ViewModel\DBTabControlVM.cs" />
-    <Compile Include="ViewModel\GeoConnVM.cs" />
     <Compile Include="ViewModel\GeoDBCreationVM.cs" />
     <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
       <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>

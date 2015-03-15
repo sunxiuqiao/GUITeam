@@ -13,24 +13,73 @@ namespace GUI.ViewModel
         #region SubModel 
         private DBCreationDialogVM dbCreationDialogVM = new DBCreationDialogVM();
         private DBTabControlVM dbTabControlVM = new DBTabControlVM();
+        private string projectName;
+        private bool isCreateButtonEnable = true;
         #endregion
 
         #region Properties
         public DBCreationDialogVM DBCreationDialogVM
         {
             get { return dbCreationDialogVM; }
-            set { dbCreationDialogVM = value; }
         }
 
         public DBTabControlVM DBTabControlVM
         {
             get { return dbTabControlVM; }
-            set { dbTabControlVM = value; }
         }
+
+        public string ProjectName
+        {
+            get { return projectName; }
+            set 
+            { 
+                projectName = value;
+                //如果ProjectName 为空ConnTest就不能click
+                if (!string.IsNullOrEmpty(projectName))
+                {
+                    DBTabControlVM.GeoConnVM.IsCanConnTest = true;
+                }
+                else
+                {
+                    DBTabControlVM.GeoConnVM.IsCanConnTest = false;
+                }
+                RaisePropertyChanged("ProjectName");
+            }
+        }
+
+        public bool IsCreateButtonEnable
+        {
+            get 
+            {
+                if (DBTabControlVM.GeoConnVM.IsSaved)
+                    isCreateButtonEnable = true;
+                else
+                    isCreateButtonEnable = false ;
+                return isCreateButtonEnable;
+            }
+            set
+            {
+                isCreateButtonEnable = value;
+            }
+        }
+
+
         #endregion
 
         #region Commands
         
+        private void CreateCommand_Excuted()
+        {
+            DBCreationDialogVM.IsCreateDialogOpened = true;
+        }
+
+        private bool CreateCommand_CanExcute()
+        {
+            return IsCreateButtonEnable;
+        }
+
+        public System.Windows.Input.ICommand StartCreateDBCommand { get { return new MVVMBase.RelayCommand(CreateCommand_Excuted, CreateCommand_CanExcute); } }
+
         #endregion
 
     }

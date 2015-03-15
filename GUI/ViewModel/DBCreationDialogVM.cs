@@ -16,7 +16,8 @@ namespace GUI.ViewModel
         private string nextStepButtonContent = "下一步";
         System.Windows.Visibility dbCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;
         private ObservableCollection<DialogUserControl> userControls = new ObservableCollection<DialogUserControl>();
-        private bool isCreationDialogOpen = false;
+        private bool isCreateDialogOpened = false;
+        
 
         private int count = 0;
         #endregion
@@ -31,14 +32,14 @@ namespace GUI.ViewModel
         }
 
         #region properties
-        public bool IsCreationDialogOpen
+        public bool IsCreateDialogOpened
         {
-            get { return isCreationDialogOpen; }
-            set { isCreationDialogOpen = value;
-            RaisePropertyChanged("IsCreationDialogOpen");
+            get { return isCreateDialogOpened; }
+            set { isCreateDialogOpened = value;
+            RaisePropertyChanged("IsCreateDialogOpened");
             }
         }
-        
+
         public DialogUserControl CurrentControl
         {
             get { return currentControl; }
@@ -135,26 +136,14 @@ namespace GUI.ViewModel
         }
         private void CancelCommand_Executed()
         {
-            IsCreationDialogOpen = false;
+            IsCreateDialogOpened = false;
         }
         public System.Windows.Input.ICommand CancelCommand { get { return new RelayCommand(CancelCommand_Executed, CancelCommand_CanExecute); } }
 
         #endregion
 
-        #region CreateDBCommand
-        private void CreationCommand_Excuted()
-        {
-            IsCreationDialogOpen = true;
-        }
-
-        private bool CreationCommand_CanExcute()
-        {
-            return true;
-        }
-
-        public System.Windows.Input.ICommand StartCreateDBCommand { get { return new MVVMBase.RelayCommand(CreationCommand_Excuted, CreationCommand_CanExcute); } }
-
-        #endregion
+        
+        
 
     }
 }

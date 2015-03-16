@@ -7,9 +7,6 @@
              xmlns:vm="clr-namespace:GUI.ViewModel"
              xmlns:v="clr-namespace:GUI.View"
              d:DesignHeight="300" d:DesignWidth="500" >
-    <UserControl.DataContext>
-        <vm:GeoConnVM></vm:GeoConnVM>
-    </UserControl.DataContext>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

@@ -17,10 +17,10 @@
                 <v:ConnView Grid.Column="0" Grid.Row="0" x:Name="GeoDBParamView" DataContext="{Binding Path=GeoConnVM}"/>
             </TabItem>
             <TabItem Header="属性数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <v:ConnView Grid.Column="0" Grid.Row="0" x:Name="AttributeDBParamView"/>
+                <v:ConnView Grid.Column="0" Grid.Row="0" x:Name="AttributeDBParamView" DataContext="{Binding Path=AttributeConnVM}"/>
             </TabItem>
             <TabItem Header="业务数据库" FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray">
-                <v:ConnView Grid.Column="0" Grid.Row="0" x:Name="BusinessDBParamView"/>
+                <v:ConnView Grid.Column="0" Grid.Row="0" x:Name="BusinessDBParamView" DataContext="{Binding Path=BusinessConnVM}"/>
             </TabItem>
         </TabControl>
     </Grid>

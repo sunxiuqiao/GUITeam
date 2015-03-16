@@ -8,13 +8,29 @@ namespace GUI.ViewModel
 {
     class DBTabControlVM
     {
+        #region subVM
         private GeoConnVM geoConnVM = new GeoConnVM();
+        private AttributeConnVM attributeConnVM = new AttributeConnVM();
+        private BusinessConnVM businessConnVM = new BusinessConnVM();
+        #endregion
 
         #region Properties
         public GeoConnVM GeoConnVM
         {
             get { return geoConnVM; }
             set { geoConnVM = value; }
+        }
+
+        public AttributeConnVM AttributeConnVM
+        {
+            get { return attributeConnVM; }
+            set { attributeConnVM = value; }
+        }
+
+        public BusinessConnVM BusinessConnVM
+        {
+            get { return businessConnVM; }
+            set { businessConnVM = value; }
         }
         #endregion
     }

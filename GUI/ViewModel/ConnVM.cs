@@ -132,17 +132,29 @@ namespace GUI.ViewModel
         }
         #endregion
 
-        
+        #region Command
+        protected bool ConnTestCommand_CanExecute()
+        {
+            return IsCanConnTest;
+        }
+        abstract protected void ConnTestCommand_Executed();
+        public System.Windows.Input.ICommand ConnTestCommand { get { return new RelayCommand(ConnTestCommand_Executed, ConnTestCommand_CanExecute); } }
+
+
+        protected bool ConnSaveCommand_CanExecute()
+        {
+            return IsCanSave;
+        }
+        abstract protected void ConnSaveCommand_Executed();
+        public System.Windows.Input.ICommand ConnSaveCommand { get { return new RelayCommand(ConnSaveCommand_Executed, ConnSaveCommand_CanExecute); } }
+
+        #endregion
+
     }
 
     class GeoConnVM : ConnVM
     {
-        
-        private bool ConnTestCommand_CanExecute()
-        {
-            return IsCanConnTest;
-        }
-        private void ConnTestCommand_Executed()
+        protected override void ConnTestCommand_Executed()
         {
             CreateDatabase.IDatabase SpatialDatabase = CreateDatabase.CSpatialDatabase.GetInstance();
             SpatialDatabase.Name = Name;
@@ -162,22 +174,80 @@ namespace GUI.ViewModel
 
             IsCanSave = SpatialDatabase.Open();
             if (IsCanSave)
-                System.Windows.MessageBox.Show("connect is ok");
+                System.Windows.MessageBox.Show("spatial database connect is ok");
             //System.Windows.MessageBox.Show(string.Format("Server:{0},ServiceName:{1},User:{2},PortNumber:{3},PassName:{4}", SpatialDatabase.Server, SpatialDatabase.ServiceName, SpatialDatabase.User, SpatialDatabase.PortNumber, SpatialDatabase.Password));
         }
-        public System.Windows.Input.ICommand ConnTestCommand { get { return new RelayCommand(ConnTestCommand_Executed, ConnTestCommand_CanExecute); } }
 
 
-        private bool ConnSaveCommand_CanExecute()
-        {
-            return IsCanSave;
-        }
-        private void ConnSaveCommand_Executed()
+        protected override void ConnSaveCommand_Executed()
         {
 
             IsSaved = true;
         }
-        public System.Windows.Input.ICommand ConnSaveCommand { get { return new RelayCommand(ConnSaveCommand_Executed, ConnSaveCommand_CanExecute); } }
 
     }
+
+    class AttributeConnVM : ConnVM
+    {
+        protected override void ConnTestCommand_Executed()
+        {
+            CreateDatabase.IDatabase AttributeDatabase = CreateDatabase.CAttributeDatabase.GetInstance();
+            AttributeDatabase.Name = Name;
+            AttributeDatabase.Password = PassWord;
+            if (string.IsNullOrEmpty(PortNumber))
+            {
+                AttributeDatabase.PortNumber = 0;
+            }
+            else
+            {
+                AttributeDatabase.PortNumber = int.Parse(PortNumber);
+            }
+            AttributeDatabase.Server = Server;
+            AttributeDatabase.ServiceName = ServiceName;
+            AttributeDatabase.User = User;
+
+            IsCanSave = AttributeDatabase.Open();
+            if (IsCanSave)
+                System.Windows.MessageBox.Show("Attribute database connect is ok");
+        }
+
+        protected override void ConnSaveCommand_Executed()
+        {
+
+            IsSaved = true;
+        }
+    }
+
+    class BusinessConnVM : ConnVM
+    {
+        protected override void ConnTestCommand_Executed()
+        {
+            CreateDatabase.IDatabase BusinessDatabase = CreateDatabase.CBusinessDatabase.GetInstance();
+            BusinessDatabase.Name = Name;
+            BusinessDatabase.Password = PassWord;
+            if (string.IsNullOrEmpty(PortNumber))
+            {
+                BusinessDatabase.PortNumber = 0;
+            }
+            else
+            {
+                BusinessDatabase.PortNumber = int.Parse(PortNumber);
+            }
+            BusinessDatabase.Server = Server;
+            BusinessDatabase.ServiceName = ServiceName;
+            BusinessDatabase.User = User;
+
+            IsCanSave = BusinessDatabase.Open();
+            if (IsCanSave)
+                System.Windows.MessageBox.Show("Attribute database connect is ok");
+        }
+
+        protected override void ConnSaveCommand_Executed()
+        {
+
+            IsSaved = true;
+        }
+    }
+
+    
 }

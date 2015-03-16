@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GUI.View;
 using GUI.MVVMBase;
+using Oracle.ManagedDataAccess.Client;
+
 
 namespace GUI.ViewModel
 {
@@ -38,10 +40,14 @@ namespace GUI.ViewModel
                 if (!string.IsNullOrEmpty(projectName))
                 {
                     DBTabControlVM.GeoConnVM.IsCanConnTest = true;
+                    DBTabControlVM.AttributeConnVM.IsCanConnTest = true;
+                    DBTabControlVM.BusinessConnVM.IsCanConnTest = true;
                 }
                 else
                 {
                     DBTabControlVM.GeoConnVM.IsCanConnTest = false;
+                    DBTabControlVM.AttributeConnVM.IsCanConnTest = false;
+                    DBTabControlVM.BusinessConnVM.IsCanConnTest = false;
                 }
                 RaisePropertyChanged("ProjectName");
             }

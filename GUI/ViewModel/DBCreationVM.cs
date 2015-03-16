@@ -57,7 +57,7 @@ namespace GUI.ViewModel
         {
             get 
             {
-                if (DBTabControlVM.GeoConnVM.IsSaved)
+                if (DBTabControlVM.GeoConnVM.IsSaved && DBTabControlVM.AttributeConnVM.IsSaved && DBTabControlVM.BusinessConnVM.IsSaved)
                     isCreateButtonEnable = true;
                 else
                     isCreateButtonEnable = false ;

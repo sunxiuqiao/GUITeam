@@ -23,6 +23,13 @@ namespace GUI.View
         public ConnView()
         {
             InitializeComponent();
+            
         }
+
+        private void ConnNameComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ConnSaveButton.IsEnabled = false;
+        }
+
     }
 }

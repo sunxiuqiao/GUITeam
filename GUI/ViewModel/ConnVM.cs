@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using GUI.MVVMBase;
 using Microsoft.Win32;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace GUI.ViewModel
 {
@@ -24,6 +25,7 @@ namespace GUI.ViewModel
         private bool isCanSave = false;
         private bool isCanConnTest = false;
         private bool isSaved = false;
+
         #endregion
 
         #region Constructor
@@ -34,10 +36,11 @@ namespace GUI.ViewModel
 
         #region Properties
 
+
         public bool IsCanSave
         {
             get { return isCanSave; }
-            set { isCanSave = value; }
+            set { isCanSave = value; RaisePropertyChanged("IsCanSave"); }
         }
 
         public bool IsSaved
@@ -132,6 +135,9 @@ namespace GUI.ViewModel
         }
         #endregion
 
+        #region function
+        #endregion
+
         #region Command
         protected bool ConnTestCommand_CanExecute()
         {
@@ -140,13 +146,9 @@ namespace GUI.ViewModel
         abstract protected void ConnTestCommand_Executed();
         public System.Windows.Input.ICommand ConnTestCommand { get { return new RelayCommand(ConnTestCommand_Executed, ConnTestCommand_CanExecute); } }
 
-
-        protected bool ConnSaveCommand_CanExecute()
-        {
-            return IsCanSave;
-        }
+        
         abstract protected void ConnSaveCommand_Executed();
-        public System.Windows.Input.ICommand ConnSaveCommand { get { return new RelayCommand(ConnSaveCommand_Executed, ConnSaveCommand_CanExecute); } }
+        public System.Windows.Input.ICommand ConnSaveCommand { get { return new RelayCommand(ConnSaveCommand_Executed); } }
 
         #endregion
 
@@ -165,7 +167,15 @@ namespace GUI.ViewModel
             }
             else
             {
-                SpatialDatabase.PortNumber = int.Parse(PortNumber);
+                try
+                {
+                    SpatialDatabase.PortNumber = int.Parse(PortNumber);
+                }
+                catch(Exception e)
+                {
+                    System.Windows.MessageBox.Show("亲，接口必须是数字哦！例如：5151");
+                }
+                
             }
             SpatialDatabase.Server = Server;
             SpatialDatabase.ServiceName = ServiceName;
@@ -174,7 +184,11 @@ namespace GUI.ViewModel
 
             IsCanSave = SpatialDatabase.Open();
             if (IsCanSave)
+            {
                 System.Windows.MessageBox.Show("spatial database connect is ok");
+                RaisePropertyChanged("ConnSaveCommand");
+            }
+                
             //System.Windows.MessageBox.Show(string.Format("Server:{0},ServiceName:{1},User:{2},PortNumber:{3},PassName:{4}", SpatialDatabase.Server, SpatialDatabase.ServiceName, SpatialDatabase.User, SpatialDatabase.PortNumber, SpatialDatabase.Password));
         }
 

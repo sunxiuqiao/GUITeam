@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:GUI.ViewModel"
              xmlns:v="clr-namespace:GUI.View"
              d:DesignHeight="300" d:DesignWidth="500" >
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ComboBoxTextChanged}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+    <!--<UserControl.DataContext>
+        <vm:GeoConnVM></vm:GeoConnVM>
+    </UserControl.DataContext>-->
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -25,31 +35,45 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
+            
             <Label Grid.Column="0" Grid.Row="0" Margin="10">连接名称</Label>
-            <ComboBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="10" IsEditable="True"></ComboBox>
+            <ComboBox x:Name="ConnNameComboBox" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" 
+                      Margin="10" IsEditable="True" TextBoxBase.TextChanged="ConnNameComboBox_TextChanged"> 
+            </ComboBox>
             <Label Grid.Column="0" Grid.Row="1" Margin="10">服务器地址</Label>
-            <ComboBox Grid.Column="1" Grid.Row="1" Margin="10" IsEditable="True"
-                      Text="{Binding Server,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding ServerNames}"></ComboBox>
+            <ComboBox Grid.Column="1" Grid.Row="1" Margin="10" IsEditable="True" TextBoxBase.TextChanged="ConnNameComboBox_TextChanged"
+                      Text="{Binding Server,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                      ItemsSource="{Binding ServerNames}">
+            </ComboBox>
             <Label Grid.Column="2" Grid.Row="1" Margin="10">实例名称</Label>
-            <ComboBox Grid.Column="3" Grid.Row="1" Margin="10" IsEditable="True"
+            <ComboBox Grid.Column="3" Grid.Row="1" Margin="10" IsEditable="True" TextBoxBase.TextChanged="ConnNameComboBox_TextChanged"
                       Text="{Binding ServiceName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             <Label Grid.Column="0" Grid.Row="2" Margin="10">数据库名</Label>
             <ComboBox Grid.Column="1" Grid.Row="2" Margin="10" IsEditable="True"
-                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                      TextBoxBase.TextChanged="ConnNameComboBox_TextChanged">
+            </ComboBox>
             <Label Grid.Column="2" Grid.Row="2" Margin="10">监听端口</Label>
             <ComboBox Grid.Column="3" Grid.Row="2" Margin="10" IsEditable="True"
-                      Text="{Binding PortNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                      Text="{Binding PortNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      TextBoxBase.TextChanged="ConnNameComboBox_TextChanged">
+            </ComboBox>
             <Label Grid.Column="0" Grid.Row="3" Margin="10">用户名</Label>
             <ComboBox Grid.Column="1" Grid.Row="3" Margin="10" IsEditable="True"
-                      Text="{Binding User,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                      Text="{Binding User,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      TextBoxBase.TextChanged="ConnNameComboBox_TextChanged">
+            </ComboBox>
             <Label Grid.Column="2" Grid.Row="3" Margin="10">密码</Label>
             <ComboBox Grid.Column="3" Grid.Row="3" Margin="10" IsEditable="True"
-                      Text="{Binding PassWord,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                      Text="{Binding PassWord,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      TextBoxBase.TextChanged="ConnNameComboBox_TextChanged">
+            </ComboBox>
         </Grid>
         <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,15,0">
-            <Button Style="{StaticResource ButtonStyle}" Content="测试连接" Margin="10" Command="{Binding ConnTestCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Style="{StaticResource ButtonStyle}" Content="保存" Margin="10" Command="{Binding ConnSaveCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="ConnTestButton" Style="{StaticResource ButtonStyle}" Content="测试连接" Margin="10" Command="{Binding ConnTestCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="ConnSaveButton" Style="{StaticResource ButtonStyle}" Content="保存" Margin="10" 
+                    Command="{Binding  ConnSaveCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    IsEnabled="{Binding IsCanSave,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
     </Grid>
 </UserControl>

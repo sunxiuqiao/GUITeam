@@ -9,10 +9,34 @@ namespace GUI.ViewModel
 {
     class AttriDBCreationVM : MVVMBase.ObservableObject
     {
-        public AttriDBCreationVM(DBCreationDialogVM p)
+        public AttriDBCreationVM()
         {
-            
+        }
+        #region member
+        private bool isContinueWithError = false;
+        private bool isInitDictionary = false;
+        #endregion
+
+        #region Properties
+        public bool IsContinueWithError
+        {
+            get { return isContinueWithError; }
+            set
+            {
+                isContinueWithError = value;
+                RaisePropertyChanged("IsContinueWithError");
+            }
         }
 
+        public bool IsInitDictionary
+        {
+            get { return isInitDictionary; }
+            set
+            {
+                isInitDictionary = value;
+                RaisePropertyChanged("IsInitDictionary");
+            }
+        }
+        #endregion
     }
 }

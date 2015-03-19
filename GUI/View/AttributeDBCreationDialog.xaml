@@ -14,8 +14,8 @@
     <Grid Background="White" >
         <GroupBox Margin="5" Header="属性库建库参数设置" FontSize="12">
             <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="20">
-                <CheckBox x:Name="isContinueWithError" IsChecked="True" Margin="10" Content="允许出错后继续"/>
-                <CheckBox x:Name="isInitDictionary" IsChecked="True" Margin="10" Content="初始化字典"/>
+                <CheckBox x:Name="isContinueWithError" IsChecked="{Binding IsContinueWithError}" Margin="10" Content="允许出错后继续"/>
+                <CheckBox x:Name="isInitDictionary" IsChecked="{Binding IsInitDictionary}" Margin="10" Content="初始化字典"/>
             </StackPanel>
         </GroupBox>
         

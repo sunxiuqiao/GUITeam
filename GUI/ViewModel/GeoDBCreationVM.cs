@@ -9,13 +9,76 @@ namespace GUI.ViewModel
 {
     class GeoDBCreationVM : MVVMBase.ObservableObject
     {
+        #region member
+        string featureDatasetName;
+        string coordSystem;
+        string maxX;
+        string maxY;
+        string minX;
+        string minY;
+        #endregion
         #region construct
         public GeoDBCreationVM()
         {
         }
         #endregion
+        #region Properties
+        public string FeatureDatasetName
+        {
+            get { return featureDatasetName; }
+            set
+            { 
+                featureDatasetName = value;
+                RaisePropertyChanged("FeatureDatasetName");
+            }
+        }
 
+        public string CoordSystem
+        {
+            get { return coordSystem; }
+            set { 
+                coordSystem = value;
+                RaisePropertyChanged("CoordSystem");
+            }
+        }
 
+        public string MaxX
+        {
+            get { return maxX; }
+            set { 
+                maxX = value;
+                RaisePropertyChanged("MaxX");
+            }
+        }
+
+        public string MaxY
+        {
+            get { return maxY; }
+            set {
+                maxY = value;
+                RaisePropertyChanged("MaxY");
+            }
+        }
+
+        public string MinX
+        { 
+            get { return minX; }
+            set { 
+                minX = value;
+                RaisePropertyChanged("MinX");
+            }
+        }
+
+        public string MinY
+        {
+            get { return minY; }
+            set {
+                minY = value;
+                RaisePropertyChanged("MinY");
+            }
+        }
+        #endregion
+        #region Command
         #region ExtendFromFileCommand
         private void ExtendFromFileCommand_Excuted()
         {
@@ -43,5 +106,7 @@ namespace GUI.ViewModel
 
         public System.Windows.Input.ICommand CoordFromShapeCommand { get { return new MVVMBase.RelayCommand(CoordFromShapeCommand_Excuted, CoordFromShapeCommand_CanExcute); } }
         #endregion
+        #endregion
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary  
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
-
+    <!-- ScrollViewer -->
     <Style x:Key="ScrollBarThumb"  
                TargetType="{x:Type Thumb}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -102,8 +102,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <!-- ScrollViewer -->
     <Style x:Key="ScrollViewerStyle" TargetType="{x:Type ScrollViewer}">
         <Setter Property="BorderBrush"   Value="LightGray"/>
         <Setter Property="BorderThickness"  Value="0"/>
@@ -218,6 +216,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
 
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="FontSize" Value="15"/>

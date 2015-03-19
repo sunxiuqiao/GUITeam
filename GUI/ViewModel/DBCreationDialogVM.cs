@@ -17,17 +17,44 @@ namespace GUI.ViewModel
         System.Windows.Visibility dbCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;
         private ObservableCollection<DialogUserControl> userControls = new ObservableCollection<DialogUserControl>();
         private bool isCreateDialogOpened = false;
-        
-
         private int count = 0;
         #endregion
 
+        #region subModel
+        GeoDBCreationVM geoDBCreationVM = new GeoDBCreationVM();
+        AttriDBCreationVM attriDBCreationVM = new AttriDBCreationVM();
+        BusiDBCreationVM busiDBCreationVM = new BusiDBCreationVM();
+
+        //public GeoDBCreationVM GeoDBCreationVM
+        //{
+        //    get { return geoDBCreationVM; }
+        //    set { value = geoDBCreationVM; }
+        //}
+
+        //public AttriDBCreationVM AttriDBCreationVM
+        //{
+        //    get { return attriDBCreationVM; }
+        //    set { attriDBCreationVM = value; }
+        //}
+
+        //public BusiDBCreationVM BusiDBCreationVM
+        //{
+        //    get { return busiDBCreationVM; }
+        //    set { busiDBCreationVM = value; }
+        //}
+        #endregion
 
         public DBCreationDialogVM()
         {
-            userControls.Add(new GeoDBCreationDialog());
-            userControls.Add(new AttributeDBCreationDialog());
-            userControls.Add(new BusinessDBCreationDialog());
+            GeoDBCreationDialog GeoDialog = new GeoDBCreationDialog();
+            AttributeDBCreationDialog AttriDialog = new AttributeDBCreationDialog();
+            BusinessDBCreationDialog BusiDialog = new BusinessDBCreationDialog();
+            GeoDialog.DataContext = geoDBCreationVM;
+            AttriDialog.DataContext = attriDBCreationVM;
+            BusiDialog.DataContext = busiDBCreationVM;
+            userControls.Add(GeoDialog);
+            userControls.Add(AttriDialog);
+            userControls.Add(BusiDialog);
             currentControl = userControls.First();
         }
 
@@ -50,6 +77,7 @@ namespace GUI.ViewModel
             }
         }
 
+        
 
         public string NextStepButtonContent
         {

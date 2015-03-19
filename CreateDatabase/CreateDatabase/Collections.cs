@@ -99,7 +99,6 @@ namespace CreateDatabase
                             default:
                                 break;
                         }
-
                     }
 
                     IEnumerable<XElement> fieldChildren = tableChild.Elements("FIELD");

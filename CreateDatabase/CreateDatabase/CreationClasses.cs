@@ -16,7 +16,6 @@ namespace CreateDatabase
             IFeatureDataset featureDataset = ((CSpatialDatabase)table.Database).CurrentFeatureDataset;
             IGeoDataset geoDataset = featureDataset as IGeoDataset;
             IDatabase dataBase = table.Database;
-            IFeatureWorkspace wsp = dataBase.Workspace as IFeatureWorkspace;
             IFields fields = new FieldsClass();
             IFieldsEdit fieldsEdit = (IFieldsEdit)fields;
             IField field = new FieldClass();

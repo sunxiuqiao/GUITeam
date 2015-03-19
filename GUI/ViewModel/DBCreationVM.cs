@@ -15,6 +15,9 @@ namespace GUI.ViewModel
         #region SubModel 
         private DBCreationDialogVM dbCreationDialogVM = new DBCreationDialogVM();
         private DBTabControlVM dbTabControlVM = new DBTabControlVM();
+        #endregion
+
+        #region member
         private string projectName;
         private bool isCreateButtonEnable = true;
         #endregion

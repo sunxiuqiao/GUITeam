@@ -77,8 +77,6 @@ namespace GUI.ViewModel
             }
         }
 
-        
-
         public string NextStepButtonContent
         {
             get 
@@ -116,6 +114,7 @@ namespace GUI.ViewModel
             count++;
             if (count == userControls.Count)
             {
+                
                 DBCreationProgramBarVisibiliy = System.Windows.Visibility.Visible;
             }
 
@@ -132,7 +131,7 @@ namespace GUI.ViewModel
         public System.Windows.Input.ICommand NextStepCommand { get { return new RelayCommand(NextStepCommand_Executed, NextStepCommand_CanExecute); } }
 
         #endregion
-
+          
         #region BackCommand
         private bool BackCommand_CanExecute()
         {

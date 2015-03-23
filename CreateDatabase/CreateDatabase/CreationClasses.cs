@@ -8,7 +8,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace CreateDatabase
 {
-    class CGeoDatasetCreation : ICreation
+    public class CGeoDatasetCreation : ICreation
     {
         public void Create(ITable table)
         {
@@ -53,41 +53,41 @@ namespace CreateDatabase
    
     }
 
-    class CAttributeTableCreation : ICreation
+    public class CAttributeTableCreation : ICreation
     {
         public void Create(ITable table)
         {
             IDatabase database = table.Database;
             IColumn column;
-            string cmdStr = @"CREATE TABLE " + table.Name + "(";
+            string cmdStr = @"CREATE TABLE " + table.AliasName + "(";
             for (int i = 0; i < table.Columns.Count - 1; i++)
             {
                 column = table.Columns[i];
                 if (column.IsPrimaryKey == true)
                 {
-                    cmdStr += string.Format("{0} {1}({2}) NOT NULL PRIMARY KEY, ", column.Name, column.Type.ToString(), column.Precision);
+                    cmdStr += string.Format("{0} {1}({2}) NOT NULL PRIMARY KEY, ", column.AliasName, column.Type.ToString(), column.Precision);
                 }
                 else
                 {
                     string isNull = column.IsNullable ? "" : "NOT NULL";
                     if (column.Scale <= 0)
-                        cmdStr += string.Format("{0} {1}({2}) {3}, ", column.Name, column.Type.ToString(), column.Precision, isNull);
+                        cmdStr += string.Format("{0} {1}({2}) {3}, ", column.AliasName, column.Type.ToString(), column.Precision, isNull);
                     else
-                        cmdStr += string.Format("{0} {1}({2},{3}) {4}, ", column.Name, column.Type.ToString(), column.Precision, column.Scale, isNull);
+                        cmdStr += string.Format("{0} {1}({2},{3}) {4}, ", column.AliasName, column.Type.ToString(), column.Precision, column.Scale, isNull);
                 }
             }
             column = table.Columns[table.Columns.Count - 1];
             if (column.Scale <= 0)
-                cmdStr += string.Format("{0} {1}({2}) {3})", column.Name, column.Type.ToString(), column.Precision, column.IsNullable ? "" : "NOT NULL");
+                cmdStr += string.Format("{0} {1}({2}) {3});", column.AliasName, column.Type.ToString(), column.Precision, column.IsNullable ? "" : "NOT NULL");
             else
-                cmdStr += string.Format("{0} {1}({2},{3}) {4})", column.Name, column.Type.ToString(), column.Precision, column.Scale, column.IsNullable ? "" : "NOT NULL");
-                
+                cmdStr += string.Format("{0} {1}({2},{3}) {4});", column.AliasName, column.Type.ToString(), column.Precision, column.Scale, column.IsNullable ? "" : "NOT NULL");
+            
             OracleCommand cmd = new OracleCommand(cmdStr, ((CODPNETDbConnection)table.Database.Connection).Conn);
             cmd.ExecuteNonQuery();
         }
     }
 
-    class CBusinessTableCreation : ICreation
+    public class CBusinessTableCreation : ICreation
     {
         public void Create(ITable table)
         {

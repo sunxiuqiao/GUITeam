@@ -10,10 +10,10 @@ namespace CreateDatabase
 {
     public class ColumnsCollection : CollectionBase
     {
-        public int Count
-        {
-            get { return this.List.Count; }
-        }
+        //public int Count
+        //{
+        //    get { return this.List.Count; }
+        //}
 
         public void Add(IColumn column)
         {
@@ -39,10 +39,10 @@ namespace CreateDatabase
 
     public class TableCollection : CollectionBase
     {
-        public int Count
-        {
-            get { return this.List.Count; }
-        }
+        //public int Count
+        //{
+        //    get { return this.List.Count; }
+        //}
 
         public void Add(ITable table)
         {
@@ -142,7 +142,7 @@ namespace CreateDatabase
                         }
                         table.Columns.Add(column);
                     }
-                    this.Add(table);
+                    Add(table);
                 }
             }
             

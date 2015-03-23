@@ -17,7 +17,7 @@ namespace CreateDatabase
         private string user;
         private string password;
         private IConnection connection;
-        private TableCollection tables;
+        private TableCollection tables = new TableCollection();
         private string name;
         private string serviceName;
         private string version;
@@ -53,8 +53,8 @@ namespace CreateDatabase
         }
         public TableCollection Tables
         {
-            get { return this.tables; }
-            set { this.tables = value; }
+            get { return tables; }
+            set { tables = value; }
         }
         public string Name
         {

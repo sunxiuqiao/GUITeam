@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GUI.View;
 using System.Collections.ObjectModel;
 using GUI.MVVMBase;
+using CreateDatabase;
 
 namespace GUI.ViewModel
 {
@@ -114,8 +115,28 @@ namespace GUI.ViewModel
             count++;
             if (count == userControls.Count)
             {
+                //create attributedatabase
+                try
+                {
+                    DBCreationProgramBarVisibiliy = System.Windows.Visibility.Visible;
+                    CAttributeDatabase AttributeDatabase = (CAttributeDatabase)AttributeConnVM.Database();
+                    ICreation AttributeCreation = new CAttributeTableCreation();
+                    AttributeDatabase.Tables.LoadSchemaFromXml("..//..//..//AttributeDBConfig.xml");
+                    for (int i = 0; i < AttributeDatabase.Tables.Count; ++i)
+                    {
+                        AttributeDatabase.Tables[i].Creation = AttributeCreation;
+                        AttributeDatabase.Tables[i].Database = AttributeDatabase;
+                    }
+                    AttributeDatabase.CreateTable();
+                    System.Windows.Forms.MessageBox.Show("finish");
+
+                }
+                catch(Exception e)
+                {
+                    System.Windows.MessageBox.Show(e.Message);
+                }
                 
-                DBCreationProgramBarVisibiliy = System.Windows.Visibility.Visible;
+                
             }
 
             else if (count == userControls.Count - 1)
@@ -125,9 +146,11 @@ namespace GUI.ViewModel
             }
             else
             {
+                NextStepButtonContent = "下一步";
                 CurrentControl = userControls[count];
             }
         }
+          
         public System.Windows.Input.ICommand NextStepCommand { get { return new RelayCommand(NextStepCommand_Executed, NextStepCommand_CanExecute); } }
 
         #endregion
@@ -144,9 +167,14 @@ namespace GUI.ViewModel
         {
             count--;
             CurrentControl = userControls[count];
-            if (count != userControls.Count)
+            if (count < userControls.Count)
             {
                 NextStepButtonContent = "下一步";
+                CurrentControl = userControls[count];
+            }
+            else if(count == userControls.Count)
+            {
+                NextStepButtonContent = "创建";
                 CurrentControl = userControls[count];
             }
             DBCreationProgramBarVisibiliy = System.Windows.Visibility.Hidden;

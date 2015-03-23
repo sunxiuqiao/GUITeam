@@ -35,10 +35,7 @@ namespace GUI
             FileViewModel.TOCControl.CreateControl();
             FileViewModel.MapControl.OleDropEnabled = true;
             FileViewModel.TOCControl.SetBuddyControl(FileViewModel.MapControl);
-
         }
-
-      
     }
         
 }

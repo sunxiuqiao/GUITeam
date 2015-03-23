@@ -12,7 +12,7 @@ namespace CreateDatabase
         string aliasName;
         IDatabase database;
         ICreation creation;
-        ColumnsCollection columns;
+        ColumnsCollection columns = new ColumnsCollection();
 
         public string AliasName
         {

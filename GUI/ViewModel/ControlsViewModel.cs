@@ -8,45 +8,37 @@ using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS.Carto;
 using System.Windows;
 using ESRI.ArcGIS.esriSystem;
+using GUI.Model;
 
 
-namespace GUI
+namespace GUI.ViewModel
 {
-    class ControlsModel
+    class ControlsViewModel
     {
-        private readonly AxMapControl _MapControl = new AxMapControl();
-        private readonly AxTOCControl _TOCControl = new AxTOCControl();
+        private static readonly AxMapControl mapControl = new AxMapControl();
+        private static readonly AxTOCControl tocControl = new AxTOCControl();
 
         private esriControlsDragDropEffect _MapControlEffect = esriControlsDragDropEffect.esriDragDropNone;
         private IToolbarMenu _MapMenu = null;
         private IToolbarMenu _LayerMenu = null;
 
-        public ControlsModel()
+        public ControlsViewModel()
         {
-            MapControl.OnOleDrop += MapControl_OnOleDrop;
-            MapControl.OnMouseDown += MapControl_OnMouseDown;
-            TOCControl.OnMouseDown += TOCControl_OnMouseDown;
+            MapControl().OnOleDrop += MapControl_OnOleDrop;
+            MapControl().OnMouseDown += MapControl_OnMouseDown;
+            TOCControl().OnMouseDown += TOCControl_OnMouseDown;
 
             InitTOCControlContextMenu();
         }
 
-        
-
-        #region properties
-        public AxMapControl MapControl
+        #region static functions
+        public static AxMapControl MapControl()
         {
-            get
-            {
-                return _MapControl;
-            }
+            return mapControl;
         }
-
-        public AxTOCControl TOCControl
+        public static AxTOCControl TOCControl()
         {
-            get
-            {
-                return _TOCControl;
-            }
+            return tocControl;
         }
         #endregion
 
@@ -63,21 +55,21 @@ namespace GUI
                 ILayer layer = null;
                 object other = null;
                 object index = null;
-                _TOCControl.HitTest(e.x, e.y, ref item, ref map, ref layer, ref other, ref index);
+                tocControl.HitTest(e.x, e.y, ref item, ref map, ref layer, ref other, ref index);
 
                 if(item == esriTOCControlItem.esriTOCControlItemMap)
                 {
-                    _TOCControl.SelectItem(map, null);
-                    _MapControl.CustomProperty = layer;
+                    tocControl.SelectItem(map, null);
+                    mapControl.CustomProperty = layer;
                     if(_MapMenu != null)
-                        _MapMenu.PopupMenu(e.x, e.y, _TOCControl.hWnd);
+                        _MapMenu.PopupMenu(e.x, e.y, tocControl.hWnd);
                 }
                 else if(item == esriTOCControlItem.esriTOCControlItemLayer)
                 {
-                    _TOCControl.SelectItem(layer, null);
-                    _MapControl.CustomProperty = layer;
+                    tocControl.SelectItem(layer, null);
+                    mapControl.CustomProperty = layer;
                     if(_LayerMenu != null)
-                        _LayerMenu.PopupMenu(e.x, e.y, _TOCControl.hWnd);
+                        _LayerMenu.PopupMenu(e.x, e.y, tocControl.hWnd);
                 }
             }
         }
@@ -108,11 +100,11 @@ namespace GUI
 
                     for (int i = 0; i < filePaths.Length; i++)
                     {
-                        if (MapControl.CheckMxFile(filePaths.GetValue(i).ToString()) == true)
+                        if (MapControl().CheckMxFile(filePaths.GetValue(i).ToString()) == true)
                         {
                             try
                             {
-                                MapControl.LoadMxFile(filePaths.GetValue(i).ToString(), Type.Missing, "");
+                                MapControl().LoadMxFile(filePaths.GetValue(i).ToString(), Type.Missing, "");
                             }
                             catch (System.Exception ex)
                             {
@@ -150,7 +142,7 @@ namespace GUI
 
         private void CreateLayer(IName name)
         {
-            _MapControl.MousePointer = esriControlsMousePointer.esriPointerHourglass;
+            mapControl.MousePointer = esriControlsMousePointer.esriPointerHourglass;
 
             ILayerFactoryHelper layerFactoryHelper = new LayerFactoryHelperClass();
 
@@ -162,7 +154,7 @@ namespace GUI
 
                 while (layer != null)
                 {
-                    _MapControl.AddLayer(layer, 0);
+                    mapControl.AddLayer(layer, 0);
                     layer = layers.Next();
                 }
             }
@@ -171,7 +163,7 @@ namespace GUI
                 MessageBox.Show("Error: " + e.Message);
                 return;
             }
-            _MapControl.MousePointer = esriControlsMousePointer.esriPointerDefault;
+            mapControl.MousePointer = esriControlsMousePointer.esriPointerDefault;
         }
 
         private void MapControl_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
@@ -182,8 +174,8 @@ namespace GUI
             {
                 ESRI.ArcGIS.Controls.ControlsMapViewMenu tool = new ControlsMapViewMenuClass();
                 ICommand cmd = (ICommand)tool;
-                cmd.OnCreate(_MapControl.Object);
-                _MapControl.CurrentTool = cmd as ITool;
+                cmd.OnCreate(mapControl.Object);
+                mapControl.CurrentTool = cmd as ITool;
             }
         }
         
@@ -194,17 +186,17 @@ namespace GUI
             //init MapMenu
              
             _MapMenu = new ToolbarMenuClass();
-            _MapMenu.AddItem(new Commands.OverViewCommand(), -1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
-            _MapMenu.AddItem(new Commands.RemoveCommand(), 2, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
+            _MapMenu.AddItem(new GUI.Model.Commands.OverViewCommand(), -1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _MapMenu.AddItem(new GUI.Model.Commands.RemoveCommand(), 2, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
             //init LayerMenu
             _LayerMenu = new ToolbarMenuClass();
-            _LayerMenu.AddItem(new Commands.RemoveCommand(), 1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.AddItem(new Commands.ScaleThresholdCommand(), 1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.AddItem(new Commands.ScaleThresholdCommand(), 2, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.AddItem(new Commands.ScaleThresholdCommand(), 3, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.AddItem(new Commands.ZoomToLayerCommand(), -1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
-            _LayerMenu.SetHook(_MapControl);
-            _MapMenu.SetHook(_MapControl);
+            _LayerMenu.AddItem(new GUI.Model.Commands.RemoveCommand(), 1, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new GUI.Model.Commands.ScaleThresholdCommand(), 1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new GUI.Model.Commands.ScaleThresholdCommand(), 2, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new GUI.Model.Commands.ScaleThresholdCommand(), 3, -1, false, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.AddItem(new GUI.Model.Commands.ZoomToLayerCommand(), -1, -1, true, esriCommandStyles.esriCommandStyleTextOnly);
+            _LayerMenu.SetHook(mapControl);
+            _MapMenu.SetHook(mapControl);
         }
     }
         

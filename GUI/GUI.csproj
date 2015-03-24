@@ -201,6 +201,7 @@
     <Compile Include="ViewModel\DBTabControlVM.cs" />
     <Compile Include="Model\EditData.cs" />
     <Compile Include="ViewModel\GeoDBCreationVM.cs" />
+    <Compile Include="ViewModel\LocalProjectVM.cs" />
     <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
       <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>
     </Compile>
@@ -210,11 +211,11 @@
     <Compile Include="View\DBCreationDialogView.xaml.cs">
       <DependentUpon>DBCreationDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Commands.cs" />
+    <Compile Include="Model\Commands.cs" />
     <Compile Include="View\ConnView.xaml.cs">
       <DependentUpon>ConnView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\ControlsModel.cs" />
+    <Compile Include="ViewModel\ControlsViewModel.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="MVVMBase\PropertySupport.cs" />
     <Compile Include="MVVMBase\RelayCommand.cs" />

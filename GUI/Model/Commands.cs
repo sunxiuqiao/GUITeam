@@ -9,7 +9,7 @@ using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.esriSystem;
 
-namespace GUI
+namespace GUI.Model
 {
     /// <summary>
     /// Summary description for Command1.

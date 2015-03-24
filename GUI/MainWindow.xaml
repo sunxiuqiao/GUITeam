@@ -120,22 +120,22 @@
                 </f:Backstage>
             </f:Ribbon.Menu>
             <f:Ribbon.Tabs>
-                <f:RibbonTabItem Name="数据采集" Header="数据采集">
+                <f:RibbonTabItem Name="LoaclProject" Header="本地工程">
                     <f:RibbonTabItem.Groups>
-                        <f:RibbonGroupBox Name="工程2" Header="工程">
-                            <f:Button Name="新建工程" Header="新建工程" Command="{Binding NewProjectCommand}"></f:Button>
-                            <f:Button Name="添加数据" Header="添加数据" Command="{Binding AddDataCommand}"></f:Button>
-                            <f:Button Name="添加文件" Header="添加文件" Command="{Binding OpenFileCommand}"></f:Button>
+                        <f:RibbonGroupBox Name="Project" Header="工程">
+                            <f:Button Name="NewLoaclProjectButton" Header="新建工程" Command="{Binding LocalProjectVM.NewProjectCommand}"></f:Button>
+                            <f:Button Name="AddDataButton" Header="添加数据" Command="{Binding LocalProjectVM.AddDataCommand}"></f:Button>
+                            <f:Button Name="OpenFileButton" Header="添加文件" Command="{Binding LocalProjectVM.OpenFileCommand}"></f:Button>
                         </f:RibbonGroupBox>
-                        <f:RibbonGroupBox x:Name="工具" Header="工具">
-                            <f:Button x:Name="放大" Header="放大" Size="Middle" Command="{Binding ZoomInCommand}"></f:Button>
-                            <f:Button x:Name="缩小" Header="缩小" Size="Middle" Command="{Binding ZoomOutCommand}"></f:Button>
-                            <f:Button x:Name="平移" Header="平移" Size="Middle" Command="{Binding MapPanCommand}"></f:Button>
-                            <f:Button x:Name="全图" Header="全图" Size="Middle" Command="{Binding OverViewCommand}"></f:Button>
-                            <f:Button x:Name="量测" Header="量测" Size="Middle" ></f:Button>
-                            <f:Button x:Name="查找" Header="查找" Size="Middle" ></f:Button>
-                            <f:Button x:Name="固定比例放大" Header="固定比例放大" Size="Middle" Command="{Binding ConstFactorZoomInCommand}"></f:Button>
-                            <f:Button x:Name="固定比例缩小" Header="固定比例缩小" Size="Middle" Command="{Binding ConstFactorZoomOutCommand}"></f:Button>
+                        <f:RibbonGroupBox x:Name="Tools" Header="工具">
+                            <f:Button x:Name="ZoomInButton" Header="放大" Size="Middle" Command="{Binding LocalProjectVM.ZoomInCommand}"></f:Button>
+                            <f:Button x:Name="ZoomOutButton" Header="缩小" Size="Middle" Command="{Binding LocalProjectVM.ZoomOutCommand}"></f:Button>
+                            <f:Button x:Name="MapPanButton" Header="平移" Size="Middle" Command="{Binding LocalProjectVM.MapPanCommand}"></f:Button>
+                            <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding LocalProjectVM.OverViewCommand}"></f:Button>
+                            <f:Button x:Name="MeasureButton" Header="量测" Size="Middle" ></f:Button>
+                            <f:Button x:Name="FindButton" Header="查找" Size="Middle" ></f:Button>
+                            <f:Button x:Name="ConstFactorZoomInButton" Header="固定比例放大" Size="Middle" Command="{Binding LocalProjectVM.ConstFactorZoomInCommand}"></f:Button>
+                            <f:Button x:Name="ConstFactorZoomOutButton" Header="固定比例缩小" Size="Middle" Command="{Binding LocalProjectVM.ConstFactorZoomOutCommand}"></f:Button>
                             
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>

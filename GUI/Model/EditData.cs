@@ -87,7 +87,7 @@ namespace GUI.Model
        /// 批量生成界址点
        /// </summary>
        /// <param name="axMapControl"></param>
-       public static void BatchGenoratJZD(AxMapControl axMapControl)
+       public static void BatchGenerateJZD(AxMapControl axMapControl)
        {
            IFeatureLayer pFlayer = QueryAndAnalysis.GetLayerByName("界址点", axMapControl) as IFeatureLayer;//得到界址点图层
            IActiveView pactiv = pFlayer as IActiveView;
@@ -141,7 +141,7 @@ namespace GUI.Model
        /// 批量生成界址线
        /// </summary>
        /// <param name="axMapControl"></param>
-       public static void BatchGenoratJZX(AxMapControl axMapControl)
+       public static void BatchGenerateJZX(AxMapControl axMapControl)
        {
            ILayer pLayer = QueryAndAnalysis.GetLayerByName("界址线", axMapControl) as IFeatureLayer;//得到界址线图层
            IFeatureLayer pFeatureLyr = pLayer as IFeatureLayer;

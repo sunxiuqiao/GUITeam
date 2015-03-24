@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GUI.ViewModel
 {
@@ -104,30 +105,52 @@ namespace GUI.ViewModel
         }
         private void NewProjectCommand_Executed()
         {
-            string saveFilePath = "";
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.AddExtension = true;
-            saveFile.Filter = "*.mdb|*.mdb|all files|*.*";
-            saveFile.FilterIndex = 0;
+            FolderBrowserDialog dialog = new FolderBrowserDialog(); 
+            string DefaultfilePath = "";
+            dialog.Description = "请选择创建地理数据库路径";
+            //首次defaultfilePath为空，按FolderBrowserDialog默认设置（即桌面）选择  
+            if (DefaultfilePath != "")  
+            {  
+                //设置此次默认目录为上一次选中目录  
+                dialog.SelectedPath = DefaultfilePath;  
+            }  
 
-            bool? f = saveFile.ShowDialog();
-            if (f != null && f.Value)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                saveFilePath = saveFile.FileName.Trim();
-                System.Resources.ResourceManager srcManager = global::Resource.Properties.Resources.ResourceManager;
-                byte[] buff = srcManager.GetObject("承包地块") as byte[];
-                FileStream fileStr = new FileStream(saveFilePath, FileMode.OpenOrCreate);
-                fileStr.Write(buff, 0, buff.Length);
-                fileStr.Close();
-                LoadMDBFile(saveFilePath);
+                //记录选中的目录
+                DefaultfilePath = dialog.SelectedPath;
+                string StyleTargetPath = dialog.SelectedPath;
+                string GDBTargetPath = dialog.SelectedPath + "\\KJK.gdb";
+
+                //copy style file
+                string StyleFileSourceFile = System.IO.Path.Combine(@"../../Config", "ESRI.ServerStyle");
+                string StyleFileDestFile = System.IO.Path.Combine(StyleTargetPath, "ESRI.ServerStyle");
+                System.IO.File.Copy(StyleFileSourceFile, StyleFileDestFile, true);
+                //copy gdb
+                if(!System.IO.Directory.Exists(GDBTargetPath))
+                {
+                    System.IO.Directory.CreateDirectory(GDBTargetPath);
+                }
+                if(System.IO.Directory.Exists(GDBTargetPath))
+                {
+                    string[] Files = System.IO.Directory.GetFiles(@"../../Config/KJK.gdb");
+                    foreach(string File in Files)
+                    {
+                        string FileName = System.IO.Path.GetFileName(File);
+                        string GDBFileDestFile = System.IO.Path.Combine(GDBTargetPath, FileName);
+                        string GDBFileSourceFile = System.IO.Path.Combine(@"../../Config/KJK.gdb", FileName);
+                        System.IO.File.Copy(GDBFileSourceFile, GDBFileDestFile, true);
+                    }
+                }
+                LoadGDBFile(GDBTargetPath);
             }
 
         }
         public System.Windows.Input.ICommand NewProjectCommand { get { return new RelayCommand(NewProjectCommand_Executed, NewProjectCommand_CanExecute); } }
 
-        private void LoadMDBFile(string filePath)
+        private void LoadGDBFile(string filePath)
         {
-            IWorkspaceFactory workspaceFactory = new ESRI.ArcGIS.DataSourcesGDB.AccessWorkspaceFactoryClass();
+            IWorkspaceFactory workspaceFactory = new ESRI.ArcGIS.DataSourcesGDB.FileGDBWorkspaceFactoryClass();
             IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)workspaceFactory.OpenFromFile(filePath, 0);
             //IWorkspace workspace = (IWorkspace)featureWorkspace;
             IFeatureDataset featureDataset = featureWorkspace.OpenFeatureDataset("CBQ");

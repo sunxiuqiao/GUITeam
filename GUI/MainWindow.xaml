@@ -21,9 +21,9 @@
         </Grid.RowDefinitions>
         <f:Ribbon Grid.Row="0" >
             <f:Ribbon.Menu>
-                <f:Backstage Name="ProjectBackStage" Header="工程">
+                <f:Backstage Name="ProjectBackStage" Header="工程" >
                     <f:BackstageTabControl>
-                        <f:BackstageTabItem Header="新建" >
+                        <f:BackstageTabItem Header="新建" DataContext="{Binding DBCreationVM}">
                             <ScrollViewer  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" 
                                            Style="{StaticResource ScrollViewerStyle}">
@@ -43,23 +43,23 @@
                                             <Label Grid.Column="0" Style="{StaticResource BigLabelStyle}" Margin="5">项目名称</Label>
                                             <TextBox x:Name="ProjectName" Grid.Column="1" Focusable="True" Height="25" 
                                                      FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray" 
-                                                     Text="{Binding DBCreationVM.ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                                     Text="{Binding ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                                             <Button x:Name="CreateProjectButton" Grid.Column="2" Style="{StaticResource ButtonStyle}" 
                                                     FontFamily="YaHei Consolas Hybrid" Margin="25" Content="创建" 
-                                                    Command="{Binding DBCreationVM.StartCreateDBCommand}" />
+                                                    Command="{Binding StartCreateDBCommand}" />
                                         </Grid>
                                         <ContentControl Grid.Row="1" Margin="35,0,25,0">
-                                            <v:DBTabControl DataContext="{Binding Path=DBCreationVM.DBTabControlVM}"></v:DBTabControl>
+                                            <v:DBTabControl DataContext="{Binding Path=DBTabControlVM}"></v:DBTabControl>
                                         </ContentControl>
                                         <Popup Grid.Row="3" x:Name="DBCreateDialog" 
                                                AllowsTransparency="True" Placement="Center" StaysOpen="True" PopupAnimation="Slide" 
                                                Width="{Binding ElementName=GUIMainWindow,Path=Width,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
                                                Height="{Binding ElementName=GUIMainWindow,Path=Height,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
                                                PlacementTarget="{Binding ElementName=GUIMainWindow}" 
-                                               IsOpen="{Binding Path=DBCreationVM.DBCreationDialogVM.IsCreateDialogOpened ,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}">
+                                               IsOpen="{Binding Path=DBCreationDialogVM.IsCreateDialogOpened ,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}">
                                             <Grid Background="#88888888" >
                                                 <ContentControl>
-                                                    <v:DBCreationDialogView DataContext="{Binding Path=DBCreationVM.DBCreationDialogVM}"></v:DBCreationDialogView>
+                                                    <v:DBCreationDialogView DataContext="{Binding Path=DBCreationDialogVM}"></v:DBCreationDialogView>
                                                 </ContentControl>
                                             </Grid>
                                         </Popup>
@@ -120,23 +120,23 @@
                 </f:Backstage>
             </f:Ribbon.Menu>
             <f:Ribbon.Tabs>
-                <f:RibbonTabItem Name="LoaclProject" Header="本地工程">
+                <f:RibbonTabItem Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}">
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox Name="Project" Header="工程">
-                            <f:Button Name="NewLoaclProjectButton" Header="新建工程" Command="{Binding LocalProjectVM.NewProjectCommand}"></f:Button>
-                            <f:Button Name="AddDataButton" Header="添加数据" Command="{Binding LocalProjectVM.AddDataCommand}"></f:Button>
-                            <f:Button Name="OpenFileButton" Header="添加文件" Command="{Binding LocalProjectVM.OpenFileCommand}"></f:Button>
+                            <f:Button Name="NewLoaclProjectButton" Header="新建工程" Command="{Binding NewProjectCommand}"></f:Button>
+                            <f:Button Name="AddDataButton" Header="添加数据" Command="{Binding AddDataCommand}"></f:Button>
+                            <f:Button Name="OpenFileButton" Header="添加文件" Command="{Binding OpenFileCommand}"></f:Button>
+                            <f:Button x:Name="AddDataFromShp" Header="从shp文件 导入数据"></f:Button>
                         </f:RibbonGroupBox>
                         <f:RibbonGroupBox x:Name="Tools" Header="工具">
-                            <f:Button x:Name="ZoomInButton" Header="放大" Size="Middle" Command="{Binding LocalProjectVM.ZoomInCommand}"></f:Button>
-                            <f:Button x:Name="ZoomOutButton" Header="缩小" Size="Middle" Command="{Binding LocalProjectVM.ZoomOutCommand}"></f:Button>
-                            <f:Button x:Name="MapPanButton" Header="平移" Size="Middle" Command="{Binding LocalProjectVM.MapPanCommand}"></f:Button>
-                            <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding LocalProjectVM.OverViewCommand}"></f:Button>
+                            <f:Button x:Name="ZoomInButton" Header="放大" Size="Middle" Command="{Binding ZoomInCommand}"></f:Button>
+                            <f:Button x:Name="ZoomOutButton" Header="缩小" Size="Middle" Command="{Binding ZoomOutCommand}"></f:Button>
+                            <f:Button x:Name="MapPanButton" Header="平移" Size="Middle" Command="{Binding MapPanCommand}"></f:Button>
+                            <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding OverViewCommand}"></f:Button>
                             <f:Button x:Name="MeasureButton" Header="量测" Size="Middle" ></f:Button>
                             <f:Button x:Name="FindButton" Header="查找" Size="Middle" ></f:Button>
-                            <f:Button x:Name="ConstFactorZoomInButton" Header="固定比例放大" Size="Middle" Command="{Binding LocalProjectVM.ConstFactorZoomInCommand}"></f:Button>
-                            <f:Button x:Name="ConstFactorZoomOutButton" Header="固定比例缩小" Size="Middle" Command="{Binding LocalProjectVM.ConstFactorZoomOutCommand}"></f:Button>
-                            
+                            <f:Button x:Name="ConstFactorZoomInButton" Header="固定比例放大" Size="Middle" Command="{Binding ConstFactorZoomInCommand}"></f:Button>
+                            <f:Button x:Name="ConstFactorZoomOutButton" Header="固定比例缩小" Size="Middle" Command="{Binding ConstFactorZoomOutCommand}"></f:Button>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
                 </f:RibbonTabItem> 

@@ -190,6 +190,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\CollectionData.cs" />
     <Compile Include="Model\HandleExcel.cs" />
     <Compile Include="Model\QueryAndAnalysis.cs" />
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />
@@ -287,6 +288,104 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Config\ESRI.ServerStyle" />
+    <None Include="Config\KJK.gdb\a00000001.freelist" />
+    <None Include="Config\KJK.gdb\a00000001.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000001.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000001.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000001.TablesByName.atx" />
+    <None Include="Config\KJK.gdb\a00000002.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000002.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000003.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000003.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000003.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000004.CatItemsByPhysicalName.atx" />
+    <None Include="Config\KJK.gdb\a00000004.CatItemsByType.atx" />
+    <None Include="Config\KJK.gdb\a00000004.FDO_UUID.atx" />
+    <None Include="Config\KJK.gdb\a00000004.freelist" />
+    <None Include="Config\KJK.gdb\a00000004.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000004.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000004.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000004.spx" />
+    <None Include="Config\KJK.gdb\a00000005.CatRelsByDestinationID.atx" />
+    <None Include="Config\KJK.gdb\a00000005.CatRelsByOriginID.atx" />
+    <None Include="Config\KJK.gdb\a00000005.CatRelsByType.atx" />
+    <None Include="Config\KJK.gdb\a00000005.FDO_UUID.atx" />
+    <None Include="Config\KJK.gdb\a00000005.freelist" />
+    <None Include="Config\KJK.gdb\a00000005.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000005.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000005.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000006.CatRelTypesByBackwardLabel.atx" />
+    <None Include="Config\KJK.gdb\a00000006.CatRelTypesByDestItemTypeID.atx" />
+    <None Include="Config\KJK.gdb\a00000006.CatRelTypesByForwardLabel.atx" />
+    <None Include="Config\KJK.gdb\a00000006.CatRelTypesByName.atx" />
+    <None Include="Config\KJK.gdb\a00000006.CatRelTypesByOriginItemTypeID.atx" />
+    <None Include="Config\KJK.gdb\a00000006.CatRelTypesByUUID.atx" />
+    <None Include="Config\KJK.gdb\a00000006.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000006.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000006.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000007.CatItemTypesByName.atx" />
+    <None Include="Config\KJK.gdb\a00000007.CatItemTypesByParentTypeID.atx" />
+    <None Include="Config\KJK.gdb\a00000007.CatItemTypesByUUID.atx" />
+    <None Include="Config\KJK.gdb\a00000007.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000007.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000007.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000009.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000009.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000009.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000009.spx" />
+    <None Include="Config\KJK.gdb\a0000000e.gdbindexes" />
+    <None Include="Config\KJK.gdb\a0000000e.gdbtable" />
+    <None Include="Config\KJK.gdb\a0000000e.gdbtablx" />
+    <None Include="Config\KJK.gdb\a0000000e.spx" />
+    <None Include="Config\KJK.gdb\a00000012.freelist" />
+    <None Include="Config\KJK.gdb\a00000012.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000012.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000012.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000012.spx" />
+    <None Include="Config\KJK.gdb\a00000013.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000013.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000013.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000013.spx" />
+    <None Include="Config\KJK.gdb\a00000014.freelist" />
+    <None Include="Config\KJK.gdb\a00000014.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000014.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000014.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000014.spx" />
+    <None Include="Config\KJK.gdb\a00000016.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000016.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000016.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000016.I21ANNOTATIONCLA.atx" />
+    <None Include="Config\KJK.gdb\a00000016.I21STATUS.atx" />
+    <None Include="Config\KJK.gdb\a00000016.spx" />
+    <None Include="Config\KJK.gdb\a00000017.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000017.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000017.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000017.spx" />
+    <None Include="Config\KJK.gdb\a00000018.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000018.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000018.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000018.spx" />
+    <None Include="Config\KJK.gdb\a00000019.gdbindexes" />
+    <None Include="Config\KJK.gdb\a00000019.gdbtable" />
+    <None Include="Config\KJK.gdb\a00000019.gdbtablx" />
+    <None Include="Config\KJK.gdb\a00000019.spx" />
+    <None Include="Config\KJK.gdb\a0000001a.gdbindexes" />
+    <None Include="Config\KJK.gdb\a0000001a.gdbtable" />
+    <None Include="Config\KJK.gdb\a0000001a.gdbtablx" />
+    <None Include="Config\KJK.gdb\a0000001a.I26ANNOTATIONCLA.atx" />
+    <None Include="Config\KJK.gdb\a0000001a.I26STATUS.atx" />
+    <None Include="Config\KJK.gdb\a0000001a.spx" />
+    <None Include="Config\KJK.gdb\DK.WMX-PC.11256.10912.sr.lock" />
+    <None Include="Config\KJK.gdb\gdb" />
+    <None Include="Config\KJK.gdb\JZD.WMX-PC.11256.10912.sr.lock" />
+    <None Include="Config\KJK.gdb\JZX.WMX-PC.11256.10912.sr.lock" />
+    <None Include="Config\KJK.gdb\KZD.WMX-PC.11256.10912.sr.lock" />
+    <None Include="Config\KJK.gdb\QYJX.WMX-PC.11256.10912.sr.lock" />
+    <None Include="Config\KJK.gdb\timestamps" />
+    <None Include="Config\KJK.gdb\ZJ.WMX-PC.11256.10912.sr.lock" />
+    <None Include="Config\KJK.gdb\_gdb.WMX-PC.11256.10912.sr.lock" />
+    <None Include="Config\KJK.gdb\_gdb.WMX-PC.2444.6252.sr.lock" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -307,6 +406,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\haha.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -58,16 +58,16 @@ namespace GUI.ViewModel
             set { dbCreationVM = value; }
         }
 
-        public ControlsViewModel ControlsVM
-        {
-            get { return controlsVM; }
-            set { controlsVM = value; }
-        }
+        //public ControlsViewModel ControlsVM
+        //{
+        //    get { return controlsVM; }
+        //    set { controlsVM = value; }
+        //}
         
         public LocalProjectVM LocalProjectVM
         {
             get { return localProjectVM; }
-            set { localProjectVM = value; }
+            set { localProjectVM = value; RaisePropertyChanged("LocalProjectVM"); }
         }
         #endregion
 

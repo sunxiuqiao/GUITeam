@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GUI.View;
 using GUI.MVVMBase;
-using Oracle.ManagedDataAccess.Client;
+
 
 
 namespace GUI.ViewModel

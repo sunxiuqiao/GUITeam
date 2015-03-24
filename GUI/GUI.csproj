@@ -54,9 +54,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CreateDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="CreateDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CreateDatabase\CreateDatabase\bin\x86\Debug\CreateDatabase.dll</HintPath>
+      <HintPath>..\CreateDatabase\CreateDatabase\bin\Debug\CreateDatabase.dll</HintPath>
     </Reference>
     <Reference Include="ESRI.ArcGIS.ADF, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86" />
     <Reference Include="ESRI.ArcGIS.ADF.Core, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
@@ -104,10 +104,6 @@
     <Reference Include="Fluent, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Fluent.Ribbon.3.3.0\lib\net45\Fluent.dll</HintPath>
-    </Reference>
-    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x86\Debug\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="Resource, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

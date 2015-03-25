@@ -120,23 +120,26 @@
                 </f:Backstage>
             </f:Ribbon.Menu>
             <f:Ribbon.Tabs>
-                <f:RibbonTabItem Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}">
+                <f:RibbonTabItem x:Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}">
                     <f:RibbonTabItem.Groups>
-                        <f:RibbonGroupBox Name="Project" Header="工程">
-                            <f:Button Name="NewLoaclProjectButton" Header="新建工程" Command="{Binding NewProjectCommand}"></f:Button>
-                            <f:Button Name="AddDataButton" Header="添加数据" Command="{Binding AddDataCommand}"></f:Button>
-                            <f:Button Name="OpenFileButton" Header="添加文件" Command="{Binding OpenFileCommand}"></f:Button>
-                            <f:Button x:Name="AddDataFromShp" Header="从shp文件 导入数据"></f:Button>
+                        <f:RibbonGroupBox x:Name="Project" Header="工程">
+                            <f:Button x:Name="NewLoaclProjectButton" Header="新建" Command="{Binding NewProjectCommand}"></f:Button>
+                            <f:Button x:Name="OpenProjectButton" Header="打开" Command="{Binding OpenProjectCommand}"></f:Button>
+                            <f:Button x:Name="SaveAsProjectButton" Header="另存为" Command="{Binding SaveAsCommand}"></f:Button>
                         </f:RibbonGroupBox>
-                        <f:RibbonGroupBox x:Name="Tools" Header="工具">
+                        <f:RibbonGroupBox x:Name="Data" Header="数据">
+                            <f:Button x:Name="AddDataButton" Header="添加数据" Command="{Binding AddDataCommand}"></f:Button>
+                            <f:Button x:Name="LoadDataFromShp" Header="从shp文件 导入数据" Command="{Binding LoadDataFromShpCommand}"></f:Button>
+                            <f:Button x:Name="StandardLayer" Header="图层标准化" Command="{Binding StandardLayerCommand}"/>
+                        </f:RibbonGroupBox>
+                        <f:RibbonGroupBox x:Name="View" Header="视图">
                             <f:Button x:Name="ZoomInButton" Header="放大" Size="Middle" Command="{Binding ZoomInCommand}"></f:Button>
                             <f:Button x:Name="ZoomOutButton" Header="缩小" Size="Middle" Command="{Binding ZoomOutCommand}"></f:Button>
                             <f:Button x:Name="MapPanButton" Header="平移" Size="Middle" Command="{Binding MapPanCommand}"></f:Button>
-                            <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding OverViewCommand}"></f:Button>
-                            <f:Button x:Name="MeasureButton" Header="量测" Size="Middle" ></f:Button>
-                            <f:Button x:Name="FindButton" Header="查找" Size="Middle" ></f:Button>
                             <f:Button x:Name="ConstFactorZoomInButton" Header="固定比例放大" Size="Middle" Command="{Binding ConstFactorZoomInCommand}"></f:Button>
                             <f:Button x:Name="ConstFactorZoomOutButton" Header="固定比例缩小" Size="Middle" Command="{Binding ConstFactorZoomOutCommand}"></f:Button>
+                            <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding OverViewCommand}"></f:Button>
+                            <f:Button x:Name="FindButton" Header="查找" Size="Middle" ></f:Button>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
                 </f:RibbonTabItem> 

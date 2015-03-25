@@ -172,10 +172,11 @@ namespace GUI.ViewModel
                 return;
             if (e.button == 2)
             {
-                ESRI.ArcGIS.Controls.ControlsMapViewMenu tool = new ControlsMapViewMenuClass();
-                ICommand cmd = (ICommand)tool;
-                cmd.OnCreate(mapControl.Object);
-                mapControl.CurrentTool = cmd as ITool;
+                //ESRI.ArcGIS.Controls.ControlsMapViewMenu tool = new ControlsMapViewMenuClass();
+                
+                //ICommand cmd = (ICommand)tool;
+                //cmd.OnCreate(mapControl.Object);
+                //mapControl.CurrentTool = cmd as ITool;
             }
         }
         

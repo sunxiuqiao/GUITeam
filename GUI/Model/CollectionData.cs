@@ -17,18 +17,17 @@ using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Output;
-using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.SystemUI;
 using Microsoft.VisualBasic;
 using Microsoft.Office.Interop.Word;
 using GUI.Model;
 
-namespace CBJYQ
+namespace GUI.Model
 {
    public class CollectionData
     {
-       private static string pserverStyleGalleryPath = System.Windows.Forms.Application.StartupPath + @"\配置文件\ESRI.ServerStyle";//符号库
-       private static string modefilePathGDB = System.Windows.Forms.Application.StartupPath + @"\配置文件\KJK.gdb";//GDB库
+       private static string pserverStyleGalleryPath = @"../../Config/ESRI.ServerStyle";//符号库
+       private static string modefilePathGDB = @"../../Config/KJK.gdb";//GDB库
          /// <summary>
          /// 新建工程
         /// </summary>

@@ -15,10 +15,30 @@ namespace GUI.ViewModel
 {
     class LocalProjectVM : MVVMBase.ObservableObject
     {
+        private static string projectPath = "";
+        private static bool isProjectOpened = false;
+
+        #region Properties
+        public static string ProjectPath
+        {
+            get { return projectPath; }
+            set { projectPath = value; }
+        }
+
+        public static bool IsProjectOpened
+        {
+            get { return isProjectOpened; }
+            set 
+            {
+                isProjectOpened = value;
+            }
+        }
+        #endregion
+
         #region AddDataCommand
         private bool AddDataCommand_CanExecute()
         {
-            return true;
+            return IsProjectOpened;
         }
         private void AddDataCommand_Executed()
         {
@@ -79,22 +99,33 @@ namespace GUI.ViewModel
         #endregion
 
         #region OpenFileCommand
-        private bool OpenFileCommand_CanExecute()
+        private bool OpenProjectCommand_CanExecute()
         {
             return true;
         }
-        private void OpenFileCommand_Executed()
+        private void OpenProjectCommand_Executed()
         {
-            ESRI.ArcGIS.SystemUI.ICommand cmd;
+            try
+            {
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                //string DefaultfilePath = "";
+                dialog.Description = "请选择地理数据库路径";
 
-            //ESRI.ArcGIS.SystemUI.ITool tool;
-            cmd = new ESRI.ArcGIS.Controls.ControlsOpenDocCommandClass();
-            //cmd = tool as ICommand;
-            cmd.OnCreate(ControlsViewModel.MapControl().Object);
-            cmd.OnClick();
-            //MapControl.CurrentTool = cmd as ITool;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ProjectPath = dialog.SelectedPath;
+                    LoadGDBFile(dialog.SelectedPath);
+                    IsProjectOpened = true;
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            
+
         }
-        public System.Windows.Input.ICommand OpenFileCommand { get { return new RelayCommand(OpenFileCommand_Executed, OpenFileCommand_CanExecute); } }
+        public System.Windows.Input.ICommand OpenProjectCommand { get { return new RelayCommand(OpenProjectCommand_Executed, OpenProjectCommand_CanExecute); } }
 
         #endregion
 
@@ -105,46 +136,50 @@ namespace GUI.ViewModel
         }
         private void NewProjectCommand_Executed()
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog(); 
-            string DefaultfilePath = "";
-            dialog.Description = "请选择创建地理数据库路径";
-            //首次defaultfilePath为空，按FolderBrowserDialog默认设置（即桌面）选择  
-            if (DefaultfilePath != "")  
-            {  
-                //设置此次默认目录为上一次选中目录  
-                dialog.SelectedPath = DefaultfilePath;  
-            }  
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                //记录选中的目录
-                DefaultfilePath = dialog.SelectedPath;
-                string StyleTargetPath = dialog.SelectedPath;
-                string GDBTargetPath = dialog.SelectedPath + "\\KJK.gdb";
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                //string DefaultfilePath = "";
+                dialog.Description = "请选择创建地理数据库路径";
+                dialog.SelectedPath = ProjectPath;
 
-                //copy style file
-                string StyleFileSourceFile = System.IO.Path.Combine(@"../../Config", "ESRI.ServerStyle");
-                string StyleFileDestFile = System.IO.Path.Combine(StyleTargetPath, "ESRI.ServerStyle");
-                System.IO.File.Copy(StyleFileSourceFile, StyleFileDestFile, true);
-                //copy gdb
-                if(!System.IO.Directory.Exists(GDBTargetPath))
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    System.IO.Directory.CreateDirectory(GDBTargetPath);
-                }
-                if(System.IO.Directory.Exists(GDBTargetPath))
-                {
-                    string[] Files = System.IO.Directory.GetFiles(@"../../Config/KJK.gdb");
-                    foreach(string File in Files)
+                    //记录选中的目录
+                    //DefaultfilePath = dialog.SelectedPath;
+                    string StyleTargetPath = dialog.SelectedPath;
+                    string GDBTargetPath = dialog.SelectedPath + "\\KJK.gdb";
+
+                    //copy style file
+                    string StyleFileSourceFile = System.IO.Path.Combine(@"../../Config", "ESRI.ServerStyle");
+                    string StyleFileDestFile = System.IO.Path.Combine(StyleTargetPath, "ESRI.ServerStyle");
+                    System.IO.File.Copy(StyleFileSourceFile, StyleFileDestFile, true);
+                    //copy gdb
+                    if (!System.IO.Directory.Exists(GDBTargetPath))
                     {
-                        string FileName = System.IO.Path.GetFileName(File);
-                        string GDBFileDestFile = System.IO.Path.Combine(GDBTargetPath, FileName);
-                        string GDBFileSourceFile = System.IO.Path.Combine(@"../../Config/KJK.gdb", FileName);
-                        System.IO.File.Copy(GDBFileSourceFile, GDBFileDestFile, true);
+                        System.IO.Directory.CreateDirectory(GDBTargetPath);
                     }
+                    if (System.IO.Directory.Exists(GDBTargetPath))
+                    {
+                        string[] Files = System.IO.Directory.GetFiles(@"../../Config/KJK.gdb");
+                        foreach (string File in Files)
+                        {
+                            string FileName = System.IO.Path.GetFileName(File);
+                            string GDBFileDestFile = System.IO.Path.Combine(GDBTargetPath, FileName);
+                            string GDBFileSourceFile = System.IO.Path.Combine(@"../../Config/KJK.gdb", FileName);
+                            System.IO.File.Copy(GDBFileSourceFile, GDBFileDestFile, true);
+                        }
+                    }
+                    ProjectPath = GDBTargetPath;
+                    LoadGDBFile(GDBTargetPath);
+                    IsProjectOpened = true;
                 }
-                LoadGDBFile(GDBTargetPath);
             }
-
+            catch(Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            
         }
         public System.Windows.Input.ICommand NewProjectCommand { get { return new RelayCommand(NewProjectCommand_Executed, NewProjectCommand_CanExecute); } }
 
@@ -152,7 +187,6 @@ namespace GUI.ViewModel
         {
             IWorkspaceFactory workspaceFactory = new ESRI.ArcGIS.DataSourcesGDB.FileGDBWorkspaceFactoryClass();
             IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)workspaceFactory.OpenFromFile(filePath, 0);
-            //IWorkspace workspace = (IWorkspace)featureWorkspace;
             IFeatureDataset featureDataset = featureWorkspace.OpenFeatureDataset("CBQ");
             IFeatureClassContainer featureClassContainer = featureDataset as IFeatureClassContainer;
             for (int i = 0; i < featureClassContainer.ClassCount; i++)
@@ -169,7 +203,7 @@ namespace GUI.ViewModel
         #region ZoomIn ZoomOut
         private bool ZoomInCommand_CanExecute()
         {
-            return true;
+            return IsProjectOpened;
         }
 
         private void ZoomInCommand_Executed()
@@ -182,7 +216,7 @@ namespace GUI.ViewModel
 
         private bool ZoomOutCommand_CanExecute()
         {
-            return true;
+            return IsProjectOpened;
         }
 
         private void ZoomOutCommand_Executed()
@@ -195,7 +229,7 @@ namespace GUI.ViewModel
 
         private bool ConstFactorZoomInCommand_CanExecute()
         {
-            return true;
+            return IsProjectOpened;
         }
 
         private void ConstFactorZoomInCommand_Executed()
@@ -207,7 +241,7 @@ namespace GUI.ViewModel
 
         private bool ConstFactorZoomOutCommand_CanExecute()
         {
-            return true;
+            return IsProjectOpened;
         }
 
         private void ConstFactorZoomOutCommand_Executed()
@@ -228,7 +262,7 @@ namespace GUI.ViewModel
         #region MapPanCommand
         private bool MapPanCommand_CanExecute()
         {
-            return true;
+            return IsProjectOpened;
         }
 
         private void MapPanCommand_Executed()
@@ -245,7 +279,7 @@ namespace GUI.ViewModel
         #region OverView
         private bool OverViewCommand_CanExecute()
         {
-            return true;
+            return IsProjectOpened;
         }
 
         private void OverViewCommand_Executed()
@@ -255,6 +289,85 @@ namespace GUI.ViewModel
             cmd.OnClick();
         }
         public System.Windows.Input.ICommand OverViewCommand { get { return new RelayCommand(OverViewCommand_Executed, OverViewCommand_CanExecute); } }
+        #endregion
+
+        #region LoadDataFromShp
+        private void LoadDataFromShpCommand_Executed()
+        {
+            Model.CollectionData.LoadShpFile(ControlsViewModel.MapControl());
+        }
+
+        private bool LoadDataFromShpCommand_CanExecute()
+        {
+            return IsProjectOpened;
+        }
+        public System.Windows.Input.ICommand LoadDataFromShpCommand { get { return new RelayCommand(LoadDataFromShpCommand_Executed, LoadDataFromShpCommand_CanExecute); } }
+        #endregion
+
+        #region StandardLayer
+        private bool StandardLayerCommand_CanExecute()
+        {
+            return IsProjectOpened;
+        }
+        private void StandardLayerCommand_Executed()
+        {
+            Model.CollectionData.StandardLayer(ControlsViewModel.MapControl());
+        }
+        public System.Windows.Input.ICommand StandardLayerCommand { get { return new RelayCommand(StandardLayerCommand_Executed, StandardLayerCommand_CanExecute); } }
+        #endregion
+
+        #region SaveAs
+        private void SaveAsCommand_Executed()
+        {
+            try
+            {
+                FolderBrowserDialog dialog = new FolderBrowserDialog();
+                dialog.Description = "选择新建项目路径：";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (ProjectPath == "")
+                    {
+                        System.Windows.Forms.MessageBox.Show("原项目路径无效！");
+                        return;
+                    }
+                    System.IO.DirectoryInfo dictionaryInfo = System.IO.Directory.GetParent(ProjectPath);
+                    string StyleSourcePath = dictionaryInfo.FullName;
+                    string GDBSourcePath = ProjectPath;
+                    string StyleTargetPath = dialog.SelectedPath;
+                    string GDBTargetPath = dialog.SelectedPath + "\\KJK.gdb";
+
+                    //copy stylefile
+                    System.IO.File.Copy(System.IO.Path.Combine(StyleSourcePath, "ESRI.ServerStyle"), System.IO.Path.Combine(StyleTargetPath, "ESRI.ServerStyle"), true);
+                    //copy gdb
+                    if (!System.IO.Directory.Exists(GDBTargetPath))
+                    {
+                        System.IO.Directory.CreateDirectory(GDBTargetPath);
+                    }
+                    if (System.IO.Directory.Exists(GDBTargetPath))
+                    {
+                        string[] Files = System.IO.Directory.GetFiles(GDBSourcePath);
+                        foreach (string File in Files)
+                        {
+                            string FileName = System.IO.Path.GetFileName(File);
+                            string GDBFileDestFile = System.IO.Path.Combine(GDBTargetPath, FileName);
+                            string GDBFileSourceFile = System.IO.Path.Combine(GDBSourcePath, FileName);
+                            System.IO.File.Copy(GDBFileSourceFile, GDBFileDestFile, true);
+                        }
+                    }
+                    ProjectPath = GDBTargetPath;
+                    LoadGDBFile(GDBTargetPath);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+        }
+        private bool SaveAsCommand_CanExecute()
+        {
+            return IsProjectOpened;
+        }
+        public System.Windows.Input.ICommand SaveAsCommand { get { return new RelayCommand(SaveAsCommand_Executed, SaveAsCommand_CanExecute); } }
         #endregion
     }
 }

@@ -81,6 +81,7 @@ namespace GUI.Model
                         _MapControl.Map.DeleteLayer(layer);
                         layer = layers.Next();
                     }
+                    GUI.ViewModel.LocalProjectVM.IsProjectOpened = false; 
                 }
                 
             }

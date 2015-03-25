@@ -25,7 +25,7 @@ namespace GUI.Model
 {
    public class EditData
     {
-       private static string pserverStyleGalleryPath = System.Windows.Forms.Application.StartupPath + @"\配置文件\ESRI.ServerStyle";
+       //private static string pserverStyleGalleryPath = System.Windows.Forms.Application.StartupPath + @"\配置文件\ESRI.ServerStyle";
        private static IRubberBand pRubberBand;
        /// <summary>
        /// 绘制面要素

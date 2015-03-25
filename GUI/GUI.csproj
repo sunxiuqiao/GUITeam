@@ -162,6 +162,7 @@
     <Compile Include="ViewModel\DBCreationVM.cs" />
     <Compile Include="ViewModel\DBTabControlVM.cs" />
     <Compile Include="ViewModel\GeoDBCreationVM.cs" />
+    <Compile Include="ViewModel\RegeditOperation.cs" />
     <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
       <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>
     </Compile>

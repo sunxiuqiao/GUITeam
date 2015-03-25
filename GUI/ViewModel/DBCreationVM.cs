@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GUI.View;
 using GUI.MVVMBase;
 using Oracle.ManagedDataAccess.Client;
+using System.Windows.Data;
 
 
 namespace GUI.ViewModel
@@ -15,8 +16,20 @@ namespace GUI.ViewModel
         #region SubModel 
         private DBCreationDialogVM dbCreationDialogVM = new DBCreationDialogVM();
         private DBTabControlVM dbTabControlVM = new DBTabControlVM();
-        private string projectName;
+        private static string projectName="";
         private bool isCreateButtonEnable = true;
+        #endregion
+
+        public DBCreationVM()
+        {
+            
+        }
+
+        #region function
+        public static string GetProjectName()
+        {
+            return projectName;
+        }
         #endregion
 
         #region Properties

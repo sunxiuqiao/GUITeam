@@ -38,19 +38,20 @@
             
             <Label Grid.Column="0" Grid.Row="0" Margin="10">连接名称</Label>
             <ComboBox x:Name="ConnNameComboBox" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" 
-                      Margin="10" IsEditable="True" TextBoxBase.TextChanged="ConnNameComboBox_TextChanged"> 
+                      Margin="10" IsEditable="True" TextBoxBase.TextChanged="ConnNameComboBox_TextChanged"
+                      Text="{Binding ConnName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"> 
             </ComboBox>
             <Label Grid.Column="0" Grid.Row="1" Margin="10">服务器地址</Label>
             <ComboBox Grid.Column="1" Grid.Row="1" Margin="10" IsEditable="True" TextBoxBase.TextChanged="ConnNameComboBox_TextChanged"
                       Text="{Binding Server,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
-                      ItemsSource="{Binding ServerNames}">
+                      ItemsSource="{Binding ServerNames}" >
             </ComboBox>
             <Label Grid.Column="2" Grid.Row="1" Margin="10">实例名称</Label>
             <ComboBox Grid.Column="3" Grid.Row="1" Margin="10" IsEditable="True" TextBoxBase.TextChanged="ConnNameComboBox_TextChanged"
                       Text="{Binding ServiceName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
             <Label Grid.Column="0" Grid.Row="2" Margin="10">数据库名</Label>
             <ComboBox Grid.Column="1" Grid.Row="2" Margin="10" IsEditable="True"
-                      Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                      Text="{Binding DataBaseName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                       TextBoxBase.TextChanged="ConnNameComboBox_TextChanged">
             </ComboBox>
             <Label Grid.Column="2" Grid.Row="2" Margin="10">监听端口</Label>

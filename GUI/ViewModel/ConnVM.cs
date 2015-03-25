@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using GUI.MVVMBase;
+using GUI.ViewModel;
 using Microsoft.Win32;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -14,14 +15,13 @@ namespace GUI.ViewModel
     abstract class  ConnVM : MVVMBase.ObservableObject
     {
         #region Member
-        private string serviceName ;
+        private string serviceName;
         private string server;
         private string user;
         private string portNumber;
-        private string name;
+        private string databaseName;
         private string connName;
         private string passWord;
-
         private bool isCanSave = false;
         private bool isCanConnTest = false;
         private bool isSaved = false;
@@ -31,11 +31,11 @@ namespace GUI.ViewModel
         #region Constructor
         public ConnVM()
         {
+            
         }
         #endregion
 
         #region Properties
-
 
         public bool IsCanSave
         {
@@ -101,13 +101,13 @@ namespace GUI.ViewModel
             }
         }
 
-        public string Name
+        public string DataBaseName
         {
-            get { return name; }
+            get { return databaseName; }
             set
             { 
-                name = value;
-                RaisePropertyChanged("Name");
+                databaseName = value;
+                RaisePropertyChanged("ConnName");
                 RaisePropertyChanged("IsCanConnTest");
             }
         }
@@ -133,6 +133,7 @@ namespace GUI.ViewModel
                 RaisePropertyChanged("IsCanConnTest");
             }
         }
+
         #endregion
 
         #region function
@@ -156,10 +157,15 @@ namespace GUI.ViewModel
 
     class GeoConnVM : ConnVM
     {
+        public GeoConnVM()
+        {
+            
+        }
+
         protected override void ConnTestCommand_Executed()
         {
             CreateDatabase.IDatabase SpatialDatabase = CreateDatabase.CSpatialDatabase.GetInstance();
-            SpatialDatabase.Name = Name;
+            SpatialDatabase.Name = DataBaseName;
             SpatialDatabase.Password = PassWord;
             if (string.IsNullOrEmpty(PortNumber))
             {
@@ -195,7 +201,8 @@ namespace GUI.ViewModel
 
         protected override void ConnSaveCommand_Executed()
         {
-
+            GeoRegedit geoRegedit = new GeoRegedit();
+            geoRegedit.writeRegedit(DBCreationVM.GetProjectName(), ConnName, Server, ServiceName, DataBaseName, PortNumber, User, PassWord);
             IsSaved = true;
         }
 
@@ -206,7 +213,7 @@ namespace GUI.ViewModel
         protected override void ConnTestCommand_Executed()
         {
             CreateDatabase.IDatabase AttributeDatabase = CreateDatabase.CAttributeDatabase.GetInstance();
-            AttributeDatabase.Name = Name;
+            AttributeDatabase.Name = DataBaseName;
             AttributeDatabase.Password = PassWord;
             if (string.IsNullOrEmpty(PortNumber))
             {
@@ -227,7 +234,8 @@ namespace GUI.ViewModel
 
         protected override void ConnSaveCommand_Executed()
         {
-
+            BusRegedit busRegedit = new BusRegedit();
+            busRegedit.writeRegedit(DBCreationVM.GetProjectName(), ConnName, Server, ServiceName, DataBaseName, PortNumber, User, PassWord);
             IsSaved = true;
         }
     }
@@ -237,7 +245,7 @@ namespace GUI.ViewModel
         protected override void ConnTestCommand_Executed()
         {
             CreateDatabase.IDatabase BusinessDatabase = CreateDatabase.CBusinessDatabase.GetInstance();
-            BusinessDatabase.Name = Name;
+            BusinessDatabase.Name = DataBaseName;
             BusinessDatabase.Password = PassWord;
             if (string.IsNullOrEmpty(PortNumber))
             {
@@ -258,7 +266,8 @@ namespace GUI.ViewModel
 
         protected override void ConnSaveCommand_Executed()
         {
-
+            AttrRegedit atrrRegedit = new AttrRegedit();
+            atrrRegedit.writeRegedit(DBCreationVM.GetProjectName(), ConnName, Server, ServiceName, DataBaseName, PortNumber, User, PassWord);
             IsSaved = true;
         }
     }

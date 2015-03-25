@@ -14,6 +14,10 @@ namespace GUI.ViewModel
         private BusinessConnVM businessConnVM = new BusinessConnVM();
         #endregion
 
+        public DBTabControlVM()
+        {
+        }
+
         #region Properties
         public GeoConnVM GeoConnVM
         {
@@ -32,6 +36,7 @@ namespace GUI.ViewModel
             get { return businessConnVM; }
             set { businessConnVM = value; }
         }
+
         #endregion
     }
 }

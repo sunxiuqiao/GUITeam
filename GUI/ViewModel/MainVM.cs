@@ -24,6 +24,7 @@ namespace GUI.ViewModel
         private static ControlsViewModel controlsVM = new ControlsViewModel();
         private DBCreationVM dbCreationVM= new DBCreationVM();
         private LocalProjectVM localProjectVM = new LocalProjectVM();
+        private DataEditVM dataEditVM = new DataEditVM();
         #endregion
 
         public MainVM()
@@ -68,6 +69,16 @@ namespace GUI.ViewModel
         {
             get { return localProjectVM; }
             set { localProjectVM = value; RaisePropertyChanged("LocalProjectVM"); }
+        }
+
+        public DataEditVM DataEditVM
+        {
+            get { return dataEditVM; }
+            set 
+            {
+                dataEditVM = value; 
+                RaisePropertyChanged("DataEditVM"); 
+            }
         }
         #endregion
 

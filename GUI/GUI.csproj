@@ -197,6 +197,7 @@
     <Compile Include="ViewModel\BusiDBCreationVM.cs" />
     <Compile Include="Converter.cs" />
     <Compile Include="ViewModel\ConnVM.cs" />
+    <Compile Include="ViewModel\DataEditVM.cs" />
     <Compile Include="ViewModel\DBCreationDialogVM.cs" />
     <Compile Include="ViewModel\DBCreationVM.cs" />
     <Compile Include="ViewModel\DBTabControlVM.cs" />

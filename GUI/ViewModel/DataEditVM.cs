@@ -1,4 +1,5 @@
-﻿using GUI.MVVMBase;
+﻿using GUI.Model;
+using GUI.MVVMBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace GUI.ViewModel
         #region member
         bool isDKDraw = false;
         bool isJZDDraw = false;
+        bool isJZXDraw = false;
         bool isAttributeEdit = false;
         bool isAnnotationEdit = false;
         #endregion
@@ -24,6 +26,16 @@ namespace GUI.ViewModel
             {
                 isDKDraw = value;
                 RaisePropertyChanged("IsDKDraw");
+            }
+        }
+
+        public bool IsJZXDraw
+        {
+            get { return isJZXDraw; }
+            set
+            {
+                isJZXDraw = value;
+                RaisePropertyChanged("IsJZXDraw");
             }
         }
 
@@ -66,11 +78,36 @@ namespace GUI.ViewModel
 
         private bool StartDrawDK_CanExecute()
         {
-            if (IsJZDDraw || IsAnnotationEdit || IsAttributeEdit)
+            if (IsJZDDraw || IsAnnotationEdit || IsAttributeEdit || IsJZXDraw)
+            {
                 return false;
+            }
+            if(!LocalProjectVM.IsProjectOpened)
+            {
+                return false;
+            }
             return true;
         }
         public System.Windows.Input.ICommand StartDrawDKCommand { get { return new RelayCommand(StartDrawDK_Executed, StartDrawDK_CanExecute); } } 
+        #endregion
+
+        #region StartDrawJZXCommand
+        private void StartDrawJZX_Executed()
+        {
+            IsJZXDraw = true;
+        }
+
+        private bool StartDrawJZX_CanExecute()
+        {
+            if (IsDKDraw || IsAnnotationEdit || IsAttributeEdit || isJZDDraw)
+                return false;
+            if (!LocalProjectVM.IsProjectOpened)
+            {
+                return false;
+            }
+            return true;
+        }
+        public System.Windows.Input.ICommand StartDrawJZXCommand { get { return new RelayCommand(StartDrawJZX_Executed, StartDrawJZX_CanExecute); } }
         #endregion
 
         #region StartDrawJZDCommand
@@ -81,8 +118,12 @@ namespace GUI.ViewModel
 
         private bool StartDrawJZD_CanExecute()
         {
-            if (IsDKDraw || IsAnnotationEdit || IsAttributeEdit)
-                return false; 
+            if (IsDKDraw || IsAnnotationEdit || IsAttributeEdit || IsJZXDraw)
+                return false;
+            if (!LocalProjectVM.IsProjectOpened)
+            {
+                return false;
+            }
             return true;
         }
         public System.Windows.Input.ICommand StartDrawJZDCommand { get { return new RelayCommand(StartDrawJZD_Executed, StartDrawJZD_CanExecute); } }
@@ -96,8 +137,12 @@ namespace GUI.ViewModel
 
         private bool StartEditAttribute_CanExecute()
         {
-            if (IsJZDDraw || IsDKDraw || IsAnnotationEdit)
+            if (IsJZDDraw || IsDKDraw || IsAnnotationEdit || IsJZXDraw)
                 return false;
+            if (!LocalProjectVM.IsProjectOpened)
+            {
+                return false;
+            }
             return true;
         }
         public System.Windows.Input.ICommand StartEditAttributeCommand { get { return new RelayCommand(StartEditAttribute_Executed, StartEditAttribute_CanExecute); } }
@@ -111,8 +156,12 @@ namespace GUI.ViewModel
 
         private bool StartEditAnnotation_CanExecute()
         {
-            if (IsJZDDraw || IsAnnotationEdit || IsDKDraw)
+            if (IsJZDDraw || IsAnnotationEdit || IsDKDraw || IsJZXDraw)
                 return false;
+            if (!LocalProjectVM.IsProjectOpened)
+            {
+                return false;
+            }
             return true;
         }
         public System.Windows.Input.ICommand StartEditAnnotationCommand { get { return new RelayCommand(StartEditAnnotation_Executed, StartEditAnnotation_CanExecute); } }
@@ -130,6 +179,20 @@ namespace GUI.ViewModel
         }
         public System.Windows.Input.ICommand StopDrawDKCommand { get { return new RelayCommand(StopDrawDK_Executed, StopDrawDK_CanExecute); } } 
         
+        #endregion
+
+        #region StopDrawJZXCommand
+        private void StopDrawJZX_Executed()
+        {
+            IsJZXDraw = false;
+        }
+
+        private bool StopDrawJZX_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand StopDrawJZXCommand { get { return new RelayCommand(StopDrawJZX_Executed, StopDrawJZX_CanExecute); } }
+
         #endregion
 
         #region StopDrawJZDCommand
@@ -171,6 +234,19 @@ namespace GUI.ViewModel
             return true;
         }
         public System.Windows.Input.ICommand StopEditAnnotationCommand { get { return new RelayCommand(StopEditAnnotation_Executed, StopEditAnnotation_CanExecute); } }
+
+        #endregion
+
+        #region DrawDKCommand
+        private void DrawDK_Executed()
+        {
+            EditData.DrawPolygon(ControlsViewModel.MapControl(),"地块");
+        }
+        private bool DrawDK_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand DrawDKCommand { get { return new RelayCommand(DrawDK_Executed, DrawDK_CanExecute); } }
 
         #endregion
 

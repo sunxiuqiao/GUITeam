@@ -493,36 +493,44 @@ namespace GUI.Model
        /// <param name="featureLyer"></param>
        private static void addFeatureTOGDB(AxMapControl axMapControl,IGeometry featureGeo,ILayer featureLyer)
        {
-           IFeatureLayer featurelayer = featureLyer as IFeatureLayer;
-           IFeatureClass featureclass = featurelayer.FeatureClass;
-           IDataset dataset = featureclass as IDataset;
-           IWorkspace workspace = dataset.Workspace;
-           IWorkspaceEdit workspaceedit = workspace as IWorkspaceEdit;
-           workspaceedit.StartEditing(true);
-           workspaceedit.StartEditOperation();
-           //IFeatureBuffer featurebuffer = featureclass.CreateFeatureBuffer();
-           //IFeatureCursor featurecursor = featureclass.Insert(true);
-           //featurebuffer.Shape = featureGeo;
-           //object featureOID = featurecursor.InsertFeature(featurebuffer);
-           IFeature pFeatue = featureclass.CreateFeature();
-           pFeatue.Shape = featureGeo;
-           if (featureclass.ShapeType == esriGeometryType.esriGeometryPolygon)
+           try
            {
-               WtriteFieldValue(featurelayer, pFeatue, "YSDM", "211011");
+               IFeatureLayer featurelayer = featureLyer as IFeatureLayer;
+               IFeatureClass featureclass = featurelayer.FeatureClass;
+               IDataset dataset = featureclass as IDataset;
+               IWorkspace workspace = dataset.Workspace;
+               IWorkspaceEdit workspaceedit = workspace as IWorkspaceEdit;
+               workspaceedit.StartEditing(true);
+               workspaceedit.StartEditOperation();
+               //IFeatureBuffer featurebuffer = featureclass.CreateFeatureBuffer();
+               //IFeatureCursor featurecursor = featureclass.Insert(true);
+               //featurebuffer.Shape = featureGeo;
+               //object featureOID = featurecursor.InsertFeature(featurebuffer);
+               IFeature pFeatue = featureclass.CreateFeature();
+               pFeatue.Shape = featureGeo;
+               if (featureclass.ShapeType == esriGeometryType.esriGeometryPolygon)
+               {
+                   WtriteFieldValue(featurelayer, pFeatue, "YSDM", "211011");
+               }
+               else if (featureclass.ShapeType == esriGeometryType.esriGeometryPolyline)
+               {
+                   WtriteFieldValue(featurelayer, pFeatue, "YSDM", "211031");
+               }
+               else if (featureclass.ShapeType == esriGeometryType.esriGeometryPoint)
+               {
+                   WtriteFieldValue(featurelayer, pFeatue, "YSDM", "211021");
+               }
+               //featurecursor.Flush();
+               pFeatue.Store();
+               workspaceedit.StartEditOperation();
+               workspaceedit.StopEditing(true);
+               System.Runtime.InteropServices.Marshal.ReleaseComObject(pFeatue);
            }
-           else if (featureclass.ShapeType == esriGeometryType.esriGeometryPolyline)
+           catch(Exception e)
            {
-               WtriteFieldValue(featurelayer, pFeatue, "YSDM", "211031");
+               System.Windows.Forms.MessageBox.Show(e.Message);
            }
-           else if (featureclass.ShapeType == esriGeometryType.esriGeometryPoint)
-           {
-               WtriteFieldValue(featurelayer, pFeatue, "YSDM", "211021");
-           }
-           //featurecursor.Flush();
-           pFeatue.Store();
-           workspaceedit.StartEditOperation();
-           workspaceedit.StopEditing(true);
-           System.Runtime.InteropServices.Marshal.ReleaseComObject(pFeatue);
+           
        }
        /// <summary>
        /// 在MapControl中查找图层

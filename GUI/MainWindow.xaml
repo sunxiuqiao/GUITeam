@@ -157,39 +157,39 @@
                     </f:RibbonTabItem.Groups>
                 </f:RibbonTabItem>
                 <!--绘制地块的命令-->
-                <f:RibbonTabItem x:Name="DKDraw" Header="绘制" Group="{Binding ElementName=DKDrawGroup}" DataContext="{Binding DataEditVM}">
+                <f:RibbonTabItem x:Name="DKDraw" Header="绘制" IsSelected="{Binding IsDKDraw}" Group="{Binding ElementName=DKDrawGroup}" DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox x:Name="DKDrawGroupBox" Header="绘制地块">
                         <f:Button x:Name="DrawDKButton" Header="地块绘制"/>
                         <f:Button x:Name="DKAutoDrawButton" Header="地块 自动构建" />
                         <f:Button x:Name="DKSegementButton" Header="地块分割"/>
                         <f:Button x:Name="DKMergeButton" Header="地块合并"/>
-                        <f:Button x:Name="DKStopDrawButton" Header="绘制完成"/>
+                        <f:Button x:Name="DKStopDrawButton" Header="绘制完成" Command="{Binding StopDrawDKCommand}"/>
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
                 <!--绘制界止点命令-->
-                <f:RibbonTabItem x:Name="JZDDraw" Header="绘制" Group="{Binding ElementName=JZDDrawGroup}" DataContext="{Binding DataEditVM}">
+                <f:RibbonTabItem x:Name="JZDDraw" Header="绘制" Group="{Binding ElementName=JZDDrawGroup}" IsSelected="{Binding IsJZDDraw}" DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox x:Name="JZDDrawGroupBox" Header="界止点绘制">
                         <f:Button x:Name="AddJZDButtonButton" Header="添加 界址点"/>
                         <f:Button x:Name="JZDAutoDrawButton" Header="自动绘制 界址点" />
-                        <f:Button x:Name="JZDStopDrawButton" Header="绘制完成"/>
+                        <f:Button x:Name="JZDStopDrawButton" Header="绘制完成" Command="{Binding StopDrawJZDCommand}"/>
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
                 <!--属性编辑命令-->
-                <f:RibbonTabItem x:Name="AttributeEdit" Header="编辑" Group="{Binding ElementName=AttributeEditGroup}" DataContext="{Binding DataEditVM}">
+                <f:RibbonTabItem x:Name="AttributeEdit" Header="编辑" Group="{Binding ElementName=AttributeEditGroup}" IsSelected="{Binding IsAttributeEdit}"  DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox Name="AttributeEditGroupBox" Header="编辑">
                         <f:Button Name="AttributeModifyButton" Header="属性修改"/>
                         <f:Button Name="BulkModifyButton" Header="批量修改"/>
-                        <f:Button x:Name="AttributeStopEditButton" Header="编辑完成"/>
+                        <f:Button x:Name="AttributeStopEditButton" Header="编辑完成" Command="{Binding StopEditAttributeCommand}"/>
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
                 <!--注记编辑命令-->
-                <f:RibbonTabItem x:Name="AnnotationEdit" Header="编辑" Group="{Binding ElementName=AnnotationEditGroup}" DataContext="{Binding DataEditVM}">
+                <f:RibbonTabItem x:Name="AnnotationEdit" Header="编辑" Group="{Binding ElementName=AnnotationEditGroup}" IsSelected="{Binding IsAnnotationEdit}" DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox Name="AnnotationEditGroupBox" Header="注记">
                         <f:Button Name="DKAnnotationButton" Header="地块注记"/>
                         <f:Button x:Name="AreaAnnotationButton" Header="面积注记"/>
                         <f:Button x:Name="DKNumberAnnotationButton" Header="地块编码注记"/>
                         <f:Button x:Name="AnnotationSettingButton" Header="注记设置"/>
-                        <f:Button x:Name="AnnotationStopEditButton" Header="编辑完成"/>
+                        <f:Button x:Name="AnnotationStopEditButton" Header="编辑完成" Command="{Binding StopEditAnnotationCommand}"/>
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
                 <!--数据编辑部分代码结束-->
@@ -252,7 +252,7 @@
             <f:Ribbon.ContextualGroups>
                 <f:RibbonContextualTabGroup x:Name="DKDrawGroup" Header="地块绘制" Background="Red" BorderBrush="Red"
                                             Visibility="{Binding Path=DataEditVM.IsDKDraw,  Converter={StaticResource BooleanToVisibilityConverter}}"></f:RibbonContextualTabGroup>
-                <f:RibbonContextualTabGroup x:Name="JZDDrawGroup" Header="界止点绘制" Background="Green" BorderBrush="Green"
+                <f:RibbonContextualTabGroup x:Name="JZDDrawGroup" Header="界止点绘制" Background="Green" BorderBrush="Green" 
                                             Visibility="{Binding Path=DataEditVM.IsJZDDraw,  Converter={StaticResource BooleanToVisibilityConverter}}"></f:RibbonContextualTabGroup>
                 <f:RibbonContextualTabGroup x:Name="AttributeEditGroup" Header="属性编辑" Background="Blue" BorderBrush="Blue"
                                             Visibility="{Binding Path=DataEditVM.IsAttributeEdit,  Converter={StaticResource BooleanToVisibilityConverter}}"></f:RibbonContextualTabGroup>

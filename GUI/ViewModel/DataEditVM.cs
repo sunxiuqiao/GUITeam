@@ -66,6 +66,8 @@ namespace GUI.ViewModel
 
         private bool StartDrawDK_CanExecute()
         {
+            if (IsJZDDraw || IsAnnotationEdit || IsAttributeEdit)
+                return false;
             return true;
         }
         public System.Windows.Input.ICommand StartDrawDKCommand { get { return new RelayCommand(StartDrawDK_Executed, StartDrawDK_CanExecute); } } 
@@ -79,6 +81,8 @@ namespace GUI.ViewModel
 
         private bool StartDrawJZD_CanExecute()
         {
+            if (IsDKDraw || IsAnnotationEdit || IsAttributeEdit)
+                return false; 
             return true;
         }
         public System.Windows.Input.ICommand StartDrawJZDCommand { get { return new RelayCommand(StartDrawJZD_Executed, StartDrawJZD_CanExecute); } }
@@ -92,6 +96,8 @@ namespace GUI.ViewModel
 
         private bool StartEditAttribute_CanExecute()
         {
+            if (IsJZDDraw || IsDKDraw || IsAnnotationEdit)
+                return false;
             return true;
         }
         public System.Windows.Input.ICommand StartEditAttributeCommand { get { return new RelayCommand(StartEditAttribute_Executed, StartEditAttribute_CanExecute); } }
@@ -105,9 +111,68 @@ namespace GUI.ViewModel
 
         private bool StartEditAnnotation_CanExecute()
         {
+            if (IsJZDDraw || IsAnnotationEdit || IsDKDraw)
+                return false;
             return true;
         }
         public System.Windows.Input.ICommand StartEditAnnotationCommand { get { return new RelayCommand(StartEditAnnotation_Executed, StartEditAnnotation_CanExecute); } }
         #endregion
+
+        #region StopDrawDKCommand
+        private void StopDrawDK_Executed()
+        {
+            IsDKDraw = false;
+        }
+
+        private bool StopDrawDK_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand StopDrawDKCommand { get { return new RelayCommand(StopDrawDK_Executed, StopDrawDK_CanExecute); } } 
+        
+        #endregion
+
+        #region StopDrawJZDCommand
+        private void StopDrawJZD_Executed()
+        {
+            IsJZDDraw = false;
+        }
+
+        private bool StopDrawJZD_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand StopDrawJZDCommand { get { return new RelayCommand(StopDrawJZD_Executed, StopDrawJZD_CanExecute); } }
+
+        #endregion
+
+        #region StopEditAttributeCommand
+        private void StopEditAttribute_Executed()
+        {
+            IsAttributeEdit = false;
+        }
+
+        private bool StopEditAttribute_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand StopEditAttributeCommand { get { return new RelayCommand(StopEditAttribute_Executed, StopEditAttribute_CanExecute); } }
+
+        #endregion
+
+        #region StopEditAnnotationCommand
+        private void StopEditAnnotation_Executed()
+        {
+            IsAnnotationEdit = false;
+        }
+
+        private bool StopEditAnnotation_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand StopEditAnnotationCommand { get { return new RelayCommand(StopEditAnnotation_Executed, StopEditAnnotation_CanExecute); } }
+
+        #endregion
+
     }
 }

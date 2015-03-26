@@ -29,12 +29,12 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            MapControlHost.Child = FileViewModel.MapControl;
-            TOCControlHost.Child = FileViewModel.TOCControl;
-            FileViewModel.MapControl.CreateControl();
-            FileViewModel.TOCControl.CreateControl();
-            FileViewModel.MapControl.OleDropEnabled = true;
-            FileViewModel.TOCControl.SetBuddyControl(FileViewModel.MapControl);
+            MapControlHost.Child = MainModel.MapControl;
+            TOCControlHost.Child = MainModel.TOCControl;
+            MainModel.MapControl.CreateControl();
+            MainModel.TOCControl.CreateControl();
+            MainModel.MapControl.OleDropEnabled = true;
+            MainModel.TOCControl.SetBuddyControl(MainModel.MapControl);
 
         }
 

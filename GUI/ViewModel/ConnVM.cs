@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GUI.ViewModel
 {
-    abstract class  ConnVM : MVVMBase.ObservableObject
+    public abstract class  ConnVM : MVVMBase.ObservableObject
     {
         #region Member
         private string serviceName ;
@@ -154,7 +154,7 @@ namespace GUI.ViewModel
 
     }
 
-    class GeoConnVM : ConnVM
+    public class GeoConnVM : ConnVM
     {
         #region member
         private static CreateDatabase.IDatabase database = CreateDatabase.CSpatialDatabase.GetInstance();
@@ -208,7 +208,7 @@ namespace GUI.ViewModel
 
     }
 
-    class AttributeConnVM : ConnVM
+    public class AttributeConnVM : ConnVM
     {
         #region member
         private static CreateDatabase.IDatabase database = CreateDatabase.CAttributeDatabase.GetInstance();
@@ -246,7 +246,7 @@ namespace GUI.ViewModel
         }
     }
 
-    class BusinessConnVM : ConnVM
+    public class BusinessConnVM : ConnVM
     {
         #region member
         private static CreateDatabase.IDatabase database = CreateDatabase.CBusinessDatabase.GetInstance();

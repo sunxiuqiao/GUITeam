@@ -10,7 +10,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace GUI.ViewModel
 {
-    class DBCreationVM : MVVMBase.ObservableObject
+    public class DBCreationVM : MVVMBase.ObservableObject
     {
         #region SubModel 
         private DBCreationDialogVM dbCreationDialogVM = new DBCreationDialogVM();

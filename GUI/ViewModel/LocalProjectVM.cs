@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace GUI.ViewModel
 {
-    class LocalProjectVM : MVVMBase.ObservableObject
+    public class LocalProjectVM : MVVMBase.ObservableObject
     {
         private static string projectPath = "";
         private static bool isProjectOpened = false;

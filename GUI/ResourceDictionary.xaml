@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary  
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:m="clr-namespace:GUI.Model"
+    >
     <!-- ScrollViewer -->
     <Style x:Key="ScrollBarThumb"  
                TargetType="{x:Type Thumb}">
@@ -243,4 +245,6 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="DimGray"/>
     </Style>
+
+    <m:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></m:BooleanToVisibilityConverter>
 </ResourceDictionary>  

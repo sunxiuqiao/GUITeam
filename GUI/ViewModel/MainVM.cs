@@ -17,7 +17,7 @@ using System.Windows.Data;
 
 namespace GUI.ViewModel
 {
-    class MainVM : MVVMBase.ObservableObject
+    public class MainVM : MVVMBase.ObservableObject
     {
         private string _MapFileName = "null";
         #region subVM

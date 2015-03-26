@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUI.ViewModel
 {
-    class DBTabControlVM
+    public class DBTabControlVM
     {
         #region subVM
         private GeoConnVM geoConnVM = new GeoConnVM();

@@ -9,7 +9,7 @@ using GUI.MVVMBase;
 
 namespace GUI.ViewModel
 {
-    class DBCreationDialogVM : MVVMBase.ObservableObject
+    public class DBCreationDialogVM : MVVMBase.ObservableObject
     {
         #region member
         private DialogUserControl currentControl ;

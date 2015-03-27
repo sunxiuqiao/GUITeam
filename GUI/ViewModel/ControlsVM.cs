@@ -13,7 +13,7 @@ using GUI.Model;
 
 namespace GUI.ViewModel
 {
-    class ControlsViewModel
+    class ControlsVM
     {
         private static readonly AxMapControl mapControl = new AxMapControl();
         private static readonly AxTOCControl tocControl = new AxTOCControl();
@@ -22,7 +22,7 @@ namespace GUI.ViewModel
         private IToolbarMenu _MapMenu = null;
         private IToolbarMenu _LayerMenu = null;
 
-        public ControlsViewModel()
+        public ControlsVM()
         {
             MapControl().OnOleDrop += MapControl_OnOleDrop;
             MapControl().OnMouseDown += MapControl_OnMouseDown;

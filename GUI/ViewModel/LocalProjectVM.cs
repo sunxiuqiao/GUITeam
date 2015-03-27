@@ -44,7 +44,7 @@ namespace GUI.ViewModel
         {
             ESRI.ArcGIS.SystemUI.ICommand cmd;
             cmd = new ESRI.ArcGIS.Controls.ControlsAddDataCommandClass();
-            cmd.OnCreate(ControlsViewModel.MapControl().Object);
+            cmd.OnCreate(ControlsVM.MapControl().Object);
             cmd.OnClick();
 
         }
@@ -195,7 +195,7 @@ namespace GUI.ViewModel
                 IFeatureLayer layer = new FeatureLayerClass();
                 layer.FeatureClass = featureclass;
                 layer.Name = featureclass.AliasName;
-                ControlsViewModel.MapControl().AddLayer(layer as ILayer);
+                ControlsVM.MapControl().AddLayer(layer as ILayer);
             }
         }
         #endregion
@@ -210,8 +210,8 @@ namespace GUI.ViewModel
         {
             ESRI.ArcGIS.Controls.ControlsMapZoomInTool tool = new ESRI.ArcGIS.Controls.ControlsMapZoomInToolClass();
             ICommand cmd = tool as ICommand;
-            cmd.OnCreate(ControlsViewModel.MapControl().Object);
-            ControlsViewModel.MapControl().CurrentTool = cmd as ITool;
+            cmd.OnCreate(ControlsVM.MapControl().Object);
+            ControlsVM.MapControl().CurrentTool = cmd as ITool;
         }
 
         private bool ZoomOutCommand_CanExecute()
@@ -223,8 +223,8 @@ namespace GUI.ViewModel
         {
             ESRI.ArcGIS.Controls.ControlsMapZoomOutTool tool = new ESRI.ArcGIS.Controls.ControlsMapZoomOutToolClass();
             ICommand cmd = tool as ICommand;
-            cmd.OnCreate(ControlsViewModel.MapControl().Object);
-            ControlsViewModel.MapControl().CurrentTool = cmd as ITool;
+            cmd.OnCreate(ControlsVM.MapControl().Object);
+            ControlsVM.MapControl().CurrentTool = cmd as ITool;
         }
 
         private bool ConstFactorZoomInCommand_CanExecute()
@@ -235,7 +235,7 @@ namespace GUI.ViewModel
         private void ConstFactorZoomInCommand_Executed()
         {
             ESRI.ArcGIS.SystemUI.ICommand cmd = new GUI.Model.Commands.ConstFactorZoomInCommand();
-            cmd.OnCreate(ControlsViewModel.MapControl());
+            cmd.OnCreate(ControlsVM.MapControl());
             cmd.OnClick();
         }
 
@@ -247,7 +247,7 @@ namespace GUI.ViewModel
         private void ConstFactorZoomOutCommand_Executed()
         {
             ESRI.ArcGIS.SystemUI.ICommand cmd = new GUI.Model.Commands.ConstFactorZoomOutCommand();
-            cmd.OnCreate(ControlsViewModel.MapControl());
+            cmd.OnCreate(ControlsVM.MapControl());
             cmd.OnClick();
         }
 
@@ -269,8 +269,8 @@ namespace GUI.ViewModel
         {
             ESRI.ArcGIS.Controls.ControlsMapPanTool tool = new ESRI.ArcGIS.Controls.ControlsMapPanToolClass();
             ICommand cmd = tool as ICommand;
-            cmd.OnCreate(ControlsViewModel.MapControl().Object);
-            ControlsViewModel.MapControl().CurrentTool = cmd as ITool;
+            cmd.OnCreate(ControlsVM.MapControl().Object);
+            ControlsVM.MapControl().CurrentTool = cmd as ITool;
         }
         public System.Windows.Input.ICommand MapPanCommand { get { return new RelayCommand(MapPanCommand_Executed, MapPanCommand_CanExecute); } }
 
@@ -285,7 +285,7 @@ namespace GUI.ViewModel
         private void OverViewCommand_Executed()
         {
             ESRI.ArcGIS.SystemUI.ICommand cmd = new GUI.Model.Commands.OverViewCommand();
-            cmd.OnCreate(ControlsViewModel.MapControl());
+            cmd.OnCreate(ControlsVM.MapControl());
             cmd.OnClick();
         }
         public System.Windows.Input.ICommand OverViewCommand { get { return new RelayCommand(OverViewCommand_Executed, OverViewCommand_CanExecute); } }
@@ -294,7 +294,7 @@ namespace GUI.ViewModel
         #region LoadDataFromShp
         private void LoadDataFromShpCommand_Executed()
         {
-            Model.CollectionData.LoadShpFile(ControlsViewModel.MapControl());
+            Model.CollectionData.LoadShpFile(ControlsVM.MapControl());
         }
 
         private bool LoadDataFromShpCommand_CanExecute()
@@ -311,7 +311,7 @@ namespace GUI.ViewModel
         }
         private void StandardLayerCommand_Executed()
         {
-            Model.CollectionData.StandardLayer(ControlsViewModel.MapControl());
+            Model.CollectionData.StandardLayer(ControlsVM.MapControl());
         }
         public System.Windows.Input.ICommand StandardLayerCommand { get { return new RelayCommand(StandardLayerCommand_Executed, StandardLayerCommand_CanExecute); } }
         #endregion

@@ -21,7 +21,7 @@ namespace GUI.ViewModel
     {
         private string _MapFileName = "null";
         #region subVM
-        private static ControlsViewModel controlsVM = new ControlsViewModel();
+        private static ControlsVM controlsVM = new ControlsVM();
         private DBCreationVM dbCreationVM= new DBCreationVM();
         private LocalProjectVM localProjectVM = new LocalProjectVM();
         private DataEditVM dataEditVM = new DataEditVM();
@@ -35,12 +35,12 @@ namespace GUI.ViewModel
         #region Properties
         public AxMapControl MapControl
         {
-            get { return ControlsViewModel.MapControl(); }
+            get { return ControlsVM.MapControl(); }
         }
         
         public AxTOCControl TOCControl
         {
-            get { return ControlsViewModel.TOCControl(); }
+            get { return ControlsVM.TOCControl(); }
         }
 
         public string MapFileName

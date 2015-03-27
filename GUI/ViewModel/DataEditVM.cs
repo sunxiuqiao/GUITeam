@@ -23,8 +23,8 @@ namespace GUI.ViewModel
         bool isAttributeEdit = false;
         bool isAnnotationEdit = false;
         bool isStop = false;
-        //IWorkspaceEdit2 wksEditor ;
-        IEngineEditor engineEditor = new EngineEditorClass();
+        IWorkspaceEdit2 wksEditor;
+        //IEngineEditor engineEditor = new EngineEditorClass();
         IOperationStack operationStack = new ControlsOperationStackClass();
         #endregion
 
@@ -92,20 +92,20 @@ namespace GUI.ViewModel
             }
         }
 
-        //public IWorkspaceEdit2 WKSEditor
-        //{
-        //    get { return wksEditor; }
-        //    set
-        //    {
-        //        wksEditor = value;
-        //    }
-        //}
-
-        public IEngineEditor EngineEditor
+        public IWorkspaceEdit2 WKSEditor
         {
-            get { return engineEditor; }
-            set { engineEditor = value; }
+            get { return wksEditor; }
+            set
+            {
+                wksEditor = value;
+            }
         }
+
+        //public IEngineEditor EngineEditor
+        //{
+        //    get { return engineEditor; }
+        //    set { engineEditor = value; }
+        //}
         #endregion
 
         #region functions
@@ -121,87 +121,60 @@ namespace GUI.ViewModel
         /// </summary>
         /// <param name="MapControl"></param>
         /// <param name="LyrName"></param>
-        private bool StartEdit(IMapControl2 MapControl,string LyrName)
+        private bool StartEdit(IMapControl2 MapControl, string LyrName)
         {
-            IMap Map = MapControl.Map;
-            if (EngineEditor.EditState != esriEngineEditState.esriEngineStateNotEditing)
-                return false;
+            bool isOk = false;
+            try
+            {
+                IMap map = MapControl.Map;
+                int layerIndex = GetLayerByName(map, LyrName);
+                if (layerIndex == -1)
+                {
+                    System.Windows.Forms.MessageBox.Show("图层错误");
+                }
+                ILayer currentLayer = map.get_Layer(layerIndex);
+                if (currentLayer is IFeatureLayer)
+                {
+                    IFeatureLayer featureLyr = currentLayer as IFeatureLayer;
+                    IDataset dataSet = featureLyr.FeatureClass as IDataset;
+                    WKSEditor = dataSet.Workspace as IWorkspaceEdit2;
+                    if (!WKSEditor.IsBeingEdited())
+                        WKSEditor.StartEditing(true);
+                    if (!WKSEditor.IsInEditOperation)
+                        WKSEditor.StartEditOperation();
+                    isOk = true;
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("图层错误");
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                // If an exception was raised, make sure the edit operation and
+                // edit session are discarded.
+                try
+                {
+                    if (WKSEditor.IsInEditOperation)
+                    {
+                        WKSEditor.AbortEditOperation();
+                    }
+                    if (WKSEditor.IsBeingEdited())
+                    {
+                        WKSEditor.StopEditing(false);
+                    }
+                }
+                catch (Exception exc)
+                {
+                    System.Windows.Forms.MessageBox.Show(exc.Message);
+                }
 
-            int LyrIndex = GetLayerByName(Map, LyrName);
-            if (LyrIndex == -1)
-            {
-                MessageBox.Show("图层错误");
-
-                return false;
             }
-                
-            ILayer Layer = Map.get_Layer(LyrIndex);
-            if(!(Layer is IFeatureLayer))
-            {
-                MessageBox.Show("图层错误");
-                return false;
-            }
-            else
-            {
-                IFeatureLayer FeatureLayer = Layer as IFeatureLayer;
-                IDataset dataset = FeatureLayer.FeatureClass as IDataset;
-                IWorkspace workspace = dataset.Workspace;
-                EngineEditor.StartEditing(workspace, Map);
-                ((IEngineEditLayers)EngineEditor).SetTargetLayer(FeatureLayer,0);
-                return true;
-            }
-           
-            //try
-            //{
-            //    IMap map = MapControl.Map;
-            //    int layerIndex = GetLayerByName(map, LyrName);
-            //    if (layerIndex == -1)
-            //    {
-            //        System.Windows.Forms.MessageBox.Show("图层错误");
-            //        return;
-            //    }
-            //    ILayer currentLayer = map.get_Layer(layerIndex);
-            //    if (currentLayer is IFeatureLayer)
-            //    {
-            //        IFeatureLayer featureLyr = currentLayer as IFeatureLayer;
-            //        IDataset dataSet = featureLyr.FeatureClass as IDataset;
-            //        WKSEditor = dataSet.Workspace as IWorkspaceEdit2;
-            //        if (WKSEditor.IsBeingEdited())
-            //            return;
-            //        WKSEditor.StartEditing(true);
-            //        if (!WKSEditor.IsInEditOperation)
-            //            WKSEditor.StartEditOperation();
-            //    }
-            //    else
-            //    {
-            //        System.Windows.Forms.MessageBox.Show("图层错误");
-            //        return;
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    System.Windows.Forms.MessageBox.Show(e.Message);
-            //}
-            //finally
-            //{
-            //    // If an exception was raised, make sure the edit operation and
-            //    // edit session are discarded.
-            //    try
-            //    {
-            //        if (WKSEditor.IsInEditOperation)
-            //        {
-            //            WKSEditor.AbortEditOperation();
-            //        }
-            //        if (WKSEditor.IsBeingEdited())
-            //        {
-            //            WKSEditor.StopEditing(false);
-            //        }
-            //    }
-            //    catch (Exception exc)
-            //    {
-            //        System.Windows.Forms.MessageBox.Show(exc.Message);
-            //    }
-            //}
+            return isOk;
         }
 
         /// <summary>
@@ -209,53 +182,53 @@ namespace GUI.ViewModel
         /// </summary>
         private void StopEdit()
         {
-            if (EngineEditor.HasEdits() == false)
-                EngineEditor.StopEditing(false);
-            else
+            //if (EngineEditor.HasEdits() == false)
+            //    EngineEditor.StopEditing(false);
+            //else
+            //{
+            //    if (MessageBox.Show("Save Edits?", "Save Prompt", MessageBoxButtons.YesNo)
+            //        == DialogResult.Yes)
+            //        EngineEditor.StopEditing(true);
+            //    else
+            //        EngineEditor.StopEditing(false);
+            //}
+
+            try
             {
-                if (MessageBox.Show("Save Edits?", "Save Prompt", MessageBoxButtons.YesNo)
-                    == DialogResult.Yes)
-                    EngineEditor.StopEditing(true);
+                if (WKSEditor == null)
+                    return;
                 else
-                    EngineEditor.StopEditing(false);
+                {
+                    WKSEditor.StopEditOperation();
+                    WKSEditor.StopEditing(true);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                // If an exception was raised, make sure the edit operation and
+                // edit session are discarded.
+                try
+                {
+                    if (WKSEditor.IsInEditOperation)
+                    {
+                        WKSEditor.AbortEditOperation();
+                    }
+                    if (WKSEditor.IsBeingEdited())
+                    {
+                        WKSEditor.StopEditing(false);
+                    }
+                }
+                catch (Exception exc)
+                {
+                    System.Windows.Forms.MessageBox.Show(exc.Message);
+                }
             }
 
-            //try
-            //{
-            //    if (WKSEditor == null)
-            //        return;
-            //    else
-            //    {
-            //        WKSEditor.StopEditOperation();
-            //        WKSEditor.StopEditing(true);
-            //    }
-            //}
-            //catch(Exception e)
-            //{
-            //    System.Windows.Forms.MessageBox.Show(e.Message);
-            //}
-            //finally
-            //{
-            //    // If an exception was raised, make sure the edit operation and
-            //    // edit session are discarded.
-            //    try
-            //    {
-            //        if (WKSEditor.IsInEditOperation)
-            //        {
-            //            WKSEditor.AbortEditOperation();
-            //        }
-            //        if (WKSEditor.IsBeingEdited())
-            //        {
-            //            WKSEditor.StopEditing(false);
-            //        }
-            //    }
-            //    catch (Exception exc)
-            //    {
-            //        System.Windows.Forms.MessageBox.Show(exc.Message);
-            //    }
-            //}
 
-            
         }
 
         /// <summary>
@@ -264,7 +237,7 @@ namespace GUI.ViewModel
         /// <param name="Map"></param>
         /// <param name="LyrName"></param>
         /// <returns></returns>
-        private int GetLayerByName(IMap Map,string LyrName)
+        private int GetLayerByName(IMap Map, string LyrName)
         {
             try
             {
@@ -303,13 +276,13 @@ namespace GUI.ViewModel
             {
                 return false;
             }
-            if(!LocalProjectVM.IsProjectOpened)
+            if (!LocalProjectVM.IsProjectOpened)
             {
                 return false;
             }
             return true;
         }
-        public System.Windows.Input.ICommand StartDrawDKCommand { get { return new RelayCommand(StartDrawDK_Executed, StartDrawDK_CanExecute); } } 
+        public System.Windows.Input.ICommand StartDrawDKCommand { get { return new RelayCommand(StartDrawDK_Executed, StartDrawDK_CanExecute); } }
         #endregion
 
         #region StartDrawJZXCommand
@@ -408,8 +381,8 @@ namespace GUI.ViewModel
         {
             return true;
         }
-        public System.Windows.Input.ICommand StopDrawDKCommand { get { return new RelayCommand(StopDrawDK_Executed, StopDrawDK_CanExecute); } } 
-        
+        public System.Windows.Input.ICommand StopDrawDKCommand { get { return new RelayCommand(StopDrawDK_Executed, StopDrawDK_CanExecute); } }
+
         #endregion
 
         #region StopDrawJZXCommand

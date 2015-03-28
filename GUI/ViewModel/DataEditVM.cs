@@ -464,7 +464,7 @@ namespace GUI.ViewModel
         #region EditCommand
         private void EditCommand_Executed()
         {
-            ESRI.ArcGIS.Controls.ControlsEditingEditTool tool = new ESRI.ArcGIS.Controls.ControlsEditingEditToolClass();
+            ITool tool = new Model.DataEditTools.SelectFeaturesTool();
             ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
             cmd.OnCreate(ControlsVM.MapControl().Object);
             ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;

@@ -192,6 +192,8 @@
     </ApplicationDefinition>
     <Compile Include="Model\CollectionData.cs" />
     <Compile Include="Model\Converter.cs" />
+    <Compile Include="Model\DataEditTools\DrawPolygon.cs" />
+    <Compile Include="Model\DataEditTools\SelectFeatures.cs" />
     <Compile Include="Model\HandleExcel.cs" />
     <Compile Include="Model\QueryAndAnalysis.cs" />
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />
@@ -408,6 +410,22 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Config\Cursor\Default.cur" />
+    <Resource Include="Config\Cursor\Edit.cur" />
+    <Resource Include="Config\Cursor\Gesture.cur" />
+    <Resource Include="Config\Cursor\Hand.cur" />
+    <Resource Include="Config\Cursor\Identify.cur" />
+    <Resource Include="Config\Cursor\Measure.cur" />
+    <Resource Include="Config\Cursor\Move.cur" />
+    <Resource Include="Config\Cursor\movehand.cur" />
+    <Resource Include="Config\Cursor\Navigation.cur" />
+    <Resource Include="Config\Cursor\Reshape.cur" />
+    <Resource Include="Config\Cursor\Sketch.cur" />
+    <Resource Include="Config\Cursor\ZoomIn.cur" />
+    <Resource Include="Config\Cursor\ZoomInOut.cur" />
+    <Resource Include="Config\Cursor\ZoomOut.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

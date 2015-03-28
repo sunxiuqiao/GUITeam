@@ -136,7 +136,8 @@ namespace GUI.ViewModel
                 if (currentLayer is IFeatureLayer)
                 {
                     IFeatureLayer featureLyr = currentLayer as IFeatureLayer;
-                    IDataset dataSet = featureLyr.FeatureClass as IDataset;
+                    IFeatureClass featureClass = featureLyr.FeatureClass;
+                    IDataset dataSet = featureClass as IDataset;
                     WKSEditor = dataSet.Workspace as IWorkspaceEdit2;
                     if (!WKSEditor.IsBeingEdited())
                         WKSEditor.StartEditing(true);
@@ -448,7 +449,7 @@ namespace GUI.ViewModel
         #region SketchCommand
         private void SketchCommand_Executed()
         {
-            ESRI.ArcGIS.Controls.ControlsEditingSketchTool tool = new ESRI.ArcGIS.Controls.ControlsEditingSketchToolClass();
+            ITool tool = new Model.DataEditTools.DrawPolygon();
             ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
             cmd.OnCreate(ControlsVM.MapControl().Object);
             ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;

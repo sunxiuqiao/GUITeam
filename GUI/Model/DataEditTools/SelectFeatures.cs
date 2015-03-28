@@ -77,8 +77,8 @@ namespace GUI.Model.DataEditTools
             //
             // TODO: Define values for the public properties
             //
-            m_cursor = new System.Windows.Forms.Cursor("../../Config/Cursor/Edit.cur");
-
+            base.m_cursor = new System.Windows.Forms.Cursor("../../Config/Cursor/Edit.cur");
+            //base.m_bitmap = new Bitmap("../../Config/SelectFeature.png");
             base.m_category = "DataEditTools/SelectFeaturesTool"; //localizable text 
             base.m_caption = "选择要素";  //localizable text 
             base.m_message = "拉框或单击选择要素";  //localizable text

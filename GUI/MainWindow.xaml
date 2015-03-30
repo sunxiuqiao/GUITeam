@@ -120,7 +120,7 @@
                 </f:Backstage>
             </f:Ribbon.Menu>
             <f:Ribbon.Tabs>
-                <f:RibbonTabItem x:Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}" IsSelected="{Binding ElementName=MainModel,Path=DataEditVM.IsStop,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                <f:RibbonTabItem x:Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}" IsSelected="{Binding ElementName=MainModel,Path=DataEditVM.IsStopEdit,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox x:Name="Project" Header="工程">
                             <f:Button x:Name="NewLoaclProjectButton" Header="新建" Command="{Binding NewProjectCommand}"></f:Button>

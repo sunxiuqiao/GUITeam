@@ -22,7 +22,7 @@ namespace GUI.ViewModel
         bool isJZXDraw = false;
         bool isAttributeEdit = false;
         bool isAnnotationEdit = false;
-        bool isStop = false;
+        bool isStopEdit = false;
         IWorkspaceEdit2 wksEditor;
         //IEngineEditor engineEditor = new EngineEditorClass();
         IOperationStack operationStack = new ControlsOperationStackClass();
@@ -82,13 +82,13 @@ namespace GUI.ViewModel
         /// <summary>
         /// 被绑定在 localProject TabItem
         /// </summary>
-        public bool IsStop
+        public bool IsStopEdit
         {
-            get { return isStop; }
+            get { return isStopEdit; }
             set
             {
-                isStop = value;
-                RaisePropertyChanged("IsStop");
+                isStopEdit = value;
+                RaisePropertyChanged("IsStopEdit");
             }
         }
 
@@ -154,27 +154,7 @@ namespace GUI.ViewModel
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
-            //finally
-            //{
-            //    // If an exception was raised, make sure the edit operation and
-            //    // edit session are discarded.
-            //    try
-            //    {
-            //        if (WKSEditor.IsInEditOperation)
-            //        {
-            //            WKSEditor.AbortEditOperation();
-            //        }
-            //        if (WKSEditor.IsBeingEdited())
-            //        {
-            //            WKSEditor.StopEditing(false);
-            //        }
-            //    }
-            //    catch (Exception exc)
-            //    {
-            //        System.Windows.Forms.MessageBox.Show(exc.Message);
-            //    }
-
-            //}
+            
             return isOk;
         }
 
@@ -189,7 +169,7 @@ namespace GUI.ViewModel
                     return;
                 else
                 {
-                    if(!wksEditor.IsBeingEdited())
+                    if (!WKSEditor.IsBeingEdited())
                     {
                         WKSEditor.StopEditOperation();
                         WKSEditor.StopEditing(false);
@@ -208,6 +188,9 @@ namespace GUI.ViewModel
                         }
                     }                    
                 }
+                IActiveView activeView = ControlsVM.MapControl().ActiveView;
+                activeView.PartialRefresh(esriViewDrawPhase.esriViewAll, null, null);
+                
             }
             catch (Exception e)
             {
@@ -233,7 +216,7 @@ namespace GUI.ViewModel
                     System.Windows.Forms.MessageBox.Show(exc.Message);
                 }
             }
-
+            
 
         }
 
@@ -271,7 +254,7 @@ namespace GUI.ViewModel
         {
             if (StartEdit((IMapControl2)ControlsVM.MapControl().Object, "地块"))
             {
-                IsStop = false;
+                IsStopEdit = false;
                 IsDKDraw = true;
             }
         }
@@ -296,7 +279,7 @@ namespace GUI.ViewModel
         {
             if (StartEdit((IMapControl2)ControlsVM.MapControl().Object, "界址线"))
             {
-                IsStop = false;
+                IsStopEdit = false;
                 IsJZXDraw = true;
             }
         }
@@ -320,7 +303,7 @@ namespace GUI.ViewModel
             if (StartEdit((IMapControl2)ControlsVM.MapControl().Object, "界址点"))
             {
                 IsJZDDraw = true;
-                IsStop = false;
+                IsStopEdit = false;
             }
         }
 
@@ -380,7 +363,7 @@ namespace GUI.ViewModel
         {
             StopEdit();
             IsDKDraw = false;
-            IsStop = true;
+            IsStopEdit = true;
         }
 
         private bool StopDrawDK_CanExecute()
@@ -395,7 +378,7 @@ namespace GUI.ViewModel
         private void StopDrawJZX_Executed()
         {
             StopEdit();
-            IsStop = true;
+            IsStopEdit = true;
             IsJZXDraw = false;
         }
 
@@ -412,7 +395,7 @@ namespace GUI.ViewModel
         {
             StopEdit();
             IsJZDDraw = false;
-            IsStop = true;
+            IsStopEdit = true;
         }
 
         private bool StopDrawJZD_CanExecute()
@@ -454,10 +437,14 @@ namespace GUI.ViewModel
         #region SketchCommand
         private void SketchCommand_Executed()
         {
-            ITool tool = new Model.DataEditTools.DrawPolygon();
-            ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
-            cmd.OnCreate(ControlsVM.MapControl().Object);
-            ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
+            if(IsDKDraw)
+            {
+                ITool tool = new Model.DataEditTools.DrawPolygon();
+                ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
+                cmd.OnCreate(ControlsVM.MapControl().Object);
+                ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
+            }
+            
         }
         private bool SketchCommand_CanExecute()
         {

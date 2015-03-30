@@ -20,7 +20,7 @@ namespace GUI.Model.DataEditTools
     [Guid("d30936d2-3d2f-40f4-b919-0253bb5604e9")]
     [ClassInterface(ClassInterfaceType.None)]
     [ProgId("WindowsFormsApplication1.Tool1")]
-    public class DrawPolygon : BaseTool
+    public sealed class DrawPoint : BaseTool
     {
         #region COM Registration Function(s)
         [ComRegisterFunction()]
@@ -72,24 +72,20 @@ namespace GUI.Model.DataEditTools
         #endregion
         #endregion
 
-        protected IHookHelper m_hookHelper = null;
-        protected INewPolygonFeedback m_polygonFeedback = null;
-        protected IGeometry geometry = null;
+        private IHookHelper m_hookHelper = null;
+        private INewMultiPointFeedback m_multiPointFeedback = null;
 
-        private bool m_isMouseDown;//鼠标是否按下
-
-        public DrawPolygon()
+        public DrawPoint()
         {
             //
             // TODO: Define values for the public properties
             //
             base.m_cursor = new System.Windows.Forms.Cursor("../../Config/Cursor/Sketch.cur");
-            base.m_category = "DataEditTools/DrawPolygon"; //localizable text 
-            base.m_caption = "绘制面要素";  //localizable text 
-            base.m_message = "绘制面要素";  //localizable text
-            base.m_toolTip = "绘制面要素";  //localizable text
-            base.m_name = "DataEditTools_DrawPolygon";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
-            
+            base.m_category = "DataEditTools/DrawPoint"; //localizable text 
+            base.m_caption = "绘制点要素";  //localizable text 
+            base.m_message = "绘制点要素";  //localizable text
+            base.m_toolTip = "绘制点要素";  //localizable text
+            base.m_name = "DataEditTools_DrawPoint";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
         }
 
         #region Overridden Class Methods
@@ -108,10 +104,8 @@ namespace GUI.Model.DataEditTools
                 {
                     m_hookHelper = null;
                 }
-
-                base.m_enabled = true;
-                base.m_checked = false;
-                m_isMouseDown = false;
+                m_enabled = true;
+                m_checked = false;
             }
             catch
             {
@@ -137,93 +131,17 @@ namespace GUI.Model.DataEditTools
         public override void OnMouseDown(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.TOCControl_OnMouseDown implementation
-            m_isMouseDown = true;
-            IActiveView activeView = m_hookHelper.FocusMap as IActiveView;
-            IPoint point = activeView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
-
-            if(m_polygonFeedback == null)
-            {
-                m_polygonFeedback = new NewPolygonFeedbackClass();
-                m_polygonFeedback.Display = activeView.ScreenDisplay;
-                m_polygonFeedback.Start(point);
-
-            }
-            else
-            {
-                m_polygonFeedback.AddPoint(point);
-            }
         }
 
         public override void OnMouseMove(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseMove implementation
-            if (m_isMouseDown == false)
-                return;
-
-            if(m_polygonFeedback!= null)
-            {
-                IActiveView activeView = m_hookHelper.FocusMap as IActiveView;
-                IPoint point = activeView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
-                m_polygonFeedback.MoveTo(point);
-            }
-
         }
-
-        /// <summary>
-        /// 键盘按下事件
-        /// </summary>
-        /// <param name="keyCode">键编码</param>
-        /// <param name="shift">shift键</param>
-        public void OnKeyDown(int keyCode, int shift)
-        {
-            if (m_isMouseDown)
-            {
-                if (keyCode == 27)
-                {
-                    m_isMouseDown = false;
-                    m_polygonFeedback = null;
-                    m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 键盘放开事件
-        /// </summary>
-        /// <param name="keyCode">键编码</param>
-        /// <param name="shift">shift键</param>
-        public void OnKeyUp(int keyCode, int shift)
-        {
-            if (m_isMouseDown)
-            {
-                if (keyCode == 27)
-                {
-                    m_isMouseDown = false;
-                    m_polygonFeedback = null;
-                    m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
-                }
-            }
-        }
-
 
         public override void OnMouseUp(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseUp implementation
         }
         #endregion
-
-        public override void OnDblClick()
-        {
-            IGeometry geo = null;
-            if (m_polygonFeedback != null)
-                geo = m_polygonFeedback.Stop() as IGeometry;
-
-            if (geo != null)
-            {
-                geometry =geo;
-            }
-            m_polygonFeedback = null;
-        }
-
     }
 }

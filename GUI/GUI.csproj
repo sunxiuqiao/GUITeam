@@ -192,8 +192,12 @@
     </ApplicationDefinition>
     <Compile Include="Model\CollectionData.cs" />
     <Compile Include="Model\Converter.cs" />
+    <Compile Include="Model\DataEditTools\DrawDKTool.cs" />
+    <Compile Include="Model\DataEditTools\DrawPoint.cs" />
     <Compile Include="Model\DataEditTools\DrawPolygon.cs" />
+    <Compile Include="Model\DataEditTools\DrawPolyline.cs" />
     <Compile Include="Model\DataEditTools\SelectFeatures.cs" />
+    <Compile Include="Model\DataEditTools\DrawJZXTool.cs" />
     <Compile Include="Model\HandleExcel.cs" />
     <Compile Include="Model\QueryAndAnalysis.cs" />
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />

@@ -20,7 +20,7 @@ namespace GUI.Model.DataEditTools
     [Guid("d30936d2-3d2f-40f4-b919-0253bb5604e9")]
     [ClassInterface(ClassInterfaceType.None)]
     [ProgId("WindowsFormsApplication1.Tool1")]
-    public class DrawPolygon : BaseTool
+    public class DrawPolyline : BaseTool
     {
         #region COM Registration Function(s)
         [ComRegisterFunction()]
@@ -73,23 +73,22 @@ namespace GUI.Model.DataEditTools
         #endregion
 
         protected IHookHelper m_hookHelper = null;
-        protected INewPolygonFeedback m_polygonFeedback = null;
+        protected INewLineFeedback m_lineFeedbback = null;
         protected IGeometry geometry = null;
 
         private bool m_isMouseDown;//鼠标是否按下
 
-        public DrawPolygon()
+        public DrawPolyline()
         {
             //
             // TODO: Define values for the public properties
             //
             base.m_cursor = new System.Windows.Forms.Cursor("../../Config/Cursor/Sketch.cur");
             base.m_category = "DataEditTools/DrawPolygon"; //localizable text 
-            base.m_caption = "绘制面要素";  //localizable text 
-            base.m_message = "绘制面要素";  //localizable text
-            base.m_toolTip = "绘制面要素";  //localizable text
+            base.m_caption = "绘制线要素";  //localizable text 
+            base.m_message = "绘制线要素";  //localizable text
+            base.m_toolTip = "绘制线要素";  //localizable text
             base.m_name = "DataEditTools_DrawPolygon";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
-            
         }
 
         #region Overridden Class Methods
@@ -108,10 +107,10 @@ namespace GUI.Model.DataEditTools
                 {
                     m_hookHelper = null;
                 }
-
-                base.m_enabled = true;
-                base.m_checked = false;
+                m_enabled = true;
+                m_checked = false;
                 m_isMouseDown = false;
+
             }
             catch
             {
@@ -138,19 +137,18 @@ namespace GUI.Model.DataEditTools
         {
             // TODO:  Add Tool1.TOCControl_OnMouseDown implementation
             m_isMouseDown = true;
-            IActiveView activeView = m_hookHelper.FocusMap as IActiveView;
-            IPoint point = activeView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
+            IActiveView activeView = m_hookHelper.ActiveView;
+            IPoint point = activeView.ScreenDisplay.DisplayTransformation.ToMapPoint(X,Y);
 
-            if(m_polygonFeedback == null)
+            if(m_lineFeedbback == null)
             {
-                m_polygonFeedback = new NewPolygonFeedbackClass();
-                m_polygonFeedback.Display = activeView.ScreenDisplay;
-                m_polygonFeedback.Start(point);
-
+                m_lineFeedbback = new NewLineFeedbackClass();
+                m_lineFeedbback.Display = activeView.ScreenDisplay;
+                m_lineFeedbback.Start(point);
             }
             else
             {
-                m_polygonFeedback.AddPoint(point);
+                m_lineFeedbback.AddPoint(point);
             }
         }
 
@@ -159,71 +157,130 @@ namespace GUI.Model.DataEditTools
             // TODO:  Add Tool1.OnMouseMove implementation
             if (m_isMouseDown == false)
                 return;
-
-            if(m_polygonFeedback!= null)
+            if(m_lineFeedbback != null)
             {
-                IActiveView activeView = m_hookHelper.FocusMap as IActiveView;
-                IPoint point = activeView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
-                m_polygonFeedback.MoveTo(point);
-            }
-
-        }
-
-        /// <summary>
-        /// 键盘按下事件
-        /// </summary>
-        /// <param name="keyCode">键编码</param>
-        /// <param name="shift">shift键</param>
-        public void OnKeyDown(int keyCode, int shift)
-        {
-            if (m_isMouseDown)
-            {
-                if (keyCode == 27)
-                {
-                    m_isMouseDown = false;
-                    m_polygonFeedback = null;
-                    m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
-                }
+                IPoint point = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
+                m_lineFeedbback.MoveTo(point);
             }
         }
-
-        /// <summary>
-        /// 键盘放开事件
-        /// </summary>
-        /// <param name="keyCode">键编码</param>
-        /// <param name="shift">shift键</param>
-        public void OnKeyUp(int keyCode, int shift)
-        {
-            if (m_isMouseDown)
-            {
-                if (keyCode == 27)
-                {
-                    m_isMouseDown = false;
-                    m_polygonFeedback = null;
-                    m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
-                }
-            }
-        }
-
 
         public override void OnMouseUp(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseUp implementation
         }
-        #endregion
+
+        /// <summary>
+        /// OnKeyDown
+        /// </summary>
+        /// <param name="keyCode"></param>
+        /// <param name="Shift"></param>
+        public override void OnKeyDown(int keyCode, int Shift)
+        {
+            if(keyCode == 27)
+            {
+                m_lineFeedbback = null;
+                m_isMouseDown = false;
+                m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
+            }
+        }
+
+        /// <summary>
+        /// OnKeyUp
+        /// </summary>
+        /// <param name="keyCode"></param>
+        /// <param name="Shift"></param>
+        public override void OnKeyUp(int keyCode, int Shift)
+        {
+            if (keyCode == 27)
+            {
+                m_lineFeedbback = null;
+                m_isMouseDown = false;
+                m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
+            }
+        }
 
         public override void OnDblClick()
         {
             IGeometry geo = null;
-            if (m_polygonFeedback != null)
-                geo = m_polygonFeedback.Stop() as IGeometry;
+            if (m_lineFeedbback != null)
+                geo = m_lineFeedbback.Stop() as IGeometry;
 
             if (geo != null)
             {
-                geometry =geo;
+                geometry = geo;
             }
-            m_polygonFeedback = null;
+            m_lineFeedbback = null;
         }
 
+        private void Draw(IGeometry geometry)
+        {
+            try
+            {
+                if (geometry == null)
+                    return;
+                IMap map = m_hookHelper.FocusMap;
+                ILayer layer = null;
+                if (geometry.GeometryType.Equals(esriGeometryType.esriGeometryPolyline))
+                {
+                    int layerIndex = GetLayerByName(map, "界址线");
+                    if (layerIndex == -1)
+                    {
+                        System.Windows.Forms.MessageBox.Show("图层错误");
+                        return;
+                    }
+                    layer = map.get_Layer(layerIndex);
+                    if (layer is IFeatureLayer)
+                    {
+                        IFeatureLayer featureLyr = layer as IFeatureLayer;
+                        IFeatureClass featureClass = featureLyr.FeatureClass;
+                        IDataset dataSet = featureClass as IDataset;
+                        IWorkspace workSpace = dataSet.Workspace;
+                        IWorkspaceEdit workspaceEdit = workSpace as IWorkspaceEdit;
+                        IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
+                        featBuffer.Shape = geometry;
+                        SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
+                        IFeatureCursor featCursor = featureClass.Insert(true);
+                        featCursor.InsertFeature(featBuffer);
+                        
+                    }
+                }
+                m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+        }
+
+        private int GetLayerByName(IMap Map, string LyrName)
+        {
+            try
+            {
+                int index = -1;
+                for (int i = 0; i < Map.LayerCount; ++i)
+                {
+                    if (Map.get_Layer(i).Name == LyrName)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                return index;
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+                return -1;
+            }
+        }
+
+        private static void SetFieldValue(IFeatureLayer Layer, IFeatureBuffer Feature, string Field, object Value)
+        {
+            IFeatureClass pFeatureCls = Layer.FeatureClass;
+            int pFieldIndex = pFeatureCls.FindField(Field);
+            Feature.set_Value(pFieldIndex, Value);
+        }
+        #endregion
     }
 }

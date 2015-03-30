@@ -439,11 +439,19 @@ namespace GUI.ViewModel
         {
             if(IsDKDraw)
             {
-                ITool tool = new Model.DataEditTools.DrawPolygon();
+                ITool tool = new Model.DataEditTools.DrawDKTool();
                 ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
                 cmd.OnCreate(ControlsVM.MapControl().Object);
                 ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
             }
+            else if (IsJZXDraw)
+            {
+                ITool tool = new Model.DataEditTools.DrawJZXTool();
+                ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
+                cmd.OnCreate(ControlsVM.MapControl().Object);
+                ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
+            }
+
             
         }
         private bool SketchCommand_CanExecute()

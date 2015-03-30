@@ -258,10 +258,22 @@ namespace GUI.Model.DataEditTools
                 IFeatureClass featureClass = featureLyr.FeatureClass;
                 IDataset dataSet = featureClass as IDataset;
                 IWorkspace workSpace = dataSet.Workspace;
-                IFeature feature = featureClass.CreateFeature();
-                feature.Shape = geometry;
-                SetFieldValue(featureLyr, feature, "YSDM", "211011");
+                IWorkspaceEdit workspaceEdit = workSpace as IWorkspaceEdit;
+                //workspaceEdit.StartEditing(true);
+                //workspaceEdit.StartEditOperation();
+                IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
+                featBuffer.Shape = geometry;
+                SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
+                IFeatureCursor featCursor = featureClass.Insert(true);
+                featCursor.InsertFeature(featBuffer);
+                //featBuffer.
+                //IFeature feature = featureClass.CreateFeature();
+                //feature.Shape = geometry;
+                //SetFieldValue(featureLyr, feature, "YSDM", "211011");
                 //feature.Store();
+                //workspaceEdit.StopEditOperation();
+                ////workspaceEdit.UndoEditOperation
+                //workspaceEdit.StopEditing(true);
             }
             m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
 
@@ -289,7 +301,7 @@ namespace GUI.Model.DataEditTools
             }
         }
 
-        private static void SetFieldValue(IFeatureLayer Layer, IFeature Feature, string Field, object Value)
+        private static void SetFieldValue(IFeatureLayer Layer, IFeatureBuffer Feature, string Field, object Value)
         {
             IFeatureClass pFeatureCls = Layer.FeatureClass;
             int pFieldIndex = pFeatureCls.FindField(Field);

@@ -18,6 +18,7 @@ using ESRI.ArcGIS;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Carto;
 using Xceed.Wpf.AvalonDock.Layout;
+using ESRI.ArcGIS.Geodatabase;
 
 namespace GUI
 {
@@ -38,7 +39,45 @@ namespace GUI
 
         }
 
-      
+        private void GUIMainWindow_Closed(object sender, EventArgs e)
+        {
+            IMap map = ViewModel.ControlsVM.MapControl().Map;
+
+            for (int index = 0; index < map.LayerCount; ++index)
+            {
+                ILayer lyr = map.get_Layer(index);
+                IFeatureLayer featurelyr = lyr as IFeatureLayer;
+                IFeatureClass featureClas = featurelyr.FeatureClass;
+                IDataset dataset = featureClas as IDataset;
+                IWorkspaceEdit workspaceEdit = dataset.Workspace as IWorkspaceEdit;
+                if (workspaceEdit == null)
+                    return;
+                else
+                {
+                    if (workspaceEdit.IsBeingEdited())
+                    {
+                        if (System.Windows.Forms.MessageBox.Show("是否保存编辑？", "Save Prompt?", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            workspaceEdit.StopEditOperation();
+                            workspaceEdit.StopEditing(true);
+                        }
+                        else
+                        {
+                            workspaceEdit.StopEditOperation();
+                            workspaceEdit.StopEditing(false);
+                        }
+                    }
+                    else
+                    {
+                        workspaceEdit.StopEditOperation();
+                        workspaceEdit.StopEditing(false);
+                    }
+                }
+
+            }
+        }
+
+        
     }
         
 }

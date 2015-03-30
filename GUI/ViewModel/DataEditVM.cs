@@ -154,27 +154,27 @@ namespace GUI.ViewModel
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
-            finally
-            {
-                // If an exception was raised, make sure the edit operation and
-                // edit session are discarded.
-                try
-                {
-                    if (WKSEditor.IsInEditOperation)
-                    {
-                        WKSEditor.AbortEditOperation();
-                    }
-                    if (WKSEditor.IsBeingEdited())
-                    {
-                        WKSEditor.StopEditing(false);
-                    }
-                }
-                catch (Exception exc)
-                {
-                    System.Windows.Forms.MessageBox.Show(exc.Message);
-                }
+            //finally
+            //{
+            //    // If an exception was raised, make sure the edit operation and
+            //    // edit session are discarded.
+            //    try
+            //    {
+            //        if (WKSEditor.IsInEditOperation)
+            //        {
+            //            WKSEditor.AbortEditOperation();
+            //        }
+            //        if (WKSEditor.IsBeingEdited())
+            //        {
+            //            WKSEditor.StopEditing(false);
+            //        }
+            //    }
+            //    catch (Exception exc)
+            //    {
+            //        System.Windows.Forms.MessageBox.Show(exc.Message);
+            //    }
 
-            }
+            //}
             return isOk;
         }
 
@@ -183,25 +183,30 @@ namespace GUI.ViewModel
         /// </summary>
         private void StopEdit()
         {
-            //if (EngineEditor.HasEdits() == false)
-            //    EngineEditor.StopEditing(false);
-            //else
-            //{
-            //    if (MessageBox.Show("Save Edits?", "Save Prompt", MessageBoxButtons.YesNo)
-            //        == DialogResult.Yes)
-            //        EngineEditor.StopEditing(true);
-            //    else
-            //        EngineEditor.StopEditing(false);
-            //}
-
             try
             {
                 if (WKSEditor == null)
                     return;
                 else
                 {
-                    WKSEditor.StopEditOperation();
-                    WKSEditor.StopEditing(true);
+                    if(!wksEditor.IsBeingEdited())
+                    {
+                        WKSEditor.StopEditOperation();
+                        WKSEditor.StopEditing(false);
+                    }
+                    else
+                    {
+                        if(MessageBox.Show("是否保存编辑？","Save Prompt?",MessageBoxButtons.YesNo)==DialogResult.Yes)
+                        {
+                            WKSEditor.StopEditOperation();
+                            WKSEditor.StopEditing(true);
+                        }
+                        else
+                        {
+                            WKSEditor.StopEditOperation();
+                            WKSEditor.StopEditing(false);
+                        }
+                    }                    
                 }
             }
             catch (Exception e)

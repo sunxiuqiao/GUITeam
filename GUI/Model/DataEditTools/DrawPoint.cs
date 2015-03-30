@@ -20,7 +20,7 @@ namespace GUI.Model.DataEditTools
     [Guid("d30936d2-3d2f-40f4-b919-0253bb5604e9")]
     [ClassInterface(ClassInterfaceType.None)]
     [ProgId("WindowsFormsApplication1.Tool1")]
-    public sealed class DrawPoint : BaseTool
+    public class DrawPoint : BaseTool
     {
         #region COM Registration Function(s)
         [ComRegisterFunction()]
@@ -72,8 +72,9 @@ namespace GUI.Model.DataEditTools
         #endregion
         #endregion
 
-        private IHookHelper m_hookHelper = null;
-        private INewMultiPointFeedback m_multiPointFeedback = null;
+        protected IHookHelper m_hookHelper = null;
+        protected IGeometry geometry = null;
+
 
         public DrawPoint()
         {
@@ -131,6 +132,10 @@ namespace GUI.Model.DataEditTools
         public override void OnMouseDown(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.TOCControl_OnMouseDown implementation
+            IActiveView activeView = m_hookHelper.ActiveView;
+            IPoint point = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
+            geometry = (IGeometry)point ;
+            
         }
 
         public override void OnMouseMove(int Button, int Shift, int X, int Y)

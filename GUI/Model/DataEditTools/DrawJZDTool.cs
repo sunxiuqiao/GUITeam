@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace GUI.Model.DataEditTools
 {
-    class DrawJZXTool : DataEditTools.DrawPolyline
+    class DrawJZDTool:DrawPoint
     {
-        public override void OnDblClick()
+        public override void OnMouseDown(int Button, int Shift, int X, int Y)
         {
-            base.OnDblClick();
+            base.OnMouseDown(Button, Shift,  X,  Y);
             if (geometry != null)
             {
                 Draw(geometry);
@@ -28,9 +28,9 @@ namespace GUI.Model.DataEditTools
                     return;
                 IMap map = m_hookHelper.FocusMap;
                 ILayer layer = null;
-                if (geometry.GeometryType.Equals(esriGeometryType.esriGeometryPolyline))
+                if (geometry.GeometryType.Equals(esriGeometryType.esriGeometryPoint))
                 {
-                    int layerIndex = GetLayerByName(map, "界址线");
+                    int layerIndex = GetLayerByName(map, "界址点");
                     if (layerIndex == -1)
                     {
                         System.Windows.Forms.MessageBox.Show("图层错误");
@@ -46,7 +46,7 @@ namespace GUI.Model.DataEditTools
                         IWorkspaceEdit workspaceEdit = workSpace as IWorkspaceEdit;
                         IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
                         featBuffer.Shape = geometry;
-                        SetFieldValue(featureLyr, featBuffer, "YSDM", "211031");
+                        SetFieldValue(featureLyr, featBuffer, "YSDM", "211021");
                         IFeatureCursor featCursor = featureClass.Insert(true);
                         featCursor.InsertFeature(featBuffer);
 
@@ -89,5 +89,6 @@ namespace GUI.Model.DataEditTools
             int pFieldIndex = pFeatureCls.FindField(Field);
             Feature.set_Value(pFieldIndex, Value);
         }
+    
     }
 }

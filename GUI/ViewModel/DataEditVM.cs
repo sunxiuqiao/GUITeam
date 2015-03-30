@@ -451,8 +451,14 @@ namespace GUI.ViewModel
                 cmd.OnCreate(ControlsVM.MapControl().Object);
                 ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
             }
+            else if (IsJZDDraw)
+            {
+                ITool tool = new Model.DataEditTools.DrawJZDTool();
+                ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
+                cmd.OnCreate(ControlsVM.MapControl().Object);
+                ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
+            }
 
-            
         }
         private bool SketchCommand_CanExecute()
         {

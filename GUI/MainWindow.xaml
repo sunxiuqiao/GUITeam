@@ -123,23 +123,25 @@
                 <f:RibbonTabItem x:Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}" IsSelected="{Binding ElementName=MainModel,Path=DataEditVM.IsStop,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox x:Name="Project" Header="工程">
-                            <f:Button x:Name="NewLoaclProjectButton" Header="新建" Command="{Binding NewProjectCommand}"></f:Button>
-                            <f:Button x:Name="OpenProjectButton" Header="打开" Command="{Binding OpenProjectCommand}"></f:Button>
-                            <f:Button x:Name="SaveAsProjectButton" Header="另存为" Command="{Binding SaveAsCommand}"></f:Button>
+                            <f:Button x:Name="NewLoaclProjectButton" Header="新建" Command="{Binding NewProjectCommand}" LargeIcon="Icons\New.png"></f:Button>
+                            <f:Button x:Name="OpenProjectButton" Header="打开" Command="{Binding OpenProjectCommand}" LargeIcon="Icons\OpenFile.png">
+                            </f:Button>
+                            <f:Button x:Name="SaveAsProjectButton" Header="另存为" Command="{Binding SaveAsCommand}" LargeIcon="Icons\SaveAs.png"></f:Button>
                         </f:RibbonGroupBox>
                         <f:RibbonGroupBox x:Name="Data" Header="数据">
-                            <f:Button x:Name="AddDataButton" Header="添加数据" Command="{Binding AddDataCommand}"></f:Button>
-                            <f:Button x:Name="LoadDataFromShp" Header="从shp文件 导入数据" Command="{Binding LoadDataFromShpCommand}"></f:Button>
-                            <f:Button x:Name="StandardLayer" Header="图层标准化" Command="{Binding StandardLayerCommand}"/>
+                            <f:Button x:Name="AddDataButton" Header="添加数据" Command="{Binding AddDataCommand}" LargeIcon="Icons\AddData.png">
+                            </f:Button>
+                            <f:Button x:Name="LoadDataFromShp" Header="从shp文件 导入数据" Command="{Binding LoadDataFromShpCommand}" LargeIcon="Icons\AddShape.png"></f:Button>
+                            <f:Button x:Name="StandardLayer" Header="图层标准化" Command="{Binding StandardLayerCommand}" LargeIcon="Icons\LayerBiaozhunhua.png"/>
                         </f:RibbonGroupBox>
                         <f:RibbonGroupBox x:Name="View" Header="视图">
-                            <f:Button x:Name="ZoomInButton" Header="放大" Size="Middle" Command="{Binding ZoomInCommand}"></f:Button>
-                            <f:Button x:Name="ZoomOutButton" Header="缩小" Size="Middle" Command="{Binding ZoomOutCommand}"></f:Button>
-                            <f:Button x:Name="MapPanButton" Header="平移" Size="Middle" Command="{Binding MapPanCommand}"></f:Button>
-                            <f:Button x:Name="ConstFactorZoomInButton" Header="固定比例放大" Size="Middle" Command="{Binding ConstFactorZoomInCommand}"></f:Button>
-                            <f:Button x:Name="ConstFactorZoomOutButton" Header="固定比例缩小" Size="Middle" Command="{Binding ConstFactorZoomOutCommand}"></f:Button>
-                            <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding OverViewCommand}"></f:Button>
-                            <f:Button x:Name="FindButton" Header="查找" Size="Middle" ></f:Button>
+                            <f:Button x:Name="ZoomInButton" Header="放大" Size="Middle" Command="{Binding ZoomInCommand}" Icon="Icons\Zoom In.png" ></f:Button>
+                            <f:Button x:Name="ZoomOutButton" Header="缩小" Size="Middle" Command="{Binding ZoomOutCommand}" Icon="Icons\Zoom Out.png"></f:Button>
+                            <f:Button x:Name="MapPanButton" Header="平移" Size="Middle" Command="{Binding MapPanCommand}" Icon="Icons\Pan.png"></f:Button>
+                            <f:Button x:Name="ConstFactorZoomInButton" Header="固定比例放大" Size="Middle" Command="{Binding ConstFactorZoomInCommand}" Icon="Icons\Zoom In Bili.png"></f:Button>
+                            <f:Button x:Name="ConstFactorZoomOutButton" Header="固定比例缩小" Size="Middle" Command="{Binding ConstFactorZoomOutCommand}" Icon="Icons\Zoom Out Bili.png"></f:Button>
+                            <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding OverViewCommand}" Icon="Icons\GlobeView.png"></f:Button>
+                            <f:Button x:Name="FindButton" Header="查找" Size="Middle"  Icon="Icons\Find.png"></f:Button>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
                 </f:RibbonTabItem> 
@@ -149,65 +151,65 @@
                 <f:RibbonTabItem Name="DataEdit" Header="数据编辑" DataContext="{Binding DataEditVM}" >
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox Name="Draw" Header="绘制">
-                            <f:Button x:Name="StartDrawDKButton" Header="地块绘制" Command="{Binding StartDrawDKCommand}"/>
-                            <f:Button x:Name="StartDrawJZXButton" Header="界址线绘制" Command="{Binding StartDrawJZXCommand}"/>
-                            <f:Button x:Name="StartDrawJZDButton" Header="界址点绘制" Command="{Binding StartDrawJZDCommand}"/>
-                            <f:Button x:Name="StartEditAttributeButton" Command="{Binding StartEditAttributeCommand}" Header="属性编辑"/>
-                            <f:Button x:Name="StartEditAnnotationButton" Command="{Binding StartEditAnnotationCommand}" Header="注记编辑"/>
+                            <f:Button x:Name="StartDrawDKButton" Header="地块绘制" Command="{Binding StartDrawDKCommand}" LargeIcon="Icons\EditDK.png"/>
+                            <f:Button x:Name="StartDrawJZXButton" Header="界址线绘制" Command="{Binding StartDrawJZXCommand}" LargeIcon="Icons\EditJZX.png"/>
+                            <f:Button x:Name="StartDrawJZDButton" Header="界址点绘制" Command="{Binding StartDrawJZDCommand}" LargeIcon="Icons\EditJZD.png"/>
+                            <f:Button x:Name="StartEditAttributeButton" Command="{Binding StartEditAttributeCommand}" Header="属性编辑"  LargeIcon="Icons\Edit Property1.png"/>
+                            <f:Button x:Name="StartEditAnnotationButton" Command="{Binding StartEditAnnotationCommand}" Header="注记编辑" LargeIcon="Icons\EditAttribute.png"/>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
                 </f:RibbonTabItem>
                     <!--绘制地块的命令-->
                 <f:RibbonTabItem x:Name="DKDraw" Header="绘制" IsSelected="{Binding IsDKDraw,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Group="{Binding ElementName=DKDrawGroup}" DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox x:Name="DKDrawGroupBox" Header="绘制地块">
-                        <f:Button x:Name="DKAutoDrawButton" Header="自动构建" />
-                        <f:Button x:Name="DKSegementButton" Header="分割"/>
-                        <f:Button x:Name="DKMergeButton" Header="合并"/>
-                        <f:Button x:Name="DKStopDrawButton" Header="完成" Command="{Binding StopDrawDKCommand}"/>
+                        <f:Button x:Name="DKAutoDrawButton" Header="自动构建"  LargeIcon="Icons\AutoCreate.png"/>
+                        <f:Button x:Name="DKSegementButton" Header="分割" LargeIcon="Icons\Segment.png"/>
+                        <f:Button x:Name="DKMergeButton" Header="合并" LargeIcon="Icons\Merge-50.png"/>
+                        <f:Button x:Name="DKStopDrawButton" Header="完成" Command="{Binding StopDrawDKCommand}" LargeIcon="Icons\DoWell.png"/>
                     </f:RibbonGroupBox>
                     <f:RibbonGroupBox x:Name="DKDrawTool" Header="工具"  >
-                        <f:Button x:Name="DKEditButton" Header="编辑" Size="Middle" Command="{Binding EditCommand}"></f:Button>
-                        <f:Button x:Name="DKSketchButton" Header="绘制" Size="Middle" Command="{Binding SketchCommand}"></f:Button>
-                        <f:Button x:Name="DKRedoButton" Header="撤销" Size="Middle" Command="{Binding UndoCommand}"></f:Button>
-                        <f:Button x:Name="DKUndoButton" Header="恢复" Size="Middle" Command="{Binding RedoCommand}"></f:Button>
-                        <f:Button x:Name="DKCopyButton" Header="复制" Size="Middle" Command="{Binding CopyCommand}"></f:Button>
-                        <f:Button x:Name="DKPasteButton" Header="粘贴" Size="Middle" Command="{Binding PasteCommand}"></f:Button>
-                        <f:Button x:Name="DKCutButton" Header="剪切" Size="Middle" Command="{Binding CutCommand}"></f:Button>
-                        <f:Button x:Name="DKClearButton" Header="删除" Size="Middle" Command="{Binding ClearCommand}"></f:Button>
+                        <f:Button x:Name="DKEditButton" Header="编辑" Size="Middle" Command="{Binding EditCommand}" Icon="Icons\Edit Start.png" ></f:Button>
+                        <f:Button x:Name="DKSketchButton" Header="绘制" Size="Middle" Command="{Binding SketchCommand}" Icon="Icons\Edit-50.png"></f:Button>
+                        <f:Button x:Name="DKRedoButton" Header="撤销" Size="Middle" Command="{Binding UndoCommand}" Icon="Icons\Undo-50.png" ></f:Button>
+                        <f:Button x:Name="DKUndoButton" Header="恢复" Size="Middle" Command="{Binding RedoCommand}" Icon="Icons\Redo-50.png"></f:Button>
+                        <f:Button x:Name="DKCopyButton" Header="复制" Size="Middle" Command="{Binding CopyCommand}" Icon="Icons\Copy-50.png"></f:Button>
+                        <f:Button x:Name="DKPasteButton" Header="粘贴" Size="Middle" Command="{Binding PasteCommand}" Icon="Icons\Paste-50.png"></f:Button>
+                        <f:Button x:Name="DKCutButton" Header="剪切" Size="Middle" Command="{Binding CutCommand}" Icon="Icons\Cut-50.png"></f:Button>
+                        <f:Button x:Name="DKClearButton" Header="删除" Size="Middle" Command="{Binding ClearCommand}" Icon="Icons\Delete .png"></f:Button>
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
                 <!--绘制界址点命令-->
                 <f:RibbonTabItem x:Name="JZDDraw" Header="绘制" Group="{Binding ElementName=JZDDrawGroup}" IsSelected="{Binding IsJZDDraw,Mode=OneWay}" DataContext="{Binding DataEditVM}">
-                    <f:RibbonGroupBox x:Name="JZDDrawGroupBox" Header="界址点绘制">
-                        <f:Button x:Name="JZDAutoDrawButton" Header="自动绘制 界址点" />
-                        <f:Button x:Name="JZDStopDrawButton" Header="绘制完成" Command="{Binding StopDrawJZDCommand}"/>
+                    <f:RibbonGroupBox x:Name="JZDDrawGroupBox" Header="界址点绘制" >
+                        <f:Button x:Name="JZDAutoDrawButton" Header="自动绘制 界址点" LargeIcon="Icons\EditJZD.png" />
+                        <f:Button x:Name="JZDStopDrawButton" Header="绘制完成" Command="{Binding StopDrawJZDCommand}" LargeIcon="Icons\DoWell.png"/>
                     </f:RibbonGroupBox>
-                    <f:RibbonGroupBox x:Name="JZDDrawTool" Header="工具" >
-                        <f:Button x:Name="JZDEditButton" Header="编辑" Size="Middle" Command="{Binding EditCommand}"></f:Button>
-                        <f:Button x:Name="JZDSketchButton" Header="绘制" Size="Middle" Command="{Binding SketchCommand}"></f:Button>
-                        <f:Button x:Name="JZDRedoButton" Header="撤销" Size="Middle" Command="{Binding UndoCommand}"></f:Button>
-                        <f:Button x:Name="JZDUndoButton" Header="恢复" Size="Middle" Command="{Binding RedoCommand}"></f:Button>
-                        <f:Button x:Name="JZDCopyButton" Header="复制" Size="Middle" Command="{Binding CopyCommand}"></f:Button>
-                        <f:Button x:Name="JZDPasteButton" Header="粘贴" Size="Middle" Command="{Binding PasteCommand}"></f:Button>
-                        <f:Button x:Name="JZDCutButton" Header="剪切" Size="Middle" Command="{Binding CutCommand}"></f:Button>
-                        <f:Button x:Name="JZDClearButton" Header="删除" Size="Middle" Command="{Binding ClearCommand}"></f:Button>
+                    <f:RibbonGroupBox x:Name="JZDDrawTool" Header="工具">
+                        <f:Button x:Name="JZDEditButton" Header="编辑" Size="Middle" Command="{Binding EditCommand}" Icon="Icons\Edit Start.png" ></f:Button>
+                        <f:Button x:Name="JZDSketchButton" Header="绘制" Size="Middle" Command="{Binding SketchCommand}" Icon="Icons\Edit-50.png"></f:Button>
+                        <f:Button x:Name="JZDRedoButton" Header="撤销" Size="Middle" Command="{Binding UndoCommand}" Icon="Icons\Undo-50.png" ></f:Button>
+                        <f:Button x:Name="JZDUndoButton" Header="恢复" Size="Middle" Command="{Binding RedoCommand}" Icon="Icons\Redo-50.png"></f:Button>
+                        <f:Button x:Name="JZDCopyButton" Header="复制" Size="Middle" Command="{Binding CopyCommand}" Icon="Icons\Copy-50.png"></f:Button>
+                        <f:Button x:Name="JZDPasteButton" Header="粘贴" Size="Middle" Command="{Binding PasteCommand}" Icon="Icons\Paste-50.png"></f:Button>
+                        <f:Button x:Name="JZDCutButton" Header="剪切" Size="Middle" Command="{Binding CutCommand}" Icon="Icons\Cut-50.png"></f:Button>
+                        <f:Button x:Name="JZDClearButton" Header="删除" Size="Middle" Command="{Binding ClearCommand}" Icon="Icons\Delete .png"></f:Button>
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
                 <!--绘制界址线命令-->
                 <f:RibbonTabItem x:Name="JZXDraw" Header="绘制" Group="{Binding ElementName=JZXDrawGroup}" IsSelected="{Binding IsJZXDraw,Mode=OneWay}" DataContext="{Binding DataEditVM}">
-                    <f:RibbonGroupBox x:Name="JZXDrawGroupBox" Header="界址点绘制">
-                        <f:Button x:Name="JZXAutoDrawButton" Header="自动绘制 界址线" />
-                        <f:Button x:Name="JZXStopDrawButton" Header="绘制完成" Command="{Binding StopDrawJZXCommand}"/>
+                    <f:RibbonGroupBox x:Name="JZXDrawGroupBox" Header="界址点绘制" >
+                        <f:Button x:Name="JZXAutoDrawButton" Header="自动绘制 界址线"  LargeIcon="Icons\EditJZX.png"/>
+                        <f:Button x:Name="JZXStopDrawButton" Header="绘制完成" Command="{Binding StopDrawJZXCommand}" LargeIcon="Icons\DoWell.png"/>
                     </f:RibbonGroupBox>
                     <f:RibbonGroupBox x:Name="JZXDrawTool" Header="工具" >
-                        <f:Button x:Name="JZXEditButton" Header="编辑" Size="Middle" Command="{Binding EditCommand}"></f:Button>
-                        <f:Button x:Name="JZXSketchButton" Header="绘制" Size="Middle" Command="{Binding SketchCommand}"></f:Button>
-                        <f:Button x:Name="JZXRedoButton" Header="撤销" Size="Middle" Command="{Binding UndoCommand}"></f:Button>
-                        <f:Button x:Name="JZXUndoButton" Header="恢复" Size="Middle" Command="{Binding RedoCommand}"></f:Button>
-                        <f:Button x:Name="JZXCopyButton" Header="复制" Size="Middle" Command="{Binding CopyCommand}"></f:Button>
-                        <f:Button x:Name="JZXPasteButton" Header="粘贴" Size="Middle" Command="{Binding PasteCommand}"></f:Button>
-                        <f:Button x:Name="JZXCutButton" Header="剪切" Size="Middle" Command="{Binding CutCommand}"></f:Button>
-                        <f:Button x:Name="JZXClearButton" Header="删除" Size="Middle" Command="{Binding ClearCommand}"></f:Button>
+                        <f:Button x:Name="JZXEditButton" Header="编辑" Size="Middle" Command="{Binding EditCommand}" Icon="Icons\Edit Start.png"></f:Button>
+                        <f:Button x:Name="JZXSketchButton" Header="绘制" Size="Middle" Command="{Binding SketchCommand}" Icon="Icons\Edit-50.png"></f:Button>
+                        <f:Button x:Name="JZXRedoButton" Header="撤销" Size="Middle" Command="{Binding UndoCommand}" Icon="Icons\Undo-50.png"></f:Button>
+                        <f:Button x:Name="JZXUndoButton" Header="恢复" Size="Middle" Command="{Binding RedoCommand}" Icon="Icons\Redo-50.png"></f:Button>
+                        <f:Button x:Name="JZXCopyButton" Header="复制" Size="Middle" Command="{Binding CopyCommand}" Icon="Icons\Copy-50.png"></f:Button>
+                        <f:Button x:Name="JZXPasteButton" Header="粘贴" Size="Middle" Command="{Binding PasteCommand}" Icon="Icons\Paste-50.png"></f:Button>
+                        <f:Button x:Name="JZXCutButton" Header="剪切" Size="Middle" Command="{Binding CutCommand}" Icon="Icons\Cut-50.png"></f:Button>
+                        <f:Button x:Name="JZXClearButton" Header="删除" Size="Middle" Command="{Binding ClearCommand}" Icon="Icons\Delete .png"></f:Button>
                     </f:RibbonGroupBox>
                 </f:RibbonTabItem>
                      <!--属性编辑命令-->

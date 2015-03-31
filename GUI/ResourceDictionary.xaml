@@ -245,6 +245,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="DimGray"/>
     </Style>
-
+    
     <m:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></m:BooleanToVisibilityConverter>
+    
 </ResourceDictionary>  

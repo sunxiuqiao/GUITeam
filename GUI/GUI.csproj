@@ -409,6 +409,48 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\AddData.png" />
+    <Resource Include="Icons\AddShape.png" />
+    <Resource Include="Icons\Edit Property1.png" />
+    <Resource Include="Icons\EditAttribute.png" />
+    <Resource Include="Icons\EditDK.png" />
+    <Resource Include="Icons\EditJZD.png" />
+    <Resource Include="Icons\EditJZX.png" />
+    <Resource Include="Icons\EditProperty.png" />
+    <Resource Include="Icons\Find.png" />
+    <Resource Include="Icons\GlobeView.png" />
+    <Resource Include="Icons\LayerBiaozhunhua.png" />
+    <Resource Include="Icons\OpenFile.png" />
+    <Resource Include="Icons\Pan.png" />
+    <Resource Include="Icons\SaveAs.png" />
+    <Resource Include="Icons\ViewFiles.png" />
+    <Resource Include="Icons\Zoom In Bili.png" />
+    <Resource Include="Icons\Zoom In.png" />
+    <Resource Include="Icons\Zoom Out Bili.png" />
+    <Resource Include="Icons\Zoom Out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\AutoCreate.png" />
+    <Resource Include="Icons\Cut-50.png" />
+    <Resource Include="Icons\Delete .png" />
+    <Resource Include="Icons\Edit-50.png" />
+    <Resource Include="Icons\Merge-50.png" />
+    <Resource Include="Icons\Paste-50.png" />
+    <Resource Include="Icons\Redo-50.png" />
+    <Resource Include="Icons\Segment.png" />
+    <Resource Include="Icons\Undo-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\DoWell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Copy-50.png" />
+    <Resource Include="Icons\New.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Edit Start.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

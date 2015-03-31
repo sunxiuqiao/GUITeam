@@ -430,23 +430,12 @@ namespace GUI.ViewModel
         #region UndoCommand
         private void UndoCommand_Executed()
         {
-            //ILayer currentLayer = null;
-            //if (IsDKDraw == true)
-            //{
-            //    int index = GetLayerByName(ControlsVM.MapControl().Map, "地块");
-            //    if (index == -1)
-            //    {
-            //        System.Windows.Forms.MessageBox.Show("图层错误");
-            //        return;
-            //    }
-            //    currentLayer = ControlsVM.MapControl().get_Layer(index);
-            //}
-            //if (currentLayer != null)
-            //{
-            //    Model.DataEditTools.UndoCommand cmd = new Model.DataEditTools.UndoCommand(currentLayer);
-            //    cmd.OnCreate(ControlsVM.MapControl().Object);
-            //    cmd.OnClick();
-            //}
+            bool isCanUndo = false;
+            dataEditor.WKSEditor.HasUndos(ref isCanUndo);
+            if(isCanUndo)
+                dataEditor.WKSEditor.UndoEditOperation();
+            ControlsVM.MapControl().ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+
         }
         private bool UndoCommand_CanExecute()
         {
@@ -459,23 +448,11 @@ namespace GUI.ViewModel
         #region RedoCommand
         private void RedoCommand_Executed()
         {
-            //ILayer currentLayer = null;
-            //if(IsDKDraw == true)
-            //{
-            //    int index = GetLayerByName(ControlsVM.MapControl().Map, "地块");
-            //    if(index == -1)
-            //    {
-            //        System.Windows.Forms.MessageBox.Show("图层错误");
-            //        return;
-            //    }
-            //    currentLayer = ControlsVM.MapControl().get_Layer(index);
-            //}
-            //if(currentLayer != null)
-            //{
-            //    Model.DataEditTools.UndoCommand cmd = new Model.DataEditTools.UndoCommand(currentLayer);
-            //    cmd.OnCreate(ControlsVM.MapControl().Object);
-            //    cmd.OnClick();
-            //}
+            bool isCanRedo = false;
+            dataEditor.WKSEditor.HasRedos(ref isCanRedo);
+            if (isCanRedo)
+                dataEditor.WKSEditor.RedoEditOperation();
+            ControlsVM.MapControl().ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
             
         }
         private bool RedoCommand_CanExecute()

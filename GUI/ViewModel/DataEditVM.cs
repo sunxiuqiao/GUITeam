@@ -1,5 +1,6 @@
 ﻿using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
+using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.SystemUI;
@@ -26,6 +27,7 @@ namespace GUI.ViewModel
         IWorkspaceEdit2 wksEditor;
         //IEngineEditor engineEditor = new EngineEditorClass();
         IOperationStack operationStack = new ControlsOperationStackClass();
+        Model.DataEditTools.DataEditor dataEditor = null;
         #endregion
 
         #region Properties
@@ -126,30 +128,13 @@ namespace GUI.ViewModel
             bool isOk = false;
             try
             {
-                IMap map = MapControl.Map;
-                int layerIndex = GetLayerByName(map, LyrName);
-                if (layerIndex == -1)
-                {
-                    System.Windows.Forms.MessageBox.Show("图层错误");
-                }
-                ILayer currentLayer = map.get_Layer(layerIndex);
-                if (currentLayer is IFeatureLayer)
-                {
-                    IFeatureLayer featureLyr = currentLayer as IFeatureLayer;
-                    IFeatureClass featureClass = featureLyr.FeatureClass;
-                    IDataset dataSet = featureClass as IDataset;
-                    WKSEditor = dataSet.Workspace as IWorkspaceEdit2;
-                    if (!WKSEditor.IsBeingEdited())
-                        WKSEditor.StartEditing(true);
-                    if (!WKSEditor.IsInEditOperation)
-                        WKSEditor.StartEditOperation();
-                    isOk = true;
-                }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show("图层错误");
-                }
-            }
+                int index = GetLayerByName(MapControl.Map, LyrName);
+
+                dataEditor = new Model.DataEditTools.DataEditor();
+                dataEditor.CurrentLayer = MapControl.get_Layer(index);
+                dataEditor.StartEdit();
+                isOk = true;
+            }            
             catch (Exception e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
@@ -165,29 +150,9 @@ namespace GUI.ViewModel
         {
             try
             {
-                if (WKSEditor == null)
+                if (dataEditor == null)
                     return;
-                else
-                {
-                    if (!WKSEditor.IsBeingEdited())
-                    {
-                        WKSEditor.StopEditOperation();
-                        WKSEditor.StopEditing(false);
-                    }
-                    else
-                    {
-                        if(MessageBox.Show("是否保存编辑？","Save Prompt?",MessageBoxButtons.YesNo)==DialogResult.Yes)
-                        {
-                            WKSEditor.StopEditOperation();
-                            WKSEditor.StopEditing(true);
-                        }
-                        else
-                        {
-                            WKSEditor.StopEditOperation();
-                            WKSEditor.StopEditing(false);
-                        }
-                    }                    
-                }
+                dataEditor.StopEdit();
                 IActiveView activeView = ControlsVM.MapControl().ActiveView;
                 activeView.PartialRefresh(esriViewDrawPhase.esriViewAll, null, null);
                 
@@ -196,28 +161,6 @@ namespace GUI.ViewModel
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
-            finally
-            {
-                // If an exception was raised, make sure the edit operation and
-                // edit session are discarded.
-                try
-                {
-                    if (WKSEditor.IsInEditOperation)
-                    {
-                        WKSEditor.AbortEditOperation();
-                    }
-                    if (WKSEditor.IsBeingEdited())
-                    {
-                        WKSEditor.StopEditing(false);
-                    }
-                }
-                catch (Exception exc)
-                {
-                    System.Windows.Forms.MessageBox.Show(exc.Message);
-                }
-            }
-            
-
         }
 
         /// <summary>
@@ -439,21 +382,21 @@ namespace GUI.ViewModel
         {
             if(IsDKDraw)
             {
-                ITool tool = new Model.DataEditTools.DrawDKTool();
+                ITool tool = new Model.DataEditTools.DrawDKTool(dataEditor);
                 ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
                 cmd.OnCreate(ControlsVM.MapControl().Object);
                 ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
             }
             else if (IsJZXDraw)
             {
-                ITool tool = new Model.DataEditTools.DrawJZXTool();
+                ITool tool = new Model.DataEditTools.DrawJZXTool(dataEditor);
                 ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
                 cmd.OnCreate(ControlsVM.MapControl().Object);
                 ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
             }
             else if (IsJZDDraw)
             {
-                ITool tool = new Model.DataEditTools.DrawJZDTool();
+                ITool tool = new Model.DataEditTools.DrawJZDTool(dataEditor);
                 ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
                 cmd.OnCreate(ControlsVM.MapControl().Object);
                 ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
@@ -487,9 +430,23 @@ namespace GUI.ViewModel
         #region UndoCommand
         private void UndoCommand_Executed()
         {
-            ESRI.ArcGIS.SystemUI.ICommand cmd = new ESRI.ArcGIS.Controls.ControlsUndoCommandClass();
-            cmd.OnCreate(ControlsVM.MapControl().Object);
-            cmd.OnClick();
+            //ILayer currentLayer = null;
+            //if (IsDKDraw == true)
+            //{
+            //    int index = GetLayerByName(ControlsVM.MapControl().Map, "地块");
+            //    if (index == -1)
+            //    {
+            //        System.Windows.Forms.MessageBox.Show("图层错误");
+            //        return;
+            //    }
+            //    currentLayer = ControlsVM.MapControl().get_Layer(index);
+            //}
+            //if (currentLayer != null)
+            //{
+            //    Model.DataEditTools.UndoCommand cmd = new Model.DataEditTools.UndoCommand(currentLayer);
+            //    cmd.OnCreate(ControlsVM.MapControl().Object);
+            //    cmd.OnClick();
+            //}
         }
         private bool UndoCommand_CanExecute()
         {
@@ -502,9 +459,24 @@ namespace GUI.ViewModel
         #region RedoCommand
         private void RedoCommand_Executed()
         {
-            ESRI.ArcGIS.SystemUI.ICommand cmd = new ESRI.ArcGIS.Controls.ControlsRedoCommandClass();
-            cmd.OnCreate(ControlsVM.MapControl().Object);
-            cmd.OnClick();
+            //ILayer currentLayer = null;
+            //if(IsDKDraw == true)
+            //{
+            //    int index = GetLayerByName(ControlsVM.MapControl().Map, "地块");
+            //    if(index == -1)
+            //    {
+            //        System.Windows.Forms.MessageBox.Show("图层错误");
+            //        return;
+            //    }
+            //    currentLayer = ControlsVM.MapControl().get_Layer(index);
+            //}
+            //if(currentLayer != null)
+            //{
+            //    Model.DataEditTools.UndoCommand cmd = new Model.DataEditTools.UndoCommand(currentLayer);
+            //    cmd.OnCreate(ControlsVM.MapControl().Object);
+            //    cmd.OnClick();
+            //}
+            
         }
         private bool RedoCommand_CanExecute()
         {
@@ -571,6 +543,43 @@ namespace GUI.ViewModel
             return true;
         }
         public System.Windows.Input.ICommand ClearCommand { get { return new RelayCommand(ClearCommand_Executed, ClearCommand_CanExecute); } }
+
+        #endregion
+
+        #region SplitPolygon
+        private void SplitPolygonCommand_Executed()
+        {
+            Model.DataEditTools.DrawSplitLine tool = new Model.DataEditTools.DrawSplitLine(dataEditor);
+            ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
+            cmd.OnCreate(ControlsVM.MapControl().Object);
+            ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
+        }
+        private bool SplitPolygonCommand_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand SplitPolygonCommand { get { return new RelayCommand(SplitPolygonCommand_Executed, SplitPolygonCommand_CanExecute); } }
+
+        #endregion
+
+        #region Merge
+        private void MergePolygonCommand_Executed()
+        {
+            //Model.DataEditTools.DrawSplitLine tool = new Model.DataEditTools.DrawSplitLine();
+            //ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
+            //cmd.OnCreate(ControlsVM.MapControl().Object);
+            //ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
+            int index = GetLayerByName(ControlsVM.MapControl().Map, "地块");
+            Model.DataEditTools.FeatureMerge cmd = new Model.DataEditTools.FeatureMerge();
+            cmd.CurrentLayer = ControlsVM.MapControl().Map.get_Layer(index);
+            cmd.OnCreate(ControlsVM.MapControl().Object);
+            cmd.OnClick();
+        }
+        private bool MergePolygonCommand_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand MergePolygonCommand { get { return new RelayCommand(MergePolygonCommand_Executed, MergePolygonCommand_CanExecute); } }
 
         #endregion
 

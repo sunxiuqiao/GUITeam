@@ -91,6 +91,12 @@ namespace GUI.Model.DataEditTools
             base.m_name = "DataEditTools_DrawPolygon";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
         }
 
+        public IGeometry Geometry
+        {
+            get { return geometry; }
+            set { geometry = value; }
+        }
+
         #region Overridden Class Methods
 
         /// <summary>

@@ -192,11 +192,16 @@
     </ApplicationDefinition>
     <Compile Include="Model\CollectionData.cs" />
     <Compile Include="Model\Converter.cs" />
+    <Compile Include="Model\DataEditTools\DataEditor.cs" />
+    <Compile Include="Model\DataEditTools\DeleteSelectedFeature.cs" />
     <Compile Include="Model\DataEditTools\DrawDKTool.cs" />
     <Compile Include="Model\DataEditTools\DrawJZDTool.cs" />
     <Compile Include="Model\DataEditTools\DrawPoint.cs" />
     <Compile Include="Model\DataEditTools\DrawPolygon.cs" />
     <Compile Include="Model\DataEditTools\DrawPolyline.cs" />
+    <Compile Include="Model\DataEditTools\DrawSplitLine.cs" />
+    <Compile Include="Model\DataEditTools\FeatureMerge.cs" />
+    <Compile Include="Model\DataEditTools\UndoCommand.cs" />
     <Compile Include="Model\DataEditTools\SelectFeatures.cs" />
     <Compile Include="Model\DataEditTools\DrawJZXTool.cs" />
     <Compile Include="Model\HandleExcel.cs" />
@@ -433,9 +438,6 @@
     <Resource Include="Config\Cursor\ZoomOut.cur" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="Config\Icon\SelectFeature.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,75 +11,51 @@ namespace GUI.Model.DataEditTools
 {
     public class DrawDKTool : DrawPolygon
     {
+        protected DataEditor dataEdit = null;
+
+        public DrawDKTool(DataEditor edit)
+        {
+            dataEdit = edit;
+        }
+
+        public DataEditor DataEdit
+        {
+            get { return dataEdit; }
+            set
+            {
+                dataEdit = value;
+            }
+        }
         public override void OnDblClick()
         {
+            DataEdit.WKSEditor.StartEditOperation();
             base.OnDblClick();
             if (geometry != null)
             {
                 Draw(geometry);
             }
+            DataEdit.WKSEditor.StopEditOperation();
         }
 
         private void Draw(IGeometry geometry)
         {
             try
             {
-                if (geometry == null)
-                    return;
-                IMap map = m_hookHelper.FocusMap;
-                ILayer layer = null;
-                if (geometry.GeometryType.Equals(esriGeometryType.esriGeometryPolygon))
-                {
-                    int layerIndex = GetLayerByName(map, "地块");
-                    if (layerIndex == -1)
-                    {
-                        System.Windows.Forms.MessageBox.Show("图层错误");
-                        return;
-                    }
-                    layer = map.get_Layer(layerIndex);
-                    if (layer is IFeatureLayer)
-                    {
-                        IFeatureLayer featureLyr = layer as IFeatureLayer;
-                        IFeatureClass featureClass = featureLyr.FeatureClass;
-                        IDataset dataSet = featureClass as IDataset;
-                        IWorkspace workSpace = dataSet.Workspace;
-                        IWorkspaceEdit workspaceEdit = workSpace as IWorkspaceEdit;
-                        IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
-                        featBuffer.Shape = geometry;
-                        SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
-                        IFeatureCursor featCursor = featureClass.Insert(true);
-                        featCursor.InsertFeature(featBuffer);
-
-                    }
-                }
+                IFeatureLayer featureLyr = DataEdit.CurrentLayer as IFeatureLayer;
+                IFeatureClass featureClass = featureLyr.FeatureClass;
+                IWorkspaceEdit2 workspaceEdit = DataEdit.WKSEditor;
+                IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
+                featBuffer.Shape = geometry;
+                SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
+                IFeatureCursor featCursor = featureClass.Insert(true);
+                featCursor.InsertFeature(featBuffer);
+                    
                 m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
 
             }
             catch (Exception e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message);
-            }
-        }
-
-        private int GetLayerByName(IMap Map, string LyrName)
-        {
-            try
-            {
-                int index = -1;
-                for (int i = 0; i < Map.LayerCount; ++i)
-                {
-                    if (Map.get_Layer(i).Name == LyrName)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-                return index;
-            }
-            catch (Exception e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message);
-                return -1;
             }
         }
 

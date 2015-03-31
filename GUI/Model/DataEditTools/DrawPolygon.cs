@@ -75,6 +75,7 @@ namespace GUI.Model.DataEditTools
         protected IHookHelper m_hookHelper = null;
         protected INewPolygonFeedback m_polygonFeedback = null;
         protected IGeometry geometry = null;
+        
 
         private bool m_isMouseDown;//鼠标是否按下
 
@@ -91,6 +92,8 @@ namespace GUI.Model.DataEditTools
             base.m_name = "DataEditTools_DrawPolygon";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
             
         }
+
+        
 
         #region Overridden Class Methods
 

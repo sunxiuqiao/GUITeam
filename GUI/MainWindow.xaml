@@ -161,8 +161,8 @@
                 <f:RibbonTabItem x:Name="DKDraw" Header="绘制" IsSelected="{Binding IsDKDraw,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Group="{Binding ElementName=DKDrawGroup}" DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox x:Name="DKDrawGroupBox" Header="绘制地块">
                         <f:Button x:Name="DKAutoDrawButton" Header="自动构建" />
-                        <f:Button x:Name="DKSegementButton" Header="分割"/>
-                        <f:Button x:Name="DKMergeButton" Header="合并"/>
+                        <f:Button x:Name="DKSegementButton" Header="分割" Command="{Binding SplitPolygonCommand}"/>
+                        <f:Button x:Name="DKMergeButton" Header="合并" Command="{Binding MergePolygonCommand}"/>
                         <f:Button x:Name="DKStopDrawButton" Header="完成" Command="{Binding StopDrawDKCommand}"/>
                     </f:RibbonGroupBox>
                     <f:RibbonGroupBox x:Name="DKDrawTool" Header="工具"  >

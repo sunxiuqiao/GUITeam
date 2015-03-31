@@ -18,7 +18,7 @@ namespace GUI.Model.DataEditTools
     [Guid("d30936d2-3d2f-40f4-b919-0253bb5604e9")]
     [ClassInterface(ClassInterfaceType.None)]
     [ProgId("WindowsFormsApplication1.Tool1")]
-    public sealed class SelectFeaturesTool : BaseTool
+    public class SelectFeaturesTool : BaseTool
     {
         #region COM Registration Function(s)
         [ComRegisterFunction()]
@@ -70,7 +70,7 @@ namespace GUI.Model.DataEditTools
         #endregion
         #endregion
 
-        private IHookHelper m_hookHelper = null;
+        protected IHookHelper m_hookHelper = null;
 
         public SelectFeaturesTool()
         {
@@ -205,6 +205,10 @@ namespace GUI.Model.DataEditTools
         public override void OnMouseUp(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseUp implementation
+        }
+        public override void OnDblClick()
+        {
+            base.OnDblClick();
         }
         #endregion
     }

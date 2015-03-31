@@ -11,47 +11,49 @@ namespace GUI.Model.DataEditTools
 {
     class DrawJZXTool : DataEditTools.DrawPolyline
     {
+        private DataEditor dataEdit = null;
+
+        public DrawJZXTool(DataEditor edit)
+        {
+            dataEdit = edit;
+        }
+
+        public DataEditor DataEdit
+        {
+            get { return dataEdit; }
+            set { dataEdit = value; }
+        }
         public override void OnDblClick()
         {
+            DataEdit.WKSEditor.StartEditOperation();
             base.OnDblClick();
             if (geometry != null)
             {
                 Draw(geometry);
             }
+            DataEdit.WKSEditor.StopEditOperation();
         }
+
+        
 
         private void Draw(IGeometry geometry)
         {
             try
             {
-                if (geometry == null)
-                    return;
-                IMap map = m_hookHelper.FocusMap;
-                ILayer layer = null;
-                if (geometry.GeometryType.Equals(esriGeometryType.esriGeometryPolyline))
+                ILayer layer = DataEdit.CurrentLayer;
+                if (layer is IFeatureLayer)
                 {
-                    int layerIndex = GetLayerByName(map, "界址线");
-                    if (layerIndex == -1)
-                    {
-                        System.Windows.Forms.MessageBox.Show("图层错误");
-                        return;
-                    }
-                    layer = map.get_Layer(layerIndex);
-                    if (layer is IFeatureLayer)
-                    {
-                        IFeatureLayer featureLyr = layer as IFeatureLayer;
-                        IFeatureClass featureClass = featureLyr.FeatureClass;
-                        IDataset dataSet = featureClass as IDataset;
-                        IWorkspace workSpace = dataSet.Workspace;
-                        IWorkspaceEdit workspaceEdit = workSpace as IWorkspaceEdit;
-                        IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
-                        featBuffer.Shape = geometry;
-                        SetFieldValue(featureLyr, featBuffer, "YSDM", "211031");
-                        IFeatureCursor featCursor = featureClass.Insert(true);
-                        featCursor.InsertFeature(featBuffer);
+                    IFeatureLayer featureLyr = layer as IFeatureLayer;
+                    IFeatureClass featureClass = featureLyr.FeatureClass;
+                    IWorkspaceEdit workspaceEdit = dataEdit.WKSEditor;
+                    IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
+                    featBuffer.Shape = geometry;
+                    SetFieldValue(featureLyr, featBuffer, "YSDM", "211031");
+                    IFeatureCursor featCursor = featureClass.Insert(true);
+                    featCursor.InsertFeature(featBuffer);
 
-                    }
                 }
+
                 m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
 
             }

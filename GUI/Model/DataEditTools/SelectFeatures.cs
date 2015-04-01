@@ -73,6 +73,8 @@ namespace GUI.Model.DataEditTools
 
         protected IHookHelper m_hookHelper = null;
         private bool m_isMouseDown = false;
+        IGeometry m_envelopeGeometry = null;
+        IMap m_map;
 
         public SelectFeaturesTool()
         {
@@ -140,65 +142,100 @@ namespace GUI.Model.DataEditTools
         public override void OnMouseDown(int Button, int Shift, int X, int Y)
         {
             m_isMouseDown = true;
-            IMap map;
+            
             IPoint clickedPoint = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
 
             //If ActiveView is a PageLayout 
             if(m_hookHelper.ActiveView is IPageLayout)
             {
                 //See whether the mouse has been clicked over a Map in the PageLayout 
-                map = m_hookHelper.ActiveView.HitTestMap(clickedPoint);
+                m_map = m_hookHelper.ActiveView.HitTestMap(clickedPoint);
 
                 //If mouse click isn't over a Map exit
-                if (map == null)
+                if (m_map == null)
                     return;
 
                 //Ensure the Map is the FocusMap
-                if((!object.ReferenceEquals(m_hookHelper.ActiveView.FocusMap,map)))
+                if((!object.ReferenceEquals(m_hookHelper.ActiveView.FocusMap,m_map)))
                 {
-                    m_hookHelper.ActiveView.FocusMap = map;
+                    m_hookHelper.ActiveView.FocusMap = m_map;
                     m_hookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
                 }
 
                 //Still need to convert the clickedPoint into map units using the map's IActiveView 
-                clickedPoint = ((IActiveView)map).ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
+                clickedPoint = ((IActiveView)m_map).ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
             }
             else
             {
-                map = m_hookHelper.ActiveView.FocusMap;
+                m_map = m_hookHelper.ActiveView.FocusMap;
             }
 
             
 
-            IActiveView activeView = map as IActiveView;
+            IActiveView activeView = m_map as IActiveView;
             IRubberBand envelopeRubber = new RubberEnvelopeClass();
-            IGeometry geom = envelopeRubber.TrackNew(activeView.ScreenDisplay, null);
-            IArea area = (IArea)geom;
 
-            if((geom.IsEmpty==true) || (area == null))
+            if (Shift != 2 || m_envelopeGeometry ==null)
             {
-                //create a new envelope 
-                IEnvelope tempEnv = new EnvelopeClass();
 
-                //create a small rectangle 
-                ESRI.ArcGIS.esriSystem.tagRECT RECT = new tagRECT();
-                RECT.bottom = 0;
-                RECT.left = 0;
-                RECT.right = 5;
-                RECT.top = 5;
+                m_envelopeGeometry = envelopeRubber.TrackNew(activeView.ScreenDisplay, null);
+                IArea area = (IArea)m_envelopeGeometry;
 
-                //transform rectangle into map units and apply to the tempEnv envelope 
-                IDisplayTransformation dispTrans = activeView.ScreenDisplay.DisplayTransformation;
-                dispTrans.TransformRect(tempEnv, ref RECT, 4); //4 = esriDisplayTransformationEnum.esriTransformToMap)
-                tempEnv.CenterAt(clickedPoint);
-                geom = (IGeometry)tempEnv;
+                if((m_envelopeGeometry.IsEmpty==true) || (area == null))
+                {
+                    //create a new envelope 
+                    IEnvelope tempEnv = new EnvelopeClass();
+
+                    //create a small rectangle 
+                    ESRI.ArcGIS.esriSystem.tagRECT RECT = new tagRECT();
+                    RECT.bottom = 0;
+                    RECT.left = 0;
+                    RECT.right = 5;
+                    RECT.top = 5;
+
+                    //transform rectangle into map units and apply to the tempEnv envelope 
+                    IDisplayTransformation dispTrans = activeView.ScreenDisplay.DisplayTransformation;
+                    dispTrans.TransformRect(tempEnv, ref RECT, 4); //4 = esriDisplayTransformationEnum.esriTransformToMap)
+                    tempEnv.CenterAt(clickedPoint);
+                    m_envelopeGeometry = (IGeometry)tempEnv;
+                }
             }
+            else
+            {
+                IGeometryCollection geometryBag = new GeometryBagClass();
+                geometryBag.AddGeometry(m_envelopeGeometry);
+                IGeometry geom = envelopeRubber.TrackNew(activeView.ScreenDisplay, null);
+                IArea area = (IArea)geom;
+                if ((geom.IsEmpty == true) || (area == null))
+                {
+                    //create a new envelope 
+                    IEnvelope tempEnv = new EnvelopeClass();
 
-            ISpatialReference spatialReference = map.SpatialReference;
-            geom.SpatialReference = spatialReference;
+                    //create a small rectangle 
+                    ESRI.ArcGIS.esriSystem.tagRECT RECT = new tagRECT();
+                    RECT.bottom = 0;
+                    RECT.left = 0;
+                    RECT.right = 5;
+                    RECT.top = 5;
 
-            map.SelectByShape(geom, null, false);
+                    //transform rectangle into map units and apply to the tempEnv envelope 
+                    IDisplayTransformation dispTrans = activeView.ScreenDisplay.DisplayTransformation;
+                    dispTrans.TransformRect(tempEnv, ref RECT, 4); //4 = esriDisplayTransformationEnum.esriTransformToMap)
+                    tempEnv.CenterAt(clickedPoint);
+                    geom = (IGeometry)tempEnv;
+                }
+                geometryBag.AddGeometry(geom);
+                ITopologicalOperator topo = new PolygonClass();
+                topo.ConstructUnion(geometryBag as IEnumGeometry);
+                m_envelopeGeometry = topo as IGeometry;
+                
+
+            }
+            ISpatialReference spatialReference = m_map.SpatialReference;
+            m_envelopeGeometry.SpatialReference = spatialReference;
+            m_map.SelectByShape(m_envelopeGeometry, null, false);
             activeView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, activeView.Extent); 
+            
         }
 
         
@@ -223,6 +260,7 @@ namespace GUI.Model.DataEditTools
         {
             // TODO:  Add Tool1.OnMouseUp implementation
             m_isMouseDown = false;
+            
         }
         public override void OnDblClick()
         {

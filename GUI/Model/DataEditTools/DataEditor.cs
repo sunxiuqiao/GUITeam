@@ -1,4 +1,5 @@
 ﻿using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Editor;
 using ESRI.ArcGIS.Geodatabase;
 using GUI.ViewModel;
 using System;
@@ -30,7 +31,8 @@ namespace GUI.Model.DataEditTools
 
         public DataEditor()
         {
-            
+            //IEditor3 editor = WKSEditor as IEditor3;
+            //editor.
         }
         public void StartEdit()
         {

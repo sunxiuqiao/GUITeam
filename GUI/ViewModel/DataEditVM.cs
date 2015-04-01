@@ -511,9 +511,29 @@ namespace GUI.ViewModel
         #region ClearCommand
         private void ClearCommand_Executed()
         {
-            ESRI.ArcGIS.SystemUI.ICommand cmd = new ESRI.ArcGIS.Controls.ControlsEditingClearCommandClass();
-            cmd.OnCreate(ControlsVM.MapControl().Object);
-            cmd.OnClick();
+            try
+            {
+                dataEditor.WKSEditor.StartEditOperation();
+                IMap map = ControlsVM.MapControl().Map;
+                IEnumFeature features = map.FeatureSelection as IEnumFeature;
+                features.Reset();
+                IFeature feature = features.Next();
+                if (feature == null)
+                    return;
+                while (feature != null)
+                {
+                    feature.Delete();
+                    feature = features.Next();
+                }
+                dataEditor.WKSEditor.StopEditOperation();
+                ControlsVM.MapControl().ActiveView.PartialRefresh(esriViewDrawPhase.esriViewAll, null, null);
+            }
+            catch(Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            
+
         }
         private bool ClearCommand_CanExecute()
         {
@@ -547,8 +567,7 @@ namespace GUI.ViewModel
             //cmd.OnCreate(ControlsVM.MapControl().Object);
             //ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
             int index = GetLayerByName(ControlsVM.MapControl().Map, "地块");
-            Model.DataEditTools.FeatureMerge cmd = new Model.DataEditTools.FeatureMerge();
-            cmd.CurrentLayer = ControlsVM.MapControl().Map.get_Layer(index);
+            Model.DataEditTools.FeatureMerge cmd = new Model.DataEditTools.FeatureMerge(dataEditor);
             cmd.OnCreate(ControlsVM.MapControl().Object);
             cmd.OnClick();
         }

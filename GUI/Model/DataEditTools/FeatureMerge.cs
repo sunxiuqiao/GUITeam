@@ -14,13 +14,19 @@ namespace GUI.Model.DataEditTools
     class FeatureMerge : BaseCommand
     {
         private HookHelper m_HookHelper = new HookHelperClass();
-        private ILayer currentLayer = null;
+        private DataEditor dataEdit = null;
 
-        public ILayer CurrentLayer
+        public FeatureMerge(DataEditor edit)
         {
-            get { return currentLayer; }
-            set { currentLayer = value; }
+            dataEdit = edit;
         }
+
+        public DataEditor DataEdit
+        {
+            get { return dataEdit; }
+            set { dataEdit = value; }
+        }
+
 
         public override void OnCreate(object hook)
         {
@@ -34,53 +40,89 @@ namespace GUI.Model.DataEditTools
 
         public override void OnClick()
         {
+            dataEdit.WKSEditor.StartEditOperation();
             IEnumFeature features = m_HookHelper.FocusMap.FeatureSelection as IEnumFeature ;
+            //features.Reset();
+            //IFeature feature = features.Next();
+            //bool isCanMerge = true;
+            //while(feature != null)
+            //{
+            //    IRelationalOperator relOp = feature.Shape as IRelationalOperator;
+            //    IFeature nextFeature = features.Next();
+
+            //    if (nextFeature == null)
+            //    {
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        IGeometry geo = nextFeature.Shape;
+            //        isCanMerge = (relOp.Touches(geo)||(!relOp.Disjoint(geo)));
+            //    }
+                    
+            //    feature = nextFeature;
+            //}
             features.Reset();
             IFeature feature = features.Next();
-            bool isCanMerge = true;
-            while(feature != null)
+            IGeometryCollection geometryBag = new GeometryBagClass();
+            while (feature != null)
             {
-                IRelationalOperator relOp = feature.Shape as IRelationalOperator;
-                IFeature nextFeature = features.Next();
-
-                if (nextFeature == null)
-                    break;
-                else
-                {
-                    IGeometry geo = nextFeature.Shape;
-                    isCanMerge = (relOp.Touches(geo)||(!relOp.Disjoint(geo)));
-                }
-                    
-                feature = nextFeature;
-            }
-            if (isCanMerge == false)
-                return;
-            else
-            {
-                features.Reset();
+                geometryBag.AddGeometry(feature.Shape);
+                feature.Delete();
                 feature = features.Next();
-                if (feature == null)
-                    return;
-                ITopologicalOperator topoOp = (ITopologicalOperator)feature.Shape;
-                IFeature feature2 = features.Next();
-                if (feature2 == null)
-                    return;
-                IGeometry UnionGeometry = topoOp.Union(feature2.Shape);
-
-                IFeatureLayer featureLyr = currentLayer as IFeatureLayer;
-                IFeatureClass featureClass = featureLyr.FeatureClass;
-                IDataset dataSet = featureClass as IDataset;
-                IWorkspace workSpace = dataSet.Workspace;
-                IWorkspaceEdit2 workspaceEdit = workSpace as IWorkspaceEdit2;
-                if (!(workspaceEdit.IsInEditOperation))
-                    workspaceEdit.StartEditOperation();
-                IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
-                featBuffer.Shape = UnionGeometry;
-                SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
-                IFeatureCursor featCursor = featureClass.Insert(true);
-                featCursor.InsertFeature(featBuffer);
-                m_HookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
             }
+            ITopologicalOperator topo = new PolygonClass();
+            topo.ConstructUnion(geometryBag as IEnumGeometry);
+
+
+            IFeatureLayer featureLyr = DataEdit.CurrentLayer as IFeatureLayer;
+            IFeatureClass featureClass = featureLyr.FeatureClass;
+            IDataset dataSet = featureClass as IDataset;
+            
+            IWorkspaceEdit2 workspaceEdit = DataEdit.WKSEditor;
+
+            IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
+            featBuffer.Shape = topo as IGeometry;
+            SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
+            IFeatureCursor featCursor = featureClass.Insert(true);
+            featCursor.InsertFeature(featBuffer);
+            m_HookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+            //if (isCanMerge == false)
+            //    return;
+            //else
+            //{
+                //ITopologicalOperator2 topoOp = (IT)
+                //features.Reset();
+                //feature = features.Next();
+                //IFeature feature2 = features.Next();
+                //if (feature == null || feature2==null)
+                //    return;
+                //ITopologicalOperator2 topoOp1 = (ITopologicalOperator2)feature.Shape;
+                //topoOp1.IsKnownSimple_2 = false;
+                //topoOp1.Simplify();
+                //feature.Shape.SnapToSpatialReference();
+                //feature2.Shape.SnapToSpatialReference();
+                ////IEnumGeometry geometrys = feature2.Shape 
+                //topoOp1.ConstructUnion(feature2.ShapeCopy);
+                //feature2.Delete();
+
+
+
+                //IFeatureLayer featureLyr = DataEdit.CurrentLayer as IFeatureLayer;
+                //IFeatureClass featureClass = featureLyr.FeatureClass;
+                //IDataset dataSet = featureClass as IDataset;
+                ////IWorkspace workSpace = dataSet.Workspace;
+                //IWorkspaceEdit2 workspaceEdit = DataEdit.WKSEditor;
+                //if (!(workspaceEdit.IsInEditOperation))
+                //    workspaceEdit.StartEditOperation();
+                //IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
+                //featBuffer.Shape = UnionGeometry;
+                //SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
+                //IFeatureCursor featCursor = featureClass.Insert(true);
+                //featCursor.InsertFeature(featBuffer);
+                //m_HookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+            //}
+            DataEdit.WKSEditor.StopEditOperation();
         }
         private static void SetFieldValue(IFeatureLayer Layer, IFeatureBuffer Feature, string Field, object Value)
         {

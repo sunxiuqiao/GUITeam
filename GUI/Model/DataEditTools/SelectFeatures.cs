@@ -8,6 +8,7 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.Geodatabase;
 
 
 namespace GUI.Model.DataEditTools
@@ -71,6 +72,7 @@ namespace GUI.Model.DataEditTools
         #endregion
 
         protected IHookHelper m_hookHelper = null;
+        private bool m_isMouseDown = false;
 
         public SelectFeaturesTool()
         {
@@ -137,6 +139,7 @@ namespace GUI.Model.DataEditTools
         
         public override void OnMouseDown(int Button, int Shift, int X, int Y)
         {
+            m_isMouseDown = true;
             IMap map;
             IPoint clickedPoint = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
 
@@ -164,6 +167,8 @@ namespace GUI.Model.DataEditTools
             {
                 map = m_hookHelper.ActiveView.FocusMap;
             }
+
+            
 
             IActiveView activeView = map as IActiveView;
             IRubberBand envelopeRubber = new RubberEnvelopeClass();
@@ -200,11 +205,24 @@ namespace GUI.Model.DataEditTools
         public override void OnMouseMove(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseMove implementation
+            //if (!m_isMouseDown)
+            //    return;
+            //IPoint point = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
+            //IEnumFeature features = m_hookHelper.FocusMap.FeatureSelection as IEnumFeature;
+            //features.Reset();
+            //IFeature feature = features.Next();
+            //while (feature != null)
+            //{
+            //    ITransform2D transform = feature.Shape as ITransform2D;
+            //    transform.Move(point.X, point.Y);
+            //    feature.Store();
+            //}
         }
 
         public override void OnMouseUp(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseUp implementation
+            m_isMouseDown = false;
         }
         public override void OnDblClick()
         {

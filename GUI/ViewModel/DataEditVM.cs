@@ -307,6 +307,7 @@ namespace GUI.ViewModel
             StopEdit();
             IsDKDraw = false;
             IsStopEdit = true;
+            ControlsVM.MapControl().CurrentTool = null;
         }
 
         private bool StopDrawDK_CanExecute()
@@ -323,6 +324,7 @@ namespace GUI.ViewModel
             StopEdit();
             IsStopEdit = true;
             IsJZXDraw = false;
+            ControlsVM.MapControl().CurrentTool = null;
         }
 
         private bool StopDrawJZX_CanExecute()
@@ -339,6 +341,7 @@ namespace GUI.ViewModel
             StopEdit();
             IsJZDDraw = false;
             IsStopEdit = true;
+            ControlsVM.MapControl().CurrentTool = null;
         }
 
         private bool StopDrawJZD_CanExecute()

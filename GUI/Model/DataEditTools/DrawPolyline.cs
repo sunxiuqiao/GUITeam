@@ -14,6 +14,7 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using CreateDatabase;
 using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.esriSystem;
 
 namespace GUI.Model.DataEditTools
 {
@@ -74,7 +75,10 @@ namespace GUI.Model.DataEditTools
 
         protected IHookHelper m_hookHelper = null;
         protected INewLineFeedback m_lineFeedbback = null;
-        protected IGeometry geometry = null;
+        protected IGeometry m_geometry = null;
+        private ISnappingEnvironment m_snapEnv = new SnappingClass();
+        private ISnappingFeedback m_snapFeedback = new SnappingFeedbackClass();
+        private IPoint m_currentPoint = null;
 
         private bool m_isMouseDown;//鼠标是否按下
 
@@ -89,12 +93,14 @@ namespace GUI.Model.DataEditTools
             base.m_message = "绘制线要素";  //localizable text
             base.m_toolTip = "绘制线要素";  //localizable text
             base.m_name = "DataEditTools_DrawPolygon";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
+
+            
         }
 
         public IGeometry Geometry
         {
-            get { return geometry; }
-            set { geometry = value; }
+            get { return m_geometry; }
+            set { m_geometry = value; }
         }
 
         #region Overridden Class Methods
@@ -117,6 +123,10 @@ namespace GUI.Model.DataEditTools
                 m_checked = false;
                 m_isMouseDown = false;
 
+                m_snapEnv.SnappingType = esriSnappingType.esriSnappingTypeEdge;
+                m_snapEnv.Tolerance = 15;
+                m_snapFeedback.Initialize(m_hookHelper.Hook, m_snapEnv, true);
+
             }
             catch
             {
@@ -128,6 +138,7 @@ namespace GUI.Model.DataEditTools
             else
                 base.m_enabled = true;
 
+            m_snapFeedback.Initialize(m_hookHelper.Hook, m_snapEnv, true);
             // TODO:  Add other initialization code
         }
 
@@ -137,36 +148,59 @@ namespace GUI.Model.DataEditTools
         public override void OnClick()
         {
             // TODO: Add Tool1.OnClick implementation
+            IHookHelper2 m_hookHelper2 = (IHookHelper2)m_hookHelper;
+            IExtensionManager extensionManager = m_hookHelper2.ExtensionManager;
+            if (extensionManager != null)
+            {
+                UID guid = new UIDClass();
+                guid.Value = "{E07B4C52-C894-4558-B8D4-D4050018D1DA}"; //Snapping extension.
+                IExtension extension = extensionManager.FindExtension(guid);
+                m_snapEnv = extension as ISnappingEnvironment;
+            }
         }
 
         public override void OnMouseDown(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.TOCControl_OnMouseDown implementation
-            m_isMouseDown = true;
-            IActiveView activeView = m_hookHelper.ActiveView;
-            IPoint point = activeView.ScreenDisplay.DisplayTransformation.ToMapPoint(X,Y);
+            
+            IActiveView activeView = m_hookHelper.FocusMap as IActiveView;
 
-            if(m_lineFeedbback == null)
+            if (!m_isMouseDown)
             {
-                m_lineFeedbback = new NewLineFeedbackClass();
-                m_lineFeedbback.Display = activeView.ScreenDisplay;
-                m_lineFeedbback.Start(point);
+                m_isMouseDown = true;
+                m_lineFeedbback.Start(m_currentPoint);
+
             }
             else
             {
-                m_lineFeedbback.AddPoint(point);
+                //m_isMouseDown = true;
+                m_lineFeedbback.AddPoint(m_currentPoint);
             }
         }
 
         public override void OnMouseMove(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseMove implementation
-            if (m_isMouseDown == false)
-                return;
-            if(m_lineFeedbback != null)
+            
+            m_currentPoint = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
+            IPointSnapper pointSnapper = m_snapEnv.PointSnapper;
+            ISnappingResult result = pointSnapper.Snap(m_currentPoint);
+            if (m_lineFeedbback == null)
             {
-                IPoint point = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
-                m_lineFeedbback.MoveTo(point);
+                m_lineFeedbback = new NewLineFeedbackClass();
+                m_lineFeedbback.Display = m_hookHelper.ActiveView.ScreenDisplay;
+            }
+            if (result != null)
+            {
+                m_snapFeedback.Update(result, 0);
+                m_currentPoint = result.Location;
+                m_lineFeedbback.MoveTo(m_currentPoint);
+            }
+            else
+            {
+                if (m_isMouseDown == false)
+                    return;
+                m_lineFeedbback.MoveTo(m_currentPoint);
             }
         }
 
@@ -213,9 +247,16 @@ namespace GUI.Model.DataEditTools
 
             if (geo != null)
             {
-                geometry = geo;
+                m_geometry = geo;
             }
             m_lineFeedbback = null;
+            m_isMouseDown = false;
+        }
+
+        public override void Refresh(int hDC)
+        {
+            base.Refresh(hDC);
+            m_snapFeedback.Refresh(hDC);
         }
         #endregion
     }

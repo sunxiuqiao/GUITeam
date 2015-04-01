@@ -27,9 +27,9 @@ namespace GUI.Model.DataEditTools
         {
             DataEdit.WKSEditor.StartEditOperation();
             base.OnDblClick();
-            if (geometry != null)
+            if (m_geometry != null)
             {
-                Draw(geometry);
+                Draw(m_geometry);
             }
             DataEdit.WKSEditor.StopEditOperation();
         }

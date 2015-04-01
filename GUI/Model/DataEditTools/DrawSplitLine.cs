@@ -35,7 +35,7 @@ namespace GUI.Model.DataEditTools
             if (feature == null)
                 return;
             IFeatureEdit2 featureEdit = feature as IFeatureEdit2;
-            ISet set = featureEdit.SplitWithUpdate(geometry);
+            ISet set = featureEdit.SplitWithUpdate(m_geometry);
 
             ControlsVM.MapControl().ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
             DataEdit.WKSEditor.StopEditOperation();

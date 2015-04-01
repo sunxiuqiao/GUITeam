@@ -76,10 +76,10 @@ namespace GUI.Model.DataEditTools
 
         protected IHookHelper m_hookHelper = null;
         protected INewPolygonFeedback m_polygonFeedback = null;
-        protected IGeometry geometry = null;
-        private ISnappingEnvironment snapEnv = new SnappingClass();
-        private ISnappingFeedback snapFeedback = new SnappingFeedbackClass();
-        IPoint currentPoint = null;
+        protected IGeometry m_geometry = null;
+        private ISnappingEnvironment m_snapEnv = new SnappingClass();
+        private ISnappingFeedback m_snapFeedback = new SnappingFeedbackClass();
+        private IPoint m_currentPoint = null;
         
         //IPointSnapper pointSnapper = new
             
@@ -98,9 +98,9 @@ namespace GUI.Model.DataEditTools
             base.m_message = "绘制面要素";  //localizable text
             base.m_toolTip = "绘制面要素";  //localizable text
             base.m_name = "DataEditTools_DrawPolygon";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
-            snapEnv.SnappingType = esriSnappingType.esriSnappingTypeEdge;
+            m_snapEnv.SnappingType = esriSnappingType.esriSnappingTypeEdge;
             
-            snapEnv.Tolerance = 15;
+            m_snapEnv.Tolerance = 15;
 
         }
 
@@ -126,7 +126,7 @@ namespace GUI.Model.DataEditTools
                 base.m_enabled = true;
                 base.m_checked = false;
                 m_isMouseDown = false;
-                snapFeedback.Initialize(m_hookHelper.Hook, snapEnv, true);
+                m_snapFeedback.Initialize(m_hookHelper.Hook, m_snapEnv, true);
             }
             catch
             {
@@ -155,7 +155,7 @@ namespace GUI.Model.DataEditTools
                 UID guid = new UIDClass();
                 guid.Value = "{E07B4C52-C894-4558-B8D4-D4050018D1DA}"; //Snapping extension.
                 IExtension extension = extensionManager.FindExtension(guid);
-                snapEnv = extension as ISnappingEnvironment;
+                m_snapEnv = extension as ISnappingEnvironment;
             }
         }
 
@@ -169,22 +169,22 @@ namespace GUI.Model.DataEditTools
             if(!m_isMouseDown)
             {
                 m_isMouseDown = true;
-                m_polygonFeedback.Start(currentPoint);
+                m_polygonFeedback.Start(m_currentPoint);
 
             }
             else
             {
                 //m_isMouseDown = true;
-                m_polygonFeedback.AddPoint(currentPoint);
+                m_polygonFeedback.AddPoint(m_currentPoint);
             }
         }
 
         public override void OnMouseMove(int Button, int Shift, int X, int Y)
         {
             // TODO:  Add Tool1.OnMouseMove implementation
-            currentPoint = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
-            IPointSnapper pointSnapper = snapEnv.PointSnapper;
-            ISnappingResult result = pointSnapper.Snap(currentPoint);
+            m_currentPoint = m_hookHelper.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(X, Y);
+            IPointSnapper pointSnapper = m_snapEnv.PointSnapper;
+            ISnappingResult result = pointSnapper.Snap(m_currentPoint);
             if (m_polygonFeedback == null)
             {
                 m_polygonFeedback = new NewPolygonFeedbackClass();
@@ -192,15 +192,15 @@ namespace GUI.Model.DataEditTools
             }
             if (result != null)
             {
-                snapFeedback.Update(result, 0);
-                currentPoint = result.Location;
-                m_polygonFeedback.MoveTo(currentPoint);
+                m_snapFeedback.Update(result, 0);
+                m_currentPoint = result.Location;
+                m_polygonFeedback.MoveTo(m_currentPoint);
             }
             else
             {
                 if (m_isMouseDown == false)
                     return;
-                m_polygonFeedback.MoveTo(currentPoint);
+                m_polygonFeedback.MoveTo(m_currentPoint);
             }
         }
 
@@ -254,7 +254,7 @@ namespace GUI.Model.DataEditTools
 
             if (geo != null)
             {
-                geometry =geo;
+                m_geometry =geo;
             }
             m_isMouseDown = false;
             m_polygonFeedback = null;
@@ -263,7 +263,7 @@ namespace GUI.Model.DataEditTools
         public override void Refresh(int hDC)
         {
             base.Refresh(hDC);
-            snapFeedback.Refresh(hDC);
+            m_snapFeedback.Refresh(hDC);
         }
 
     }

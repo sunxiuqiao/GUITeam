@@ -72,10 +72,10 @@ namespace GUI.Model.DataEditTools
         #endregion
 
         protected IHookHelper m_hookHelper = null;
-        private bool m_isMouseDown = false;
-        private IGeometry m_envelopeGeometry = null;
-        private IMap m_map;
-        private DataEditor dataEdit;
+        protected bool m_isMouseDown = false;
+        protected IGeometry m_envelopeGeometry = null;
+        protected IMap m_map;
+        protected DataEditor dataEdit;
 
         public SelectFeaturesTool(DataEditor edit)
         {

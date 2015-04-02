@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <f:Ribbon Grid.Row="0" >
             <f:Ribbon.Menu>
@@ -60,6 +61,16 @@
                                             <Grid Background="#88888888" >
                                                 <ContentControl>
                                                     <v:DBCreationDialogView DataContext="{Binding Path=DBCreationDialogVM}"></v:DBCreationDialogView>
+                                                </ContentControl>
+                                            </Grid>
+                                        </Popup>
+                                        <Popup x:Name="ModifyDKBMPopup" 
+                                       AllowsTransparency="True" Placement="MousePoint" StaysOpen="True" PopupAnimation="Slide" 
+                                       PlacementTarget="{Binding ElementName=GUIMainWindow}" 
+                                       IsOpen="{Binding DataEditVM.ModifyDKBMVM.IsShow}">
+                                            <Grid Background="#88888888" >
+                                                <ContentControl>
+                                                    <v:ModifyDKBMView DataContext="{Binding DataEditVM.ModifyDKBMVM}"></v:ModifyDKBMView>
                                                 </ContentControl>
                                             </Grid>
                                         </Popup>
@@ -165,6 +176,7 @@
                         <f:Button x:Name="DKAutoDrawButton" Header="自动构建"  LargeIcon="Icons\AutoCreate.png" />
                         <f:Button x:Name="DKSegementButton" Header="分割" LargeIcon="Icons\Segment.png" Command="{Binding SplitPolygonCommand}"/>
                         <f:Button x:Name="DKMergeButton" Header="合并" LargeIcon="Icons\Merge-50.png" Command="{Binding MergePolygonCommand}"/>
+                        <f:Button x:Name="ModifyDKBMButton" Header="修改 地块编码" Command="{Binding ModifyDKBMCommand}"></f:Button>
                         <f:Button x:Name="DKStopDrawButton" Header="完成" Command="{Binding StopDrawDKCommand}" LargeIcon="Icons\DoWell.png"/>
                     </f:RibbonGroupBox>
                     <f:RibbonGroupBox x:Name="DKDrawTool" Header="工具"  >
@@ -285,6 +297,7 @@
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
                 </f:RibbonTabItem>
+                
             </f:Ribbon.Tabs>
             <!--GUI所有的ContextualGroups-->
             <f:Ribbon.ContextualGroups>
@@ -305,7 +318,7 @@
                 <avalonDock:LayoutPanel Orientation="Horizontal">
                     <avalonDock:LayoutAnchorablePane DockWidth="150">
                         <avalonDock:LayoutAnchorable x:Name="TOCControlDock" Title="图层" >
-                            <WindowsFormsHost x:Name="TOCControlHost" ></WindowsFormsHost>
+                                <WindowsFormsHost x:Name="TOCControlHost" ></WindowsFormsHost>
                         </avalonDock:LayoutAnchorable>
                     </avalonDock:LayoutAnchorablePane>
                     <avalonDock:LayoutDocumentPane>
@@ -316,5 +329,9 @@
                 </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
+        <Grid Grid.Row="2">
+           
+            
+        </Grid>
     </Grid>
 </f:RibbonWindow>

@@ -9,7 +9,7 @@
                 xmlns:vm ="clr-namespace:GUI.ViewModel"
                 xmlns:v="clr-namespace:GUI.View"
                 xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800" Closed="GUIMainWindow_Closed">
     <Window.DataContext>
         <vm:MainVM x:Name="MainModel"></vm:MainVM>
     </Window.DataContext>
@@ -120,7 +120,7 @@
                 </f:Backstage>
             </f:Ribbon.Menu>
             <f:Ribbon.Tabs>
-                <f:RibbonTabItem x:Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}" IsSelected="{Binding ElementName=MainModel,Path=DataEditVM.IsStop,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                <f:RibbonTabItem x:Name="LoaclProject" Header="本地工程" DataContext="{Binding LocalProjectVM}" IsSelected="{Binding ElementName=MainModel,Path=DataEditVM.IsStopEdit,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
                     <f:RibbonTabItem.Groups>
                         <f:RibbonGroupBox x:Name="Project" Header="工程">
                             <f:Button x:Name="NewLoaclProjectButton" Header="新建" Command="{Binding NewProjectCommand}" LargeIcon="Icons\New.png"></f:Button>
@@ -162,9 +162,9 @@
                     <!--绘制地块的命令-->
                 <f:RibbonTabItem x:Name="DKDraw" Header="绘制" IsSelected="{Binding IsDKDraw,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Group="{Binding ElementName=DKDrawGroup}" DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox x:Name="DKDrawGroupBox" Header="绘制地块">
-                        <f:Button x:Name="DKAutoDrawButton" Header="自动构建"  LargeIcon="Icons\AutoCreate.png"/>
-                        <f:Button x:Name="DKSegementButton" Header="分割" LargeIcon="Icons\Segment.png"/>
-                        <f:Button x:Name="DKMergeButton" Header="合并" LargeIcon="Icons\Merge-50.png"/>
+                        <f:Button x:Name="DKAutoDrawButton" Header="自动构建"  LargeIcon="Icons\AutoCreate.png" />
+                        <f:Button x:Name="DKSegementButton" Header="分割" LargeIcon="Icons\Segment.png" Command="{Binding SplitPolygonCommand}"/>
+                        <f:Button x:Name="DKMergeButton" Header="合并" LargeIcon="Icons\Merge-50.png" Command="{Binding MergePolygonCommand}"/>
                         <f:Button x:Name="DKStopDrawButton" Header="完成" Command="{Binding StopDrawDKCommand}" LargeIcon="Icons\DoWell.png"/>
                     </f:RibbonGroupBox>
                     <f:RibbonGroupBox x:Name="DKDrawTool" Header="工具"  >
@@ -305,7 +305,7 @@
                 <avalonDock:LayoutPanel Orientation="Horizontal">
                     <avalonDock:LayoutAnchorablePane DockWidth="150">
                         <avalonDock:LayoutAnchorable x:Name="TOCControlDock" Title="图层" >
-                            <WindowsFormsHost x:Name="TOCControlHost"></WindowsFormsHost>
+                            <WindowsFormsHost x:Name="TOCControlHost" ></WindowsFormsHost>
                         </avalonDock:LayoutAnchorable>
                     </avalonDock:LayoutAnchorablePane>
                     <avalonDock:LayoutDocumentPane>

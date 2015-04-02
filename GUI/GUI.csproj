@@ -97,6 +97,9 @@
     <Reference Include="ESRI.ArcGIS.DisplayUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="ESRI.ArcGIS.Editor, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="ESRI.ArcGIS.Geodatabase, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -192,6 +195,16 @@
     </ApplicationDefinition>
     <Compile Include="Model\CollectionData.cs" />
     <Compile Include="Model\Converter.cs" />
+    <Compile Include="Model\DataEditTools\DataEditor.cs" />
+    <Compile Include="Model\DataEditTools\DrawDKTool.cs" />
+    <Compile Include="Model\DataEditTools\DrawJZDTool.cs" />
+    <Compile Include="Model\DataEditTools\DrawPoint.cs" />
+    <Compile Include="Model\DataEditTools\DrawPolygon.cs" />
+    <Compile Include="Model\DataEditTools\DrawPolyline.cs" />
+    <Compile Include="Model\DataEditTools\DrawSplitLine.cs" />
+    <Compile Include="Model\DataEditTools\FeatureMerge.cs" />
+    <Compile Include="Model\DataEditTools\SelectFeatures.cs" />
+    <Compile Include="Model\DataEditTools\DrawJZXTool.cs" />
     <Compile Include="Model\HandleExcel.cs" />
     <Compile Include="Model\QueryAndAnalysis.cs" />
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />
@@ -451,6 +464,23 @@
   <ItemGroup>
     <Resource Include="Icons\Edit Start.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Config\Cursor\Default.cur" />
+    <Resource Include="Config\Cursor\Edit.cur" />
+    <Resource Include="Config\Cursor\Gesture.cur" />
+    <Resource Include="Config\Cursor\Hand.cur" />
+    <Resource Include="Config\Cursor\Identify.cur" />
+    <Resource Include="Config\Cursor\Measure.cur" />
+    <Resource Include="Config\Cursor\Move.cur" />
+    <Resource Include="Config\Cursor\movehand.cur" />
+    <Resource Include="Config\Cursor\Navigation.cur" />
+    <Resource Include="Config\Cursor\Reshape.cur" />
+    <Resource Include="Config\Cursor\Sketch.cur" />
+    <Resource Include="Config\Cursor\ZoomIn.cur" />
+    <Resource Include="Config\Cursor\ZoomInOut.cur" />
+    <Resource Include="Config\Cursor\ZoomOut.cur" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

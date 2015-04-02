@@ -9,6 +9,8 @@ using ESRI.ArcGIS.Carto;
 using System.Windows;
 using ESRI.ArcGIS.esriSystem;
 using GUI.Model;
+using ESRI.ArcGIS.Geodatabase;
+using System.Windows.Forms;
 
 
 namespace GUI.ViewModel
@@ -27,6 +29,7 @@ namespace GUI.ViewModel
             MapControl().OnOleDrop += MapControl_OnOleDrop;
             MapControl().OnMouseDown += MapControl_OnMouseDown;
             TOCControl().OnMouseDown += TOCControl_OnMouseDown;
+            MapControl().HandleDestroyed += MapControl_HandelDestroyed;
 
             InitTOCControlContextMenu();
         }
@@ -108,7 +111,7 @@ namespace GUI.ViewModel
                             }
                             catch (System.Exception ex)
                             {
-                                MessageBox.Show(ex.Message);
+                                System.Windows.Forms.MessageBox.Show(ex.Message);
                                 return;
                             }
                         }
@@ -160,7 +163,7 @@ namespace GUI.ViewModel
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error: " + e.Message);
+                System.Windows.Forms.MessageBox.Show("Error: " + e.Message);
                 return;
             }
             mapControl.MousePointer = esriControlsMousePointer.esriPointerDefault;
@@ -173,11 +176,49 @@ namespace GUI.ViewModel
             if (e.button == 2)
             {
                 //ESRI.ArcGIS.Controls.ControlsMapViewMenu tool = new ControlsMapViewMenuClass();
-                
-                //ICommand cmd = (ICommand)tool;
+
+                //ICommand cmd = tool as ICommand;
                 //cmd.OnCreate(mapControl.Object);
                 //mapControl.CurrentTool = cmd as ITool;
             }
+        }
+        //TODO
+        private void MapControl_HandelDestroyed(System.Object sender, EventArgs e)
+        {
+            //IMap map = MapControl().Map;
+
+            //for(int index =0;index<map.LayerCount;++index)
+            //{
+            //    ILayer lyr = map.get_Layer(index);
+            //    IFeatureLayer featurelyr = lyr as IFeatureLayer;
+            //    IFeatureClass featureClas = featurelyr.FeatureClass;
+            //    IDataset dataset = featureClas as IDataset;
+            //    IWorkspaceEdit workspaceEdit = dataset.Workspace as IWorkspaceEdit;
+            //    if (workspaceEdit == null)
+            //        return;
+            //    else
+            //    {
+            //        if(workspaceEdit.IsBeingEdited())
+            //        {
+            //            if (System.Windows.Forms.MessageBox.Show("是否保存编辑？", "Save Prompt?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            //            {
+            //                workspaceEdit.StopEditOperation();
+            //                workspaceEdit.StopEditing(true);
+            //            }
+            //            else
+            //            {
+            //                workspaceEdit.StopEditOperation();
+            //                workspaceEdit.StopEditing(false);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            workspaceEdit.StopEditOperation();
+            //            workspaceEdit.StopEditing(false);
+            //        }
+            //    }
+
+            //}
         }
         
         #endregion

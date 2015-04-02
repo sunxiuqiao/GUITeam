@@ -198,7 +198,7 @@
                 <!--绘制界址线命令-->
                 <f:RibbonTabItem x:Name="JZXDraw" Header="绘制" Group="{Binding ElementName=JZXDrawGroup}" IsSelected="{Binding IsJZXDraw,Mode=OneWay}" DataContext="{Binding DataEditVM}">
                     <f:RibbonGroupBox x:Name="JZXDrawGroupBox" Header="界址点绘制" >
-                        <f:Button x:Name="JZXAutoDrawButton" Header="自动绘制 界址线"  LargeIcon="Icons\EditJZX.png"/>
+                        <f:Button x:Name="JZXAutoDrawButton" Header="自动绘制 界址线"  LargeIcon="Icons\EditJZX.png" Command="{Binding BatchGenerateJZXCommand}"/>
                         <f:Button x:Name="JZXStopDrawButton" Header="绘制完成" Command="{Binding StopDrawJZXCommand}" LargeIcon="Icons\DoWell.png"/>
                     </f:RibbonGroupBox>
                     <f:RibbonGroupBox x:Name="JZXDrawTool" Header="工具" >

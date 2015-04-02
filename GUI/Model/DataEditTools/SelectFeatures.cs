@@ -180,7 +180,6 @@ namespace GUI.Model.DataEditTools
 
             if (Shift != 2 || m_envelopeGeometry ==null)
             {
-
                 m_envelopeGeometry = envelopeRubber.TrackNew(activeView.ScreenDisplay, null);
                 IArea area = (IArea)m_envelopeGeometry;
 

@@ -589,5 +589,19 @@ namespace GUI.ViewModel
 
         #endregion
 
+        #region BatchGenerateJZX
+        private void BatchGenerateJZX_Executed()
+        {
+            EditData.BatchGenerateJZX(ControlsVM.MapControl());
+        }
+        private bool BatchGenerateJZX_CanExecute()
+        {
+            return true;
+        }
+
+        public System.Windows.Input.ICommand BatchGenerateJZXCommand { get { return new RelayCommand(BatchGenerateJZX_Executed, BatchGenerateJZX_CanExecute); } }
+
+        #endregion
+
     }
 }

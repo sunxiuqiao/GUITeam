@@ -143,28 +143,36 @@ namespace GUI.Model
        /// <param name="axMapControl"></param>
        public static void BatchGenerateJZX(AxMapControl axMapControl)
        {
-           ILayer pLayer = QueryAndAnalysis.GetLayerByName("界址线", axMapControl) as IFeatureLayer;//得到界址线图层
-           IFeatureLayer pFeatureLyr = pLayer as IFeatureLayer;
-           IFeatureClass pFeatCls = pFeatureLyr.FeatureClass;
-           //遍历每个地块标注界址线
-           ILayer player = QueryAndAnalysis.GetLayerByName("地块", axMapControl);
-           IFeatureLayer pDKlayer = player as IFeatureLayer;
-           IFeatureClass pFeatureCls = pDKlayer.FeatureClass;
-           int pFieldDKBMIndex = pFeatureCls.FindField("DKBM");
-           IQueryFilter pQueryFilter = new QueryFilter();//实例化一个查询条件对象 
-           pQueryFilter.WhereClause = null;//将查询条件赋值 
-           IFeatureCursor pDKFeatureCursor = pDKlayer.Search(pQueryFilter, false);//进行查询 
-           IFeature pDKFeatuer = pDKFeatureCursor.NextFeature();
-           while (pDKFeatuer != null)
+           try
            {
-               string DKBM = pDKFeatuer.get_Value(pFieldDKBMIndex).ToString();//得到地块编码
-               IPointCollection pJZDXHPointCollection = GetFeaturePointColl(pDKFeatuer);//得到地块的界址点点集
-               List<IFeature> pJZXList = GetFeaturelineList(pJZDXHPointCollection, DKBM,pLayer);//得到界址线集合
-               //List<IFeature> pToucheFeatures=GetTouchesFeature(pDKlayer,pDKFeatuer);              
-               QueryLDKQLR(pDKlayer, pJZXList, pFeatureLyr, DKBM);
-               pDKFeatuer = pDKFeatureCursor.NextFeature();
+               ILayer pLayer = QueryAndAnalysis.GetLayerByName("界址线", axMapControl) as IFeatureLayer;//得到界址线图层
+               IFeatureLayer pFeatureLyr = pLayer as IFeatureLayer;
+               IFeatureClass pFeatCls = pFeatureLyr.FeatureClass;
+               //遍历每个地块标注界址线
+               ILayer player = QueryAndAnalysis.GetLayerByName("地块", axMapControl);
+               IFeatureLayer pDKlayer = player as IFeatureLayer;
+               IFeatureClass pFeatureCls = pDKlayer.FeatureClass;
+               int pFieldDKBMIndex = pFeatureCls.FindField("DKBM");
+               IQueryFilter pQueryFilter = new QueryFilter();//实例化一个查询条件对象 
+               pQueryFilter.WhereClause = null;//将查询条件赋值 
+               IFeatureCursor pDKFeatureCursor = pDKlayer.Search(pQueryFilter, false);//进行查询 
+               IFeature pDKFeatuer = pDKFeatureCursor.NextFeature();
+               while (pDKFeatuer != null)
+               {
+                   string DKBM = pDKFeatuer.get_Value(pFieldDKBMIndex).ToString();//得到地块编码
+                   IPointCollection pJZDXHPointCollection = GetFeaturePointColl(pDKFeatuer);//得到地块的界址点点集
+                   List<IFeature> pJZXList = GetFeaturelineList(pJZDXHPointCollection, DKBM, pLayer);//得到界址线集合
+                   //List<IFeature> pToucheFeatures=GetTouchesFeature(pDKlayer,pDKFeatuer);              
+                   QueryLDKQLR(pDKlayer, pJZXList, pFeatureLyr, DKBM);
+                   pDKFeatuer = pDKFeatureCursor.NextFeature();
+               }
+               axMapControl.Refresh();
            }
-           axMapControl.Refresh();
+           catch (Exception ex)
+           {
+               MessageBox.Show(ex.Message);
+           }
+
        }
        /// <summary>
        /// 删除单个要素
@@ -641,7 +649,7 @@ namespace GUI.Model
         /// </summary>
         /// <param name="pPointColl"></param>
         /// <returns></returns>
-        private static List<IFeature> GetFeaturelineList(IPointCollection pJZDXHPointCollection, string DKBM,ILayer pLayer)
+        private static  List<IFeature> GetFeaturelineList(IPointCollection pJZDXHPointCollection, string DKBM, ILayer pLayer)
         {
             IFeatureLayer pFeatureLyr = pLayer as IFeatureLayer;
             IFeatureClass pFeatCls = pFeatureLyr.FeatureClass;
@@ -669,6 +677,7 @@ namespace GUI.Model
                 IPolyline pPolyline = pPtCollLine as IPolyline;
                 pJZXFeature = pFeatCls.CreateFeature();
                 IGeometry pJZXline = pPolyline as IGeometry;
+                pJZXFeature.Shape = pJZXline;
                 pJZXList.Add(pJZXFeature);
                 WtriteFieldValue(pFeatureLyr, pJZXFeature, "YSDM", "211031");
                 WtriteFieldValue(pFeatureLyr, pJZXFeature, "DKBM", DKBM);
@@ -689,9 +698,11 @@ namespace GUI.Model
             {
                 foreach (IFeature pobject in pFeatureLineList)
                 {
-                    IPolyline ppolyLine = pobject.Shape as PolylineClass;
+                    //IPolyline ppolyLine =;
 
-                    IGeometry pGeometry = ppolyLine as IGeometry;
+
+                    IGeometry pGeometry = pobject.Shape as IGeometry;
+                    IPolyline ppolyLine = pGeometry as IPolyline;
                     ITopologicalOperator pTopo = pGeometry as ITopologicalOperator;
                     //IGeometry pBuffer = pTopo.Buffer(0.05);//做缓冲
 
@@ -722,24 +733,25 @@ namespace GUI.Model
                     }
                     pPLDWQLRJZXlist.Add(pobject);
                 }
-                foreach (IFeature pfeature in pPLDWQLRJZXlist)
-                {
-                    IFields pFields = pFeatureCls.Fields;
-                    int PLDWQLRFieldIndex = pFields.FindField("PLDWQLR");
-                    string PLDWQLR = pfeature.get_Value(PLDWQLRFieldIndex).ToString();
-                    if (PLDWQLR == "")
-                    {
-                        pfeature.set_Value(PLDWQLRFieldIndex, "道路");
-                    }
-                    pfeature.Store();
-                }
+
+                //foreach (IFeature pfeature in pPLDWQLRJZXlist)
+                //{
+                //    IFields pFields = pFeatureCls.Fields;
+                //    int PLDWQLRFieldIndex = pFields.FindField("PLDWQLR");
+                //    string PLDWQLR = pfeature.get_Value(PLDWQLRFieldIndex).ToString();
+                //    if (PLDWQLR == "")
+                //    {
+                //        pfeature.set_Value(PLDWQLRFieldIndex, "道路");
+                //    }
+                //    pfeature.Store();
+                //}
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-         
+
         }
         /// <summary>
         /// 写入要素字段值

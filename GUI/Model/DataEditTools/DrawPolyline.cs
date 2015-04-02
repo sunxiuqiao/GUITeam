@@ -256,6 +256,7 @@ namespace GUI.Model.DataEditTools
         public override void Refresh(int hDC)
         {
             base.Refresh(hDC);
+            m_lineFeedbback.Refresh(hDC);
             m_snapFeedback.Refresh(hDC);
         }
         #endregion

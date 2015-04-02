@@ -8,6 +8,7 @@ using GUI.Model;
 using GUI.MVVMBase;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -600,6 +601,28 @@ namespace GUI.ViewModel
         }
 
         public System.Windows.Input.ICommand BatchGenerateJZXCommand { get { return new RelayCommand(BatchGenerateJZX_Executed, BatchGenerateJZX_CanExecute); } }
+
+        #endregion
+
+        #region GeoUNIONAtrribute
+        private void GeoUNIONAtrribute_Executed()
+        {
+            string path = "";
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog()==DialogResult.OK)
+            {
+                    path=dialog.FileName;
+            }
+            FileInfo fileInfo = new FileInfo(path);
+            if(fileInfo.Exists)
+                EditData.GeoUNIONAtrribute(ControlsVM.MapControl(),path);
+        }
+        private bool GeoUNIONAtrribute_CanExecute()
+        {
+            return true;
+        }
+
+        public System.Windows.Input.ICommand GeoUNIONAtrributeCommand { get { return new RelayCommand(GeoUNIONAtrribute_Executed, GeoUNIONAtrribute_CanExecute); } }
 
         #endregion
 

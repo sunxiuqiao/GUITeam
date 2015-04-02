@@ -369,5 +369,22 @@ namespace GUI.ViewModel
         }
         public System.Windows.Input.ICommand SaveAsCommand { get { return new RelayCommand(SaveAsCommand_Executed, SaveAsCommand_CanExecute); } }
         #endregion
+
+        #region Identify
+        private bool IdentifyCommand_CanExecute()
+        {
+            return IsProjectOpened;
+        }
+
+        private void IdentifyCommand_Executed()
+        {
+            ESRI.ArcGIS.Controls.ControlsMapIdentifyTool tool = new ESRI.ArcGIS.Controls.ControlsMapIdentifyToolClass();
+            ICommand cmd = tool as ICommand;
+            cmd.OnCreate(ControlsVM.MapControl().Object);
+            ControlsVM.MapControl().CurrentTool = cmd as ITool;
+        }
+        public System.Windows.Input.ICommand IdentifyCommand { get { return new RelayCommand(IdentifyCommand_Executed, IdentifyCommand_CanExecute); } }
+
+        #endregion
     }
 }

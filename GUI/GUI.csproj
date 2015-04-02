@@ -218,6 +218,7 @@
     <Compile Include="ViewModel\DBTabControlVM.cs" />
     <Compile Include="Model\EditData.cs" />
     <Compile Include="ViewModel\GeoDBCreationVM.cs" />
+    <Compile Include="ViewModel\GraphicChartOutput.cs" />
     <Compile Include="ViewModel\LocalProjectVM.cs" />
     <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
       <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>
@@ -481,7 +482,6 @@
     <Resource Include="Config\Cursor\ZoomInOut.cur" />
     <Resource Include="Config\Cursor\ZoomOut.cur" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

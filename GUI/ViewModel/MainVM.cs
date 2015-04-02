@@ -25,6 +25,7 @@ namespace GUI.ViewModel
         private DBCreationVM dbCreationVM= new DBCreationVM();
         private LocalProjectVM localProjectVM = new LocalProjectVM();
         private DataEditVM dataEditVM = new DataEditVM();
+        private GraphicChartOutput graphicChartOutput = new GraphicChartOutput();
         #endregion
 
         public MainVM()
@@ -79,6 +80,12 @@ namespace GUI.ViewModel
                 dataEditVM = value; 
                 RaisePropertyChanged("DataEditVM"); 
             }
+        }
+
+        public GraphicChartOutput GraphicChartOutput
+        {
+            get { return graphicChartOutput; }
+            set { graphicChartOutput = value; RaisePropertyChanged("GraphicChartOutput"); }
         }
         #endregion
 

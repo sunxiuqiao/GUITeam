@@ -204,6 +204,7 @@
     <Compile Include="Model\DataEditTools\DrawPolyline.cs" />
     <Compile Include="Model\DataEditTools\DrawSplitLine.cs" />
     <Compile Include="Model\DataEditTools\FeatureMerge.cs" />
+    <Compile Include="Model\DataEditTools\ModifyDKBMTool.cs" />
     <Compile Include="Model\DataEditTools\SelectFeatures.cs" />
     <Compile Include="Model\DataEditTools\DrawJZXTool.cs" />
     <Compile Include="Model\HandleExcel.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="ViewModel\GeoDBCreationVM.cs" />
     <Compile Include="ViewModel\GraphicChartOutput.cs" />
     <Compile Include="ViewModel\LocalProjectVM.cs" />
+    <Compile Include="ViewModel\ModifyDKBMVM.cs" />
     <Compile Include="View\AttributeDBCreationDialog.xaml.cs">
       <DependentUpon>AttributeDBCreationDialog.xaml</DependentUpon>
     </Compile>
@@ -244,6 +246,9 @@
     <Compile Include="View\DialogUserControl.cs" />
     <Compile Include="View\GeoDBCreationDialog.xaml.cs">
       <DependentUpon>GeoDBCreationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifyDKBMView.xaml.cs">
+      <DependentUpon>ModifyDKBMView.xaml</DependentUpon>
     </Compile>
     <Page Include="ResourceDictionary.xaml">
       <SubType>Designer</SubType>
@@ -282,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GeoDBCreationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ModifyDKBMView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

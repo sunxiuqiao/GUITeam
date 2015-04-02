@@ -18,6 +18,9 @@ namespace GUI.ViewModel
 {
     public class DataEditVM : MVVMBase.ObservableObject
     {
+        #region subModel
+        private static readonly ModifyDKBMVM modifyDKBMVM = new ModifyDKBMVM();
+        #endregion
         #region member
         bool isDKDraw = false;
         bool isJZDDraw = false;
@@ -29,6 +32,8 @@ namespace GUI.ViewModel
         //IEngineEditor engineEditor = new EngineEditorClass();
         IOperationStack operationStack = new ControlsOperationStackClass();
         Model.DataEditTools.DataEditor dataEditor = null;
+
+
         #endregion
 
         #region Properties
@@ -102,6 +107,11 @@ namespace GUI.ViewModel
             {
                 wksEditor = value;
             }
+        }
+
+        public static ModifyDKBMVM ModifyDKBMVM
+        {
+            get { return modifyDKBMVM; }
         }
 
         //public IEngineEditor EngineEditor
@@ -378,6 +388,23 @@ namespace GUI.ViewModel
             return true;
         }
         public System.Windows.Input.ICommand StopEditAnnotationCommand { get { return new RelayCommand(StopEditAnnotation_Executed, StopEditAnnotation_CanExecute); } }
+
+        #endregion
+
+        #region ModifyDKBM
+        private void ModifyDKBM_Executed()
+        {
+            ITool tool = new Model.DataEditTools.ModifyDKBMTool(dataEditor);
+            ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
+            cmd.OnCreate(ControlsVM.MapControl().Object);
+            ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
+        }
+
+        private bool ModifyDKBM_CanExecute()
+        {
+            return true;
+        }
+        public System.Windows.Input.ICommand ModifyDKBMCommand { get { return new RelayCommand(ModifyDKBM_Executed, ModifyDKBM_CanExecute); } }
 
         #endregion
 

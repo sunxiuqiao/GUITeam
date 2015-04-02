@@ -42,26 +42,7 @@ namespace GUI.Model.DataEditTools
         {
             dataEdit.WKSEditor.StartEditOperation();
             IEnumFeature features = m_HookHelper.FocusMap.FeatureSelection as IEnumFeature ;
-            //features.Reset();
-            //IFeature feature = features.Next();
-            //bool isCanMerge = true;
-            //while(feature != null)
-            //{
-            //    IRelationalOperator relOp = feature.Shape as IRelationalOperator;
-            //    IFeature nextFeature = features.Next();
-
-            //    if (nextFeature == null)
-            //    {
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        IGeometry geo = nextFeature.Shape;
-            //        isCanMerge = (relOp.Touches(geo)||(!relOp.Disjoint(geo)));
-            //    }
-                    
-            //    feature = nextFeature;
-            //}
+            
             features.Reset();
             IFeature feature = features.Next();
             IGeometryCollection geometryBag = new GeometryBagClass();
@@ -86,43 +67,10 @@ namespace GUI.Model.DataEditTools
             SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
             IFeatureCursor featCursor = featureClass.Insert(true);
             featCursor.InsertFeature(featBuffer);
-            m_HookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
-            //if (isCanMerge == false)
-            //    return;
-            //else
-            //{
-                //ITopologicalOperator2 topoOp = (IT)
-                //features.Reset();
-                //feature = features.Next();
-                //IFeature feature2 = features.Next();
-                //if (feature == null || feature2==null)
-                //    return;
-                //ITopologicalOperator2 topoOp1 = (ITopologicalOperator2)feature.Shape;
-                //topoOp1.IsKnownSimple_2 = false;
-                //topoOp1.Simplify();
-                //feature.Shape.SnapToSpatialReference();
-                //feature2.Shape.SnapToSpatialReference();
-                ////IEnumGeometry geometrys = feature2.Shape 
-                //topoOp1.ConstructUnion(feature2.ShapeCopy);
-                //feature2.Delete();
 
-
-
-                //IFeatureLayer featureLyr = DataEdit.CurrentLayer as IFeatureLayer;
-                //IFeatureClass featureClass = featureLyr.FeatureClass;
-                //IDataset dataSet = featureClass as IDataset;
-                ////IWorkspace workSpace = dataSet.Workspace;
-                //IWorkspaceEdit2 workspaceEdit = DataEdit.WKSEditor;
-                //if (!(workspaceEdit.IsInEditOperation))
-                //    workspaceEdit.StartEditOperation();
-                //IFeatureBuffer featBuffer = featureClass.CreateFeatureBuffer();
-                //featBuffer.Shape = UnionGeometry;
-                //SetFieldValue(featureLyr, featBuffer, "YSDM", "211011");
-                //IFeatureCursor featCursor = featureClass.Insert(true);
-                //featCursor.InsertFeature(featBuffer);
-                //m_HookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
-            //}
             DataEdit.WKSEditor.StopEditOperation();
+            m_HookHelper.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+            
         }
         private static void SetFieldValue(IFeatureLayer Layer, IFeatureBuffer Feature, string Field, object Value)
         {

@@ -73,10 +73,11 @@ namespace GUI.Model.DataEditTools
 
         protected IHookHelper m_hookHelper = null;
         private bool m_isMouseDown = false;
-        IGeometry m_envelopeGeometry = null;
-        IMap m_map;
+        private IGeometry m_envelopeGeometry = null;
+        private IMap m_map;
+        private DataEditor dataEdit;
 
-        public SelectFeaturesTool()
+        public SelectFeaturesTool(DataEditor edit)
         {
             //
             // TODO: Define values for the public properties
@@ -88,7 +89,9 @@ namespace GUI.Model.DataEditTools
             base.m_message = "拉框或单击选择要素";  //localizable text
             base.m_toolTip = "选择要素";  //localizable text
             base.m_name = "SelectFeaturesTool";   //unique id, non-localizable (e.g. "MyCategory_MyTool")
-            
+
+            dataEdit = edit;
+
         }
 
 
@@ -231,11 +234,11 @@ namespace GUI.Model.DataEditTools
                 
 
             }
+            dataEdit.WKSEditor.StartEditOperation();
             ISpatialReference spatialReference = m_map.SpatialReference;
             m_envelopeGeometry.SpatialReference = spatialReference;
             m_map.SelectByShape(m_envelopeGeometry, null, false);
             activeView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, activeView.Extent); 
-            
         }
 
         
@@ -260,6 +263,7 @@ namespace GUI.Model.DataEditTools
         {
             // TODO:  Add Tool1.OnMouseUp implementation
             m_isMouseDown = false;
+            dataEdit.WKSEditor.StopEditOperation();
             
         }
         public override void OnDblClick()

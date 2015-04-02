@@ -417,7 +417,7 @@ namespace GUI.ViewModel
         #region EditCommand
         private void EditCommand_Executed()
         {
-            ITool tool = new Model.DataEditTools.SelectFeaturesTool();
+            ITool tool = new Model.DataEditTools.SelectFeaturesTool(dataEditor);
             ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
             cmd.OnCreate(ControlsVM.MapControl().Object);
             ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
@@ -433,11 +433,18 @@ namespace GUI.ViewModel
         #region UndoCommand
         private void UndoCommand_Executed()
         {
-            bool isCanUndo = false;
-            dataEditor.WKSEditor.HasUndos(ref isCanUndo);
-            if(isCanUndo)
-                dataEditor.WKSEditor.UndoEditOperation();
-            ControlsVM.MapControl().ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+            try
+            {
+                bool isCanUndo = false;
+                dataEditor.WKSEditor.HasUndos(ref isCanUndo);
+                if (isCanUndo)
+                    dataEditor.WKSEditor.UndoEditOperation();
+                ControlsVM.MapControl().ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+            }
+            catch(Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
 
         }
         private bool UndoCommand_CanExecute()

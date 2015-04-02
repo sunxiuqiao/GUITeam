@@ -64,16 +64,7 @@
                                                 </ContentControl>
                                             </Grid>
                                         </Popup>
-                                        <Popup x:Name="ModifyDKBMPopup" 
-                                       AllowsTransparency="True" Placement="MousePoint" StaysOpen="True" PopupAnimation="Slide" 
-                                       PlacementTarget="{Binding ElementName=GUIMainWindow}" 
-                                       IsOpen="{Binding DataEditVM.ModifyDKBMVM.IsShow}">
-                                            <Grid Background="#88888888" >
-                                                <ContentControl>
-                                                    <v:ModifyDKBMView DataContext="{Binding DataEditVM.ModifyDKBMVM}"></v:ModifyDKBMView>
-                                                </ContentControl>
-                                            </Grid>
-                                        </Popup>
+                                        
                                     </Grid>
                                 </GroupBox>
                             </ScrollViewer>
@@ -332,8 +323,17 @@
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
         <Grid Grid.Row="2">
-           
-            
+            <Popup x:Name="ModifyDKBMPopup" 
+                                       AllowsTransparency="True" Placement="MousePoint" StaysOpen="True" PopupAnimation="Slide" 
+                                       PlacementTarget="{Binding ElementName=GUIMainWindow}" 
+                                       IsOpen="{Binding DataEditVM.ModifyDKBMVM.IsShow}">
+                <Grid Background="#88888888" >
+                    <ContentControl>
+                        <v:ModifyDKBMView DataContext="{Binding DataEditVM.ModifyDKBMVM}"></v:ModifyDKBMView>
+                    </ContentControl>
+                </Grid>
+            </Popup>
+
         </Grid>
     </Grid>
 </f:RibbonWindow>

@@ -313,19 +313,24 @@
                         <avalonDock:LayoutAnchorable x:Name="TOCControlDock" Title="图层" >
                                 <WindowsFormsHost x:Name="TOCControlHost" ></WindowsFormsHost>
                         </avalonDock:LayoutAnchorable>
+                        <avalonDock:LayoutAnchorable x:Name="ModifyDKBMDock" Title="地块编码">
+                            <StackPanel Orientation="Vertical">
+                                <v:ModifyDKBMView DataContext="{Binding DataEditVM.ModifyDKBMVM}" Focusable="True"></v:ModifyDKBMView>
+                            </StackPanel>
+                            
+                        </avalonDock:LayoutAnchorable>
                     </avalonDock:LayoutAnchorablePane>
                     <avalonDock:LayoutDocumentPane>
                         <avalonDock:LayoutDocument x:Name="MapControlDocument" Title="地图" CanClose="False">
                             <WindowsFormsHost x:Name="MapControlHost"></WindowsFormsHost>
                         </avalonDock:LayoutDocument>
-                        
                     </avalonDock:LayoutDocumentPane>
                 </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
         
 
-       <Popup x:Name="ModifyDKBMPopup" 
+       <!--<Popup x:Name="ModifyDKBMPopup" 
               AllowsTransparency="True" Placement="MousePoint" StaysOpen="True" PopupAnimation="Slide" 
               PlacementTarget="{Binding ElementName=GUIMainWindow}" Focusable="True"  IsManipulationEnabled="True" 
               IsOpen="{Binding DataEditVM.ModifyDKBMVM.IsShow}">
@@ -334,6 +339,6 @@
                     <v:ModifyDKBMView DataContext="{Binding DataEditVM.ModifyDKBMVM}" Focusable="True"></v:ModifyDKBMView>
                 </ContentControl>
           </Grid>
-       </Popup>
+       </Popup>-->
     </Grid>
 </f:RibbonWindow>

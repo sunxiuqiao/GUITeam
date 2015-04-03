@@ -48,8 +48,8 @@ namespace GUI.ViewModel
                     System.Windows.MessageBox.Show("字段名错误！");
                     return;
                 }
-                object value = feature.get_Value(index);
-                DKBM = value.ToString();
+                //object value = feature.get_Value(index);
+                //DKBM = value.ToString();
                 int number = 0;
                
                 if (string.IsNullOrEmpty(DKBM))

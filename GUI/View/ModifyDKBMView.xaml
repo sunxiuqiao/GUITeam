@@ -23,8 +23,8 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Content="地块编码" FontSize="15"/>
         <TextBox x:Name="ModifyDKBM" Grid.Column="1" Focusable="True" Height="25" AcceptsReturn="True" IsReadOnly="False" 
-                                                     FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray" IsHitTestVisible="True" 
-                                                     Text="{Binding DKBM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                                     FontFamily="YaHei Consolas Hybrid" FontSize="15" Foreground="DimGray"
+                                                     Text="{Binding DKBM, Mode=TwoWay, UpdateSourceTrigger=Default}"></TextBox>
         <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Grid.Column="2" x:Name="ModifyFinishedButton" Content="修改完成" Margin="5" Style="{DynamicResource ButtonStyle}"
                     Command="{Binding ModifyFinishedCommand}"/>

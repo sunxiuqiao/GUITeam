@@ -19,6 +19,8 @@ using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Carto;
 using Xceed.Wpf.AvalonDock.Layout;
 using ESRI.ArcGIS.Geodatabase;
+using System.Windows.Interop;
+using System.Windows.Controls.Primitives;
 
 namespace GUI
 {
@@ -80,6 +82,24 @@ namespace GUI
         
 
         
+
+        //private void ModifyDKBMPopup_Loaded(object sender, RoutedEventArgs e)
+        //{
+
+
+
+
+        //}
+
+
+        //public static void ActivatePopup(Popup popup)
+        //{
+        //    //try to get a handle on the popup itself (via its child)
+        //    HwndSource source = (HwndSource)PresentationSource.FromVisual(popup.Child);
+        //    IntPtr handle = source.Handle;
+
+
+        //    SetForegroundWindow(handle);
+
     }
-        
 }

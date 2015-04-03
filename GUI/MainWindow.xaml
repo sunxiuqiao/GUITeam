@@ -52,8 +52,9 @@
                                         <ContentControl Grid.Row="1" Margin="35,0,25,0">
                                             <v:DBTabControl DataContext="{Binding Path=DBTabControlVM}"></v:DBTabControl>
                                         </ContentControl>
+                                        
                                         <Popup Grid.Row="3" x:Name="DBCreateDialog" 
-                                               AllowsTransparency="True" Placement="Center" StaysOpen="True" PopupAnimation="Slide" 
+                                               AllowsTransparency="True" Placement="Center" StaysOpen="True" PopupAnimation="Slide" InputMethod.IsInputMethodEnabled="True" 
                                                Width="{Binding ElementName=GUIMainWindow,Path=Width,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
                                                Height="{Binding ElementName=GUIMainWindow,Path=Height,Mode=TwoWay,UpdateSourceTrigger= PropertyChanged}" 
                                                PlacementTarget="{Binding ElementName=GUIMainWindow}" 
@@ -64,7 +65,6 @@
                                                 </ContentControl>
                                             </Grid>
                                         </Popup>
-                                        
                                     </Grid>
                                 </GroupBox>
                             </ScrollViewer>
@@ -318,22 +318,22 @@
                         <avalonDock:LayoutDocument x:Name="MapControlDocument" Title="地图" CanClose="False">
                             <WindowsFormsHost x:Name="MapControlHost"></WindowsFormsHost>
                         </avalonDock:LayoutDocument>
+                        
                     </avalonDock:LayoutDocumentPane>
                 </avalonDock:LayoutPanel>
             </avalonDock:LayoutRoot>
         </avalonDock:DockingManager>
-        <Grid Grid.Row="2">
-            <Popup x:Name="ModifyDKBMPopup" 
-                                       AllowsTransparency="True" Placement="MousePoint" StaysOpen="True" PopupAnimation="Slide" 
-                                       PlacementTarget="{Binding ElementName=GUIMainWindow}" 
-                                       IsOpen="{Binding DataEditVM.ModifyDKBMVM.IsShow}">
-                <Grid Background="#88888888" >
-                    <ContentControl>
-                        <v:ModifyDKBMView DataContext="{Binding DataEditVM.ModifyDKBMVM}"></v:ModifyDKBMView>
-                    </ContentControl>
-                </Grid>
-            </Popup>
+        
 
-        </Grid>
+       <Popup x:Name="ModifyDKBMPopup" 
+              AllowsTransparency="True" Placement="MousePoint" StaysOpen="True" PopupAnimation="Slide" 
+              PlacementTarget="{Binding ElementName=GUIMainWindow}" Focusable="True"  IsManipulationEnabled="True" 
+              IsOpen="{Binding DataEditVM.ModifyDKBMVM.IsShow}">
+          <Grid Background="#88888888" >
+                <ContentControl>
+                    <v:ModifyDKBMView DataContext="{Binding DataEditVM.ModifyDKBMVM}" Focusable="True"></v:ModifyDKBMView>
+                </ContentControl>
+          </Grid>
+       </Popup>
     </Grid>
 </f:RibbonWindow>

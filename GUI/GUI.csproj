@@ -491,6 +491,11 @@
     <Resource Include="Config\Cursor\ZoomInOut.cur" />
     <Resource Include="Config\Cursor\ZoomOut.cur" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\modifyDKBM.png" />
+    <Resource Include="Icons\identity.png" />
+    <Resource Include="Icons\property and image.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

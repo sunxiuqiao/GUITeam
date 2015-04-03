@@ -143,7 +143,7 @@
                             <f:Button x:Name="ConstFactorZoomInButton" Header="固定比例放大" Size="Middle" Command="{Binding ConstFactorZoomInCommand}" Icon="Icons\Zoom In Bili.png"></f:Button>
                             <f:Button x:Name="ConstFactorZoomOutButton" Header="固定比例缩小" Size="Middle" Command="{Binding ConstFactorZoomOutCommand}" Icon="Icons\Zoom Out Bili.png"></f:Button>
                             <f:Button x:Name="OverViewButton" Header="全图" Size="Middle" Command="{Binding OverViewCommand}" Icon="Icons\GlobeView.png"></f:Button>
-                            <f:Button x:Name="IdentifyButton" Header="识别" Size="Middle" Command="{Binding IdentifyCommand}"></f:Button>
+                            <f:Button x:Name="IdentifyButton" Header="识别" Size="Middle" Command="{Binding IdentifyCommand}" Icon="Icons\identity.png"></f:Button>
                             <f:Button x:Name="FindButton" Header="查找" Size="Middle"  Icon="Icons\Find.png"></f:Button>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
@@ -159,7 +159,7 @@
                             <f:Button x:Name="StartDrawJZDButton" Header="界址点绘制" Command="{Binding StartDrawJZDCommand}" LargeIcon="Icons\EditJZD.png"/>
                             <f:Button x:Name="StartEditAttributeButton" Command="{Binding StartEditAttributeCommand}" Header="属性编辑"  LargeIcon="Icons\Edit Property1.png"/>
                             <f:Button x:Name="StartEditAnnotationButton" Command="{Binding StartEditAnnotationCommand}" Header="注记编辑" LargeIcon="Icons\EditAttribute.png"/>
-                            <f:Button x:Name="GeoUNIONAtrributeButton" Header="图属挂接" Command="{Binding GeoUNIONAtrributeCommand}"></f:Button>
+                            <f:Button x:Name="GeoUNIONAtrributeButton" Header="图属挂接" Command="{Binding GeoUNIONAtrributeCommand}" LargeIcon="Icons\property and image.png"></f:Button>
                         </f:RibbonGroupBox>
                     </f:RibbonTabItem.Groups>
                 </f:RibbonTabItem>
@@ -169,7 +169,7 @@
                         <f:Button x:Name="DKAutoDrawButton" Header="自动构建"  LargeIcon="Icons\AutoCreate.png" />
                         <f:Button x:Name="DKSegementButton" Header="分割" LargeIcon="Icons\Segment.png" Command="{Binding SplitPolygonCommand}"/>
                         <f:Button x:Name="DKMergeButton" Header="合并" LargeIcon="Icons\Merge-50.png" Command="{Binding MergePolygonCommand}"/>
-                        <f:Button x:Name="ModifyDKBMButton" Header="修改 地块编码" Command="{Binding ModifyDKBMCommand}"></f:Button>
+                        <f:Button x:Name="ModifyDKBMButton" Header="修改地块编码" Command="{Binding ModifyDKBMCommand}" LargeIcon="Icons\modifyDKBM.png"></f:Button>
                         <f:Button x:Name="DKStopDrawButton" Header="完成" Command="{Binding StopDrawDKCommand}" LargeIcon="Icons\DoWell.png"/>
                     </f:RibbonGroupBox>
                     <f:RibbonGroupBox x:Name="DKDrawTool" Header="工具"  >

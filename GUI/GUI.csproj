@@ -209,6 +209,7 @@
     <Compile Include="Model\DataEditTools\DrawJZXTool.cs" />
     <Compile Include="Model\HandleExcel.cs" />
     <Compile Include="Model\QueryAndAnalysis.cs" />
+    <Compile Include="MVVMBase\DelegateCommand.cs" />
     <Compile Include="ViewModel\AttriDBCreationVM.cs" />
     <Compile Include="ViewModel\BusiDBCreationVM.cs" />
     <Compile Include="Converter.cs" />

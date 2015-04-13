@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="70" d:DesignWidth="300" BorderBrush="Black" BorderThickness="1">
     <UserControl.DataContext>
-        <vm:ModifyDKBMVM></vm:ModifyDKBMVM>
+        <vm:ModifyAttributeVM></vm:ModifyAttributeVM>
     </UserControl.DataContext>
     <Grid Width="auto" Height="auto" Background="White">
         <Grid.RowDefinitions>

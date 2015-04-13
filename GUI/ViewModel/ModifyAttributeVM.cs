@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GUI.ViewModel
 {
-    public class ModifyDKBMVM : MVVMBase.ObservableObject
+    public class ModifyAttributeVM : MVVMBase.ObservableObject
     {
         private string dkbm;
         private static bool isShow = false;

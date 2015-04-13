@@ -12,10 +12,10 @@ using ESRI.ArcGIS.Geodatabase;
 
 namespace GUI.Model.DataEditTools
 {
-    public class ModifyDKBMTool:SelectFeaturesTool
+    public class ModifyAttributeTool:SelectFeaturesTool
     {
 
-        public ModifyDKBMTool(DataEditor edit):base(edit)
+        public ModifyAttributeTool(DataEditor edit):base(edit)
         {
 
         }

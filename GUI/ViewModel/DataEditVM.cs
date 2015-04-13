@@ -19,7 +19,7 @@ namespace GUI.ViewModel
     public class DataEditVM : MVVMBase.ObservableObject
     {
         #region subModel
-        private static readonly ModifyDKBMVM modifyDKBMVM = new ModifyDKBMVM();
+        private static readonly ModifyAttributeVM modifyDKBMVM = new ModifyAttributeVM();
         #endregion
         #region member
         bool isDKDraw = false;
@@ -109,7 +109,7 @@ namespace GUI.ViewModel
             }
         }
 
-        public static ModifyDKBMVM ModifyDKBMVM
+        public static ModifyAttributeVM ModifyDKBMVM
         {
             get { return modifyDKBMVM; }
         }
@@ -394,7 +394,7 @@ namespace GUI.ViewModel
         #region ModifyDKBM
         private void ModifyDKBM_Executed()
         {
-            ITool tool = new Model.DataEditTools.ModifyDKBMTool(dataEditor);
+            ITool tool = new Model.DataEditTools.ModifyAttributeTool(dataEditor);
             ESRI.ArcGIS.SystemUI.ICommand cmd = tool as ESRI.ArcGIS.SystemUI.ICommand;
             cmd.OnCreate(ControlsVM.MapControl().Object);
             ControlsVM.MapControl().CurrentTool = cmd as ESRI.ArcGIS.SystemUI.ITool;
